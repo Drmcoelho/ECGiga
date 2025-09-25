@@ -1,0 +1,32 @@
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node modules (if added later)
+node_modules/
+
+# Logs
+*.log
+logs/
+
+# Build artifacts (if added later)
+dist/
+build/
+
+# Cache files
+.cache/
+
+# Backup files
+*.bak
+*.backup

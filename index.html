@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECGiga - Curso Completo de ECG</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>ECGiga</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Início</a></li>
+                <li><a href="#modules" class="nav-link">Módulos</a></li>
+                <li><a href="#practice" class="nav-link">Prática</a></li>
+                <li><a href="#resources" class="nav-link">Recursos</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>Curso Completo de <span class="highlight">ECG</span></h1>
+                    <p>Aprenda a interpretar eletrocardiogramas de forma completa e profissional. Do básico ao avançado, com exemplos práticos e exercícios interativos.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="scrollToSection('modules')">Começar Agora</button>
+                        <button class="btn btn-secondary" onclick="scrollToSection('practice')">Teste Seus Conhecimentos</button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="ecg-wave">
+                        <svg viewBox="0 0 400 100" class="ecg-svg">
+                            <path d="M0,50 L50,50 L60,20 L70,80 L80,10 L90,50 L150,50 L160,20 L170,80 L180,10 L190,50 L250,50 L260,20 L270,80 L280,10 L290,50 L350,50 L400,50" 
+                                  stroke="#ff6b6b" stroke-width="2" fill="none" class="ecg-path"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="modules" class="modules-section">
+            <div class="container">
+                <h2>Módulos do Curso</h2>
+                <div class="modules-grid">
+                    <div class="module-card" data-module="basics">
+                        <div class="module-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Fundamentos do ECG</h3>
+                        <p>Anatomia cardíaca, sistema de condução e princípios básicos do eletrocardiograma.</p>
+                        <ul>
+                            <li>Anatomia do sistema de condução</li>
+                            <li>Ondas, intervalos e segmentos</li>
+                            <li>Derivações do ECG</li>
+                            <li>Frequência e ritmo cardíaco</li>
+                        </ul>
+                        <button class="btn btn-outline">Estudar Módulo</button>
+                    </div>
+
+                    <div class="module-card" data-module="rhythms">
+                        <div class="module-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Arritmias Cardíacas</h3>
+                        <p>Identificação e interpretação das principais arritmias cardíacas.</p>
+                        <ul>
+                            <li>Ritmo sinusal normal</li>
+                            <li>Bradicardias</li>
+                            <li>Taquicardias</li>
+                            <li>Fibrilação atrial</li>
+                            <li>Flutter atrial</li>
+                        </ul>
+                        <button class="btn btn-outline">Estudar Módulo</button>
+                    </div>
+
+                    <div class="module-card" data-module="ischemia">
+                        <div class="module-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h3>Isquemia e IAM</h3>
+                        <p>Diagnóstico de isquemia miocárdica e infarto agudo do miocárdio.</p>
+                        <ul>
+                            <li>Alterações da onda T</li>
+                            <li>Supradesnivelamento de ST</li>
+                            <li>Infradesnivelamento de ST</li>
+                            <li>Localização do IAM</li>
+                            <li>Cronologia do IAM</li>
+                        </ul>
+                        <button class="btn btn-outline">Estudar Módulo</button>
+                    </div>
+
+                    <div class="module-card" data-module="hypertrophy">
+                        <div class="module-icon">
+                            <i class="fas fa-expand-arrows-alt"></i>
+                        </div>
+                        <h3>Hipertrofias</h3>
+                        <p>Reconhecimento de hipertrofia atrial e ventricular no ECG.</p>
+                        <ul>
+                            <li>Hipertrofia atrial direita</li>
+                            <li>Hipertrofia atrial esquerda</li>
+                            <li>Hipertrofia ventricular direita</li>
+                            <li>Hipertrofia ventricular esquerda</li>
+                            <li>Critérios diagnósticos</li>
+                        </ul>
+                        <button class="btn btn-outline">Estudar Módulo</button>
+                    </div>
+
+                    <div class="module-card" data-module="blocks">
+                        <div class="module-icon">
+                            <i class="fas fa-ban"></i>
+                        </div>
+                        <h3>Bloqueios</h3>
+                        <p>Identificação de bloqueios de ramo e bloqueios atrioventriculares.</p>
+                        <ul>
+                            <li>Bloqueio de ramo direito</li>
+                            <li>Bloqueio de ramo esquerdo</li>
+                            <li>Bloqueio AV de 1º grau</li>
+                            <li>Bloqueio AV de 2º grau</li>
+                            <li>Bloqueio AV total</li>
+                        </ul>
+                        <button class="btn btn-outline">Estudar Módulo</button>
+                    </div>
+
+                    <div class="module-card" data-module="advanced">
+                        <div class="module-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Tópicos Avançados</h3>
+                        <p>Situações especiais e interpretação avançada do ECG.</p>
+                        <ul>
+                            <li>Síndrome de Brugada</li>
+                            <li>QT longo e curto</li>
+                            <li>Pré-excitação ventricular</li>
+                            <li>Marcapasso</li>
+                            <li>Eletrolitos e medicações</li>
+                        </ul>
+                        <button class="btn btn-outline">Estudar Módulo</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="practice" class="practice-section">
+            <div class="container">
+                <h2>Área de Prática</h2>
+                <div class="practice-grid">
+                    <div class="practice-card">
+                        <h3>Casos Clínicos</h3>
+                        <p>Resolva casos reais com ECGs para praticar sua interpretação.</p>
+                        <button class="btn btn-primary">Começar</button>
+                    </div>
+                    <div class="practice-card">
+                        <h3>Quiz Interativo</h3>
+                        <p>Teste seus conhecimentos com perguntas sobre interpretação de ECG.</p>
+                        <button class="btn btn-primary">Iniciar Quiz</button>
+                    </div>
+                    <div class="practice-card">
+                        <h3>Biblioteca de ECGs</h3>
+                        <p>Acesse nossa extensa biblioteca de exemplos de ECG.</p>
+                        <button class="btn btn-primary">Explorar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources" class="resources-section">
+            <div class="container">
+                <h2>Recursos Adicionais</h2>
+                <div class="resources-grid">
+                    <div class="resource-item">
+                        <i class="fas fa-book"></i>
+                        <h3>Guia de Referência Rápida</h3>
+                        <p>Valores normais, intervalos e critérios diagnósticos em formato PDF.</p>
+                    </div>
+                    <div class="resource-item">
+                        <i class="fas fa-calculator"></i>
+                        <h3>Calculadoras ECG</h3>
+                        <p>Ferramentas para calcular frequência, intervalos e índices cardíacos.</p>
+                    </div>
+                    <div class="resource-item">
+                        <i class="fas fa-video"></i>
+                        <h3>Vídeo Aulas</h3>
+                        <p>Conteúdo em vídeo explicando conceitos complexos de forma visual.</p>
+                    </div>
+                    <div class="resource-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>App Mobile</h3>
+                        <p>Estude onde estiver com nosso aplicativo móvel (em breve).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for Module Content -->
+    <div id="moduleModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="moduleContent">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ECGiga</h3>
+                    <p>O curso mais completo de ECG disponível online. Aprenda com qualidade e praticidade.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Links Úteis</h3>
+                    <ul>
+                        <li><a href="#modules">Módulos</a></li>
+                        <li><a href="#practice">Prática</a></li>
+                        <li><a href="#resources">Recursos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>Para dúvidas e sugestões, entre em contato conosco.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ECGiga. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
