@@ -1,0 +1,14 @@
+{
+  "id": "pr_rule_0001",
+  "topic": "Intervalos — PR",
+  "difficulty": "easy",
+  "stem": "PR=220 ms, QRS=90 ms sugere:",
+  "options": [
+    "BAV 1º grau",
+    "Mobitz I",
+    "Pré-excitação",
+    "BRE"
+  ],
+  "answer_index": 0,
+  "explanation": "PR > 200 ms define BAV 1º."
+}

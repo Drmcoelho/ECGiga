@@ -1,0 +1,14 @@
+{
+  "id": "lbbb_stemi_0002",
+  "topic": "BRE + IAM",
+  "difficulty": "hard",
+  "stem": "Mais específico:",
+  "options": [
+    "ST supra concordante",
+    "ST supra discordante leve",
+    "PR curto",
+    "QRS estreito"
+  ],
+  "answer_index": 0,
+  "explanation": "Sgarbossa clássico."
+}
