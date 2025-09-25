@@ -1,0 +1,14 @@
+{
+  "id": "prqrs_auto_01",
+  "topic": "Intervalos — PR/QRS",
+  "difficulty": "easy",
+  "stem": "PR=100 ms, QRS=90 ms. Melhor interpretação:",
+  "options": [
+    "PR curto (pré-excitação)",
+    "BAV 1º",
+    "QRS largo (bloqueio de ramo)",
+    "QRS 110–119 ms (incompleto)"
+  ],
+  "answer_index": 0,
+  "explanation": "Aplicação direta de faixas normativas."
+}

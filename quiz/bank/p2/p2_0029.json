@@ -1,0 +1,14 @@
+{
+  "id": "de_winter_0002",
+  "topic": "De Winter",
+  "difficulty": "hard",
+  "stem": "É equivalente a:",
+  "options": [
+    "Oclusão proximal da ADA (STEMI anterior)",
+    "NSTEMI inferior",
+    "Pericardite",
+    "Brugada"
+  ],
+  "answer_index": 0,
+  "explanation": "Equivalente de STEMI anterior."
+}

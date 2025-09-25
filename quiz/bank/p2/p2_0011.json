@@ -1,0 +1,14 @@
+{
+  "id": "paced_bre_0001",
+  "topic": "Marcapasso — Morfologia",
+  "difficulty": "medium",
+  "stem": "Estimulação VD →",
+  "options": [
+    "BRD",
+    "BRE",
+    "QRS estreito",
+    "QS laterais"
+  ],
+  "answer_index": 1,
+  "explanation": "VD gera padrão de BRE."
+}
