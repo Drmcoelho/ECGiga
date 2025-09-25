@@ -1,0 +1,14 @@
+{
+  "id": "wolff_drugs_0001",
+  "topic": "WPW + FA",
+  "difficulty": "hard",
+  "stem": "Evitar:",
+  "options": [
+    "AV nodais isolados",
+    "Cardioversão elétrica",
+    "Procainamida",
+    "Manobra vagal"
+  ],
+  "answer_index": 0,
+  "explanation": "Bloquear apenas AV pode piorar."
+}

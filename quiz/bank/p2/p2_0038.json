@@ -1,0 +1,14 @@
+{
+  "id": "qtc_auto_01",
+  "topic": "QTc — Bazett (aprox)",
+  "difficulty": "medium",
+  "stem": "QT=380 ms, RR=800 ms. Classifique o QTc:",
+  "options": [
+    "Normal",
+    "Prolongado",
+    "Curto",
+    "Indefinido"
+  ],
+  "answer_index": 0,
+  "explanation": "QTc≈425 ms."
+}

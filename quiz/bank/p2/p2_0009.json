@@ -1,0 +1,14 @@
+{
+  "id": "early_t_0001",
+  "topic": "Isquemia — T hiperaguda",
+  "difficulty": "medium",
+  "stem": "T hiperaguda inicial é:",
+  "options": [
+    "Baixa e larga",
+    "Alta e simétrica desproporcional",
+    "Negativa simétrica",
+    "Com entalhe J"
+  ],
+  "answer_index": 1,
+  "explanation": "Alta/larga e desproporcional."
+}

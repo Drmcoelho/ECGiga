@@ -1,0 +1,14 @@
+{
+  "id": "ashman_0002",
+  "topic": "Ashman",
+  "difficulty": "medium",
+  "stem": "Mais visto em:",
+  "options": [
+    "FA com ciclo longo-curto",
+    "Flutter 2:1 fixo",
+    "BRD completo",
+    "Ritmo idioventricular"
+  ],
+  "answer_index": 0,
+  "explanation": "Aberrância dependente do ciclo."
+}

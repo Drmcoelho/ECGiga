@@ -1,0 +1,14 @@
+{
+  "id": "axis_auto_03",
+  "topic": "Eixo — I/aVF",
+  "difficulty": "easy",
+  "stem": "Com I=-5 mV e aVF=6 mV, classifique o eixo:",
+  "options": [
+    "Normal",
+    "Desvio para a esquerda",
+    "Desvio para a direita",
+    "Desvio extremo (noroeste)"
+  ],
+  "answer_index": 2,
+  "explanation": "Quadrante aponta para desvio para a direita."
+}
