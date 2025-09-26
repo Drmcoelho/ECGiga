@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ECG Report Schema",
+  "version": "0.3.0",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object"
+    },
+    "patient_info": {
+      "type": "object"
+    },
+    "acquisition": {
+      "type": "object"
+    },
+    "segmentation": {
+      "type": "object"
+    },
+    "layout_detection": {
+      "type": "object",
+      "properties": {
+        "layout": {
+          "type": "string",
+          "enum": [
+            "3x4",
+            "6x2",
+            "3x4+rhythm",
+            "unknown"
+          ]
+        },
+        "score": {
+          "type": "number"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "bbox": {
+                "type": "array"
+              },
+              "label": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "score": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "rpeaks": {
+      "type": "object",
+      "properties": {
+        "lead_used": {
+          "type": "string"
+        },
+        "peaks_idx": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "rr_sec": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "hr_bpm_mean": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "hr_bpm_median": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    },
+    "measures": {
+      "type": "object"
+    },
+    "flags": {
+      "type": "array"
+    },
+    "suggested_interpretations": {
+      "type": "array"
+    },
+    "version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "meta",
+    "version"
+  ]
+}
