@@ -1,7 +1,7 @@
 """Central configuration constants for ECGCourse."""
 
 from __future__ import annotations
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Dict, Any
 
 
@@ -33,12 +33,12 @@ class ECGConfig:
     MAX_HR_BPM: float = 300.0
     
     # Lead analysis constants
-    AXIS_NORMAL_RANGES: Dict[str, tuple[float, float]] = {
+    AXIS_NORMAL_RANGES: Dict[str, tuple[float, float]] = field(default_factory=lambda: {
         "normal": (-30, 90),
         "left_deviation": (-90, -30),
         "right_deviation": (90, 180),
         "extreme": (-180, -90)
-    }
+    })
     
     # Schema version constants
     DEFAULT_SCHEMA_VERSION: str = "v0.4"
