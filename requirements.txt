@@ -19,18 +19,9 @@ pytest>=8.3
 black>=24.8
 ruff>=0.6
 
-# --- p3c additions ---
-requests>=2.31.0
+# Additional dependencies
 beautifulsoup4>=4.12.2
 lxml>=4.9.3
 pillow-avif-plugin>=1.4.6 ; platform_system != "Windows"  # opcional; será detectado em runtime
-
-# --- p6 additions ---
-opencv-python-headless>=4.9.0.80    # template matching e utilidades de imagem
 pytesseract>=0.3.10                 # OCR opcional (requer binário tesseract instalado no sistema)
 rapidfuzz>=3.6.1                    # fuzzy matching para mapear tokens a rótulos esperados
-
-# --- p6 additions ---
-opencv-python-headless>=4.9.0.80
-pytesseract>=0.3.10
-rapidfuzz>=3.6.1

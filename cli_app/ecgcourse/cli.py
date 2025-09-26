@@ -245,11 +245,9 @@ def analyze_values(
 
 app.add_typer(analyze_app, name="analyze")
 
-if __name__ == "__main__":
-    app()
-
 # --------------------------
-# INGEST commands (p3)
+# INGEST commands (p3) 
+# --------------------------
 # --------------------------
 ingest_app = typer.Typer(help="Ingestão de ECG por imagem (PNG/JPG).")
 
@@ -293,7 +291,7 @@ def ingest_image(
     meta_path = pathlib.Path(meta) if meta else p.with_suffix(p.suffix + ".meta.json")
     # Pré-processamento opcional: deskew + normalize (aplicados sequencialmente sobre arquivo temporário em memória)
     from PIL import Image
-    _img = Image.open(_buf).convert("RGB")
+    _img = Image.open(p).convert("RGB")
     if deskew:
         from cv.deskew import estimate_rotation_angle, rotate_image
         _info = estimate_rotation_angle(_img, search_deg=6.0, step=0.5)
@@ -341,12 +339,22 @@ def ingest_image(
             bbox = find_content_bbox(gray)
             seg_leads = segment_12leads_basic(gray, bbox=bbox)
             seg = {"content_bbox": bbox, "leads": seg_leads}
-        if auto_leads:
+        except Exception as e:
+            typer.echo(f"Erro na detecção de grid/segmentação: {e}", err=True)
+            grid, seg = None, None
+    
+    if auto_leads:
+        try:
             from cv.lead_ocr import choose_layout
             cand = {"3x4":[d["bbox"] for d in seg_leads]}
             layout_det = choose_layout(_np.asarray(Image.open(p).convert("L")), {"3x4":[d["bbox"] for d in seg_leads]})
             lead_labels = layout_det.get("labels")
-        if rpeaks_lead:
+        except Exception as e:
+            typer.echo(f"Erro na detecção de layout: {e}", err=True)
+            layout_det = None
+    
+    if rpeaks_lead:
+        try:
             from cv.rpeaks_from_image import extract_trace_centerline, smooth_signal, detect_rpeaks_from_trace, estimate_px_per_sec
             # procura bbox do lead requisitado
             _lab2box = {d["lead"]: d["bbox"] for d in seg_leads}
@@ -367,9 +375,9 @@ def ingest_image(
                     intervals_out = intervals_from_trace(_trace, rpeaks_out.get("peaks_idx") or [], _pxsec)
 
                 rpeaks_out["lead_used"] = rpeaks_lead
-        
         except Exception as e:
-            typer.echo(f"Auto-grid falhou: {e}", err=True)
+            typer.echo(f"Erro na análise de R-peaks: {e}", err=True)
+            rpeaks_out = None
     
 
     # Derivados
@@ -414,6 +422,17 @@ def ingest_image(
     else:
         suggested.append("Sem flags críticas pelos limiares configurados; correlacionar clinicamente.")
 
+    # Determine capabilities based on which processing stages ran
+    capabilities = []
+    if seg:
+        capabilities.append("segmentation")
+    if auto_leads and layout_det:
+        capabilities.append("layout_detection") 
+    if rpeaks_lead and rpeaks_out:
+        capabilities.append("rpeaks")
+    if intervals and intervals_out:
+        capabilities.append("intervals")
+
     report_obj = {
         "meta": {
             "source_image": str(p),
@@ -441,6 +460,7 @@ def ingest_image(
             "fc_bpm": fc_bpm, "axis_angle_deg": angle, "axis_label": axis_label
         },
         "flags": flags,
+        "capabilities": capabilities,
         "suggested_interpretations": suggested,
         "segmentation": (seg if seg else None),
         "layout_detection": (layout_det if auto_leads else None),
@@ -465,12 +485,20 @@ def ingest_image(
         with open(reports_dir / f"{ts}_ecg_report.json", "w", encoding="utf-8") as f:
             json.dump(report_obj, f, ensure_ascii=False, indent=2)
         with open(reports_dir / f"{ts}_ecg_report.md", "w", encoding="utf-8") as f:
-            f.write(f"# Laudo ECG (ingest image) — {ts}\\n\\n")
-            f.write(f"- Arquivo: {p.name}\\n")
-            if fc_bpm: f.write(f"- FC: {fc_bpm:.1f} bpm\\n")
-            if qt_ms: f.write(f"- QT: {qt_ms} ms | QTc (B/F): {qb}/{qf} ms\\n")
-            if axis_label: f.write(f"- Eixo: {axis_label} ({angle:.1f}°)\\n")
-            if flags:\n                f.write("\\n## Flags\\n"); [f.write(f"- {fl}\\n") for fl in flags]\n            if suggested:\n                f.write("\\n## Sugestões/Observações\\n"); [f.write(f"- {s}\\n") for s in suggested]\n        print(Panel.fit("[bold green]Laudos salvos em reports/"))
+            f.write(f"# Laudo ECG (ingest image) — {ts}\n\n")
+            f.write(f"- Arquivo: {p.name}\n")
+            if fc_bpm: f.write(f"- FC: {fc_bpm:.1f} bpm\n")
+            if qt_ms: f.write(f"- QT: {qt_ms} ms | QTc (B/F): {qb}/{qf} ms\n")
+            if axis_label: f.write(f"- Eixo: {axis_label} ({angle:.1f}°)\n")
+            if flags:
+                f.write("\n## Flags\n")
+                for fl in flags:
+                    f.write(f"- {fl}\n")
+            if suggested:
+                f.write("\n## Sugestões/Observações\n")
+                for s in suggested:
+                    f.write(f"- {s}\n")
+        print(Panel.fit("[bold green]Laudos salvos em reports/"))
 
 app.add_typer(ingest_app, name="ingest")
 
@@ -577,7 +605,7 @@ def cv_deskew(image_path: str = typer.Argument(..., help="PNG/JPG"),
     from PIL import Image
     from cv.deskew import estimate_rotation_angle, rotate_image
     p = pathlib.Path(image_path)
-    img = Image.open(_buf).convert("RGB")
+    img = Image.open(p).convert("RGB")
     info = estimate_rotation_angle(img, search_deg=search_deg, step=0.5)
     print(f"Ângulo estimado: {info['angle_deg']:.2f}° (score {info['score']:.3f} vs {info['score0']:.3f})")
     if save:
@@ -593,7 +621,7 @@ def cv_normalize(image_path: str = typer.Argument(..., help="PNG/JPG"),
     from PIL import Image
     from cv.normalize import normalize_scale
     p = pathlib.Path(image_path)
-    img = Image.open(_buf).convert("RGB")
+    img = Image.open(p).convert("RGB")
     im1, scale, pxmm = normalize_scale(img, target_px_per_mm=target_pxmm)
     print(f"px/mm estimado: {pxmm} | scale aplicado: {scale:.3f}")
     if save:
@@ -784,3 +812,6 @@ def quiz_build(report_json: str = typer.Argument(..., help="Arquivo de laudo JSO
         print(_json.dumps(q, ensure_ascii=False, indent=2))
 
 app.add_typer(quiz_app, name="quiz")
+
+if __name__ == "__main__":
+    app()

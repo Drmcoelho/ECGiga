@@ -82,12 +82,12 @@ app.layout = html.Div([
 ], style={'display':'flex','gap':'16px','alignItems':'center','marginBottom':'8px'}),
 html.Button("Processar", id="btn-process", n_clicks=0),
             html.Div(id="upload-summary", style={"marginTop":"10px","whiteSpace":"pre-wrap"}),
-html.Div([
+            html.Div([
   html.Label('Lead para FC (R-peaks)'),
   dcc.Dropdown(id='lead-select', options=[{'label':l,'value':l} for l in ['II','V2','V5']], value='II', clearable=False, style={'width':'200px'}),
   html.Button('R-peaks robustos', id='btn-rrob', n_clicks=0),
   html.Button('Intervalos (PR/QRS/QT/QTc)', id='btn-intervals', n_clicks=0)
-], style={'display':'flex','gap':'12px','alignItems':'center','marginTop':'8px'})
+], style={'display':'flex','gap':'12px','alignItems':'center','marginTop':'8px'}),
             dcc.Graph(id="overlay", figure=go.Figure())
         ], className="card", style={"maxWidth":"900px"})
     ], style={"marginBottom":"16px"}),
@@ -103,13 +103,13 @@ html.Div([
 @app.callback(
     Output("overlay","figure"),
     Output("upload-summary","children"),
-    Input("btn-process","n_clicks"), Input('btn-hr','n_clicks'), Input('btn-rrob','n_clicks'), Input('btn-intervals','n_clicks'),
+    Input("btn-process","n_clicks"), Input('btn-rrob','n_clicks'), Input('btn-intervals','n_clicks'),
     State("upload-ecg","contents"),
     State("upload-ecg","filename"),
     State("upload-meta","value"), State('ops','value'), State('layout-select','value'),
     prevent_initial_call=True
 )
-def process(n, nhr, nrrob, nintv, content, filename, meta_text, ops, layout):
+def process(n, nrrob, nintv, content, filename, meta_text, ops, layout):
     if not content:
         return go.Figure(), "Nenhuma imagem enviada."
     img = decode_image(content)
@@ -130,7 +130,7 @@ def process(n, nhr, nrrob, nintv, content, filename, meta_text, ops, layout):
     # Grid + segmentação básica (servidor)
     from cv.grid_detect import estimate_grid_period_px
     from cv.segmentation import segment_12leads_basic, find_content_bbox
-from cv.segmentation_ext import segment_layout
+    from cv.segmentation_ext import segment_layout
     arr = np.asarray(img.convert("L"))
     grid = estimate_grid_period_px(np.asarray(img))
     bbox = find_content_bbox(arr)
