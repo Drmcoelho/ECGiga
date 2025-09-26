@@ -340,3 +340,58 @@ python -m ecgcourse ingest image samples/ecg_images/synthetic_12lead.png   --des
 **CLI & Dash**
 - `rhythm analyze`, `precordials transition`, `checklist lvh`.
 - Botões **Ritmo** e **Transição R/S** adicionados no Dash.
+
+---
+
+## 26) **API (Phase 4 in progress)** — FastAPI Baseline
+
+**Objetivo**: Estabelecer a base da API REST para expansões futuras (ingest endpoints, quiz services, plugins).
+
+### Uso rápido
+
+**Iniciar servidor API:**
+```bash
+uvicorn api.main:app --reload
+```
+
+O servidor estará disponível em: http://127.0.0.1:8000
+
+**Documentação interativa:**
+- Swagger UI: http://127.0.0.1:8000/docs
+- ReDoc: http://127.0.0.1:8000/redoc
+
+### Endpoints disponíveis
+
+**GET /health** - Status do serviço e capacidades
+```json
+{
+    "status": "ok",
+    "tesseract": false,
+    "api_key_configured": false
+}
+```
+
+**GET /version** - Informações de versão
+```json
+{
+    "app_version": "0.0.0-p0",
+    "schema_supported": ["0.2.0", "0.3.0", "0.4.0", "0.5.0"]
+}
+```
+
+### Testes
+```bash
+pytest tests_api/ -v
+```
+
+**Estrutura adicionada:**
+- `api/` - Pacote FastAPI principal
+- `api/main.py` - Aplicação FastAPI
+- `api/routers/system.py` - Endpoints de sistema
+- `api/dependencies.py` - Dependências e configurações
+- `tests_api/` - Testes da API
+- `docs/api_reference.md` - Referência da API
+
+**Dependências:** FastAPI>=0.111.0, uvicorn[standard]>=0.30.0
+
+**Próximas fases:** ingest endpoints, persistência, quiz dinâmico, plugins, auth.
