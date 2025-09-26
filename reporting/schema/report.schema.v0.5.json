@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Drmcoelho/ECGiga/reporting/schema/report.schema.v0.5.json",
+  "title": "ECG Report Schema",
+  "description": "Comprehensive ECG analysis report schema v0.5 with quality metrics, measurements, and clinical interpretations",
+  "version": "0.5.0",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object",
+      "description": "Metadata about the ECG report generation process"
+    },
+    "patient_info": {
+      "type": "object",
+      "description": "Patient demographic and clinical information"
+    },
+    "acquisition": {
+      "type": "object",
+      "description": "ECG acquisition parameters and settings"
+    },
+    "segmentation": {
+      "type": "object",
+      "description": "Lead segmentation results and boundaries"
+    },
+    "layout_detection": {
+      "type": "object",
+      "description": "ECG layout detection and grid analysis results"
+    },
+    "rpeaks": {
+      "type": "object",
+      "description": "R-peak detection results across leads"
+    },
+    "intervals": {
+      "type": "object",
+      "description": "Basic interval measurements (PR, QRS, QT)"
+    },
+    "intervals_refined": {
+      "type": "object",
+      "description": "Refined interval measurements using multi-evidence approach"
+    },
+    "axis": {
+      "type": "object",
+      "description": "Frontal axis calculation and interpretation",
+      "properties": {
+        "angle_deg": {
+          "type": "number",
+          "description": "Axis angle in degrees"
+        },
+        "label": {
+          "type": "string",
+          "description": "Axis interpretation label (normal, LAD, RAD, etc.)"
+        },
+        "amps": {
+          "type": "object",
+          "description": "Lead amplitudes used for axis calculation"
+        }
+      }
+    },
+    "measures": {
+      "type": "object",
+      "description": "Clinical measurements and derived parameters"
+    },
+    "flags": {
+      "type": "array",
+      "description": "Automated clinical flags and warnings",
+      "items": {
+        "type": "string"
+      }
+    },
+    "suggested_interpretations": {
+      "type": "array",
+      "description": "AI-suggested clinical interpretations",
+      "items": {
+        "type": "string"
+      }
+    },
+    "version": {
+      "type": "string",
+      "description": "Schema version identifier"
+    },
+    "axis_hex": {
+      "type": "object",
+      "description": "Hexaxial reference system axis analysis"
+    },
+    "rhythm": {
+      "type": "object",
+      "description": "Rhythm analysis and arrhythmia detection"
+    },
+    "precordial_transition": {
+      "type": "object",
+      "description": "Precordial lead transition zone analysis"
+    },
+    "hypertrophy": {
+      "type": "object",
+      "description": "Hypertrophy assessment using clinical criteria"
+    },
+    "capabilities": {
+      "type": "array",
+      "description": "Analysis capabilities applied to this report",
+      "items": {
+        "type": "string",
+        "enum": [
+          "grid_detection",
+          "lead_segmentation", 
+          "rpeak_detection",
+          "interval_measurement",
+          "axis_calculation",
+          "rhythm_analysis",
+          "hypertrophy_assessment",
+          "ocr_recognition",
+          "quality_assessment",
+          "clinical_flagging"
+        ]
+      }
+    },
+    "quality": {
+      "type": "object",
+      "description": "Quality metrics and assessment scores",
+      "properties": {
+        "overall_score": {
+          "type": "number",
+          "description": "Overall quality score (0.0-1.0)",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "image_quality": {
+          "type": "object",
+          "description": "Image quality assessment",
+          "properties": {
+            "resolution_score": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "contrast_score": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "noise_score": {"type": "number", "minimum": 0.0, "maximum": 1.0}
+          }
+        },
+        "analysis_confidence": {
+          "type": "object",
+          "description": "Confidence levels for different analysis components",
+          "properties": {
+            "segmentation_confidence": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "rpeak_confidence": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "measurement_confidence": {"type": "number", "minimum": 0.0, "maximum": 1.0}
+          }
+        },
+        "validation_flags": {
+          "type": "array",
+          "description": "Quality validation flags and warnings",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "meta",
+    "version"
+  ]
+}

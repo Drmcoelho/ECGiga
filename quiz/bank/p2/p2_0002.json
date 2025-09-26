@@ -1,0 +1,14 @@
+{
+  "id": "axis_rule_0002",
+  "topic": "Eixo — Quadrantes",
+  "difficulty": "easy",
+  "stem": "I negativo e aVF positivo sugerem:",
+  "options": [
+    "Eixo normal",
+    "Desvio para a esquerda",
+    "Desvio para a direita",
+    "Desvio extremo"
+  ],
+  "answer_index": 2,
+  "explanation": "I−, aVF+ → desvio para a direita."
+}
