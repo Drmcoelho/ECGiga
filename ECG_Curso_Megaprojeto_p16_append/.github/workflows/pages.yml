@@ -1,7 +1,8 @@
-name: Deploy Pages
+name: Deploy ECGiga to GitHub Pages
+
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]     # ajuste se seu branch padrão for outro
   workflow_dispatch:
 
 permissions:
@@ -9,17 +10,36 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v5
+
+      # Copia o conteúdo estático para uma pasta de publicação
+      - name: Prepare static site
+        run: |
+          mkdir -p _site
+          rsync -av --delete ./web_app/ ./_site/
+          # impede que o Pages trate pastas iniciadas por "_" como Jekyll
+          touch ./_site/.nojekyll
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: web_app
-      - name: Deploy to GitHub Pages
-        id: deployment
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
         uses: actions/deploy-pages@v4
