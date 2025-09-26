@@ -1,0 +1,4 @@
+# Ignore storage contents except this placeholder
+*
+!.gitignore
+!README.txt
