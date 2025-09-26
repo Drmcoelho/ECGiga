@@ -382,3 +382,5 @@ python -m ecgcourse ingest image samples/ecg_images/synthetic_12lead.png   --des
 - **Geração de quiz ilustrado** a partir do **laudo** (com overlay opcional).
 - **Relatório HTML** de desempenho agregando múltiplos casos.
 - **GitHub Pages**: workflow pronto e home index.
+
+<!-- trigger deploy -->
