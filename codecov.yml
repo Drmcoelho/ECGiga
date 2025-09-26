@@ -1,0 +1,58 @@
+# Codecov configuration for ECGiga project
+# Enforces minimum coverage thresholds and quality gates
+
+coverage:
+  precision: 2
+  round: down
+  range: "60...95"
+
+  status:
+    project:
+      default:
+        target: 60%  # Minimum project coverage threshold
+        threshold: 1%  # Allow 1% drop before failing
+        base: auto
+        if_ci_failed: error
+    
+    patch:
+      default:
+        target: 70%  # Higher threshold for new code
+        threshold: 5%  # More lenient for patches
+        if_ci_failed: error
+
+comment:
+  layout: "reach,diff,flags,tree,reach"
+  behavior: default
+  require_changes: false
+  require_base: no
+  require_head: yes
+
+ignore:
+  # Build and configuration files
+  - "setup.py"
+  - "pyproject.toml" 
+  - "requirements.txt"
+  
+  # Documentation and examples
+  - "docs/**/*"
+  - "notebooks/**/*"
+  - "README.md"
+  
+  # Test data and fixtures
+  - "samples/**/*"
+  - "assets/**/*"
+  
+  # Quiz bank data (JSON files)
+  - "quiz/bank/**/*"
+  - "cli_app/quiz/bank/**/*"
+  
+  # Generated files
+  - "**/version.py"
+  - "**/__pycache__/**/*"
+  
+  # Scripts that are primarily CLI tools
+  - "scripts/python/download_assets.py"
+  - "scripts/python/dump_cli_help.py"
+
+github_checks:
+  annotations: true

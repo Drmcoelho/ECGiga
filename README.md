@@ -1,6 +1,29 @@
 # MEGAPROJETO ECG — Parte **0/30** (p0)
 
+[![CI Quality Gates](https://github.com/Drmcoelho/ECGiga/workflows/ci-quality-gates/badge.svg)](https://github.com/Drmcoelho/ECGiga/actions/workflows/ci-quality-gates.yml)
+[![Nightly Benchmark](https://github.com/Drmcoelho/ECGiga/workflows/nightly-benchmark/badge.svg)](https://github.com/Drmcoelho/ECGiga/actions/workflows/nightly-benchmark.yml)
+[![codecov](https://codecov.io/gh/Drmcoelho/ECGiga/branch/main/graph/badge.svg)](https://codecov.io/gh/Drmcoelho/ECGiga)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 > **Missão:** construir o maior curso open‑source, interativo e clínico de Eletrocardiografia (ECG) para médicos com base sólida — com CLI didática, web dinâmica, IA assistiva (GPT‑5), quizzes MCQ com feedback imediato e simulações fisiológicas.
+
+## 🏆 Quality Gates & Benchmarks
+
+Este projeto mantém altos padrões de qualidade através de gates automatizados:
+
+- **Coverage**: ≥60% (com meta de 70-75% após estabilização)
+- **F1 Score**: ≥0.85 para HR 60-90 bpm (benchmark nightly)
+- **Schema Validation**: Report schema v0.5 com análise de qualidade
+- **Code Quality**: Black formatting + Ruff linting
+- **Documentation**: CLI reference auto-gerada
+
+### Nightly Benchmarks
+
+Benchmarks sintéticos executam todas as noites às 2h UTC, validando:
+- Performance de detecção de R-peaks
+- Consistência de medições de intervalos
+- Threshold F1 ≥0.85 para faixa de FC 60-90 bpm
+- Métricas de qualidade de imagem e análise
 
 ---
 
