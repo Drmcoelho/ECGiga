@@ -1,0 +1,14 @@
+{
+  "id": "ppm_0005",
+  "topic": "TRC — biventricular",
+  "difficulty": "medium",
+  "stem": "TRC eficaz tende a:",
+  "options": [
+    "Reduzir QRS",
+    "Aumentar QRS",
+    "Inverter P",
+    "Encurtar QT"
+  ],
+  "answer_index": 0,
+  "explanation": "Ressincronização reduz QRS em muitos casos."
+}
