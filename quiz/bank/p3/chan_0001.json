@@ -1,0 +1,14 @@
+{
+  "id": "chan_0001",
+  "topic": "Brugada — tipo 1",
+  "difficulty": "hard",
+  "stem": "Assinatura:",
+  "options": [
+    "ST côncavo difuso",
+    "ST em V1–V2 'coved' + T negativa",
+    "Delta",
+    "U gigante"
+  ],
+  "answer_index": 1,
+  "explanation": "Tipo 1 clássico."
+}
