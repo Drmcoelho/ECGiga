@@ -1,0 +1,1 @@
+"""API package for ECGiga FastAPI application."""
