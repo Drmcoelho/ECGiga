@@ -1,0 +1,14 @@
+{
+  "id": "brugada_drugs_0001",
+  "topic": "Brugada — Desencadeantes",
+  "difficulty": "hard",
+  "stem": "Podem desmascarar:",
+  "options": [
+    "Bloq. canais de Na+",
+    "Digitálico",
+    "Beta-agonistas",
+    "Hipercalemia"
+  ],
+  "answer_index": 0,
+  "explanation": "Na+ e febre desmascaram."
+}
