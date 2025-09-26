@@ -1,6 +1,6 @@
 import dash
 import dash_bootstrap_components as dbc
-from dash import html, dcc
+from dash import html, dcc, Input, Output
 import diskcache
 from dash.long_callback import DiskcacheManager
 
@@ -8,20 +8,21 @@ from dash.long_callback import DiskcacheManager
 cache = diskcache.Cache("./cache")
 long_callback_manager = DiskcacheManager(cache)
 
-# Conecta ao app Dash principal. O `use_pages=True` habilita o roteamento de páginas.
 app = dash.Dash(
     __name__, 
     use_pages=True, 
     external_stylesheets=[dbc.themes.BOOTSTRAP],
-    long_callback_manager=long_callback_manager
+    long_callback_manager=long_callback_manager,
+    suppress_callback_exceptions=True # Necessário pois os callbacks estão em arquivos separados
 )
 app.title = "ECG Giga - Curso Interativo de ECG"
 
 # Define a barra de navegação superior
 navbar = dbc.NavbarSimple(
     children=[
-        # Cria um link para cada página registrada no diretório `pages`
         dbc.NavItem(dbc.NavLink(page["name"], href=page["relative_path"])) for page in dash.page_registry.values()
+    ] + [
+        dbc.NavbarText("", id="welcome-message", className="ms-auto")
     ],
     brand="ECG Giga",
     brand_href="/",
@@ -32,16 +33,22 @@ navbar = dbc.NavbarSimple(
 
 # Layout principal da aplicação
 app.layout = html.Div([
-    # `dcc.Location` monitora a URL na barra de endereços
     dcc.Location(id="url"),
-
-    # A barra de navegação que será exibida em todas as páginas
+    # Armazenamento de dados do perfil do usuário no navegador
+    dcc.Store(id='user-profile-store', storage_type='local'),
     navbar,
-
-    # O conteúdo da página atual será renderizado aqui. 
-    # `dash.page_container` é preenchido pelo Dash com base na URL.
     dbc.Container(id="page-content", children=[dash.page_container], fluid=True)
 ])
+
+# Callback para atualizar a mensagem de boas-vindas
+@app.callback(
+    Output("welcome-message", "children"),
+    Input("user-profile-store", "data")
+)
+def update_welcome_message(data):
+    if data and data.get("user_name"):
+        return f"Bem-vindo(a), {data['user_name']}!"
+    return "Bem-vindo(a)!"
 
 if __name__ == "__main__":
     app.run(debug=True)

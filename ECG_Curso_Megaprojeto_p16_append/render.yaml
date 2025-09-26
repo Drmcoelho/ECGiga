@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: ecg-giga-dash
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn web_app.dash_app.app:app.server"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11
