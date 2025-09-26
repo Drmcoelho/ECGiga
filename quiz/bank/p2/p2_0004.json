@@ -1,0 +1,14 @@
+{
+  "id": "qtc_rule_0001",
+  "topic": "Intervalos — QTc",
+  "difficulty": "medium",
+  "stem": "QT=400 ms, RR=1000 ms. QTc Bazett ≈",
+  "options": [
+    "320 ms",
+    "400 ms",
+    "500 ms",
+    "600 ms"
+  ],
+  "answer_index": 1,
+  "explanation": "400/√1,0 ≈ 400 ms."
+}

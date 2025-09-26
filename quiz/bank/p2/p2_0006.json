@@ -1,0 +1,14 @@
+{
+  "id": "qrs_rule_0001",
+  "topic": "Intervalos — QRS",
+  "difficulty": "easy",
+  "stem": "QRS=130 ms sugere:",
+  "options": [
+    "Normal",
+    "Bloqueio de ramo completo",
+    "BR incompleto",
+    "TV garantida"
+  ],
+  "answer_index": 1,
+  "explanation": "≥120 ms compatível com bloqueio completo."
+}
