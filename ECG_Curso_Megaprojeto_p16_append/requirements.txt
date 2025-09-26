@@ -8,6 +8,7 @@ scipy>=1.11
 matplotlib>=3.8
 plotly>=5.22
 dash>=2.17
+dash-bootstrap-components>=1.6.0
 pillow>=10.2
 opencv-python-headless>=4.10
 neurokit2>=0.2.9
