@@ -1,0 +1,8 @@
+total 288
+drwxr-xr-x@  7 matheuscoelho  wheel   224B 26 set 14:54 .
+drwxr-xr-x   3 matheuscoelho  wheel    96B 26 set 14:12 ..
+drwxr-xr-x@ 14 matheuscoelho  wheel   448B 26 set 14:17 .git
+-rw-r--r--@  1 matheuscoelho  wheel   137K 26 set 14:12 ECG_Curso_Megaprojeto_p7_append.zip
+-rw-r--r--@  1 matheuscoelho  wheel     0B 26 set 14:54 ll.txt
+-rw-r--r--@  1 matheuscoelho  wheel    13B 26 set 14:12 README.md
+drwxr-xr-x@ 20 matheuscoelho  wheel   640B 26 set 14:53 src_unzipped

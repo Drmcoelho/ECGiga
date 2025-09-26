@@ -1,0 +1,22 @@
+total 88
+drwxr-xr-x@ 21 matheuscoelho  wheel   672B 26 set 14:54 .
+drwxr-xr-x@  7 matheuscoelho  wheel   224B 26 set 14:54 ..
+drwxr-xr-x@  3 matheuscoelho  wheel    96B 26 set 14:53 .github
+-rw-r--r--@  1 matheuscoelho  wheel   131B 25 set 19:47 .gitignore
+drwxr-xr-x@  3 matheuscoelho  wheel    96B 26 set 14:53 assets
+drwxr-xr-x@  4 matheuscoelho  wheel   128B 26 set 14:53 cli_app
+drwxr-xr-x@ 11 matheuscoelho  wheel   352B 26 set 14:53 cv
+drwxr-xr-x@ 17 matheuscoelho  wheel   544B 26 set 14:53 docs
+-rw-r--r--@  1 matheuscoelho  wheel   128B 25 set 19:47 LICENSE
+-rw-r--r--@  1 matheuscoelho  wheel     0B 26 set 14:54 ll.txt
+drwxr-xr-x@ 22 matheuscoelho  wheel   704B 26 set 14:53 notebooks
+-rw-r--r--@  1 matheuscoelho  wheel   463B 25 set 19:47 pyproject.toml
+drwxr-xr-x@  5 matheuscoelho  wheel   160B 26 set 14:53 quiz
+-rw-r--r--@  1 matheuscoelho  wheel    13K 25 set 21:04 README.md
+-rw-r--r--@  1 matheuscoelho  wheel   7,0K 25 set 19:47 readme.me
+drwxr-xr-x@  3 matheuscoelho  wheel    96B 26 set 14:53 reporting
+-rw-r--r--@  1 matheuscoelho  wheel   837B 25 set 20:56 requirements.txt
+drwxr-xr-x@  4 matheuscoelho  wheel   128B 26 set 14:53 samples
+drwxr-xr-x@  3 matheuscoelho  wheel    96B 26 set 14:53 scripts
+-rw-r--r--@  1 matheuscoelho  wheel     9B 25 set 19:47 VERSION
+drwxr-xr-x@  3 matheuscoelho  wheel    96B 26 set 14:53 web_app

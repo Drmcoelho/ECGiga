@@ -1,0 +1,14 @@
+{
+  "id": "lead_pos_0002",
+  "topic": "Posicionamento — V1 errado",
+  "difficulty": "medium",
+  "stem": "V1 muito lateral tende a:",
+  "options": [
+    "Reduzir R em V1",
+    "Aumentar R em V1",
+    "Gerar delta",
+    "Inverter P em inferiores"
+  ],
+  "answer_index": 1,
+  "explanation": "Deslocar V1 lateral aumenta R e altera transição."
+}

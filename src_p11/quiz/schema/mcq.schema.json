@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ECG MCQ",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "topic": {
+      "type": "string"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": [
+        "easy",
+        "medium",
+        "hard"
+      ]
+    },
+    "stem": {
+      "type": "string"
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2
+    },
+    "answer_index": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "explanation": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "topic",
+    "difficulty",
+    "stem",
+    "options",
+    "answer_index",
+    "explanation"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "hbp_0001",
+  "topic": "HBPE",
+  "difficulty": "hard",
+  "stem": "Associa-se a:",
+  "options": [
+    "Eixo direito",
+    "Eixo esquerdo",
+    "Eixo normal",
+    "Eixo extremo"
+  ],
+  "answer_index": 0,
+  "explanation": "Desvia à direita."
+}
