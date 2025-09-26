@@ -1,0 +1,14 @@
+{
+  "id": "svt_adenosine_diag_0001",
+  "topic": "Adenosina — Diagnóstico",
+  "difficulty": "medium",
+  "stem": "Pode:",
+  "options": [
+    "Evidenciar ondas F no flutter",
+    "Tratar FA definitivamente",
+    "Sempre prolongar QT perigosamente",
+    "Induzir bloqueio AV permanente"
+  ],
+  "answer_index": 0,
+  "explanation": "Bloqueio AV momentâneo ajuda diagnóstico."
+}
