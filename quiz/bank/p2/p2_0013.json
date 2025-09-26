@@ -1,0 +1,14 @@
+{
+  "id": "bundle_diff_0001",
+  "topic": "BRD vs BRE",
+  "difficulty": "easy",
+  "stem": "Assinale:",
+  "options": [
+    "BRD rSR' V1–V2; BRE R larga V5–V6",
+    "BRD R larga V6; BRE rSR' V1",
+    "Ambos estreitos",
+    "Nenhum"
+  ],
+  "answer_index": 0,
+  "explanation": "Correto."
+}

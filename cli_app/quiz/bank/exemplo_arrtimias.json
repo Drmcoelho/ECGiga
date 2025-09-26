@@ -1,0 +1,14 @@
+{
+  "id": "arr-0001",
+  "topic": "Arritmias — FA",
+  "difficulty": "medium",
+  "stem": "Qual achado é mais típico de fibrilação atrial no ECG?",
+  "options": [
+    "Ondas P serrilhadas regulares com FC ~150 bpm",
+    "Intervalos PR progressivamente mais longos até QRS cair",
+    "Linha de base fibrilatória sem ondas P discretas e RR irregular",
+    "QRS largo regular com dissociação AV"
+  ],
+  "answer_index": 2,
+  "explanation": "FA: ausência de ondas P organizadas e resposta ventricular irregularmente irregular. Flutter tem ondas serrilhadas com padrões de condução, Wenckebach (Mobitz I) tem PR progressivo e TV monomórfica dá QRS largo regular."
+}

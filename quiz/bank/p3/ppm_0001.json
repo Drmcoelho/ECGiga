@@ -1,0 +1,14 @@
+{
+  "id": "ppm_0001",
+  "topic": "Marcapasso — captura VD",
+  "difficulty": "easy",
+  "stem": "Morfologia esperada:",
+  "options": [
+    "BRE",
+    "BRD",
+    "QRS estreito",
+    "QS em DII"
+  ],
+  "answer_index": 0,
+  "explanation": "Ritmo estimulado VD → BRE."
+}
