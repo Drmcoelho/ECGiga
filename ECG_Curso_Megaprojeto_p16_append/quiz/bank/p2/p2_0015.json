@@ -1,0 +1,14 @@
+{
+  "id": "tep_axis_0001",
+  "topic": "TEP — Padrões",
+  "difficulty": "medium",
+  "stem": "Achado possível:",
+  "options": [
+    "S1Q3T3",
+    "Delta",
+    "PR curto",
+    "QT muito curto"
+  ],
+  "answer_index": 0,
+  "explanation": "Clássico porém inespecífico."
+}

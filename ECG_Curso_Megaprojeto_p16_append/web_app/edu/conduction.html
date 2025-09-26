@@ -1,0 +1,62 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>ECGiga — Conduction Lab</title>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#fff;margin:0}
+header{background:#111;color:#fff;padding:14px 18px}
+main{display:grid;grid-template-columns:1fr 320px;gap:12px;padding:12px}
+svg{border:1px solid #e5e7eb;border-radius:10px;background:#fff}
+.panel{border:1px solid #e5e7eb;border-radius:10px;padding:10px}
+.row{display:flex;gap:8px;align-items:center;margin:8px 0}
+.badge{display:inline-block;background:#eef;border:1px solid #99c;border-radius:4px;padding:1px 6px;margin-left:6px;font-size:12px}
+</style>
+<header><h3>Sistema de Condução — PR/QRS e vetores</h3></header>
+<main>
+  <svg id="heart" viewBox="0 0 600 360" width="100%" height="360">
+    <defs>
+      <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L6,3 z" fill="#0b5cff"/>
+      </marker>
+    </defs>
+    <rect x="0" y="0" width="600" height="360" fill="#fff"/>
+    <circle id="sa" cx="120" cy="90" r="10" fill="#22c55e"/><text x="136" y="95" font-size="12">NSA</text>
+    <circle id="av" cx="220" cy="180" r="10" fill="#f59e0b"/><text x="236" y="184" font-size="12">NAV</text>
+    <circle id="his" cx="260" cy="200" r="6" fill="#3b82f6"/><text x="270" y="206" font-size="12">His</text>
+    <line x1="260" y1="200" x2="360" y2="240" stroke="#0b5cff" stroke-width="4" marker-end="url(#arrow)"/>
+    <line x1="260" y1="200" x2="360" y2="120" stroke="#0b5cff" stroke-width="4" marker-end="url(#arrow)"/>
+    <g id="purk">
+      <line x1="360" y1="120" x2="520" y2="100" stroke="#0ea5e9" stroke-width="3" marker-end="url(#arrow)"/>
+      <line x1="360" y1="240" x2="520" y2="280" stroke="#0ea5e9" stroke-width="3" marker-end="url(#arrow)"/>
+    </g>
+    <circle id="dot" cx="120" cy="90" r="6" fill="#ef4444"/>
+  </svg>
+  <div class="panel">
+    <div class="row"><label>Atraso AV (ms):</label><input id="avd" type="range" min="80" max="260" step="5" value="160"><span id="avdV" class="badge">160</span></div>
+    <div class="row"><label>Vel. QRS (ms):</label><input id="qrsd" type="range" min="60" max="180" step="5" value="90"><span id="qrsdV" class="badge">90</span></div>
+    <div class="row"><button id="play">▶ Reproduzir pulso</button></div>
+    <div class="row"><small>PR ≈ atraso AV; QRS ≈ velocidade de propagação intraventricular.</small></div>
+    <div class="row"><small>Experimente aumentar o atraso AV e observar como o ponto vermelho pausa no NAV.</small></div>
+  </div>
+</main>
+<script>
+const dot = document.getElementById('dot');
+const avd = document.getElementById('avd'), qrsd = document.getElementById('qrsd');
+const avdV = document.getElementById('avdV'), qrsdV = document.getElementById('qrsdV');
+avd.oninput=()=>avdV.textContent=avd.value; qrsd.oninput=()=>qrsdV.textContent=qrsd.value;
+function move(el, x,y){ el.setAttribute('cx', x); el.setAttribute('cy', y); }
+function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
+async function play(){
+  move(dot, 120, 90);
+  await sleep(50);
+  // NSA->NAV
+  for(let t=0;t<600;t+=12){ move(dot, 120+ (t/6), 90 + (t/12)); await sleep(10); }
+  await sleep(parseInt(avd.value)); // AV delay → PR
+  // NAV->His
+  for(let t=0;t<40;t+=4){ move(dot, 220+t, 180+(t/2)); await sleep(12); }
+  // His->ramos (QRS) — duração controlada por qrsd
+  const dur = parseInt(qrsd.value);
+  for(let t=0;t<dur;t+=8){ move(dot, 260+(t/2), 200-(t/4)); await sleep(8); }
+  for(let t=0;t<dur;t+=8){ move(dot, 260+(t/2), 200+(t/4)); await sleep(8); }
+}
+document.getElementById('play').onclick=()=>{ play(); };
+</script>

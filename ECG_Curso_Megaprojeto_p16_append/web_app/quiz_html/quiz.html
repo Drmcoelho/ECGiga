@@ -1,0 +1,64 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>ECGiga — Quiz (HTML)</title>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#f8fafc;margin:0}
+header{background:#0b5cff;color:#fff;padding:14px 18px}
+main{padding:14px;max-width:960px;margin:0 auto}
+.q{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:14px;margin:12px 0}
+.choice{border:1px solid #e5e7eb;border-radius:8px;padding:10px;margin:8px 0;cursor:pointer}
+.choice.correct{border-color:#16a34a;background:#ecfdf5}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+img{max-width:100%;border:1px solid #e5e7eb;border-radius:8px}
+.small{color:#555;font-size:13px}
+.btn{display:inline-block;padding:8px 12px;border:1px solid #0b5cff;border-radius:8px;color:#0b5cff;text-decoration:none}
+footer{margin:16px 0;color:#444}
+</style>
+<header><h3>ECGiga — Quiz Ilustrado</h3></header>
+<main>
+  <div class="small">Carregue um arquivo <code>.json</code> no formato do banco MCQ para começar.</div>
+  <p><input type="file" id="file" accept="application/json" class="btn"></p>
+  <div id="score" class="small"></div>
+  <div id="root"></div>
+</main>
+<footer class="small" style="text-align:center">Parte 15/30 — pronto para GitHub Pages (offline)</footer>
+<script>
+const root=document.getElementById('root'); const score=document.getElementById('score');
+document.getElementById('file').onchange=(e)=>{
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=()=>{ try{ const data=JSON.parse(r.result); renderQuiz(data); } catch(err){ root.innerHTML='<b>Erro</b>: '+err; } };
+  r.readAsText(f);
+};
+function imgTag(src){ return src? `<div><img src="${src}"></div>` : ''; }
+function renderQuiz(data){
+  let correct=0, total=0;
+  root.innerHTML = (data.questions||[]).map((q,i)=>{
+    const img = imgTag(q.image || '');
+    const choices = (q.choices||[]).map((c,j)=>{
+      return `<div class="choice" data-q="${i}" data-c="${j}"><b>${String.fromCharCode(65+j)}.</b> ${c.text}<div class="small exp" style="display:none;margin-top:6px">${c.explanation||''}</div></div>`;
+    }).join('');
+    return `<div class="q"><div class="prompt">${q.prompt||'(sem enunciado)'}</div>${img}${choices}</div>`;
+  }).join('');
+  total = (data.questions||[]).length;
+  score.textContent = `Score: 0/${total}`;
+  root.querySelectorAll('.choice').forEach(el=>{
+    el.onclick = ()=>{
+      const qi = parseInt(el.getAttribute('data-q')), ci = parseInt(el.getAttribute('data-c'));
+      const q = data.questions[qi]; const c = q.choices[ci];
+      const chs = el.parentElement.querySelectorAll('.choice');
+      chs.forEach(x=>x.onclick=null); // lock question
+      chs.forEach(x=>x.classList.add('wrong')); // mark all
+      // mark correct
+      const idx = q.choices.findIndex(z=>z.is_correct);
+      if(idx>=0){
+        const corr = chs[idx]; corr.classList.remove('wrong'); corr.classList.add('correct');
+      }
+      // show explanation
+      chs.forEach(x=>{ const e=x.querySelector('.exp'); if(e) e.style.display='block'; });
+      if(c.is_correct) correct++;
+      score.textContent = `Score: ${correct}/${total}`;
+    };
+  });
+}
+</script>

@@ -1,0 +1,14 @@
+{
+  "id": "hve_strain_0002",
+  "topic": "HVE — Strain",
+  "difficulty": "easy",
+  "stem": "Strain lateral:",
+  "options": [
+    "ST elevado convexo",
+    "ST deprimido + T negativa assimétrica",
+    "Delta",
+    "QT curto"
+  ],
+  "answer_index": 1,
+  "explanation": "Padrão clássico."
+}

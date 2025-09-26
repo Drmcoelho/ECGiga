@@ -88,7 +88,7 @@ html.Div([
   html.Button('R-peaks robustos', id='btn-rrob', n_clicks=0),
   html.Button('Intervalos (PR/QRS/QT/QTc)', id='btn-intervals', n_clicks=0),
   html.Button('Eixo (I/aVF)', id='btn-axis', n_clicks=0)
-], style={'display':'flex','gap':'12px','alignItems':'center','marginTop':'8px'}),
+], style={'display':'flex','gap':'12px','alignItems':'center','marginTop':'8px'})
             dcc.Graph(id="overlay", figure=go.Figure())
         ], className="card", style={"maxWidth":"900px"})
     ], style={"marginBottom":"16px"}),
@@ -131,7 +131,7 @@ def process(n, nhr, nrrob, nintv, naxis, content, filename, meta_text, ops, layo
     # Grid + segmentação básica (servidor)
     from cv.grid_detect import estimate_grid_period_px
     from cv.segmentation import segment_12leads_basic, find_content_bbox
-    from cv.segmentation_ext import segment_layout
+from cv.segmentation_ext import segment_layout
     arr = np.asarray(img.convert("L"))
     grid = estimate_grid_period_px(np.asarray(img))
     bbox = find_content_bbox(arr)
@@ -197,3 +197,5 @@ def calc_qtc(qt, rr):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+# Rota leve para Edu index (servir como arquivo estático)

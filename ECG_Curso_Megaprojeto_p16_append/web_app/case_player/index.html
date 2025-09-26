@@ -1,0 +1,397 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>ECGiga — Case Player (p13)</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;background:#fafafa;color:#222}
+  header{padding:12px 16px;background:#111;color:#fff}
+  main{display:flex;gap:16px;padding:16px}
+  aside{width:320px;min-width:280px;background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px;height:calc(100vh - 90px);overflow:auto}
+  .panel{background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px}
+  .row{display:flex;gap:8px;align-items:center;margin:6px 0}
+  .btn{padding:6px 10px;border:1px solid #444;border-radius:6px;background:#f2f2f2;cursor:pointer}
+  .btn.primary{background:#0b5cff;color:#fff;border-color:#084bd6}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+  .hint{font-size:12px;color:#555}
+  canvas{border:1px solid #ccc;background:#fff;max-width:100%;height:auto;border-radius:6px}
+  #overlay{position:absolute;left:0;top:0;pointer-events:none}
+  .stack{position:relative;display:inline-block}
+  .field{display:flex;align-items:center;gap:6px;margin:6px 0}
+  input[type="number"]{width:90px}
+  .badge{display:inline-block;background:#eef;border:1px solid #99c;border-radius:4px;padding:1px 6px;margin-left:6px;font-size:12px}
+  details{margin-top:8px}
+  code{background:#f4f4f4;border:1px solid #e0e0e0;border-radius:4px;padding:1px 4px}
+</style>
+<header><h2>ECGiga — Case Player (p13) • Medição, Calibração e Anotação</h2></header>
+<main>
+  <aside>
+    <div class="panel">
+      <div class="row"><input type="file" id="file" accept="image/*" class="btn"></div>
+      <div class="row">
+        <button id="openSample" class="btn">Abrir amostra sintética</button>
+        <span class="hint">ou carregue uma imagem de ECG</span>
+      </div>
+      <hr>
+      <h4>Calibração</h4>
+      <div class="field">
+        <label>px por quadradinho (1 mm):</label>
+        <input type="number" id="pxmm" value="10" step="0.1">
+        <button id="calX" class="btn">Calibrar (eixo X)</button>
+      </div>
+      <div class="field">
+        <label>Velocidade (mm/s):</label>
+        <input type="number" id="speed" value="25" step="1">
+      </div>
+      <div class="field">
+        <label>Ganho (mm/mV):</label>
+        <input type="number" id="gain" value="10" step="1">
+      </div>
+      <span class="hint">Dica: clique em duas linhas verticais grossas (5 mm) para calibrar X. px/mm é ajustado automaticamente.</span>
+      <hr>
+      <h4>Ferramentas</h4>
+<div class='row'><button id='btn-corrige' class='btn primary'>Corrigir-me (IoU)</button><button id='btn-corrige-clear' class='btn'>Limpar correção</button></div>
+<div class="field"><label>Rótulo atual:</label>
+<select id="labelSel"><option>P</option><option>PR</option><option selected>QRS</option><option>ST</option><option>T</option><option>U</option><option>artifact</option><option>other</option></select></div>
+<div class="row"><input type="file" id="gtfile" accept="application/json" class="btn"><button id="eval" class="btn primary">Comparar com gabarito</button><button id="saveGT" class="btn">Salvar como gabarito</button></div>
+      <div class="row">
+        <button id="mode-none" class="btn">Navegar</button>
+        <button id="mode-time" class="btn">Paquímetro (tempo)</button>
+        <button id="mode-amp" class="btn">Régua (amplitude)</button>
+        <button id="mode-box" class="btn">Caixa (segmento)</button>
+      </div>
+      <div class="row">
+        <button id="clear" class="btn">Limpar marcações</button>
+        <button id="saveJSON" class="btn primary">Salvar JSON</button>
+      </div>
+      <details>
+        <summary>Ajuda rápida</summary>
+        <ul>
+          <li><b>Calibrar X</b>: clique em duas linhas grossas consecutivas (5 mm). O sistema define px/mm.</li>
+          <li><b>Tempo</b>: arraste horizontalmente; mostra ms e FC estimada (se múltiplos RR iguais).</li>
+          <li><b>Amplitude</b>: arraste verticalmente; mostra mm e mV (padrão 10 mm/mV).</li>
+          <li><b>Caixa</b>: arraste uma área para marcar P, QRS, T ou ST. Pode renomear no JSON.</li>
+        </ul>
+      </details>
+    </div>
+  </aside>
+  <section style="flex:1">
+    <div class="panel">
+      <div class="stack">
+        <canvas id="img"></canvas>
+        <canvas id="overlay"></canvas>
+<canvas id="corrCanvas"></canvas>
+      </div>
+      <div id="readout" class="hint" style="margin-top:8px"></div>
+    </div>
+  </section>
+</main>
+<script>
+const imgCanvas = document.getElementById('img');
+const ovCanvas  = document.getElementById('overlay');
+const ctxImg = imgCanvas.getContext('2d');
+const ctxOv  = ovCanvas.getContext('2d');
+const fileInput = document.getElementById('file');
+const pxmmInput = document.getElementById('pxmm');
+const speedInput = document.getElementById('speed');
+const gainInput  = document.getElementById('gain');
+const readout = document.getElementById('readout');
+
+let state = { 
+  label: 'QRS',
+  gt: null,
+
+  mode: 'none', // none|time|amp|box
+  img: null,
+  pxmm: 10,
+  speed: 25,
+  gain: 10,
+  start: null,
+  end: null,
+  boxes: [],
+  measures: []
+};
+
+function resizeCanv(w,h){
+  const corrCanvas=document.getElementById('corrCanvas');
+  corrCanvas.width=w; corrCanvas.height=h;
+  corrCanvas.style.position='absolute';
+  corrCanvas.style.left=imgCanvas.offsetLeft+'px';
+  corrCanvas.style.top=imgCanvas.offsetTop+'px';
+  imgCanvas.width = w; imgCanvas.height = h;
+  ovCanvas.width  = w; ovCanvas.height  = h;
+  ovCanvas.style.position='absolute';
+  ovCanvas.style.left=imgCanvas.offsetLeft+'px';
+  ovCanvas.style.top=imgCanvas.offsetTop+'px';
+}
+function drawImage(img){
+  resizeCanv(img.width, img.height);
+  ctxImg.drawImage(img,0,0);
+  redrawOverlay();
+}
+function redrawOverlay(){
+  ctxOv.clearRect(0,0,ovCanvas.width,ovCanvas.height);
+  ctxOv.lineWidth = 2; ctxOv.strokeStyle = 'rgba(0,128,255,.9)';
+  // measures
+  for(const m of state.measures){
+    ctxOv.strokeStyle = m.type==='time' ? 'rgba(0,128,255,.9)' : 'rgba(0,180,0,.9)';
+    ctxOv.beginPath();
+    ctxOv.moveTo(m.x0,m.y0); ctxOv.lineTo(m.x1,m.y1); ctxOv.stroke();
+  }
+  // boxes
+  for(const b of state.boxes){
+    const c = colorFor(b.label); ctxOv.strokeStyle = c;
+    ctxOv.strokeRect(b.x, b.y, b.w, b.h);
+    ctxOv.fillStyle = c; ctxOv.fillRect(b.x, b.y-14, Math.min(60,b.w), 14);
+    ctxOv.fillStyle = 'white'; ctxOv.font='12px system-ui'; ctxOv.fillText(b.label, b.x+3, b.y-3);
+  }
+}
+function msFromDx(dx){
+  const pxsec = state.pxmm*state.speed;
+  return dx/pxsec*1000.0;
+}
+function mvFromDy(dy){
+  const mm = dy/state.pxmm;
+  return mm/state.gain;
+}
+function setMode(m){
+  state.mode = m;
+  readout.innerText = 'Modo: '+m;
+}
+document.getElementById('mode-none').onclick = ()=>setMode('none');
+document.getElementById('mode-time').onclick = ()=>setMode('time');
+document.getElementById('mode-amp').onclick  = ()=>setMode('amp');
+document.getElementById('mode-box').onclick  = ()=>setMode('box');
+document.getElementById('clear').onclick = ()=>{state.measures=[]; state.boxes=[]; redrawOverlay();};
+document.getElementById('labelSel').onchange = (e)=>{ state.label = e.target.value; }; 
+document.getElementById('gtfile').onchange = (e)=>{ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>{ try{state.gt=JSON.parse(r.result); readout.innerText='Gabarito carregado.';}catch(_){readout.innerText='Falha ao ler gabarito.'} }; r.readAsText(f); }; 
+document.getElementById('saveGT').onclick = ()=>{ const payload = {meta:{pxmm:state.pxmm,speed:state.speed,gain:state.gain,ts:new Date().toISOString()}, boxes: state.boxes}; download('gabarito.annotations.json', JSON.stringify(payload,null,2)); }; 
+document.getElementById('eval').onclick = ()=>{ if(!state.gt){ readout.innerText='Carregue um gabarito (.json) antes.'; return; } const report = evalIoU(state.boxes, state.gt.boxes, 0.3); readout.innerHTML = 'Macro-F1: <b>'+report.macroF1.toFixed(2)+'</b> | '+report.details; };
+
+pxmmInput.onchange = ()=>{ state.pxmm = parseFloat(pxmmInput.value)||10; };
+speedInput.onchange = ()=>{ state.speed= parseFloat(speedInput.value)||25; };
+gainInput.onchange  = ()=>{ state.gain = parseFloat(gainInput.value)||10; };
+
+function download(filename, text) {
+  const el = document.createElement('a');
+  el.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(text));
+  el.setAttribute('download', filename);
+  document.body.appendChild(el);
+  el.click();
+  document.body.removeChild(el);
+}
+document.getElementById('saveJSON').onclick = ()=>{
+  const payload = {
+    meta: { pxmm: state.pxmm, speed: state.speed, gain: state.gain, ts: new Date().toISOString() },
+    measures: state.measures,
+    boxes: state.boxes
+  };
+  download('annotations.json', JSON.stringify(payload, null, 2));
+};
+
+// Calibração X: clique em duas linhas verticais grossas (5 mm)
+document.getElementById('calX').onclick = ()=>{
+  readout.innerText = 'Clique em duas linhas verticais grossas consecutivas (5 mm).';
+  let clicks = [];
+  function onClick(ev){
+    const x = ev.offsetX;
+    clicks.push(x);
+    if(clicks.length===2){
+      const dx = Math.abs(clicks[1]-clicks[0]);
+      const pxPer5mm = dx;
+      const pxmm = pxPer5mm/5.0;
+      state.pxmm = pxmm;
+      pxmmInput.value = pxmm.toFixed(2);
+      readout.innerText = 'Calibrado: '+pxmm.toFixed(2)+' px/mm';
+      ovCanvas.removeEventListener('click', onClick);
+    }
+  }
+  ovCanvas.addEventListener('click', onClick);
+};
+
+function handlePointer(ev){
+  if(state.mode==='none' || !state.img) return;
+  const x = ev.offsetX, y = ev.offsetY;
+  if(ev.type==='mousedown'){
+    state.start = {x,y};
+  } else if(ev.type==='mousemove' && state.start){
+    state.end = {x,y};
+    redrawOverlay();
+    ctxOv.setLineDash([6,4]);
+    ctxOv.beginPath(); ctxOv.moveTo(state.start.x, state.start.y); ctxOv.lineTo(x,y); ctxOv.stroke();
+    ctxOv.setLineDash([]);
+    const dx = Math.abs(x-state.start.x), dy = Math.abs(y-state.start.y);
+    if(state.mode==='time'){
+      const ms = msFromDx(dx);
+      const hr = ms>0 ? (60000.0/ms) : 0;
+      readout.innerHTML = `Δt ≈ <b>${ms.toFixed(0)} ms</b>  <span class="badge">FC≈${hr.toFixed(0)} bpm</span>`;
+    } else if(state.mode==='amp'){
+      const mm = dy/state.pxmm;
+      const mv = mvFromDy(dy);
+      readout.innerHTML = `Δy ≈ <b>${mm.toFixed(1)} mm</b> / ${mv.toFixed(2)} mV`;
+    } else if(state.mode==='box'){
+      readout.innerHTML = `Área: ${dx}×${dy} px`;
+    }
+  } else if(ev.type==='mouseup' && state.start){
+    const x1 = ev.offsetX, y1 = ev.offsetY;
+    const x0 = state.start.x, y0 = state.start.y;
+    if(state.mode==='time'){
+      state.measures.push({type:'time', x0, y0, x1, y1, ms: msFromDx(Math.abs(x1-x0))});
+    } else if(state.mode==='amp'){
+      state.measures.push({type:'amp', x0, y0, x1, y1, mm: Math.abs(y1-y0)/state.pxmm, mV: mvFromDy(Math.abs(y1-y0))});
+    } else if(state.mode==='box'){
+      const x = Math.min(x0,x1), y = Math.min(y0,y1);
+      const w = Math.abs(x1-x0), h = Math.abs(y1-y0);
+      state.boxes.push({x,y,w,h,label:state.label});
+    }
+    state.start=null; state.end=null; redrawOverlay();
+  }
+}
+['mousedown','mousemove','mouseup'].forEach(ev=>ovCanvas.addEventListener(ev, handlePointer));
+
+fileInput.onchange = (e)=>{
+  const f = e.target.files[0];
+  if(!f) return;
+  const img = new Image();
+  img.onload = ()=>{ state.img=img; drawImage(img); };
+  img.src = URL.createObjectURL(f);
+};
+
+document.getElementById('openSample').onclick = ()=>{
+  const img = new Image();
+  img.onload = ()=>{ state.img=img; drawImage(img); readout.innerText='Amostra carregada. Faça a calibração e meça.'; };
+  img.src = './samples/synthetic_12lead.png';
+};
+
+// defaults
+state.pxmm = parseFloat(pxmmInput.value)||10;
+state.speed= parseFloat(speedInput.value)||25;
+state.gain = parseFloat(gainInput.value)||10;
+
+function colorFor(lab){
+  switch(lab){
+    case 'P': return 'rgba(35,132,255,.9)';
+    case 'PR': return 'rgba(111,66,193,.9)';
+    case 'QRS': return 'rgba(220,53,69,.9)';
+    case 'ST': return 'rgba(255,193,7,.95)';
+    case 'T': return 'rgba(40,167,69,.9)';
+    case 'U': return 'rgba(23,162,184,.9)';
+    case 'artifact': return 'rgba(108,117,125,.9)';
+    default: return 'rgba(0,0,0,.8)';
+  }
+}
+// IoU e avaliação simples (por label com matching guloso)
+function IoU(a,b){
+  const ax0=a.x, ay0=a.y, ax1=a.x+a.w, ay1=a.y+a.h;
+  const bx0=b.x, by0=b.y, bx1=b.x+b.w, by1=b.y+b.h;
+  const ix0=Math.max(ax0,bx0), iy0=Math.max(ay0,by0);
+  const ix1=Math.min(ax1,bx1), iy1=Math.min(ay1,by1);
+  const iw=Math.max(0, ix1-ix0), ih=Math.max(0, iy1-iy0);
+  const inter=iw*ih;
+  const aarea=(ax1-ax0)*(ay1-ay0), barea=(bx1-bx0)*(by1-by0);
+  const uni=aarea+barea-inter+1e-9;
+  return inter/uni;
+}
+function evalIoU(pred, gt, thr){
+  const labels=['P','PR','QRS','ST','T','U','artifact','other'];
+  let macro=0, det=[];
+  for(const lab of labels){
+    const P = pred.filter(b=>b.label===lab);
+    const G = gt.filter(b=>b.label===lab);
+    const used=new Set(); let tp=0, fp=0, fn=0;
+    for(const a of P){
+      let best=-1, bj=-1;
+      for(let j=0;j<G.length;j++){
+        if(used.has(j)) continue;
+        const i = IoU(a,G[j]);
+        if(i>best){ best=i; bj=j; }
+      }
+      if(best>=thr && bj>=0){ tp++; used.add(bj); } else { fp++; }
+    }
+    fn = G.length - used.size;
+    const prec = tp/(tp+fp+1e-9), rec=tp/(tp+fn+1e-9);
+    const f1 = (2*prec*rec)/(prec+rec+1e-9);
+    macro += f1; det.push(`${lab}: F1=${f1.toFixed(2)} (TP=${tp},FP=${fp},FN=${fn})`);
+  }
+  macro /= labels.length;
+  return {macroF1: macro, details: det.join(' | ')};
+}
+
+
+// ----- Correção visual -----
+function IoUBox(a,b){
+  const ax0=a.x, ay0=a.y, ax1=a.x+a.w, ay1=a.y+a.h;
+  const bx0=b.x, by0=b.y, bx1=b.x+b.w, by1=b.y+b.h;
+  const ix0=Math.max(ax0,bx0), iy0=Math.max(ay0,by0);
+  const ix1=Math.min(ax1,bx1), iy1=Math.min(ay1,by1);
+  const iw=Math.max(0, ix1-ix0), ih=Math.max(0, iy1-iy0);
+  const inter=iw*ih; const aarea=(ax1-ax0)*(ay1-ay0); const barea=(bx1-bx0)*(by1-by0);
+  const uni=aarea+barea-inter + 1e-9;
+  return inter/uni;
+}
+function centerDelta(a,b){
+  const acx=a.x+a.w/2, acy=a.y+a.h/2;
+  const bcx=b.x+b.w/2, bcy=b.y+b.h/2;
+  return {dx: bcx-acx, dy: bcy-acy, dw: b.w-a.w, dh: b.h-a.h};
+}
+function matchPredToGT(pred, gt, thr=0.3){
+  // por label, greedy
+  const labels=['P','PR','QRS','ST','T','U','artifact','other'];
+  const matches=[]; const fps=[]; const fns=[];
+  for(const lab of labels){
+    const P = pred.filter(b=>b.label===lab);
+    const G = gt.filter(b=>b.label===lab);
+    const used=new Set();
+    for(const p of P){
+      let best=-1, bj=-1;
+      for(let j=0;j<G.length;j++){ if(used.has(j)) continue;
+        const i=IoUBox(p,G[j]); if(i>best){ best=i; bj=j; } }
+      if(best>=thr && bj>=0){ used.add(bj); matches.push({lab, pred:p, gt:G[bj], iou:best, delta:centerDelta(p,G[bj])}); }
+      else { fps.push({lab, pred:p}); }
+    }
+    for(let j=0;j<G.length;j++){ if(!used.has(j)) fns.push({lab, gt:G[j]}); }
+  }
+  return {matches, fps, fns};
+}
+function drawCorrectionOverlay(res){
+  const corr=document.getElementById('corrCanvas');
+  const ctx=corr.getContext('2d');
+  ctx.clearRect(0,0,corr.width,corr.height);
+  // TP = verde
+  ctx.lineWidth=2;
+  for(const m of res.matches){
+    ctx.strokeStyle='rgba(16,185,129,.95)';
+    const b=m.pred; ctx.strokeRect(b.x,b.y,b.w,b.h);
+  }
+  // FP = vermelho
+  for(const f of res.fps){
+    ctx.strokeStyle='rgba(239,68,68,.95)';
+    const b=f.pred; ctx.strokeRect(b.x,b.y,b.w,b.h);
+  }
+  // FN (GT não coberto) = amarelo tracejado
+  ctx.setLineDash([6,4]);
+  for(const n of res.fns){
+    ctx.strokeStyle='rgba(245,158,11,.95)';
+    const b=n.gt; ctx.strokeRect(b.x,b.y,b.w,b.h);
+  }
+  ctx.setLineDash([]);
+}
+function correctionSummaryHTML(res){
+  const tp = res.matches.length, fp=res.fps.length, fn=res.fns.length;
+  let lines=[`TP=${tp} FP=${fp} FN=${fn}`];
+  const top = res.matches.slice().sort((a,b)=>a.iou<b.iou?1:-1).slice(0,5);
+  for(const m of top){
+    const d=m.delta; lines.push(`${m.lab}: IoU=${m.iou.toFixed(2)} Δ(x,y)=(${d.dx.toFixed(0)},${d.dy.toFixed(0)}) Δ(w,h)=(${d.dw.toFixed(0)},${d.dh.toFixed(0)})`);
+  }
+  return lines.join(' | ');
+}
+document.getElementById('btn-corrige').onclick = ()=>{
+  if(!state.gt){ readout.innerText='Carregue um gabarito (.json) antes.'; return; }
+  const res = matchPredToGT(state.boxes, state.gt.boxes, 0.3);
+  drawCorrectionOverlay(res);
+  readout.innerHTML = 'Correção: <b>'+correctionSummaryHTML(res)+'</b>';
+};
+document.getElementById('btn-corrige-clear').onclick = ()=>{
+  const corr=document.getElementById('corrCanvas');
+  corr.getContext('2d').clearRect(0,0,corr.width,corr.height);
+};
+
+</script>

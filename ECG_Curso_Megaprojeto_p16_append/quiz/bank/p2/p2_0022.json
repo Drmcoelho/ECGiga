@@ -1,0 +1,14 @@
+{
+  "id": "pericard_pr_0001",
+  "topic": "Pericardite — PR",
+  "difficulty": "medium",
+  "stem": "Achado comum:",
+  "options": [
+    "PR deprimido",
+    "PR encurtado",
+    "PR longo fixo",
+    "PR alternante"
+  ],
+  "answer_index": 0,
+  "explanation": "Frequente em pericardite."
+}

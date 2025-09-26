@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ECGiga Annotation Schema v0.1",
+  "type": "object",
+  "required": [
+    "meta",
+    "boxes"
+  ],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "pxmm": {
+          "type": "number"
+        },
+        "speed": {
+          "type": "number"
+        },
+        "gain": {
+          "type": "number"
+        },
+        "src": {
+          "type": "string"
+        },
+        "ts": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "pxmm",
+        "speed",
+        "gain",
+        "ts"
+      ]
+    },
+    "boxes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "x",
+          "y",
+          "w",
+          "h",
+          "label"
+        ],
+        "properties": {
+          "x": {
+            "type": "number"
+          },
+          "y": {
+            "type": "number"
+          },
+          "w": {
+            "type": "number",
+            "minimum": 1
+          },
+          "h": {
+            "type": "number",
+            "minimum": 1
+          },
+          "label": {
+            "type": "string",
+            "enum": [
+              "P",
+              "PR",
+              "QRS",
+              "ST",
+              "T",
+              "U",
+              "artifact",
+              "other"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

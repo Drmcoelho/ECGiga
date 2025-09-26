@@ -1,0 +1,105 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>ECGiga — AP Lab</title>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#fff;margin:0}
+header{background:#111;color:#fff;padding:14px 18px}
+.container{padding:14px;display:grid;grid-template-columns:1fr 320px;gap:14px}
+.panel{border:1px solid #e5e7eb;border-radius:10px;padding:10px}
+.row{display:flex;align-items:center;gap:8px;margin:8px 0}
+label{min-width:80px}
+canvas{width:100%;height:240px;border:1px solid #ddd;border-radius:8px}
+small{color:#555}
+.badge{display:inline-block;background:#eef;border:1px solid #99c;border-radius:4px;padding:1px 6px;margin-left:6px;font-size:12px}
+</style>
+<header><h3>Laboratório de Potencial de Ação — fases 0–4 ↔ ECG</h3></header>
+<div class="container">
+  <div class="panel">
+    <canvas id="ap"></canvas>
+    <div class="row"><small>Traçado: Vm (mV) com marcador de fases; abaixo, ECG sintético (lead II) acoplado.</small></div>
+    <canvas id="ecg"></canvas>
+  </div>
+  <div class="panel">
+    <div class="row"><label>gNa</label><input id="gNa" type="range" min="0" max="1" step="0.01" value="0.9"><span id="vNa" class="badge">0.90</span></div>
+    <div class="row"><label>gCaL</label><input id="gCa" type="range" min="0" max="1" step="0.01" value="0.6"><span id="vCa" class="badge">0.60</span></div>
+    <div class="row"><label>gK</label><input id="gK" type="range" min="0" max="1" step="0.01" value="0.7"><span id="vK" class="badge">0.70</span></div>
+    <div class="row"><label>g<em>f</em></label><input id="gF" type="range" min="0" max="1" step="0.01" value="0.2"><span id="vF" class="badge">0.20</span></div>
+    <hr>
+    <div class="row"><label>EAD</label><input id="ead" type="checkbox"><small>pos-depolarização precoce (fase 2)</small></div>
+    <div class="row"><label>DAD</label><input id="dad" type="checkbox"><small>pos-depolarização tardia (fase 4)</small></div>
+    <div class="row"><label>Hyper K⁺</label><input id="hk" type="checkbox"><small>↑K⁺ ext. → repouso menos negativo, repolarização + rápida</small></div>
+    <div class="row"><label>Auto-ritmo</label><input id="autor" type="checkbox" checked><small>ativa g<em>f</em> e marcapasso</small></div>
+  </div>
+</div>
+<script>
+const ap = document.getElementById('ap'), ecg = document.getElementById('ecg');
+ap.width=800; ap.height=240; ecg.width=800; ecg.height=160;
+const c1=ap.getContext('2d'), c2=ecg.getContext('2d');
+const sliders = {gNa:'vNa', gCa:'vCa', gK:'vK', gF:'vF'};
+for(const k in sliders){ const s=document.getElementById(k==='gCa'?'gCa':k); const v=document.getElementById(sliders[k]); s.oninput=()=>v.textContent=parseFloat(s.value).toFixed(2); }
+const ui = {gNa:()=>parseFloat(document.getElementById('gNa').value),
+            gCa:()=>parseFloat(document.getElementById('gCa').value),
+            gK: ()=>parseFloat(document.getElementById('gK').value),
+            gF: ()=>parseFloat(document.getElementById('gF').value),
+            ead:()=>document.getElementById('ead').checked,
+            dad:()=>document.getElementById('dad').checked,
+            hk: ()=>document.getElementById('hk').checked,
+            autor:()=>document.getElementById('autor').checked};
+let t=0, dt=0.8;
+let Vm=-85, phase=4, refr=0;
+function step(){
+  const gNa=ui.gNa(), gCa=ui.gCa(), gK=ui.gK(), gF=ui.gF();
+  if(refr>0){ refr-=dt; }
+  // drift fase 4 (marcapasso)
+  if(ui.autor()){ Vm += (0.015 + 0.08*gF) * dt; }
+  // trigger automático
+  if(Vm>-65 && phase===4){ phase=0; }
+  // hiperK+: desloca repouso e acelera repolarização
+  const hk = ui.hk()? 8: 0;
+  // dinâmica simples por fases
+  if(phase===0){ // upstroke (Na)
+    Vm += (60*gNa + 10) * dt;
+    if(Vm>30){ Vm=30; phase=1; }
+  } else if(phase===1){ // repolarização inicial
+    Vm += (-15 - 10*gK) * dt;
+    if(Vm<0){ phase=2; }
+  } else if(phase===2){ // platô (CaL vs K)
+    const ead = ui.ead()? Math.sin(t/20)*3 : 0;
+    Vm += ((5*gCa - 3*gK) + ead) * dt;
+    if(Vm< -5){ phase=3; }
+  } else if(phase===3){ // repolarização final (K)
+    Vm += (-6*gK - 1 - hk*0.4) * dt;
+    if(Vm<-70+(-hk*1.2)){ phase=4; refr=30; }
+  } else { // fase 4 repouso/autorritmo
+    const dad = ui.dad()? Math.sin(t/18)*1.5 : 0;
+    Vm += (-0.6 + dad) * dt;
+    if(Vm<-90- hk*1){ Vm=-90- hk*1; }
+  }
+  t+=dt;
+}
+const buf = []; const buflen=800;
+function draw(){
+  step();
+  buf.push(Vm); if(buf.length>buflen) buf.shift();
+  // AP
+  c1.fillStyle="#fff"; c1.fillRect(0,0,ap.width,ap.height);
+  c1.strokeStyle="#333"; c1.strokeRect(0,0,ap.width,ap.height);
+  c1.strokeStyle="#0b5cff"; c1.beginPath();
+  for(let i=0;i<buf.length;i++){ const x=i, y=ap.height - ((buf[i]+100)*2); if(i===0)c1.moveTo(x,y); else c1.lineTo(x,y); } c1.stroke();
+  // fases
+  c1.fillStyle="#444"; c1.fillText("Vm (mV)", 8, 12);
+  // ECG sintético: P (fase 4→0 lenta), QRS (fase 0), T (fase 3)
+  c2.fillStyle="#fff"; c2.fillRect(0,0,ecg.width,ecg.height);
+  c2.strokeStyle="#222"; c2.strokeRect(0,0,ecg.width,ecg.height);
+  c2.strokeStyle="#000"; c2.beginPath();
+  for(let i=0;i<buf.length;i++){
+    // simples mapeamento: derivada do Vm → QRS; curvatura → T
+    const d = i>0? (buf[i]-buf[i-1]) : 0;
+    const tcomp = Math.max(0, (buf[i]+70)/50);
+    const y = ecg.height/2 - (d*1.8 + tcomp*0.6);
+    if(i===0)c2.moveTo(i,y); else c2.lineTo(i,y);
+  } c2.stroke();
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
