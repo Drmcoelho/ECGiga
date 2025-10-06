@@ -1,0 +1,14 @@
+{
+  "id": "u_wave_0001",
+  "topic": "Onda U",
+  "difficulty": "easy",
+  "stem": "Mais típica de:",
+  "options": [
+    "Hipocalemia",
+    "Hipercalemia",
+    "Hipercalcemia",
+    "IAM inferior"
+  ],
+  "answer_index": 0,
+  "explanation": "Clássico."
+}

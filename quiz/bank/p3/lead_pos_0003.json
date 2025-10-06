@@ -1,0 +1,14 @@
+{
+  "id": "lead_pos_0003",
+  "topic": "Posicionamento — Dextrocardia",
+  "difficulty": "hard",
+  "stem": "Progresso de R em V1–V6 na dextrocardia usualmente:",
+  "options": [
+    "Normal",
+    "Ausente",
+    "Exagerado",
+    "Inverso uniforme"
+  ],
+  "answer_index": 1,
+  "explanation": "Pobre progressão de R em precordiais esquerdas."
+}

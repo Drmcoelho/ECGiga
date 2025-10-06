@@ -1,0 +1,14 @@
+{
+  "id": "lead_pos_0004",
+  "topic": "Posicionamento — RA/LA invertidos",
+  "difficulty": "medium",
+  "stem": "Inversão RA/LA produz:",
+  "options": [
+    "I invertida e troca de aVR/aVL",
+    "QRS largo difuso",
+    "Delta",
+    "QT curto"
+  ],
+  "answer_index": 0,
+  "explanation": "Assinatura clássica de troca de braços."
+}
