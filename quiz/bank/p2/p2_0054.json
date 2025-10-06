@@ -1,0 +1,14 @@
+{
+  "id": "p2_auto_006",
+  "topic": "Ritmos — Flutter 2:1",
+  "difficulty": "easy",
+  "stem": "FC esperada:",
+  "options": [
+    "~150 bpm",
+    "~75 bpm",
+    "~100 bpm",
+    "~200 bpm"
+  ],
+  "answer_index": 0,
+  "explanation": "Condução 2:1."
+}

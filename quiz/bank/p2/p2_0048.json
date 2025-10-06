@@ -1,0 +1,14 @@
+{
+  "id": "p2_auto_000",
+  "topic": "Artefatos — Tremor",
+  "difficulty": "medium",
+  "stem": "Tremor muscular tende a gerar:",
+  "options": [
+    "Ruído de alta frequência",
+    "Baseline wander",
+    "Ondas F falsas em todas",
+    "QRS alargado fixo"
+  ],
+  "answer_index": 0,
+  "explanation": "Ruído rápido."
+}
