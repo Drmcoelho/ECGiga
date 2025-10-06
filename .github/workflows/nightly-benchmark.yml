@@ -1,0 +1,150 @@
+name: nightly-benchmark
+
+on:
+  schedule:
+    # Run nightly at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      sample_count:
+        description: 'Number of synthetic samples to generate'
+        required: false
+        default: '100'
+        type: string
+      f1_threshold:
+        description: 'F1 score threshold for validation'
+        required: false
+        default: '0.85'
+        type: string
+
+env:
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      
+      - name: Cache Python dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install numpy  # Ensure numpy is available for benchmark script
+      
+      - name: Create benchmark output directory
+        run: mkdir -p benchmark-results
+      
+      - name: Run ECG benchmark
+        id: benchmark
+        run: |
+          SAMPLE_COUNT="${{ github.event.inputs.sample_count || '100' }}"
+          F1_THRESHOLD="${{ github.event.inputs.f1_threshold || '0.85' }}"
+          
+          echo "Running benchmark with $SAMPLE_COUNT samples, F1 threshold: $F1_THRESHOLD"
+          
+          python scripts/python/benchmark_ecg.py \
+            --samples "$SAMPLE_COUNT" \
+            --f1-threshold "$F1_THRESHOLD" \
+            --output "benchmark-results/nightly-benchmark-$(date +%Y%m%d-%H%M%S).json" \
+            --exit-on-fail
+          
+          # Extract key metrics for job summary
+          LATEST_RESULT=$(ls -t benchmark-results/*.json | head -1)
+          F1_MEAN=$(python -c "import json; data=json.load(open('$LATEST_RESULT')); print(f\"{data['f1_performance']['mean_f1']:.3f}\")")
+          PASSED=$(python -c "import json; data=json.load(open('$LATEST_RESULT')); print(data['threshold_validation']['passed'])")
+          
+          echo "f1_mean=$F1_MEAN" >> $GITHUB_OUTPUT
+          echo "threshold_passed=$PASSED" >> $GITHUB_OUTPUT
+          echo "result_file=$LATEST_RESULT" >> $GITHUB_OUTPUT
+      
+      - name: Generate benchmark summary
+        run: |
+          RESULT_FILE="${{ steps.benchmark.outputs.result_file }}"
+          F1_MEAN="${{ steps.benchmark.outputs.f1_mean }}"
+          PASSED="${{ steps.benchmark.outputs.threshold_passed }}"
+          
+          # Create a summary for the GitHub Actions summary
+          echo "# 🔬 Nightly ECG Benchmark Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Date:** $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## 📊 Performance Metrics" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| **F1 Score (Mean)** | $F1_MEAN |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Threshold (≥0.85)** | $([ "$PASSED" = "True" ] && echo "✅ PASSED" || echo "❌ FAILED") |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Samples** | ${{ github.event.inputs.sample_count || '100' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Target HR Range** | 60-90 bpm |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # Add detailed metrics if available
+          if [ -f "$RESULT_FILE" ]; then
+            echo "## 📋 Detailed Results" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
+            python -c "
+          import json
+          with open('$RESULT_FILE') as f:
+              data = json.load(f)
+              summary = {
+                  'f1_performance': data['f1_performance'],
+                  'performance_metrics': data['performance_metrics'],
+                  'benchmark_metadata': data['benchmark_metadata'],
+                  'threshold_validation': data['threshold_validation']
+              }
+              print(json.dumps(summary, indent=2))
+          " >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          # Set workflow status based on threshold validation
+          if [ "$PASSED" != "True" ]; then
+            echo "::error::Benchmark F1 threshold validation failed: $F1_MEAN < 0.85"
+            exit 1
+          fi
+      
+      - name: Upload benchmark artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nightly-benchmark-results
+          path: benchmark-results/
+          retention-days: 30
+          compression-level: 6
+      
+      - name: Upload to GitHub Release (if available)
+        continue-on-error: true
+        run: |
+          # Try to attach to latest release or create a benchmark release
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          RESULT_FILE="${{ steps.benchmark.outputs.result_file }}"
+          
+          if [ -n "$LATEST_TAG" ] && command -v gh >/dev/null 2>&1; then
+            echo "Attempting to upload benchmark results to release $LATEST_TAG"
+            gh release upload "$LATEST_TAG" "$RESULT_FILE" --clobber || echo "Could not upload to release"
+          else
+            echo "No release found or gh CLI not available - skipping release upload"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "::warning::Nightly benchmark failed. Check logs and consider investigating ECG analysis performance degradation."

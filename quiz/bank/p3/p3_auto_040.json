@@ -1,0 +1,14 @@
+{
+  "id": "p3_auto_040",
+  "topic": "Artefatos — Tremor",
+  "difficulty": "easy",
+  "stem": "Tremor gera:",
+  "options": [
+    "Ruído alta freq.",
+    "Baseline wander",
+    "Delta",
+    "QRS largo fixo"
+  ],
+  "answer_index": 0,
+  "explanation": "Tremor → ruído rápido."
+}
