@@ -1,0 +1,14 @@
+{
+  "id": "qt_short_0001",
+  "topic": "QT curto",
+  "difficulty": "hard",
+  "stem": "QTc < 350 ms sugere:",
+  "options": [
+    "Síndrome QT curto",
+    "Digitálico agudo",
+    "Hipocalcemia",
+    "TEP"
+  ],
+  "answer_index": 0,
+  "explanation": "Risco arrítmico; raro."
+}

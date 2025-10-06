@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ECG Report Schema",
+  "version": "0.4.0",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object"
+    },
+    "patient_info": {
+      "type": "object"
+    },
+    "acquisition": {
+      "type": "object"
+    },
+    "segmentation": {
+      "type": "object"
+    },
+    "layout_detection": {
+      "type": "object"
+    },
+    "rpeaks": {
+      "type": "object"
+    },
+    "intervals": {
+      "type": "object",
+      "properties": {
+        "lead_used": {
+          "type": "string"
+        },
+        "per_beat": {
+          "type": "object"
+        },
+        "median": {
+          "type": "object"
+        }
+      }
+    },
+    "measures": {
+      "type": "object"
+    },
+    "flags": {
+      "type": "array"
+    },
+    "suggested_interpretations": {
+      "type": "array"
+    },
+    "version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "meta",
+    "version"
+  ]
+}
