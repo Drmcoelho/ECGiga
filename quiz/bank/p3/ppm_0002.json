@@ -1,0 +1,14 @@
+{
+  "id": "ppm_0002",
+  "topic": "Marcapasso — falha de captura",
+  "difficulty": "medium",
+  "stem": "No ECG, falha de captura:",
+  "options": [
+    "Espícula sem QRS subsequente",
+    "QRS sem espícula",
+    "RR irregular com F ondas",
+    "Delta"
+  ],
+  "answer_index": 0,
+  "explanation": "Espícula não seguida de captura."
+}
