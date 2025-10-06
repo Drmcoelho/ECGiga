@@ -1,0 +1,14 @@
+{
+  "id": "ppm_0003",
+  "topic": "Marcapasso — sensibilidade baixa",
+  "difficulty": "medium",
+  "stem": "Pode causar:",
+  "options": [
+    "Inibição inadequada (undersensing)",
+    "Oversensing constante",
+    "QT longo",
+    "WPW"
+  ],
+  "answer_index": 0,
+  "explanation": "Baixa sensibilidade não detecta atividade intrínseca."
+}

@@ -1,0 +1,14 @@
+{
+  "id": "ppm_0004",
+  "topic": "Marcapasso — oversensing",
+  "difficulty": "hard",
+  "stem": "Pode causar:",
+  "options": [
+    "Inibição por ruído",
+    "Estimulação contínua",
+    "QRS estreito",
+    "Bloqueio AV"
+  ],
+  "answer_index": 0,
+  "explanation": "Oversensing de ruído impede estímulo."
+}

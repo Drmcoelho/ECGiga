@@ -1,0 +1,14 @@
+{
+  "id": "sgarbossa_mod_0002",
+  "topic": "Sgarbossa mod.",
+  "difficulty": "hard",
+  "stem": "Ênfase:",
+  "options": [
+    "Discordância proporcional do ST ao QRS",
+    "PR curto",
+    "QT curto",
+    "Delta"
+  ],
+  "answer_index": 0,
+  "explanation": "Critério modificado de Smith."
+}
