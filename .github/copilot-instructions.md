@@ -23,7 +23,16 @@ Seja conciso e focado: melhorias devem preservar heurísticas existentes (não s
   - `python -m ecgcourse ingest image samples/img001.png --deskew --normalize --auto-grid --auto-leads --rpeaks-lead II --schema-v3 --report`
   - `python -m ecgcourse analyze values --qt 360 --rr 800 --sexo M`
 
+- Web app (Dash interativo):
+  - `cd ECG_Curso_Megaprojeto_p16_append/web_app/dash_app && python app.py`
+  - Abre em `http://localhost:8050` por padrão (modo debug).
+  - Usa páginas multi-page Dash (arquitetura: `dash.page_registry`, callbacks em arquivos separados).
+
 - Tests / linting: dependências listadas em `ECG_Curso_Megaprojeto_p16_append/requirements.txt`. Projeto usa `black` e `ruff` (configs em `pyproject.toml`). Use `pytest` para testes.
+
+- Dependências nativas opcionais:
+  - **Tesseract OCR**: requerido apenas se usar `pytesseract` para OCR de rótulos (fallback em `cv/lead_ocr.py`). Template matching funciona sem ele.
+  - **AVIF plugin (Pillow)**: listado em `requirements.txt` mas opcional; detectado em runtime.
 
 ## Padrões e decisões específicas do projeto
 
