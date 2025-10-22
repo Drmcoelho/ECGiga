@@ -30,6 +30,11 @@ Seja conciso e focado: melhorias devem preservar heurísticas existentes (não s
 
 - Tests / linting: dependências listadas em `ECG_Curso_Megaprojeto_p16_append/requirements.txt`. Projeto usa `black` e `ruff` (configs em `pyproject.toml`). Use `pytest` para testes.
 
+- Scripts utilitários (em `scripts/python/`):
+  - `download_assets.py` — baixa assets externos (imagens de exemplo, datasets).
+  - `preprocess_images.py` — processa lote de imagens (batch deskew/normalize).
+  - `verify_licenses.py` — verifica conformidade de licenças de dependências.
+
 - Dependências nativas opcionais:
   - **Tesseract OCR**: requerido apenas se usar `pytesseract` para OCR de rótulos (fallback em `cv/lead_ocr.py`). Template matching funciona sem ele.
   - **AVIF plugin (Pillow)**: listado em `requirements.txt` mas opcional; detectado em runtime.
