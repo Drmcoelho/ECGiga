@@ -39,6 +39,14 @@ Seja conciso e focado: melhorias devem preservar heurísticas existentes (não s
 - Entradas/saídas são frequentemente JSON sidecars (ex.: `<img>.meta.json`) — preserve esse formato quando criar novas rotinas de ingestão.
 - Heurísticas são preferidas a modelos complexos em módulos CV (funções com nomes como `estimate_grid_period_px`, `segment_12leads_basic`, `detect_rpeaks_from_trace`). Prefira refatorar com testes ao invés de substituição total.
 - Interoperabilidade entre módulos via dicionários/JSON: muitos pontos esperam chaves como `rpeaks.peaks_idx`, `layout.labels`, `measures.qrs_ms` — siga esses nomes ao emitir relatórios.
+- Pipelines de processamento de imagem são compostos e sequenciais: `deskew` → `normalize` → `grid_detect` → `segmentation` → `lead_ocr` → `rpeaks` → `intervals`. Cada etapa emite dict/JSON que alimenta a próxima.
+
+### Exemplos de funções-chave em `cv/`:
+
+- `cv/rpeaks_from_image.py::extract_trace_centerline(gray_crop, band=0.8)`: Extrai série 1D y(x) do traçado pegando pixel mais escuro (mínimo) em cada coluna dentro de uma banda vertical central. Retorna array NumPy com coordenadas y.
+- `cv/rpeaks_from_image.py::detect_rpeaks_from_trace(y, px_per_sec, zthr=2.0)`: Detecta R-peaks por z-score invertido (picos para cima) com threshold e distância mínima entre picos. Retorna `{'peaks_idx': [...], 'rr_sec': [...], 'hr_bpm_mean': float, 'hr_bpm_median': float}`.
+- `cv/grid_detect.py::estimate_grid_period_px(arr)`: Estima período da grade (em pixels) por autocorrelação ou FFT. Retorna dict com `px_small_x`, `px_small_y` (1 mm), `px_large_x`, `px_large_y` (5 mm).
+- `cv/segmentation.py::segment_12leads_basic(gray, bbox)`: Segmenta 12 derivações em layout 3×4 ou 6×2. Retorna lista de dicts `[{'lead': 'I', 'bbox': (x0,y0,x1,y1)}, ...]`.
 
 ## Arquivos-chave a revisar antes de alterar comportamento crítico
 
