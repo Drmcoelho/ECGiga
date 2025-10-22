@@ -291,21 +291,22 @@ def ingest_image(
 
     # Sidecar META
     meta_path = pathlib.Path(meta) if meta else p.with_suffix(p.suffix + ".meta.json")
-    # Pré-processamento opcional: deskew + normalize (aplicados sequencialmente sobre arquivo temporário em memória)
     from PIL import Image
-    _img = Image.open(_buf).convert("RGB")
+
+    original_img = Image.open(p).convert("RGB")
+    processed_img = original_img
+
     if deskew:
         from cv.deskew import estimate_rotation_angle, rotate_image
-        _info = estimate_rotation_angle(_img, search_deg=6.0, step=0.5)
-        _img = rotate_image(_img, _info['angle_deg'])
+
+        deskew_info = estimate_rotation_angle(processed_img, search_deg=6.0, step=0.5)
+        processed_img = rotate_image(processed_img, deskew_info["angle_deg"])
+
+    px_per_mm_norm = None
     if normalize:
         from cv.normalize import normalize_scale
-        _img, _scale, _pxmm = normalize_scale(_img, target_px_per_mm=10.0)
-    # Substitui path por buffer em memória para etapas seguintes que leem a imagem
-    import io as _io
-    _buf = _io.BytesIO()
-    _img.save(_buf, format="PNG")
-    _buf.seek(0)
+
+        processed_img, _scale, px_per_mm_norm = normalize_scale(processed_img, target_px_per_mm=10.0)
     
     meta_data = {}
     if meta_path.exists():
@@ -324,52 +325,60 @@ def ingest_image(
     seg = None
     grid = None
     layout_det = None
-    lead_labels = None
     rpeaks_out = None
     intervals_out = None
 
 
     if auto_grid:
         try:
-            from PIL import Image
             import numpy as _np
             from cv.grid_detect import estimate_grid_period_px
             from cv.segmentation import segment_12leads_basic, find_content_bbox
-            arr = _np.asarray(Image.open(_buf).convert("RGB"))
-            grid = estimate_grid_period_px(arr)
-            gray = _np.asarray(Image.open(_buf).convert("L"))
-            bbox = find_content_bbox(gray)
-            seg_leads = segment_12leads_basic(gray, bbox=bbox)
-            seg = {"content_bbox": bbox, "leads": seg_leads}
-        if auto_leads:
-            from cv.lead_ocr import choose_layout
-            cand = {"3x4":[d["bbox"] for d in seg_leads]}
-            layout_det = choose_layout(_np.asarray(Image.open(p).convert("L")), {"3x4":[d["bbox"] for d in seg_leads]})
-            lead_labels = layout_det.get("labels")
-        if rpeaks_lead:
-            from cv.rpeaks_from_image import extract_trace_centerline, smooth_signal, detect_rpeaks_from_trace, estimate_px_per_sec
-            # procura bbox do lead requisitado
-            _lab2box = {d["lead"]: d["bbox"] for d in seg_leads}
-            if rpeaks_lead in _lab2box:
-                _x0,_y0,_x1,_y1 = _lab2box[rpeaks_lead]
-                _gray = _np.asarray(Image.open(p).convert("L"))
-                _crop = _gray[_y0:_y1, _x0:_x1]
-                _trace = smooth_signal(extract_trace_centerline(_crop, band=0.8), win=11)
-                _pxmm = (grid.get("px_small_x") if grid else None) or (grid.get("px_small_y") if grid else None)
-                _pxsec = estimate_px_per_sec(_pxmm, 25.0) or 250.0
-                rpeaks_out = detect_rpeaks_from_trace(_trace, px_per_sec=_pxsec, zthr=2.0)
-                if rpeaks_robust:
-                    from cv.rpeaks_robust import pan_tompkins_like
-                    _rob = pan_tompkins_like(_trace, _pxsec)
-                    rpeaks_out = {"peaks_idx": _rob["peaks_idx"], "method": "pan_tompkins_like"}
-                if intervals:
-                    from cv.intervals import intervals_from_trace
-                    intervals_out = intervals_from_trace(_trace, rpeaks_out.get("peaks_idx") or [], _pxsec)
 
-                rpeaks_out["lead_used"] = rpeaks_lead
-        
+            rgb_arr = _np.asarray(processed_img)
+            gray_arr = _np.asarray(processed_img.convert("L"))
+            grid = estimate_grid_period_px(rgb_arr)
+            bbox = find_content_bbox(gray_arr)
+            seg_leads = segment_12leads_basic(gray_arr, bbox=bbox)
+            seg = {"content_bbox": bbox, "leads": seg_leads}
+
+            if auto_leads:
+                from cv.lead_ocr import choose_layout
+
+                layout_det = choose_layout(gray_arr, {"3x4": [d["bbox"] for d in seg_leads]})
+
+            if rpeaks_lead:
+                from cv.rpeaks_from_image import (
+                    detect_rpeaks_from_trace,
+                    estimate_px_per_sec,
+                    extract_trace_centerline,
+                    smooth_signal,
+                )
+
+                lab2box = {d["lead"]: d["bbox"] for d in seg_leads}
+                if rpeaks_lead in lab2box:
+                    x0, y0, x1, y1 = lab2box[rpeaks_lead]
+                    crop = gray_arr[y0:y1, x0:x1]
+                    trace = smooth_signal(extract_trace_centerline(crop, band=0.8), win=11)
+                    px_small = grid.get("px_small_x") if grid else None
+                    if px_small is None and grid:
+                        px_small = grid.get("px_small_y")
+                    pxsec = estimate_px_per_sec(px_small, 25.0) or 250.0
+                    rpeaks_out = detect_rpeaks_from_trace(trace, px_per_sec=pxsec, zthr=2.0)
+                    if rpeaks_robust:
+                        from cv.rpeaks_robust import pan_tompkins_like
+
+                        robust = pan_tompkins_like(trace, pxsec)
+                        rpeaks_out = {"peaks_idx": robust["peaks_idx"], "method": "pan_tompkins_like"}
+                    if intervals:
+                        from cv.intervals import intervals_from_trace
+
+                        intervals_out = intervals_from_trace(trace, rpeaks_out.get("peaks_idx") or [], pxsec)
+
+                    rpeaks_out["lead_used"] = rpeaks_lead
         except Exception as e:
             typer.echo(f"Auto-grid falhou: {e}", err=True)
+
     
 
     # Derivados
@@ -429,12 +438,15 @@ def ingest_image(
             "context": meta_data.get("context")
         },
         "acquisition": {
-            "dpi": dpi, "mm_per_mV": mm_per_mV, "ms_per_div": ms_per_div, "leads_layout": layout,
-            "px_per_mm_x": (grid.get("px_small_x") if grid else None),
-            "px_per_mm_y": (grid.get("px_small_y") if grid else None),
-            "px_small_grid": (grid.get("px_small_x") if grid else None),
-            "px_big_grid": (grid.get("px_big_x") if grid else None),
-            "grid_confidence": (grid.get("confidence") if grid else None)
+            "dpi": dpi,
+            "mm_per_mV": mm_per_mV or px_per_mm_norm,
+            "ms_per_div": ms_per_div,
+            "leads_layout": layout,
+            "px_per_mm_x": grid.get("px_small_x") if grid else None,
+            "px_per_mm_y": grid.get("px_small_y") if grid else None,
+            "px_small_grid": grid.get("px_small_x") if grid else None,
+            "px_big_grid": grid.get("px_big_x") if grid else None,
+            "grid_confidence": grid.get("confidence") if grid else None,
         },
         "measures": {
             "pr_ms": pr_ms, "qrs_ms": qrs_ms, "qt_ms": qt_ms, "rr_ms": rr_ms,
@@ -452,25 +464,42 @@ def ingest_image(
     # Resumo
     print(Panel.fit("[bold]Ingestão de imagem — resumo[/]"))
     print(f"Arquivo: {p.name}")
-    if meta_data: print("META: encontrado e aplicado.")
-    if fc_bpm: print(f"FC: {fc_bpm:.1f} bpm")
-    if qt_ms: print(f"QT: {qt_ms} ms | QTc (B/F): {qb}/{qf} ms")
-    if axis_label: print(f"Eixo: {axis_label} ({angle:.1f}° aprox)")
-    if flags: print("Flags: " + "; ".join(flags))
-
+    if meta_data:
+        print("META: encontrado e aplicado.")
+    if fc_bpm:
+        print(f"FC: {fc_bpm:.1f} bpm")
+    if qt_ms:
+        print(f"QT: {qt_ms} ms | QTc (B/F): {qb}/{qf} ms")
+    if axis_label:
+        print(f"Eixo: {axis_label} ({angle:.1f}° aprox)")
+    if flags:
+        print("Flags: " + "; ".join(flags))
     # Salvar relatórios
     if report:
-        reports_dir = (REPO_ROOT / "reports"); reports_dir.mkdir(parents=True, exist_ok=True)
+        reports_dir = REPO_ROOT / "reports"
+        reports_dir.mkdir(parents=True, exist_ok=True)
         ts = time.strftime("%Y%m%d-%H%M%S")
         with open(reports_dir / f"{ts}_ecg_report.json", "w", encoding="utf-8") as f:
             json.dump(report_obj, f, ensure_ascii=False, indent=2)
         with open(reports_dir / f"{ts}_ecg_report.md", "w", encoding="utf-8") as f:
-            f.write(f"# Laudo ECG (ingest image) — {ts}\\n\\n")
-            f.write(f"- Arquivo: {p.name}\\n")
-            if fc_bpm: f.write(f"- FC: {fc_bpm:.1f} bpm\\n")
-            if qt_ms: f.write(f"- QT: {qt_ms} ms | QTc (B/F): {qb}/{qf} ms\\n")
-            if axis_label: f.write(f"- Eixo: {axis_label} ({angle:.1f}°)\\n")
-            if flags:\n                f.write("\\n## Flags\\n"); [f.write(f"- {fl}\\n") for fl in flags]\n            if suggested:\n                f.write("\\n## Sugestões/Observações\\n"); [f.write(f"- {s}\\n") for s in suggested]\n        print(Panel.fit("[bold green]Laudos salvos em reports/"))
+            f.write(f"# Laudo ECG (ingest image) — {ts}\n\n")
+            f.write(f"- Arquivo: {p.name}\n")
+            if fc_bpm:
+                f.write(f"- FC: {fc_bpm:.1f} bpm\n")
+            if qt_ms:
+                f.write(f"- QT: {qt_ms} ms | QTc (B/F): {qb}/{qf} ms\n")
+            if axis_label:
+                f.write(f"- Eixo: {axis_label} ({angle:.1f}°)\n")
+            if flags:
+                f.write("\n## Flags\n")
+                for fl in flags:
+                    f.write(f"- {fl}\n")
+            if suggested:
+                f.write("\n## Sugestões/Observações\n")
+                for suggestion in suggested:
+                    f.write(f"- {suggestion}\n")
+        print(Panel.fit("[bold green]Laudos salvos em reports/"))
+
 
 app.add_typer(ingest_app, name="ingest")
 
@@ -577,7 +606,7 @@ def cv_deskew(image_path: str = typer.Argument(..., help="PNG/JPG"),
     from PIL import Image
     from cv.deskew import estimate_rotation_angle, rotate_image
     p = pathlib.Path(image_path)
-    img = Image.open(_buf).convert("RGB")
+    img = Image.open(p).convert("RGB")
     info = estimate_rotation_angle(img, search_deg=search_deg, step=0.5)
     print(f"Ângulo estimado: {info['angle_deg']:.2f}° (score {info['score']:.3f} vs {info['score0']:.3f})")
     if save:
@@ -593,7 +622,7 @@ def cv_normalize(image_path: str = typer.Argument(..., help="PNG/JPG"),
     from PIL import Image
     from cv.normalize import normalize_scale
     p = pathlib.Path(image_path)
-    img = Image.open(_buf).convert("RGB")
+    img = Image.open(p).convert("RGB")
     im1, scale, pxmm = normalize_scale(img, target_px_per_mm=target_pxmm)
     print(f"px/mm estimado: {pxmm} | scale aplicado: {scale:.3f}")
     if save:

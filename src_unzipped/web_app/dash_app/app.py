@@ -70,24 +70,41 @@ app.layout = html.Div([
             ),
             dcc.Textarea(id="upload-meta", placeholder="Cole o sidecar META (JSON) opcional...", style={"width":"100%","height":"120px"}),
             html.Div([
-    dcc.Checklist(id='ops', options=[
-        {'label':'Deskew','value':'deskew'},
-        {'label':'Normalize (px/mm≈10)','value':'normalize'}
-    ], value=[]),
-    html.Label('Layout'), dcc.Dropdown(id='layout-select', options=[
-        {'label':'3x4','value':'3x4'},
-        {'label':'6x2','value':'6x2'},
-        {'label':'3x4 + ritmo (II)','value':'3x4+rhythm'}
-    ], value='3x4', clearable=False, style={'width':'260px'})
-], style={'display':'flex','gap':'16px','alignItems':'center','marginBottom':'8px'}),
-html.Button("Processar", id="btn-process", n_clicks=0),
-            html.Div(id="upload-summary", style={"marginTop":"10px","whiteSpace":"pre-wrap"}),
-html.Div([
-  html.Label('Lead para FC (R-peaks)'),
-  dcc.Dropdown(id='lead-select', options=[{'label':l,'value':l} for l in ['II','V2','V5']], value='II', clearable=False, style={'width':'200px'}),
-  html.Button('R-peaks robustos', id='btn-rrob', n_clicks=0),
-  html.Button('Intervalos (PR/QRS/QT/QTc)', id='btn-intervals', n_clicks=0)
-], style={'display':'flex','gap':'12px','alignItems':'center','marginTop':'8px'})
+                dcc.Checklist(
+                    id='ops',
+                    options=[
+                        {'label': 'Deskew', 'value': 'deskew'},
+                        {'label': 'Normalize (px/mm≈10)', 'value': 'normalize'},
+                    ],
+                    value=[],
+                ),
+                html.Label('Layout'),
+                dcc.Dropdown(
+                    id='layout-select',
+                    options=[
+                        {'label': '3x4', 'value': '3x4'},
+                        {'label': '6x2', 'value': '6x2'},
+                        {'label': '3x4 + ritmo (II)', 'value': '3x4+rhythm'},
+                    ],
+                    value='3x4',
+                    clearable=False,
+                    style={'width': '260px'},
+                ),
+            ], style={'display': 'flex', 'gap': '16px', 'alignItems': 'center', 'marginBottom': '8px'}),
+            html.Button("Processar", id="btn-process", n_clicks=0),
+            html.Div(id="upload-summary", style={"marginTop": "10px", "whiteSpace": "pre-wrap"}),
+            html.Div([
+                html.Label('Lead para FC (R-peaks)'),
+                dcc.Dropdown(
+                    id='lead-select',
+                    options=[{'label': l, 'value': l} for l in ['II', 'V2', 'V5']],
+                    value='II',
+                    clearable=False,
+                    style={'width': '200px'},
+                ),
+                html.Button('R-peaks robustos', id='btn-rrob', n_clicks=0),
+                html.Button('Intervalos (PR/QRS/QT/QTc)', id='btn-intervals', n_clicks=0),
+            ], style={'display': 'flex', 'gap': '12px', 'alignItems': 'center', 'marginTop': '8px'}),
             dcc.Graph(id="overlay", figure=go.Figure())
         ], className="card", style={"maxWidth":"900px"})
     ], style={"marginBottom":"16px"}),
@@ -101,17 +118,27 @@ html.Div([
 ])
 
 @app.callback(
-    Output("overlay","figure"),
-    Output("upload-summary","children"),
-    Input("btn-process","n_clicks"), Input('btn-hr','n_clicks'), Input('btn-rrob','n_clicks'), Input('btn-intervals','n_clicks'),
-    State("upload-ecg","contents"),
-    State("upload-ecg","filename"),
-    State("upload-meta","value"), State('ops','value'), State('layout-select','value'),
-    prevent_initial_call=True
+    Output("overlay", "figure"),
+    Output("upload-summary", "children"),
+    Input("btn-process", "n_clicks"),
+    Input("btn-rrob", "n_clicks"),
+    Input("btn-intervals", "n_clicks"),
+    State("upload-ecg", "contents"),
+    State("upload-ecg", "filename"),
+    State("upload-meta", "value"),
+    State("ops", "value"),
+    State("layout-select", "value"),
+    State("lead-select", "value"),
+    prevent_initial_call=True,
 )
-def process(n, nhr, nrrob, nintv, content, filename, meta_text, ops, layout):
+def process(n_process, n_rrob, n_intervals, content, filename, meta_text, ops, layout, lead_selected):
     if not content:
         return go.Figure(), "Nenhuma imagem enviada."
+
+    ctx = dash.callback_context
+    triggered = ctx.triggered[0]["prop_id"].split(".")[0] if ctx.triggered else None
+    run_rrob = triggered == "btn-rrob"
+    run_intervals = triggered == "btn-intervals"
     img = decode_image(content)
     # pré-processo: deskew/normalize
     if ops and 'deskew' in ops:
@@ -129,46 +156,67 @@ def process(n, nhr, nrrob, nintv, content, filename, meta_text, ops, layout):
 
     # Grid + segmentação básica (servidor)
     from cv.grid_detect import estimate_grid_period_px
-    from cv.segmentation import segment_12leads_basic, find_content_bbox
-from cv.segmentation_ext import segment_layout
-    arr = np.asarray(img.convert("L"))
-    grid = estimate_grid_period_px(np.asarray(img))
-    bbox = find_content_bbox(arr)
-    leads = segment_layout(arr, layout=layout, bbox=bbox)
+    from cv.segmentation import find_content_bbox
+    from cv.segmentation_ext import segment_layout
+
+    arr_rgb = np.asarray(img)
+    arr_gray = np.asarray(img.convert("L"))
+    grid = estimate_grid_period_px(arr_rgb) or {}
+    bbox = find_content_bbox(arr_gray)
+    leads = segment_layout(arr_gray, layout=layout, bbox=bbox)
     from cv.lead_ocr import detect_labels_per_box
     seg = {"content_bbox": bbox, "leads": leads}
-    labels = detect_labels_per_box(arr, [d['bbox'] for d in leads])
-    summary = [f"Arquivo: {filename}", f"Layout: {layout}", f"Rótulos detectados: {sum(1 for d in labels if d.get('label'))}/{len(labels)}",
-               f"Grid small≈{grid.get('px_small_x') or grid.get('px_small_y'):.1f}px, big≈{grid.get('px_big_x') or grid.get('px_big_y'):.1f}px (conf {grid.get('confidence',0):.2f})",
-               f"Content bbox: {bbox} | Leads: {len(leads)}"]
+    labels = detect_labels_per_box(arr_gray, [d['bbox'] for d in leads])
+    labeled = sum(1 for d in labels if d.get('label'))
+    small = grid.get('px_small_x') or grid.get('px_small_y')
+    big = grid.get('px_big_x') or grid.get('px_big_y')
+    conf = grid.get('confidence')
+    grid_str = "n/d"
+    if small or big:
+        parts = []
+        if small:
+            parts.append(f"small≈{small:.1f}px")
+        if big:
+            parts.append(f"big≈{big:.1f}px")
+        parts.append(f"conf {conf:.2f}" if conf is not None else "conf n/d")
+        grid_str = ", ".join(parts)
+    summary = [
+        f"Arquivo: {filename}",
+        f"Layout: {layout}",
+        f"Rótulos detectados: {labeled}/{len(labels)}",
+        f"Grid {grid_str}",
+        f"Content bbox: {bbox} | Leads: {len(leads)}",
+    ]
     if meta and isinstance(meta, dict):
         m = meta.get("measures", {})
         qt = m.get("qt_ms"); rr = m.get("rr_ms") or (60000.0/(m.get("fc_bpm") or 0) if m.get("fc_bpm") else None)
         if qt and rr:
             summary.append(f"QT: {qt} ms | QTc (B/F): {qtc_b(qt, rr):.1f}/{qtc_f(qt, rr):.1f} ms")
-    # Se solicitado Estimar FC, calcula em lead selecionável (II por padrão)
+    # Se solicitado Estimar FC/intervalos, calcula na lead selecionada
     from cv.rpeaks_from_image import extract_trace_centerline, smooth_signal, estimate_px_per_sec
     from cv.rpeaks_robust import pan_tompkins_like
     from cv.intervals import intervals_from_trace
-    # estimadores (opcionais, via botões)
-    if nrrob or nintv:
-        lab = 'II'
-        lab2box = {d['lead']: d['bbox'] for d in leads}
-        if lab in lab2box:
-            x0,y0,x1,y1 = lab2box[lab]
-            crop = arr[y0:y1, x0:x1]
+    lab2box = {d['lead']: d['bbox'] for d in leads}
+    target_lead = lead_selected or 'II'
+    if run_rrob or run_intervals:
+        if target_lead in lab2box:
+            x0, y0, x1, y1 = lab2box[target_lead]
+            crop = arr_gray[y0:y1, x0:x1]
             trace = smooth_signal(extract_trace_centerline(crop), win=11)
-            from cv.grid_detect import estimate_grid_period_px
-            pxmm = (estimate_grid_period_px(np.asarray(img)).get('px_small_x') or estimate_grid_period_px(np.asarray(img)).get('px_small_y'))
-            pxsec = estimate_px_per_sec(pxmm, 25.0) or 250.0
-            if nrrob:
-                rdet = pan_tompkins_like(trace, pxsec)
-                summary.append(f"R-peaks robustos: {len(rdet['peaks_idx'])} picos (fs≈{pxsec:.1f} px/s)")
-            if nintv:
-                rdet = pan_tompkins_like(trace, pxsec)
-                iv = intervals_from_trace(trace, rdet['peaks_idx'], pxsec)
-                m = iv['median']
-                summary.append(f"PR {m.get('PR_ms')} ms | QRS {m.get('QRS_ms')} ms | QT {m.get('QT_ms')} ms | QTcB {m.get('QTc_B')} ms | QTcF {m.get('QTc_F')} ms")
+            pxmm = small
+            pxsec = estimate_px_per_sec(pxmm, 25.0) if pxmm else None
+            pxsec = pxsec or 250.0
+            rpeaks_data = pan_tompkins_like(trace, pxsec)
+            if run_rrob:
+                summary.append(f"R-peaks robustos ({target_lead}): {len(rpeaks_data['peaks_idx'])} picos (fs≈{pxsec:.1f} px/s)")
+            if run_intervals:
+                iv = intervals_from_trace(trace, rpeaks_data['peaks_idx'], pxsec)
+                med = iv['median']
+                summary.append(
+                    "PR {PR_ms} ms | QRS {QRS_ms} ms | QT {QT_ms} ms | QTcB {QTc_B} ms | QTcF {QTc_F} ms".format(**med)
+                )
+        else:
+            summary.append(f"Lead {target_lead} não encontrada na segmentação.")
     fig = make_overlay_figure(img, seg)
     return fig, "\n".join(summary)
 
