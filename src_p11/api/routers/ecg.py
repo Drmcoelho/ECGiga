@@ -3,6 +3,7 @@ ECG processing API router.
 Handles the /ecg/process-inline endpoint for image processing.
 """
 
+import logging
 from typing import Optional
 
 from fastapi import APIRouter, File, Form, HTTPException, Query, UploadFile
@@ -111,6 +112,5 @@ async def process_inline(
 
     except Exception as e:
         # Log error in production but don't expose internal details
-        import logging
         logging.error(f"Image processing failed: {str(e)}")
         raise HTTPException(status_code=500, detail="Image processing failed")
