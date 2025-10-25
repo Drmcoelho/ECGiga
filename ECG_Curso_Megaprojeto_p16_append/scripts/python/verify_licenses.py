@@ -7,9 +7,13 @@ Verificador de licenças/atribuições para ecg_images JSONL (p3c).
 - Escreve `ecg_images.verified.jsonl`
 - Gera créditos: `assets/credits/credits.md` e `.json`
 """
-import os, sys, json, pathlib, re, time
-from dataclasses import dataclass, asdict
-from typing import List, Dict, Optional
+import json
+import pathlib
+import re
+import sys
+import time
+from typing import Dict, List, Optional
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -22,13 +26,23 @@ CREDITS_DIR.mkdir(parents=True, exist_ok=True)
 HDRS = {"User-Agent": "ECGCourseBot/0.1 (+https://example.org; edu)"}
 
 CC_PATTERNS = [
-    ("CC BY-SA 4.0", re.compile(r"(CC\s*BY[- ]SA\s*4\.0|creativecommons\.org/licenses/by-sa/4\.0)", re.I)),
-    ("CC BY-SA 3.0", re.compile(r"(CC\s*BY[- ]SA\s*3\.0|creativecommons\.org/licenses/by-sa/3\.0)", re.I)),
+    (
+        "CC BY-SA 4.0",
+        re.compile(r"(CC\s*BY[- ]SA\s*4\.0|creativecommons\.org/licenses/by-sa/4\.0)", re.I),
+    ),
+    (
+        "CC BY-SA 3.0",
+        re.compile(r"(CC\s*BY[- ]SA\s*3\.0|creativecommons\.org/licenses/by-sa/3\.0)", re.I),
+    ),
     ("CC BY 4.0", re.compile(r"(CC\s*BY\s*4\.0|creativecommons\.org/licenses/by/4\.0)", re.I)),
     ("CC BY 3.0", re.compile(r"(CC\s*BY\s*3\.0|creativecommons\.org/licenses/by/3\.0)", re.I)),
     ("CC0", re.compile(r"(CC0|creativecommons\.org/publicdomain/zero/1\.0)", re.I)),
-    ("Public Domain", re.compile(r"(public\s*domain|creativecommons\.org/publicdomain/mark/1\.0)", re.I)),
+    (
+        "Public Domain",
+        re.compile(r"(public\s*domain|creativecommons\.org/publicdomain/mark/1\.0)", re.I),
+    ),
 ]
+
 
 def extract_license_and_author(html: str) -> (Optional[str], Optional[str]):
     soup = BeautifulSoup(html, "lxml")
@@ -65,6 +79,7 @@ def extract_license_and_author(html: str) -> (Optional[str], Optional[str]):
 
     return license_val, author
 
+
 def verify_one(entry: Dict) -> Dict:
     out = dict(entry)
     url = entry.get("page_url")
@@ -83,39 +98,47 @@ def verify_one(entry: Dict) -> Dict:
         out["verification_error"] = f"{type(e).__name__}: {e}"
     return out
 
+
 def iter_jsonl(path: pathlib.Path):
     with open(path, "r", encoding="utf-8") as f:
         for line in f:
             line = line.strip()
-            if not line: 
+            if not line:
                 continue
             yield json.loads(line)
+
 
 def write_jsonl(path: pathlib.Path, items: List[Dict]):
     with open(path, "w", encoding="utf-8") as f:
         for it in items:
-            f.write(json.dumps(it, ensure_ascii=False)+"\n")
+            f.write(json.dumps(it, ensure_ascii=False) + "\n")
+
 
 def build_credits(items: List[Dict]):
     data = []
     for it in items:
-        data.append({
-            "id": it.get("id"),
-            "condition": it.get("condition"),
-            "author": it.get("author"),
-            "license": it.get("license"),
-            "page_url": it.get("page_url"),
-            "source": it.get("source"),
-        })
+        data.append(
+            {
+                "id": it.get("id"),
+                "condition": it.get("condition"),
+                "author": it.get("author"),
+                "license": it.get("license"),
+                "page_url": it.get("page_url"),
+                "source": it.get("source"),
+            }
+        )
     # JSON
     with open(CREDITS_DIR / "credits.json", "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     # Markdown
     lines = ["# Créditos de Imagens — ECG Course", ""]
     for d in data:
-        lines.append(f"- **{d['id']}** — {d['condition']} — Autor: {d.get('author') or 'N/D'} — Licença: {d.get('license') or 'N/D'} — Fonte: {d.get('source') or 'N/D'} — [página]({d['page_url']})")
+        lines.append(
+            f"- **{d['id']}** — {d['condition']} — Autor: {d.get('author') or 'N/D'} — Licença: {d.get('license') or 'N/D'} — Fonte: {d.get('source') or 'N/D'} — [página]({d['page_url']})"
+        )
     with open(CREDITS_DIR / "credits.md", "w", encoding="utf-8") as f:
-        f.write("\n".join(lines)+"\n")
+        f.write("\n".join(lines) + "\n")
+
 
 def main(manifest_in=None, manifest_out=None):
     mi = pathlib.Path(manifest_in) if manifest_in else MANIFEST_IN
@@ -130,8 +153,10 @@ def main(manifest_in=None, manifest_out=None):
     build_credits(out)
     print(f"OK — escrito {mo} e créditos em {CREDITS_DIR}")
 
+
 if __name__ == "__main__":
     import argparse
+
     p = argparse.ArgumentParser()
     p.add_argument("--in", dest="manifest_in", default=None)
     p.add_argument("--out", dest="manifest_out", default=None)

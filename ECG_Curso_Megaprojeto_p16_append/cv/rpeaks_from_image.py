@@ -1,6 +1,7 @@
+from typing import Dict, Optional
 
 import numpy as np
-from typing import Dict, List, Tuple, Optional
+
 
 def extract_trace_centerline(gray_crop: np.ndarray, band: float = 0.8) -> np.ndarray:
     """
@@ -12,7 +13,7 @@ def extract_trace_centerline(gray_crop: np.ndarray, band: float = 0.8) -> np.nda
     if gray_crop.ndim != 2:
         raise ValueError("Esperado gray 2D")
     h, w = gray_crop.shape
-    cy0 = int((1-band)*0.5*h)
+    cy0 = int((1 - band) * 0.5 * h)
     cy1 = int(h - cy0)
     center = []
     for x in range(w):
@@ -21,13 +22,20 @@ def extract_trace_centerline(gray_crop: np.ndarray, band: float = 0.8) -> np.nda
         center.append(cy0 + y_local)
     return np.array(center, dtype=float)
 
+
 def smooth_signal(y: np.ndarray, win: int = 9) -> np.ndarray:
     win = max(3, int(win) | 1)  # ímpar
-    ker = np.ones(win)/win
+    ker = np.ones(win) / win
     return np.convolve(y, ker, mode="same")
 
-def detect_rpeaks_from_trace(y: np.ndarray, px_per_sec: float, zthr: float = 2.0,
-                             min_bpm: float = 30.0, max_bpm: float = 220.0) -> Dict:
+
+def detect_rpeaks_from_trace(
+    y: np.ndarray,
+    px_per_sec: float,
+    zthr: float = 2.0,
+    min_bpm: float = 30.0,
+    max_bpm: float = 220.0,
+) -> Dict:
     """
     Detecção simples de R-peaks:
     - sinal invertido (picos para cima)
@@ -42,22 +50,32 @@ def detect_rpeaks_from_trace(y: np.ndarray, px_per_sec: float, zthr: float = 2.0
     # distância mínima entre picos (em pixels)
     min_dist_sec = 60.0 / max_bpm
     min_dist_px = int(px_per_sec * min_dist_sec)
-    if min_dist_px < 1: min_dist_px = 1
+    if min_dist_px < 1:
+        min_dist_px = 1
     # detecção: pico local com z > zthr e distância mínima
     peaks = []
     last = -1e9
-    for i in range(1, len(z)-1):
-        if z[i] > zthr and z[i] >= z[i-1] and z[i] >= z[i+1]:
+    for i in range(1, len(z) - 1):
+        if z[i] > zthr and z[i] >= z[i - 1] and z[i] >= z[i + 1]:
             if i - last >= min_dist_px:
-                peaks.append(i); last = i
+                peaks.append(i)
+                last = i
     # RR e FC
     rr_sec = []
-    for a,b in zip(peaks, peaks[1:]):
-        rr_sec.append((b-a)/px_per_sec)
-    hr = [60.0/r for r in rr_sec if r>1e-6]
+    for a, b in zip(peaks, peaks[1:]):
+        rr_sec.append((b - a) / px_per_sec)
+    hr = [60.0 / r for r in rr_sec if r > 1e-6]
     hr_mean = float(np.mean(hr)) if hr else None
     hr_median = float(np.median(hr)) if hr else None
-    return {"peaks_idx": peaks, "rr_sec": rr_sec, "hr_bpm_mean": hr_mean, "hr_bpm_median": hr_median}
+    return {
+        "peaks_idx": peaks,
+        "rr_sec": rr_sec,
+        "hr_bpm_mean": hr_mean,
+        "hr_bpm_median": hr_median,
+    }
 
-def estimate_px_per_sec(px_per_mm: Optional[float], speed_mm_per_sec: float = 25.0) -> Optional[float]:
+
+def estimate_px_per_sec(
+    px_per_mm: Optional[float], speed_mm_per_sec: float = 25.0
+) -> Optional[float]:
     return (px_per_mm * speed_mm_per_sec) if px_per_mm else None
