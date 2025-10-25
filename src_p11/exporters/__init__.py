@@ -6,7 +6,7 @@ This module provides export functionality for ECG reports in various formats:
 - FHIR: Educational FHIR Bundle structure (non-clinical use)
 """
 
-from .markdown import report_to_markdown
 from .fhir_stub import report_to_fhir
+from .markdown import report_to_markdown
 
 __all__ = ["report_to_markdown", "report_to_fhir"]

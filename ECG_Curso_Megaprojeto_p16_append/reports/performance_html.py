@@ -1,8 +1,9 @@
-
 from __future__ import annotations
-import json, glob
+
+import glob
+import json
 from pathlib import Path
-from typing import List, Dict
+from typing import List
 
 TEMPLATE = """<!doctype html>
 <meta charset="utf-8">
@@ -43,27 +44,32 @@ th,td{border-bottom:1px solid #e5e7eb;padding:8px;text-align:left}
 </main>
 """
 
+
 def render(perf_files: List[Path], out_html: Path) -> str:
     rows = []
     macros = []
     for p in perf_files:
         try:
             d = json.loads(p.read_text(encoding="utf-8"))
-            mf = float(d.get("macro_F1") or 0.0); macros.append(mf)
+            mf = float(d.get("macro_F1") or 0.0)
+            macros.append(mf)
             note = []
             per = d.get("per_label") or {}
-            for lab in ("ST","T","QRS","P","PR"):
+            for lab in ("ST", "T", "QRS", "P", "PR"):
                 item = per.get(lab)
-                if item and float(item.get("F1",0)) < 0.5:
+                if item and float(item.get("F1", 0)) < 0.5:
                     note.append(f"{lab}↓")
-            rows.append(f"<tr><td>{p.name}</td><td>{mf:.2f}</td><td>{', '.join(note) or '-'}</td></tr>")
+            rows.append(
+                f"<tr><td>{p.name}</td><td>{mf:.2f}</td><td>{', '.join(note) or '-'}</td></tr>"
+            )
         except Exception:
             rows.append(f"<tr><td>{p.name}</td><td>-</td><td>erro ao ler</td></tr>")
-    macro_mean = sum(macros)/len(macros) if macros else 0.0
+    macro_mean = sum(macros) / len(macros) if macros else 0.0
     html = TEMPLATE.format(nfiles=len(perf_files), macro_mean=macro_mean, rows="\\n".join(rows))
     out_html.parent.mkdir(parents=True, exist_ok=True)
     out_html.write_text(html, encoding="utf-8")
     return str(out_html)
+
 
 def build_report(input_glob: str, out_html: str) -> str:
     files = [Path(p) for p in glob.glob(input_glob)]

@@ -7,12 +7,16 @@ Pré-processador de imagens para Web (p3c).
 - Stripa metadados e garante compressão eficiente
 - Emite manifest derivado: assets/manifest/ecg_images.derived.json
 """
-import os, sys, json, pathlib
-from PIL import Image, ImageOps
+import json
+import pathlib
+import sys
+
+from PIL import Image
 
 # AVIF opcional
 try:
     import pillow_avif  # noqa: F401
+
     AVIF_OK = True
 except Exception:
     AVIF_OK = False
@@ -24,6 +28,7 @@ DERIVED.mkdir(parents=True, exist_ok=True)
 MAN_OUT = BASE / "assets" / "manifest" / "ecg_images.derived.json"
 
 TARGET_WIDTHS = [320, 640, 1024, 1600]
+
 
 def process_one(path: pathlib.Path, out_dir: pathlib.Path):
     img = Image.open(path).convert("RGB")
@@ -40,16 +45,26 @@ def process_one(path: pathlib.Path, out_dir: pathlib.Path):
         webp_dir.mkdir(parents=True, exist_ok=True)
         webp_path = webp_dir / (path.stem + ".webp")
         imr.save(webp_path, "WEBP", quality=85, method=6)
-        sizes.append({"format":"webp","width": tw, "height": th, "path": str(webp_path.relative_to(BASE))})
+        sizes.append(
+            {"format": "webp", "width": tw, "height": th, "path": str(webp_path.relative_to(BASE))}
+        )
         # AVIF opcional
         if AVIF_OK:
             avif_path = webp_dir / (path.stem + ".avif")
             try:
                 imr.save(avif_path, "AVIF", quality=50)
-                sizes.append({"format":"avif","width": tw, "height": th, "path": str(avif_path.relative_to(BASE))})
+                sizes.append(
+                    {
+                        "format": "avif",
+                        "width": tw,
+                        "height": th,
+                        "path": str(avif_path.relative_to(BASE)),
+                    }
+                )
             except Exception:
                 pass
     return sizes
+
 
 def main():
     if not RAW.exists():
@@ -57,7 +72,7 @@ def main():
         return 1
     manifest = {}
     for fp in sorted(RAW.glob("*")):
-        if not fp.is_file(): 
+        if not fp.is_file():
             continue
         eid = fp.stem
         out_dir = DERIVED / eid
@@ -68,6 +83,7 @@ def main():
         json.dump(manifest, f, ensure_ascii=False, indent=2)
     print(f"Manifesto derivado salvo em {MAN_OUT}")
     return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())
