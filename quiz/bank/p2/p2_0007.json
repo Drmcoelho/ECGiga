@@ -1,0 +1,14 @@
+{
+  "id": "stemi_post_0001",
+  "topic": "Isquemia — Posterior",
+  "difficulty": "hard",
+  "stem": "V1–V3 com R altas e ST deprimido sugerem:",
+  "options": [
+    "IAM posterior",
+    "Pericardite",
+    "Brugada",
+    "ARVC"
+  ],
+  "answer_index": 0,
+  "explanation": "Sugerem posterior; confirmar V7–V9."
+}

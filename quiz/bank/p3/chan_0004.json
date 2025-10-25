@@ -1,0 +1,14 @@
+{
+  "id": "chan_0004",
+  "topic": "CPVT",
+  "difficulty": "hard",
+  "stem": "ECG basal geralmente:",
+  "options": [
+    "Normal",
+    "QT muito longo",
+    "BRD completo",
+    "Delta"
+  ],
+  "answer_index": 0,
+  "explanation": "CPVT pode ter ECG basal normal; arritmias adrenérgicas."
+}
