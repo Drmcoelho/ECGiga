@@ -1,0 +1,37 @@
+name: assets-pipeline-p3c
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "assets/manifest/**.jsonl"
+      - "scripts/python/**.py"
+      - ".github/workflows/assets-pipeline.yml"
+
+jobs:
+  build-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Download images
+        run: python -m ecgcourse assets download || python scripts/python/download_assets.py
+      - name: Verify licenses
+        run: python -m ecgcourse assets verify || python scripts/python/verify_licenses.py
+      - name: Preprocess images
+        run: python -m ecgcourse assets preprocess || python scripts/python/preprocess_images.py
+      - name: Upload derived as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-images-derived
+          path: |
+            assets/derived/images/**
+            assets/manifest/ecg_images.derived.json
+            assets/manifest/ecg_images.verified.jsonl
+            assets/credits/**

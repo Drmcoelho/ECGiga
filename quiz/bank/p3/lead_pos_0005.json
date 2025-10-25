@@ -1,0 +1,14 @@
+{
+  "id": "lead_pos_0005",
+  "topic": "Posicionamento — V6 posterior",
+  "difficulty": "medium",
+  "stem": "V6 muito posterior pode:",
+  "options": [
+    "Simular infarto lateral",
+    "Gerar U proeminente",
+    "QRS estreitar",
+    "Aumentar PR"
+  ],
+  "answer_index": 0,
+  "explanation": "Posição incorreta pode falsear Q/QRS em laterais."
+}
