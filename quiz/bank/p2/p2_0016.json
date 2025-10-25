@@ -1,0 +1,14 @@
+{
+  "id": "avrt_0001",
+  "topic": "AVRT ortodrômica",
+  "difficulty": "medium",
+  "stem": "QRS costuma ser:",
+  "options": [
+    "Largo",
+    "Estreito",
+    "Sempre com delta",
+    "Irregular"
+  ],
+  "answer_index": 1,
+  "explanation": "Condução via nó AV ➜ estreito."
+}

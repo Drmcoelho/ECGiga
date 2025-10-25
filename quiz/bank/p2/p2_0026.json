@@ -1,0 +1,14 @@
+{
+  "id": "hbae_0001",
+  "topic": "HBAE",
+  "difficulty": "medium",
+  "stem": "Associa-se a:",
+  "options": [
+    "Eixo esquerdo",
+    "Eixo normal",
+    "Eixo direito",
+    "Eixo extremo"
+  ],
+  "answer_index": 0,
+  "explanation": "Desvia à esquerda."
+}
