@@ -1,0 +1,19 @@
+{
+  "dpi": 300,
+  "mm_per_mV": 10,
+  "ms_per_div": 200,
+  "leads_layout": "3x4",
+  "sexo": "M",
+  "measures": {
+    "pr_ms": 160,
+    "qrs_ms": 100,
+    "qt_ms": 380,
+    "rr_ms": 800,
+    "fc_bpm": 75,
+    "lead_i_mv": 6,
+    "avf_mv": 3
+  },
+  "patient_id": "SYNTH-001",
+  "age": 55,
+  "context": "Amostra sintética educacional (p3)."
+}
