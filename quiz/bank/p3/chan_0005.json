@@ -1,0 +1,14 @@
+{
+  "id": "chan_0005",
+  "topic": "Brugada — desencadeantes",
+  "difficulty": "medium",
+  "stem": "Podem desmascarar:",
+  "options": [
+    "Febre, bloqueadores de Na+",
+    "Beta-agonistas",
+    "Digitálico",
+    "Hipocalcemia"
+  ],
+  "answer_index": 0,
+  "explanation": "Clássicos em Brugada."
+}
