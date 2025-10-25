@@ -1,5 +1,3 @@
-
-
 def _grid_boxes(bbox, rows, cols, margin=0.02):
     x0, y0, x1, y1 = bbox
     W = x1 - x0

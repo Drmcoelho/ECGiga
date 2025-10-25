@@ -110,5 +110,7 @@ async def process_inline(
         return JSONResponse(status_code=200, content=response_data)
 
     except Exception as e:
-        # Log error in production
-        raise HTTPException(status_code=500, detail=f"Image processing failed: {str(e)}")
+        # Log error in production but don't expose internal details
+        import logging
+        logging.error(f"Image processing failed: {str(e)}")
+        raise HTTPException(status_code=500, detail="Image processing failed")
