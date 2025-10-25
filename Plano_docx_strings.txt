@@ -1,0 +1,88 @@
+Paaaasa
+[Content_Types].xml
+_rels/.rels
+>2_Nxp
+word/document.xml
+:67`/R
+(@50-&N[\
+&c8/?W,
+q'k.+\!%
+l,f#*4
+&42ds&
+61!s0\
+ sX5U#i]
+bw0|\i
+sEN$-XK
+,Z\5m 2Y'Jf
+#ZUTDH
+Ezh`W8
+r@dc;VCoO
+n#6z@x
+(nv65Yy
+8yKGpc"
+U]2wgU{
+fdE	io&qP
+''Qc#}
++1pq0A
+$p}XBY
+x`gjbs
+v-o:_u3
+2Pl-{j
+2x	1sP
+-59agx
+R_w`rbS
+l=9lS"
+zL#N:r
+WE	W7/
+"gu ~PE
+word/_rels/document.xml.rels
+#_aGOmow
+word/_rels/footnotes.xml.rels
+pvX1D@
+4R7IK 
+2'A(2	C
+Vlh}~j
+word/numbering.xml
+eL"?a_
+dfQR8,
+word/styles.xml
+MK&;J`3[
+{ZAKA"q
+*.Ui?m?j+yM
+%f*R%/P
+Kcxy]I
+rK7FR-
+word/footnotes.xml
+W	5_PK
+word/comments.xml
+docProps/core.xml
+ODrB*9!
+docProps/app.xml
+(piUv9
+docProps/custom.xml
+word/theme/theme1.xml
+6:R!2h!
+word/settings.xml
+~/W_$g
+word/webSettings.xml]
+V[>\`]
+word/fontTable.xml
+JpxE0b*
+	j]i(y
+[Content_Types].xmlPK
+_rels/.relsPK
+word/document.xmlPK
+word/_rels/document.xml.relsPK
+word/_rels/footnotes.xml.relsPK
+word/numbering.xmlPK
+word/styles.xmlPK
+word/footnotes.xmlPK
+word/comments.xmlPK
+docProps/core.xmlPK
+docProps/app.xmlPK
+docProps/custom.xmlPK
+word/theme/theme1.xmlPK
+word/settings.xmlPK
+word/webSettings.xmlPK
+V[>\`]
+word/fontTable.xmlPK
