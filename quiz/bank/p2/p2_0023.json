@@ -1,0 +1,14 @@
+{
+  "id": "osborn_0002",
+  "topic": "Hipotermia — Osborn",
+  "difficulty": "easy",
+  "stem": "Localiza-se:",
+  "options": [
+    "Ponto J",
+    "Início da P",
+    "Meio do QRS",
+    "Final do T"
+  ],
+  "answer_index": 0,
+  "explanation": "Deflexão no J."
+}

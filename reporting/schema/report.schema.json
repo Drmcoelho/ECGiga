@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ECG Report Schema",
+  "version": "0.1.0",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "source_image": {
+          "type": "string"
+        },
+        "sidecar_meta_used": {
+          "type": "boolean"
+        },
+        "ingest_version": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "source_image",
+        "ingest_version",
+        "created_at"
+      ]
+    },
+    "patient_info": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "age": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "sex": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "M",
+            "F",
+            null
+          ]
+        },
+        "context": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "acquisition": {
+      "type": "object",
+      "properties": {
+        "dpi": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "mm_per_mV": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "ms_per_div": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "leads_layout": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "measures": {
+      "type": "object",
+      "properties": {
+        "pr_ms": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "qrs_ms": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "qt_ms": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "rr_ms": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "fc_bpm": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "axis_angle_deg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "axis_label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "suggested_interpretations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "meta",
+    "measures",
+    "version"
+  ]
+}

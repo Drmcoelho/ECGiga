@@ -1,0 +1,14 @@
+{
+  "id": "lead_pos_0001",
+  "topic": "Posicionamento — V1/V2 altos",
+  "difficulty": "hard",
+  "stem": "Colocar V1–V2 um espaço intercostal acima pode mimetizar:",
+  "options": [
+    "Brugada",
+    "HVE",
+    "TEP",
+    "QT curto"
+  ],
+  "answer_index": 0,
+  "explanation": "Pré-cordiais altas podem gerar morfologia tipo Brugada."
+}
