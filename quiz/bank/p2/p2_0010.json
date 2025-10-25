@@ -1,0 +1,14 @@
+{
+  "id": "precordial_misplace_0001",
+  "topic": "Técnica — V1–V2 altas",
+  "difficulty": "hard",
+  "stem": "Pode simular:",
+  "options": [
+    "Brugada",
+    "TEP",
+    "Pericardite",
+    "HVE"
+  ],
+  "answer_index": 0,
+  "explanation": "Pré-cordiais altas mimetizam Brugada."
+}
