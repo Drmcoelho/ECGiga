@@ -1307,8 +1307,8 @@ def cv_overlay(
     print(f"Overlay salvo em {outp}")
 
 
-@app.command("report")
-def report(): ...
+report = typer.Typer(help="Comandos de manipulação de laudos")
+app.add_typer(report, name="report")
 
 
 @report.command("export")
@@ -1376,8 +1376,8 @@ def validate_report(report_json: str = typer.Argument(..., help="Laudo JSON (v0.
     print("✓ Laudo válido (checagem leve)")
 
 
-@app.command("rhythm")
-def rhythm(): ...
+rhythm = typer.Typer(help="Análise de ritmo")
+app.add_typer(rhythm, name="rhythm")
 
 
 @rhythm.command("analyze")
@@ -1402,8 +1402,8 @@ def rhythm_analyze(
     return rep
 
 
-@app.command("precordials")
-def precordials(): ...
+precordials = typer.Typer(help="Análise de derivações precordiais")
+app.add_typer(precordials, name="precordials")
 
 
 @precordials.command("transition")
@@ -1426,8 +1426,8 @@ def precordials_transition(
     return rep
 
 
-@app.command("checklist")
-def checklist(): ...
+checklist = typer.Typer(help="Checklists diagnósticos (HVE, BAV, etc.)")
+app.add_typer(checklist, name="checklist")
 
 
 @checklist.command("lvh")
