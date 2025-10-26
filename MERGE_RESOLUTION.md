@@ -40,3 +40,4 @@ python -m cli_app.ecgcourse.cli analyze values --qt 400 --rr 1000 --lead-i 5 --a
 ```
 
 All tests pass and commands execute successfully.
+# Test push
