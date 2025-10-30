@@ -6,20 +6,27 @@ Download assets listed in assets/manifest/ecg_images.v1.jsonl and datasets manif
 - Writes images to assets/raw/images/<id>.<ext>
 - For datasets, only prints instructions (WFDB download typically requires tarballs and parsing).
 """
-import os, sys, json, hashlib, pathlib, urllib.request, urllib.error
-from urllib.parse import urlparse
+import json
+import os
+import pathlib
+import sys
+import urllib.error
+import urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from urllib.parse import urlparse
 
 BASE = pathlib.Path(__file__).resolve().parents[2]  # project root
 MANIFEST_IMG = BASE / "assets/manifest/ecg_images.v1.jsonl"
 OUT_DIR = BASE / "assets/raw/images"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
+
 def infer_ext_from_url(url: str) -> str:
     path = urlparse(url).path
     ext = os.path.splitext(path)[1] or ".bin"
     # For Special:FilePath the extension is embedded in the file name within the URL
     return ext
+
 
 def download_one(entry: dict, timeout=60):
     url = entry["file_url"]
@@ -36,6 +43,7 @@ def download_one(entry: dict, timeout=60):
         return eid, f"http_error_{e.code}", None
     except Exception as e:
         return eid, f"error_{type(e).__name__}", None
+
 
 def main():
     entries = []
@@ -63,6 +71,7 @@ def main():
             else:
                 print(f"[ERR] {eid}: {status}")
     print(f"Done. {ok} files downloaded.")
+
 
 if __name__ == "__main__":
     sys.exit(main())
