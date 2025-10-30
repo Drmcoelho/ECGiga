@@ -4,7 +4,7 @@ FROM python:3.11-slim
 WORKDIR /opt/ecgcourse
 
 # Copy only requirements first for layer caching
-COPY ECG_Curso_Megaprojeto_p16_append/requirements.txt ./requirements.txt
+COPY requirements.txt ./requirements.txt
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends build-essential libgl1 libglib2.0-0 \
@@ -15,7 +15,7 @@ RUN apt-get update \
 # Copy repository into image
 COPY . .
 
-WORKDIR /opt/ecgcourse/ECG_Curso_Megaprojeto_p16_append/web_app/dash_app
+WORKDIR /opt/ecgcourse/web_app/dash_app
 
 ENV PORT=8050
 EXPOSE 8050

@@ -3,8 +3,8 @@ services:
     name: ecg-giga-dash
     runtime: python
     plan: free
-    buildCommand: "pip install -r ECG_Curso_Megaprojeto_p16_append/requirements.txt"
-    startCommand: "cd ECG_Curso_Megaprojeto_p16_append && gunicorn web_app.dash_app.app:app.server"
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn web_app.dash_app.app:app.server"
     envVars:
       - key: PYTHON_VERSION
         value: 3.11
