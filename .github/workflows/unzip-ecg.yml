@@ -1,0 +1,137 @@
+---
+name: Unzip ECG Course Archive
+
+'on':
+  workflow_dispatch:
+    description: >
+      'Manually trigger unzip of ECG_Curso_Megaprojeto_p3b_append.zip'
+  push:
+    branches:
+      - main
+      # Only run on push if the ZIP file still exists
+      # This makes the workflow idempotent
+
+jobs:
+  unzip-ecg-archive:
+    runs-on: ubuntu-latest
+    name: Extract ECG Course Project Files
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check if ZIP file exists
+        id: check_zip
+        run: |
+          if [ -f "ECG_Curso_Megaprojeto_p3b_append.zip" ]; then
+            echo "zip_exists=true" >> $GITHUB_OUTPUT
+            echo "✅ ZIP file found: ECG_Curso_Megaprojeto_p3b_append.zip"
+          else
+            echo "zip_exists=false" >> $GITHUB_OUTPUT
+            echo "ℹ️  ZIP file not found. May have been extracted already."
+          fi
+
+      - name: List ZIP contents
+        if: steps.check_zip.outputs.zip_exists == 'true'
+        run: |
+          echo "📦 ZIP file contents:"
+          unzip -l ECG_Curso_Megaprojeto_p3b_append.zip
+
+      - name: Extract ZIP archive safely
+        if: steps.check_zip.outputs.zip_exists == 'true'
+        run: |
+          echo "🚀 Starting safe extraction process..."
+
+          # Create temporary extraction directory
+          mkdir -p /tmp/ecg_extract
+
+          # Extract to temporary directory first
+          echo "📂 Extracting to temporary directory..."
+          unzip -q ECG_Curso_Megaprojeto_p3b_append.zip -d /tmp/ecg_extract
+
+          # Create conflicts directory in case we need it
+          mkdir -p extracted_conflicts
+
+          # Function to safely move files
+          safe_move() {
+            local src="$1"
+            local dest="$2"
+            local dest_dir=$(dirname "$dest")
+
+            # Create destination directory if needed
+            mkdir -p "$dest_dir"
+
+            if [ -f "$dest" ]; then
+              echo "⚠️  Conflict detected: $dest already exists"
+              # Move to conflicts directory with timestamp
+              local timestamp=$(date +%Y%m%d_%H%M%S)
+              local conflict_path
+              conflict_path="extracted_conflicts/$(basename "$dest")_$timestamp"
+              echo "   Moving extracted version to: $conflict_path"
+              mv "$src" "$conflict_path"
+            else
+              echo "✅ Moving: $src -> $dest"
+              mv "$src" "$dest"
+            fi
+          }
+
+          # Process all extracted files
+          echo "📝 Processing extracted files..."
+          find /tmp/ecg_extract -type f -print0 | \
+            while IFS= read -r -d '' file; do
+            # Get relative path by removing temp directory prefix
+            rel_path="${file#/tmp/ecg_extract/}"
+            safe_move "$file" "$rel_path"
+          done
+
+          # Clean up temp directory
+          rm -rf /tmp/ecg_extract
+
+          echo "✨ Extraction completed successfully!"
+
+      - name: Configure Git
+        if: steps.check_zip.outputs.zip_exists == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Commit extracted files
+        if: steps.check_zip.outputs.zip_exists == 'true'
+        run: |
+          # Add all new files
+          git add .
+
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "ℹ️  No changes to commit."
+          else
+            echo "💾 Committing extracted files..."
+            git commit -m "Extract ECG course project files from archive
+
+            - Extracted contents from ECG_Curso_Megaprojeto_p3b_append.zip
+            - Preserved directory structure
+            - Handled file conflicts by moving to extracted_conflicts/
+            - Automated extraction via GitHub Actions workflow"
+
+            echo "🚀 Pushing changes..."
+            git push
+          fi
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "📊 Unzip workflow summary:"
+          echo "- ZIP exists: ${{ steps.check_zip.outputs.zip_exists }}"
+          if [ "${{ steps.check_zip.outputs.zip_exists }}" == "true" ]; then
+            echo "- Extraction: Completed"
+            echo "- Conflicts: Check extracted_conflicts/ directory if any"
+            echo "- Repository updated with extracted files"
+          else
+            echo "- Action: No extraction needed (ZIP not found)"
+          fi
+
+          echo ""
+          echo "🎯 To run this workflow manually:"
+          echo "   Go to Actions tab → 'Unzip ECG Course Archive' → 'Run'"
