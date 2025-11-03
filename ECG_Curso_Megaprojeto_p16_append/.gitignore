@@ -13,3 +13,8 @@ build/
 .coverage
 htmlcov/
 .site/
+
+# Diskcache directories
+cache/
+**/cache/
+test_cache/
