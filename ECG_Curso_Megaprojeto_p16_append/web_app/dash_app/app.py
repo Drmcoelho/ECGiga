@@ -1,18 +1,17 @@
 import dash
 import dash_bootstrap_components as dbc
-from dash import html, dcc, Input, Output
+from dash import html, dcc, Input, Output, DiskcacheManager
 import diskcache
-from dash.long_callback import DiskcacheManager
 
 # Gerenciador de callbacks em background usando cache em disco
 cache = diskcache.Cache("./cache")
-long_callback_manager = DiskcacheManager(cache)
+background_callback_manager = DiskcacheManager(cache)
 
 app = dash.Dash(
     __name__, 
     use_pages=True, 
     external_stylesheets=[dbc.themes.BOOTSTRAP],
-    long_callback_manager=long_callback_manager,
+    background_callback_manager=background_callback_manager,
     suppress_callback_exceptions=True # Necessário pois os callbacks estão em arquivos separados
 )
 app.title = "ECG Giga - Curso Interativo de ECG"
@@ -22,7 +21,7 @@ navbar = dbc.NavbarSimple(
     children=[
         dbc.NavItem(dbc.NavLink(page["name"], href=page["relative_path"])) for page in dash.page_registry.values()
     ] + [
-        dbc.NavbarText("", id="welcome-message", className="ms-auto")
+        html.Span("", id="welcome-message", className="ms-auto text-white")
     ],
     brand="ECG Giga",
     brand_href="/",
