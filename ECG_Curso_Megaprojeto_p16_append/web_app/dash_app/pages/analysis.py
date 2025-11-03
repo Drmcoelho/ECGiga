@@ -1,5 +1,5 @@
 import dash
-from dash import html, dcc, Input, Output, State, long_callback, no_update
+from dash import html, dcc, Input, Output, State, no_update
 import dash_bootstrap_components as dbc
 import plotly.graph_objs as go
 import numpy as np
@@ -58,7 +58,7 @@ layout = dbc.Container([
 
 # --- Callback em Background ---
 
-@long_callback(
+@dash.get_app().callback(
     Output("overlay-graph", "figure"),
     Output("upload-summary", "children"),
     Input("btn-process", "n_clicks"),
@@ -67,6 +67,7 @@ layout = dbc.Container([
     State("upload-meta", "value"),
     State('ops', 'value'),
     State('layout-select', 'value'),
+    background=True,
     running=[
         (Output("btn-process", "disabled"), True, False),
         (Output("spinner-dummy", "children"), dbc.Spinner(size="sm"), ""),

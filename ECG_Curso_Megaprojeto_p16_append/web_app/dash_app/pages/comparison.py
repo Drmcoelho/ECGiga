@@ -1,5 +1,5 @@
 import dash
-from dash import html, dcc, Input, Output, State, long_callback, no_update
+from dash import html, dcc, Input, Output, State, no_update
 import dash_bootstrap_components as dbc
 import plotly.graph_objs as go
 import numpy as np
@@ -97,7 +97,7 @@ layout = dbc.Container([
 
 # --- Callback ---
 
-@long_callback(
+@dash.get_app().callback(
     Output('graph-a', 'figure'),
     Output('summary-a', 'children'),
     Output('graph-b', 'figure'),
@@ -108,6 +108,7 @@ layout = dbc.Container([
     State("upload-ecg-a", "filename"),
     State("upload-ecg-b", "contents"),
     State("upload-ecg-b", "filename"),
+    background=True,
     running=[
         (Output("btn-compare", "disabled"), True, False),
         (Output("spinner-compare-dummy", "children"), dbc.Spinner(size="lg"), ""),
