@@ -4,7 +4,7 @@ services:
     runtime: python
     plan: free
     buildCommand: "pip install -r ECG_Curso_Megaprojeto_p16_append/requirements.txt"
-    startCommand: "cd ECG_Curso_Megaprojeto_p16_append && gunicorn web_app.dash_app.app:app.server"
+    startCommand: "cd ECG_Curso_Megaprojeto_p16_append/web_app/dash_app && gunicorn wsgi:application --bind 0.0.0.0:$PORT"
     envVars:
       - key: PYTHON_VERSION
         value: 3.11
