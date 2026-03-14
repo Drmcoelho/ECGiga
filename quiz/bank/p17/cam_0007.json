@@ -1,0 +1,14 @@
+{
+  "id": "cam_0007",
+  "topic": "cameras_cardiacas",
+  "difficulty": "hard",
+  "stem": "Um ECG mostra supradesnivelamento de ST em DII, DIII e aVF, com infradesnivelamento recíproco em DI e aVL. Usando a analogia das câmeras, qual a interpretação?",
+  "options": [
+    "As câmeras laterais (DI, aVL) filmam a lesão diretamente",
+    "As câmeras inferiores (DII, DIII, aVF) filmam lesão na parede inferior; as câmeras laterais altas veem o reflexo (espelho)",
+    "Todas as câmeras estão com defeito de calibração",
+    "O vetor está perpendicular a todas as derivações simultaneamente"
+  ],
+  "answer_index": 1,
+  "explanation": "As câmeras inferiores (DII, DIII, aVF) estão filmando diretamente a lesão na parede inferior — por isso mostram supra de ST. As câmeras do lado oposto (DI, aVL) veem o 'reflexo' da lesão, como um espelho, mostrando infra de ST recíproco. Isso indica IAM inferior (oclusão da coronária direita ou circunflexa)."
+}

@@ -1,0 +1,14 @@
+{
+  "id": "pat_0003",
+  "topic": "pericarditis",
+  "difficulty": "hard",
+  "stem": "O sinal de Spodick na pericardite corresponde a:",
+  "options": [
+    "Elevação de ST côncava para cima",
+    "Segmento TP com inclinação descendente (downsloping)",
+    "Alternância elétrica do QRS",
+    "Onda delta no início do QRS"
+  ],
+  "answer_index": 1,
+  "explanation": "O sinal de Spodick é uma inclinação descendente do segmento TP (entre a onda T e a próxima onda P). É um achado sutil mas altamente específico para pericardite. Na analogia das câmeras, é como se entre os batimentos a câmera registrasse uma queda contínua do sinal — a 'linha de base' não está plana, está caindo."
+}

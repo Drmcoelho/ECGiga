@@ -1,0 +1,14 @@
+{
+  "id": "cam_0019",
+  "topic": "cameras_cardiacas",
+  "difficulty": "hard",
+  "stem": "Na hipertrofia ventricular esquerda (HVE), por que o S é muito profundo em V1 e o R é muito alto em V5/V6?",
+  "options": [
+    "Porque V1 e V5/V6 estão mal posicionadas",
+    "Porque o VE hipertrofiado gera vetores maiores para a esquerda; V1 vê mais vetor fugindo (S profundo) e V5/V6 veem mais vetor se aproximando (R alto)",
+    "Porque na HVE o septo cresce e gera vetor para a direita",
+    "Porque o VD está hipertrofiado e empurra o vetor para V1"
+  ],
+  "answer_index": 1,
+  "explanation": "Na HVE, a massa do VE aumenta, gerando vetores mais potentes apontando para a esquerda e para trás. A câmera V1 (à direita) vê esses vetores ampliados fugindo → S mais profundo. As câmeras V5/V6 (à esquerda) veem os vetores ampliados se aproximando → R mais alto. É o princípio do critério de Sokolow-Lyon: SV1 + RV5/V6 ≥ 35mm."
+}

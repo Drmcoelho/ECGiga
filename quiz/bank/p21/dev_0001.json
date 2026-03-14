@@ -1,0 +1,14 @@
+{
+  "id": "dev_0001",
+  "topic": "pacemaker",
+  "difficulty": "easy",
+  "stem": "No ECG de um paciente com marcapasso VVI, espera-se ver:",
+  "options": [
+    "Spike seguido de onda P e depois QRS normal",
+    "Spike seguido de QRS largo (sem relação com onda P)",
+    "Dois spikes por ciclo cardíaco",
+    "ECG completamente normal sem spikes"
+  ],
+  "answer_index": 1,
+  "explanation": "No modo VVI, o marcapasso estimula APENAS o ventrículo. A câmera do ECG vê: um spike fino → QRS largo (porque a ativação ventricular não segue o sistema de condução normal). A onda P pode estar dissociada, pois os átrios seguem seu próprio ritmo."
+}

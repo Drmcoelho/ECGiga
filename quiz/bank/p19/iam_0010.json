@@ -1,0 +1,14 @@
+{
+  "id": "iam_0010",
+  "topic": "stemi",
+  "difficulty": "medium",
+  "stem": "Qual a diferença principal entre STEMI e NSTEMI no ECG?",
+  "options": [
+    "STEMI tem ondas Q e NSTEMI não",
+    "STEMI tem elevação persistente de ST; NSTEMI tem depressão de ST ou inversão de T sem elevação persistente",
+    "STEMI afeta apenas a parede anterior",
+    "NSTEMI é mais grave que STEMI"
+  ],
+  "answer_index": 1,
+  "explanation": "No STEMI, as câmeras mostram elevação PERSISTENTE de ST — indicando oclusão total da artéria (isquemia transmural). No NSTEMI, as câmeras mostram depressão de ST ou inversão de T — indicando oclusão parcial ou isquemia subendocárdica. A diferença não é de gravidade, mas de mecanismo e urgência de intervenção."
+}

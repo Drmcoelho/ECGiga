@@ -1,0 +1,14 @@
+{
+  "id": "pat_0008",
+  "topic": "brugada",
+  "difficulty": "medium",
+  "stem": "Qual é o ÚNICO padrão diagnóstico de síndrome de Brugada?",
+  "options": [
+    "Tipo 2 (saddleback/em sela) com ST ≥ 2 mm",
+    "Tipo 1 (coved/em tenda) com ST ≥ 2 mm e T negativa em V1-V2",
+    "Qualquer elevação de ST em V1-V2",
+    "Intervalo QT prolongado"
+  ],
+  "answer_index": 1,
+  "explanation": "O Tipo 1 (coved) é o único padrão diagnóstico: a câmera V1/V2 registra uma 'cúpula' única no ST que desce suavemente até uma onda T negativa, como o telhado de uma tenda. Elevação do ponto J ≥ 2 mm. O Tipo 2 (saddleback) é sugestivo mas requer teste provocativo para confirmação."
+}

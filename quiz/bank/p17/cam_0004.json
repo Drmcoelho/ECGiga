@@ -1,0 +1,14 @@
+{
+  "id": "cam_0004",
+  "topic": "cameras_cardiacas",
+  "difficulty": "medium",
+  "stem": "Por que a derivação aVR registra deflexões predominantemente negativas em um ECG normal?",
+  "options": [
+    "Porque está com defeito técnico e inverte o sinal",
+    "Porque está posicionada a -150°, quase oposta ao vetor normal (~60°), e vê o vetor fugindo",
+    "Porque registra apenas a repolarização, que é sempre negativa",
+    "Porque está no plano horizontal e não capta bem o plano frontal"
+  ],
+  "answer_index": 1,
+  "explanation": "aVR é a 'câmera do contra' — está a -150°. O vetor normal (~60°) se afasta dela (diferença de ~150°, muito maior que 90°). Pela regra CAFÉ: Fugindo → deflexão negativa. Por isso P, QRS e T são todos negativos em aVR normalmente."
+}

@@ -1,0 +1,14 @@
+{
+  "id": "dev_0002",
+  "topic": "pacemaker",
+  "difficulty": "medium",
+  "stem": "Perda de captura no marcapasso é definida como:",
+  "options": [
+    "Spike presente mas sem onda correspondente (P ou QRS)",
+    "Ausência de spike no traçado",
+    "QRS muito estreito após o spike",
+    "Frequência cardíaca acima do programado"
+  ],
+  "answer_index": 0,
+  "explanation": "Perda de captura: o metrônomo 'bate' (spike visível) mas o músculo cardíaco não responde. A câmera vê o spike solitário sem a onda que deveria seguir. Causas incluem deslocamento do eletrodo, aumento do limiar de captura, ou fibrose ao redor do eletrodo."
+}

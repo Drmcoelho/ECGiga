@@ -1,0 +1,14 @@
+{
+  "id": "pat_0010",
+  "topic": "pericarditis",
+  "difficulty": "medium",
+  "stem": "Nos estágios de Spodick da pericardite, o Estágio III é caracterizado por:",
+  "options": [
+    "Elevação difusa de ST",
+    "Normalização do ST (ECG pseudonormal)",
+    "Inversão difusa de ondas T",
+    "Retorno completo ao ECG basal"
+  ],
+  "answer_index": 2,
+  "explanation": "Os 4 estágios de Spodick são: I — Elevação difusa de ST + depressão de PR (agudo); II — Normalização do ST (pseudonormal); III — Inversão difusa de T (sem ondas Q, diferente do IAM); IV — Normalização completa. Cada estágio é como a câmera registrando fases diferentes da recuperação do 'nevoeiro' inflamatório."
+}

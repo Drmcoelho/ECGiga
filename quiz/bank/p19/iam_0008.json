@@ -1,0 +1,14 @@
+{
+  "id": "iam_0008",
+  "topic": "stemi",
+  "difficulty": "hard",
+  "stem": "No STEMI anterior extenso, qual achado em aVR sugere oclusão proximal da DA (tronco da coronária esquerda)?",
+  "options": [
+    "Depressão de ST em aVR",
+    "Elevação de ST ≥ 1 mm em aVR",
+    "Onda Q em aVR",
+    "Bloqueio AV em aVR"
+  ],
+  "answer_index": 1,
+  "explanation": "A câmera aVR aponta para a cavidade do VE (de dentro para fora). Elevação de ST em aVR + depressão difusa nas demais derivações sugere isquemia global subendocárdica — padrão de oclusão de tronco da coronária esquerda ou DA muito proximal. É um achado de altíssima gravidade."
+}

@@ -1,0 +1,14 @@
+{
+  "id": "dev_0005",
+  "topic": "channelopathy",
+  "difficulty": "medium",
+  "stem": "A tríade clássica do WPW (Wolff-Parkinson-White) inclui:",
+  "options": [
+    "PR longo + QRS estreito + onda U",
+    "PR curto + QRS largo + onda delta",
+    "PR normal + BRD + elevação de ST",
+    "PR curto + QRS estreito + onda delta"
+  ],
+  "answer_index": 1,
+  "explanation": "WPW = PR curto (< 120 ms) + QRS largo (> 120 ms) + onda delta. Existe uma 'passagem secreta' (via acessória) que contorna o nó AV: o impulso chega ao ventrículo por atalho (PR curto), ativa parte do ventrículo prematuramente (onda delta = rampa lenta no início do QRS), e o QRS total fica alargado."
+}

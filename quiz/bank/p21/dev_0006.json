@@ -1,0 +1,14 @@
+{
+  "id": "dev_0006",
+  "topic": "channelopathy",
+  "difficulty": "medium",
+  "stem": "O que é a onda delta no WPW?",
+  "options": [
+    "Uma onda negativa no final do QRS",
+    "Uma rampa lenta (empastamento) no início do QRS causada pela pré-excitação",
+    "Uma elevação do segmento ST",
+    "Uma deflexão no segmento PR"
+  ],
+  "answer_index": 1,
+  "explanation": "A onda delta é um 'empastamento' no início do QRS. A via acessória conduz o impulso lentamente para uma pequena parte do ventrículo ANTES do sistema His-Purkinje ativar o resto. A câmera vê: início borrado (onda delta) → depois QRS rápido normal quando o His-Purkinje assume."
+}

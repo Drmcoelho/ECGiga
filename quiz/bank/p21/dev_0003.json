@@ -1,0 +1,14 @@
+{
+  "id": "dev_0003",
+  "topic": "pacemaker",
+  "difficulty": "hard",
+  "stem": "No modo DDD, quantos spikes a câmera do ECG tipicamente registra por ciclo cardíaco?",
+  "options": [
+    "Nenhum (o DDD é totalmente inibido)",
+    "Um spike (apenas ventricular)",
+    "Dois spikes (atrial + ventricular)",
+    "Três spikes"
+  ],
+  "answer_index": 2,
+  "explanation": "No modo DDD (dupla câmara), o marcapasso pode estimular átrio E ventrículo. A câmera vê dois spikes: primeiro o atrial (→ onda P) e depois o ventricular (→ QRS), separados pelo intervalo AV programado. É como dois metrônomos sincronizados — um para cada câmara."
+}

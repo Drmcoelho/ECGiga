@@ -1,0 +1,14 @@
+{
+  "id": "pat_0005",
+  "topic": "pe_tep",
+  "difficulty": "medium",
+  "stem": "Qual é o achado eletrocardiográfico MAIS COMUM no TEP agudo?",
+  "options": [
+    "S1Q3T3",
+    "Bloqueio de ramo direito",
+    "Taquicardia sinusal",
+    "Fibrilação atrial"
+  ],
+  "answer_index": 2,
+  "explanation": "A taquicardia sinusal é o achado mais frequente no TEP — presente em até 40-50% dos casos. A câmera do nó sinusal 'dispara mais rápido' tentando compensar a queda do débito cardíaco. O S1Q3T3, embora clássico, é bem menos frequente (~20%). Um ECG normal NÃO exclui TEP!"
+}

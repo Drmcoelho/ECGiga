@@ -1,0 +1,14 @@
+{
+  "id": "iam_0004",
+  "topic": "stemi",
+  "difficulty": "medium",
+  "stem": "Depressão de ST isolada em V1-V3 (sem elevação em outras derivações) pode representar:",
+  "options": [
+    "STEMI anterior",
+    "Infarto posterior (alteração recíproca)",
+    "Pericardite",
+    "Hipercalemia"
+  ],
+  "answer_index": 1,
+  "explanation": "As câmeras V1-V3 estão do lado oposto à parede posterior. Depressão de ST nessas derivações pode ser a imagem em espelho de elevação de ST na parede posterior. É como ver fumaça refletida num espelho — o incêndio está atrás. Idealmente, confirmar com V7-V9."
+}

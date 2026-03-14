@@ -1,0 +1,14 @@
+{
+  "id": "dev_0010",
+  "topic": "channelopathy",
+  "difficulty": "hard",
+  "stem": "Qual é o limite de QTc para 'borderline prolongado' em homens?",
+  "options": [
+    "430-449 ms",
+    "450-469 ms",
+    "470-499 ms",
+    "> 500 ms"
+  ],
+  "answer_index": 1,
+  "explanation": "Em homens, QTc 450-469 ms é borderline (zona cinzenta). Abaixo de 450 ms é normal; 470-499 ms é prolongado; ≥ 500 ms é alto risco. Em mulheres, os limites são ~10 ms mais altos (borderline 460-479 ms). É como o tempo de exposição das câmeras — um pouco longo é 'borderline', muito longo é perigoso."
+}

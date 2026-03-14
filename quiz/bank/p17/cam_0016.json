@@ -1,0 +1,14 @@
+{
+  "id": "cam_0016",
+  "topic": "cameras_cardiacas",
+  "difficulty": "hard",
+  "stem": "Em um ECG com eixo a -60° (desvio à esquerda), quais câmeras do plano frontal mostrarão as maiores deflexões positivas do QRS?",
+  "options": [
+    "DII e DIII (câmeras inferiores)",
+    "DI e aVL (câmeras laterais-esquerdas)",
+    "aVR (câmera do braço direito)",
+    "aVF (câmera inferior)"
+  ],
+  "answer_index": 1,
+  "explanation": "Com eixo a -60°, o vetor aponta para cima e para a esquerda. As câmeras mais alinhadas são DI (0°, diferença de 60°) e aVL (-30°, diferença de apenas 30°). Pela regra CAFÉ: vetor se aproxima dessas câmeras → deflexão positiva. aVL terá o maior QRS positivo, pois está mais alinhada."
+}

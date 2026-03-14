@@ -1,0 +1,14 @@
+{
+  "id": "cam_0001",
+  "topic": "cameras_cardiacas",
+  "difficulty": "easy",
+  "stem": "Usando a analogia das câmeras cardíacas, por que o QRS é predominantemente positivo em DII?",
+  "options": [
+    "Porque o vetor de despolarização ventricular (~60°) se aproxima da câmera DII (60°), gerando deflexão positiva",
+    "Porque DII está posicionada no braço direito e vê tudo de perto",
+    "Porque o VD é mais espesso que o VE e gera vetor em direção a DII",
+    "Porque a repolarização atrial produz onda positiva em DII"
+  ],
+  "answer_index": 0,
+  "explanation": "DII está a 60°, exatamente alinhada com o vetor médio de despolarização ventricular (~60°). Pela regra CAFÉ: vetor se Aproximando da Câmera → deflexão positiva. A câmera DII tem a melhor 'visão' do vetor normal."
+}

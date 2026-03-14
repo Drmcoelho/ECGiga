@@ -1,0 +1,14 @@
+{
+  "id": "iam_0009",
+  "topic": "stemi",
+  "difficulty": "hard",
+  "stem": "Qual é o ponto J e por que é usado para medir elevação de ST?",
+  "options": [
+    "Final da onda P; marca o início da sístole atrial",
+    "Junção do QRS com o segmento ST; marca o fim da despolarização ventricular",
+    "Pico da onda R; representa a máxima despolarização",
+    "Início da onda T; marca o começo da repolarização"
+  ],
+  "answer_index": 1,
+  "explanation": "O ponto J (junção) é onde o QRS termina e o segmento ST começa. A medida de elevação de ST é feita tipicamente 60-80 ms após o ponto J. Na analogia das câmeras, o ponto J é o momento exato em que a câmera termina de registrar o batimento e começa a 'ver' a fase de repouso — qualquer desvio neste ponto indica lesão."
+}

@@ -1,0 +1,14 @@
+{
+  "id": "iam_0002",
+  "topic": "stemi",
+  "difficulty": "easy",
+  "stem": "Qual artéria é tipicamente responsável pelo infarto inferior (elevação de ST em DII, DIII, aVF)?",
+  "options": [
+    "Artéria descendente anterior (DA)",
+    "Artéria circunflexa (Cx)",
+    "Artéria coronária direita (CD/RCA) ou circunflexa (Cx)",
+    "Artéria mamária interna"
+  ],
+  "answer_index": 2,
+  "explanation": "As câmeras DII, DIII e aVF olham para a parede inferior do coração. A irrigação dessa parede vem da artéria coronária direita (RCA) em ~80% dos casos, ou da circunflexa (Cx) nos restantes. É como três câmeras de segurança no chão do edifício — todas captam o problema vindo de baixo."
+}

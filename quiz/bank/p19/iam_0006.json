@@ -1,0 +1,14 @@
+{
+  "id": "iam_0006",
+  "topic": "stemi",
+  "difficulty": "medium",
+  "stem": "O que significam as alterações recíprocas no contexto de STEMI?",
+  "options": [
+    "Elevação de ST em todas as derivações",
+    "Depressão de ST nas derivações opostas ao território infartado",
+    "Inversão de onda T generalizada",
+    "Ondas Q patológicas em derivações adjacentes"
+  ],
+  "answer_index": 1,
+  "explanation": "Alterações recíprocas são depressões de ST nas câmeras do lado oposto ao infarto. Se as câmeras da parede anterior veem elevação (incêndio), as câmeras inferiores (do outro lado) veem a imagem invertida — depressão de ST. A presença de reciprocidade aumenta muito a especificidade para STEMI verdadeiro."
+}

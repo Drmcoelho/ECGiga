@@ -1,0 +1,14 @@
+{
+  "id": "cam_0005",
+  "topic": "cameras_cardiacas",
+  "difficulty": "medium",
+  "stem": "Quando o vetor elétrico é perpendicular a uma derivação (câmera), o que se observa no traçado?",
+  "options": [
+    "Deflexão muito positiva, pois o vetor passa rente à câmera",
+    "Deflexão muito negativa, pois o vetor cruza a câmera",
+    "Registro bifásico ou isoelétrico — a câmera não resolve a direção",
+    "Ausência completa de registro (linha reta)"
+  ],
+  "answer_index": 2,
+  "explanation": "Pela regra CAFÉ — 'É' de Esquece quando perpendicular: quando o vetor é perpendicular à câmera (~90°), ele não se aproxima nem se afasta claramente. A câmera registra um complexo bifásico (metade para cima, metade para baixo) ou isoelétrico."
+}

@@ -1,0 +1,14 @@
+{
+  "id": "dev_0007",
+  "topic": "channelopathy",
+  "difficulty": "hard",
+  "stem": "Por que WPW + fibrilação atrial é uma emergência?",
+  "options": [
+    "Porque causa bradicardia extrema",
+    "Porque a via acessória pode conduzir impulsos atriais a frequências ventriculares muito altas, causando FV",
+    "Porque alonga o QT",
+    "Porque causa bloqueio AV total"
+  ],
+  "answer_index": 1,
+  "explanation": "Na FA, os átrios disparam a >300 bpm. O nó AV normalmente filtra esses impulsos. Mas a via acessória do WPW NÃO tem esse freio — ela conduz todos os impulsos direto ao ventrículo. As câmeras mostram QRS irregulares e muito rápidos. Se a frequência ventricular ultrapassar ~250 bpm, pode degenerar em fibrilação ventricular."
+}

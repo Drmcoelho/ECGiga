@@ -1,0 +1,14 @@
+{
+  "id": "cam_0010",
+  "topic": "cameras_cardiacas",
+  "difficulty": "hard",
+  "stem": "No bloqueio de ramo direito (BRD), a câmera V1 registra padrão rsR'. Usando a analogia das câmeras, o que cada componente representa?",
+  "options": [
+    "r = átrio direito, s = átrio esquerdo, R' = ventrículos juntos",
+    "r = septo se aproximando, S = VE se afastando, R' = VD despolarizando tardiamente em direção a V1",
+    "r = ruído, s = sinal fraco, R' = artefato",
+    "r = repolarização, s = despolarização, R' = segunda repolarização"
+  ],
+  "answer_index": 1,
+  "explanation": "No BRD, a câmera V1 filma em três atos: (1) r = septo despolariza da esquerda para a direita, aproximando-se de V1; (2) S = VE despolariza para a esquerda, afastando-se de V1; (3) R' = VD despolariza tardiamente (ramo direito bloqueado), e como V1 está sobre o VD, vê esse vetor tardio se aproximando. É o famoso 'orelha de coelho'."
+}

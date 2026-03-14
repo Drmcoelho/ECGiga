@@ -1,0 +1,14 @@
+{
+  "id": "dev_0009",
+  "topic": "pacemaker",
+  "difficulty": "medium",
+  "stem": "Undersensing no marcapasso significa que:",
+  "options": [
+    "O marcapasso não emite spikes",
+    "O marcapasso não detecta batimentos nativos e dispara spike desnecessariamente",
+    "O marcapasso captura o ventrículo em todos os ciclos",
+    "O marcapasso está no modo DDD"
+  ],
+  "answer_index": 1,
+  "explanation": "Undersensing: o marcapasso não 'ouve' os batimentos próprios do coração. Resultado: emite spikes desnecessários — a câmera mostra spikes competindo com QRS nativos. É como um metrônomo surdo que continua batendo mesmo quando a orquestra já está tocando sozinha."
+}

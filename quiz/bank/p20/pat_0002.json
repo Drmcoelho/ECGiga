@@ -1,0 +1,14 @@
+{
+  "id": "pat_0002",
+  "topic": "pericarditis",
+  "difficulty": "medium",
+  "stem": "Qual achado no ECG é considerado patognomônico de pericardite aguda?",
+  "options": [
+    "Elevação de ST difusa",
+    "Depressão do segmento PR",
+    "Inversão de onda T",
+    "Onda Q patológica"
+  ],
+  "answer_index": 1,
+  "explanation": "A depressão do segmento PR é patognomônica (exclusiva) da pericardite. A inflamação pericárdica afeta os átrios (parede fina), deslocando o PR para baixo. Nenhuma câmera vê isso no infarto. Em aVR ocorre o oposto: elevação do PR (imagem espelhada)."
+}

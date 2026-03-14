@@ -1,0 +1,14 @@
+{
+  "id": "pat_0001",
+  "topic": "pericarditis",
+  "difficulty": "easy",
+  "stem": "A elevação de ST na pericardite é tipicamente:",
+  "options": [
+    "Focal em um território coronariano",
+    "Difusa, envolvendo múltiplas derivações dos membros E precordiais",
+    "Presente apenas em V1-V2",
+    "Ausente — só há depressão de ST"
+  ],
+  "answer_index": 1,
+  "explanation": "Na pericardite, a inflamação envolve TODO o pericárdio. É como nevoeiro em volta do coração inteiro: QUASE TODAS as câmeras (derivações) veem elevação de ST simultaneamente. No STEMI, apenas as câmeras de uma parede mostram elevação — o incêndio é localizado."
+}

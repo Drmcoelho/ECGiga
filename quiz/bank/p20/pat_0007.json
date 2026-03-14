@@ -1,0 +1,14 @@
+{
+  "id": "pat_0007",
+  "topic": "brugada",
+  "difficulty": "easy",
+  "stem": "O padrão de Brugada é tipicamente visto em quais derivações?",
+  "options": [
+    "DII, DIII, aVF",
+    "V1 e V2",
+    "V5 e V6",
+    "DI e aVL"
+  ],
+  "answer_index": 1,
+  "explanation": "V1 e V2 são as câmeras mais próximas da via de saída do ventrículo direito (VSVD). Na síndrome de Brugada, o defeito dos canais de sódio ocorre exatamente nessa região. As outras câmeras estão longe demais para captar essa anomalia localizada."
+}

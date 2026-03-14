@@ -1,0 +1,14 @@
+{
+  "id": "cam_0002",
+  "topic": "cameras_cardiacas",
+  "difficulty": "easy",
+  "stem": "No mnemônico CAFÉ das câmeras cardíacas, o que representa a letra 'F'?",
+  "options": [
+    "Foco — a câmera está focada no vetor",
+    "Fugindo — quando o vetor se afasta da câmera, a deflexão é negativa",
+    "Frontal — refere-se ao plano frontal das derivações",
+    "Frequência — relação entre a FC e a deflexão"
+  ],
+  "answer_index": 1,
+  "explanation": "CAFÉ: C = Câmera (polo positivo), A = Aproximando (deflexão positiva), F = Fugindo (deflexão negativa), É = Esquece quando perpendicular (bifásico). A letra F nos lembra que quando o vetor FOGE da câmera, a deflexão é negativa."
+}
