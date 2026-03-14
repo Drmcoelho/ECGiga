@@ -10,17 +10,18 @@ TRANSLATIONS: dict[str, dict[str, str]] = {
     "pt": {
         # Report sections
         "report_title": "Laudo ECG",
-        "patient_info": "Informacoes do Paciente",
-        "measurements": "Medicoes",
-        "interpretation": "Interpretacao",
-        "flags": "Flags Clinicas",
-        "differential_diagnosis": "Diagnostico Diferencial",
+        "patient_info": "Informações do Paciente",
+        "measurements": "Medições",
+        "interpretation": "Interpretação",
+        "flags": "Flags Clínicas",
+        "differential_diagnosis": "Diagnóstico Diferencial",
         "educational_notes": "Notas Educacionais",
-        "conclusion": "Conclusao",
+        "conclusion": "Conclusão",
+        "disclaimer": "Aviso Legal",
         # Measurement labels
         "heart_rate": "Frequencia Cardiaca",
         "pr_interval": "Intervalo PR",
-        "qrs_duration": "Duracao QRS",
+        "qrs_duration": "Duração QRS",
         "qt_interval": "Intervalo QT",
         "qtc_interval": "Intervalo QTc (Bazett)",
         "frontal_axis": "Eixo Frontal",
@@ -34,31 +35,50 @@ TRANSLATIONS: dict[str, dict[str, str]] = {
         "normal_axis": "Eixo normal",
         "left_axis_deviation": "Desvio do eixo para a esquerda",
         "right_axis_deviation": "Desvio do eixo para a direita",
-        "extreme_axis": "Eixo extremo (terra de ninguem)",
+        "extreme_axis": "Eixo extremo (terra de ninguém)",
         # Common flags
         "no_significant_flags": "Sem flags relevantes",
         "sinus_rhythm": "Ritmo sinusal",
         "sinus_tachycardia": "Taquicardia sinusal",
         "sinus_bradycardia": "Bradicardia sinusal",
         "wide_qrs": "QRS alargado (>=120 ms)",
-        "prolonged_pr": "PR prolongado (>200 ms) — BAV 1o grau",
+        "prolonged_pr": "PR prolongado (>200 ms) — BAV 1º grau",
         "prolonged_qtc": "QTc prolongado",
         "short_qtc": "QTc curto",
         "left_axis": "Desvio do eixo para a esquerda",
         "right_axis": "Desvio do eixo para a direita",
+        # Status
+        "normal": "Normal",
+        "abnormal_low": "Abaixo do normal",
+        "abnormal_high": "Acima do normal",
+        "critical": "CRÍTICO",
         # Educational / camera analogy
-        "camera_analogy_title": "Analogia da Camera",
+        "camera_analogy_title": "Analogia da Câmera",
         "camera_analogy_body": (
-            "Imagine o coracao como um objeto sendo fotografado por 12 cameras (derivacoes). "
-            "Cada derivacao ve o mesmo evento eletrico de um angulo diferente. "
-            "O eixo eletrico e como a direcao principal da luz — "
-            "as cameras que veem a luz de frente registram deflexoes positivas."
+            "Imagine o coração como um objeto sendo fotografado por 12 câmeras (derivações). "
+            "Cada derivação vê o mesmo evento elétrico de um ângulo diferente. "
+            "O eixo elétrico é como a direção principal da luz — "
+            "as câmeras que veem a luz de frente registram deflexões positivas.\n\n"
+            "Mnemônico CAFÉ:\n"
+            "  C — Câmera = polo positivo\n"
+            "  A — Aproximando = deflexão positiva\n"
+            "  F — Fugindo = deflexão negativa\n"
+            "  É — Esquece (perpendicular) = bifásico"
+        ),
+        # Disclaimer
+        "disclaimer_text": (
+            "AVISO: Este laudo foi gerado automaticamente pelo sistema ECGiga "
+            "e tem finalidade exclusivamente educacional. NÃO substitui a "
+            "avaliação de um médico cardiologista. Qualquer decisão clínica "
+            "deve ser baseada na avaliação profissional presencial."
         ),
         # Page labels
-        "page": "Pagina",
+        "page": "Página",
         "of": "de",
         "generated_by": "Gerado por ECGiga",
         "date": "Data",
+        "report_id": "ID do Laudo",
+        "clinical_summary": "Resumo Clínico",
     },
     "en": {
         # Report sections
@@ -70,6 +90,7 @@ TRANSLATIONS: dict[str, dict[str, str]] = {
         "differential_diagnosis": "Differential Diagnosis",
         "educational_notes": "Educational Notes",
         "conclusion": "Conclusion",
+        "disclaimer": "Disclaimer",
         # Measurement labels
         "heart_rate": "Heart Rate",
         "pr_interval": "PR Interval",
@@ -99,19 +120,38 @@ TRANSLATIONS: dict[str, dict[str, str]] = {
         "short_qtc": "Short QTc",
         "left_axis": "Left axis deviation",
         "right_axis": "Right axis deviation",
+        # Status
+        "normal": "Normal",
+        "abnormal_low": "Below normal",
+        "abnormal_high": "Above normal",
+        "critical": "CRITICAL",
         # Educational / camera analogy
         "camera_analogy_title": "Camera Analogy",
         "camera_analogy_body": (
             "Think of the heart as an object being photographed by 12 cameras (leads). "
             "Each lead sees the same electrical event from a different angle. "
             "The electrical axis is like the main direction of light — "
-            "cameras facing the light record positive deflections."
+            "cameras facing the light record positive deflections.\n\n"
+            "CAFE Mnemonic:\n"
+            "  C — Camera = positive pole\n"
+            "  A — Approaching = positive deflection\n"
+            "  F — Fleeing = negative deflection\n"
+            "  E — Equidistant (perpendicular) = biphasic"
+        ),
+        # Disclaimer
+        "disclaimer_text": (
+            "DISCLAIMER: This report was automatically generated by the ECGiga system "
+            "and is intended for educational purposes ONLY. It does NOT replace "
+            "evaluation by a qualified cardiologist. Any clinical decisions must "
+            "be based on professional in-person assessment."
         ),
         # Page labels
         "page": "Page",
         "of": "of",
         "generated_by": "Generated by ECGiga",
         "date": "Date",
+        "report_id": "Report ID",
+        "clinical_summary": "Clinical Summary",
     },
 }
 
@@ -175,7 +215,6 @@ def translate_report(report: dict, target_lang: str = "en") -> dict:
     result = {}
     for key, value in report.items():
         translated_key = key
-        # Try to find a translation key for this field name
         if key in field_map_pt_to_en:
             trans_key = field_map_pt_to_en[key]
             translated_key = t(trans_key, target_lang)
@@ -200,14 +239,12 @@ def translate_flags(flags: list[str], target_lang: str = "en") -> list[str]:
     translated = []
     for flag in flags:
         found = False
-        # Try PT -> key matching
         for pattern, key in _FLAG_PT_TO_KEY.items():
             if pattern.lower() in flag.lower():
                 translated.append(t(key, target_lang))
                 found = True
                 break
         if not found:
-            # Try EN -> key matching
             for pattern, key in _FLAG_EN_TO_KEY.items():
                 if pattern.lower() in flag.lower():
                     translated.append(t(key, target_lang))
