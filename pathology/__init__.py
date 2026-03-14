@@ -1,13 +1,13 @@
-"""Pathology detection modules for ECG analysis.
+"""Módulos de detecção de patologias para análise de ECG.
 
-Provides algorithmic detection of cardiac pathologies from ECG signal
-features and interval measurements, including:
+Fornece detecção algorítmica de patologias cardíacas a partir de
+características do sinal de ECG e medições de intervalos, incluindo:
 
-- Arrhythmia detection (AF, flutter, SVT, VT)
-- Electrolyte disturbances (hyperkalemia, hypokalemia, hypercalcemia, hypocalcemia)
-- Ischemia patterns (STEMI, NSTEMI, early repolarization differentiation)
-- Conduction abnormalities (Brugada, WPW, bundle branch blocks)
-- Demographic-adjusted thresholds (sex, age)
+- Detecção de arritmias (FA, flutter, TSV, TV)
+- Distúrbios eletrolíticos (hipercalemia, hipocalemia, hipercalcemia, hipocalcemia)
+- Padrões isquêmicos (STEMI, NSTEMI, diferenciação de repolarização precoce)
+- Anormalidades de condução (Brugada, WPW, bloqueios de ramo)
+- Limiares ajustados por dados demográficos (sexo, idade)
 """
 
 from pathology.arrhythmia import (

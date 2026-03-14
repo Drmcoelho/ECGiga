@@ -1,13 +1,13 @@
-"""Complete ECG preprocessing pipeline.
+"""Pipeline completo de pré-processamento de ECG.
 
-Chains baseline wander removal, powerline notch filtering, bandpass filtering,
-and quality assessment into a single configurable pipeline.
+Encadeia remoção de oscilação de linha de base, filtragem notch da rede elétrica,
+filtragem passa-banda e avaliação de qualidade em um pipeline único e configurável.
 
-Reference pipeline order (recommended):
-1. Baseline wander removal (highpass 0.5 Hz or median filter)
-2. Powerline notch filter (50/60 Hz + harmonics)
-3. Bandpass filter (0.05-150 Hz diagnostic / 0.5-40 Hz monitoring)
-4. Quality assessment
+Ordem recomendada do pipeline:
+1. Remoção de oscilação de linha de base (passa-alta 0,5 Hz ou filtro mediano)
+2. Filtro notch da rede elétrica (50/60 Hz + harmônicas)
+3. Filtro passa-banda (0,05-150 Hz diagnóstico / 0,5-40 Hz monitorização)
+4. Avaliação de qualidade
 """
 
 from __future__ import annotations
@@ -29,37 +29,37 @@ def preprocess_ecg(
     apply_bandpass: bool = True,
     compute_quality: bool = True,
 ) -> dict[str, Any]:
-    """Full ECG preprocessing pipeline.
+    """Pipeline completo de pré-processamento de ECG.
 
-    Parameters
+    Parâmetros
     ----------
     signal : ndarray
-        Raw ECG signal (1D or 2D [samples, leads]).
+        Sinal de ECG bruto (1D ou 2D [amostras, derivações]).
     fs : float
-        Sampling frequency in Hz.
+        Frequência de amostragem em Hz.
     mode : str
-        'diagnostic' (0.05-150 Hz) or 'monitoring' (0.5-40 Hz).
+        'diagnostic' (0,05-150 Hz) ou 'monitoring' (0,5-40 Hz).
     powerline_freq : float
-        Powerline frequency: 50 Hz (Europe/Brazil) or 60 Hz (Americas).
+        Frequência da rede elétrica: 50 Hz (Europa/Brasil) ou 60 Hz (Américas).
     remove_baseline : bool
-        Whether to remove baseline wander.
+        Se deve remover oscilação de linha de base.
     baseline_method : str
-        'highpass' or 'median' for baseline removal.
+        'highpass' ou 'median' para remoção de linha de base.
     remove_powerline : bool
-        Whether to apply notch filter for powerline.
+        Se deve aplicar filtro notch para rede elétrica.
     apply_bandpass : bool
-        Whether to apply bandpass filter.
+        Se deve aplicar filtro passa-banda.
     compute_quality : bool
-        Whether to compute signal quality index.
+        Se deve calcular o índice de qualidade do sinal.
 
-    Returns
+    Retorna
     -------
     dict
-        - signal: ndarray (preprocessed signal)
+        - signal: ndarray (sinal pré-processado)
         - fs: float
         - mode: str
         - steps_applied: list[str]
-        - quality: dict (if compute_quality=True)
+        - quality: dict (se compute_quality=True)
     """
     from signal_processing.filters import (
         bandpass_filter,
@@ -74,7 +74,7 @@ def preprocess_ecg(
     if signal.dtype not in (np.float32, np.float64):
         signal = signal.astype(np.float64)
 
-    # Validate mode
+    # Valida modo
     if mode == "diagnostic":
         bp_low, bp_high = 0.05, 150.0
         bw_cutoff = 0.5
@@ -87,7 +87,7 @@ def preprocess_ecg(
     steps: list[str] = []
     processed = signal.copy()
 
-    # Step 1: Baseline wander removal
+    # Etapa 1: Remoção de oscilação de linha de base
     if remove_baseline:
         processed = remove_baseline_wander(
             processed, fs,
@@ -96,7 +96,7 @@ def preprocess_ecg(
         )
         steps.append(f"baseline_wander_removal({baseline_method}, cutoff={bw_cutoff}Hz)")
 
-    # Step 2: Powerline notch filter
+    # Etapa 2: Filtro notch da rede elétrica
     if remove_powerline:
         processed = notch_filter(
             processed, fs,
@@ -106,7 +106,7 @@ def preprocess_ecg(
         )
         steps.append(f"notch_filter({powerline_freq}Hz, harmonics=3)")
 
-    # Step 3: Bandpass filter
+    # Etapa 3: Filtro passa-banda
     if apply_bandpass:
         processed = bandpass_filter(
             processed, fs,
@@ -122,19 +122,19 @@ def preprocess_ecg(
         "steps_applied": steps,
     }
 
-    # Step 4: Quality assessment (on preprocessed signal)
+    # Etapa 4: Avaliação de qualidade (no sinal pré-processado)
     if compute_quality:
         if processed.ndim == 1:
             result["quality"] = signal_quality_index(processed, fs)
         else:
-            # Multi-lead: assess each lead, report worst
+            # Multiderivação: avalia cada derivação, reporta a pior
             lead_qualities = []
             for i in range(processed.shape[1]):
                 q = signal_quality_index(processed[:, i], fs)
                 q["lead_index"] = i
                 lead_qualities.append(q)
 
-            # Overall quality is the worst lead
+            # Qualidade geral é a pior derivação
             worst = min(lead_qualities, key=lambda q: q["sqi_score"])
             result["quality"] = worst
             result["quality_per_lead"] = lead_qualities

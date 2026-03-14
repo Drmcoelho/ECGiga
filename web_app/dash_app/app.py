@@ -6,8 +6,8 @@ import numpy as np, base64, json
 from PIL import Image
 from io import BytesIO
 
-app = dash.Dash(__name__)
-app.title = "ECG Dash — p4 (upload + overlay + QTc + 12 leads)"
+app = dash.Dash(__name__, suppress_callback_exceptions=True)
+app.title = "ECGiga — Plataforma Educacional de ECG"
 
 def synth_wave(phase=0.0, n=2000):
     t = np.linspace(0, 1, n)
@@ -60,7 +60,25 @@ def axis_label_from(I, aVF):
     return "Desvio extremo (noroeste)"
 
 app.layout = html.Div([
-    html.H2("ECG Dashboard (p4) — Upload + Overlay 12D + Calculadora QTc + 12 leads sintéticos"),
+    html.H2("ECGiga — Plataforma Educacional de ECG", style={"textAlign": "center", "color": "#1a5276"}),
+    dcc.Tabs(id="tabs-main", value="tab-analise", children=[
+        dcc.Tab(label="Análise de ECG", value="tab-analise"),
+        dcc.Tab(label="Educação", value="tab-educacao"),
+        dcc.Tab(label="Quiz", value="tab-quiz"),
+        dcc.Tab(label="Simulador", value="tab-simulador"),
+        dcc.Tab(label="Interpretação IA", value="tab-ia"),
+    ]),
+    html.Div(id="tab-content"),
+])
+
+
+# ---------------------------------------------------------------------------
+# Conteúdo das abas
+# ---------------------------------------------------------------------------
+
+def _layout_analise():
+    """Layout da aba de análise de ECG."""
+    return html.Div([
     html.Div([
         html.Div([
             html.H3("Upload de ECG (PNG/JPG)"),
@@ -100,7 +118,303 @@ app.layout = html.Div([
         html.Div(id="qtc-out", style={"marginTop":"8px","fontWeight":"bold"}),
     ], className="card", style={"maxWidth":"520px","marginBottom":"16px"}),
     dcc.Graph(id="ecg12", figure=fig_synth)
-])
+    ])
+
+
+def _layout_educacao():
+    """Layout da aba de educação."""
+    return html.Div([
+        html.H3("Módulo Educacional — Analogia das Câmeras"),
+        html.P(
+            "Imagine o coração como um objeto sendo fotografado por 12 câmeras (derivações). "
+            "Cada derivação vê o mesmo evento elétrico de um ângulo diferente."
+        ),
+        html.Div([
+            html.H4("Mnemônico CAFÉ"),
+            html.Ul([
+                html.Li("C — Câmera = polo positivo"),
+                html.Li("A — Aproximando = deflexão positiva"),
+                html.Li("F — Fugindo = deflexão negativa"),
+                html.Li("É — Esquece (perpendicular) = bifásico"),
+            ]),
+        ], className="card", style={"maxWidth": "600px"}),
+        html.Div([
+            html.H4("Explorar Derivações"),
+            dcc.Dropdown(
+                id="edu-lead-select",
+                options=[{"label": l, "value": l} for l in leads],
+                value="II",
+                clearable=False,
+                style={"width": "200px"},
+            ),
+            html.Div(id="edu-lead-info", style={"marginTop": "10px", "whiteSpace": "pre-wrap"}),
+        ], className="card", style={"maxWidth": "600px", "marginTop": "16px"}),
+        html.Div([
+            html.H4("Visualização do Eixo Elétrico"),
+            dcc.Graph(id="edu-axis-wheel"),
+        ], className="card", style={"maxWidth": "600px", "marginTop": "16px"}),
+    ])
+
+
+def _layout_quiz():
+    """Layout da aba de quiz."""
+    return html.Div([
+        html.H3("Quiz Adaptativo de ECG"),
+        html.P("Teste seus conhecimentos com questões adaptativas baseadas na análise do ECG."),
+        html.Div([
+            html.Label("Número de questões:"),
+            dcc.Input(id="quiz-n", type="number", value=6, min=1, max=20, step=1),
+            html.Button("Gerar Quiz", id="btn-quiz-generate", n_clicks=0, style={"marginLeft": "10px"}),
+        ], style={"display": "flex", "gap": "10px", "alignItems": "center"}),
+        html.Div(id="quiz-content", style={"marginTop": "20px"}),
+    ])
+
+
+def _layout_simulador():
+    """Layout da aba de simulador de ECG."""
+    return html.Div([
+        html.H3("Simulador de ECG"),
+        html.P("Gere sinais de ECG sintéticos com diferentes patologias para estudo."),
+        html.Div([
+            html.Label("FC (bpm):"),
+            dcc.Input(id="sim-hr", type="number", value=75, min=30, max=250, step=1),
+            html.Label("Duração (s):"),
+            dcc.Input(id="sim-duration", type="number", value=5, min=1, max=30, step=1),
+            html.Label("Patologia:"),
+            dcc.Dropdown(
+                id="sim-pathology",
+                options=[
+                    {"label": "Normal (sinusal)", "value": "normal"},
+                    {"label": "Taquicardia sinusal", "value": "tachycardia"},
+                    {"label": "Bradicardia sinusal", "value": "bradycardia"},
+                    {"label": "PR prolongado (BAV 1°)", "value": "first_degree_block"},
+                    {"label": "QRS alargado (BRE)", "value": "lbbb"},
+                    {"label": "Fibrilação atrial", "value": "afib"},
+                    {"label": "Supra de ST (STEMI)", "value": "stemi"},
+                ],
+                value="normal",
+                clearable=False,
+                style={"width": "300px"},
+            ),
+            html.Button("Simular", id="btn-simulate", n_clicks=0),
+        ], style={"display": "flex", "gap": "10px", "alignItems": "center", "flexWrap": "wrap"}),
+        dcc.Graph(id="sim-ecg-graph"),
+    ])
+
+
+def _layout_ia():
+    """Layout da aba de interpretação com IA."""
+    return html.Div([
+        html.H3("Interpretação de ECG com IA Offline"),
+        html.P("Interprete um ECG fornecendo os intervalos medidos. "
+               "Utiliza regras clínicas offline com detecção de patologias."),
+        html.Div([
+            html.Div([
+                html.Label("PR (ms):"), dcc.Input(id="ia-pr", type="number", value=160, step=1),
+                html.Label("QRS (ms):"), dcc.Input(id="ia-qrs", type="number", value=90, step=1),
+                html.Label("QT (ms):"), dcc.Input(id="ia-qt", type="number", value=380, step=1),
+                html.Label("QTc (ms):"), dcc.Input(id="ia-qtc", type="number", value=425, step=1),
+                html.Label("RR (s):"), dcc.Input(id="ia-rr", type="number", value=0.8, step=0.01),
+                html.Label("Eixo (°):"), dcc.Input(id="ia-axis", type="number", value=60, step=1),
+                html.Label("Idade:"), dcc.Input(id="ia-age", type="number", value=50, step=1),
+                html.Label("Sexo:"), dcc.Dropdown(
+                    id="ia-sex",
+                    options=[{"label": "Masculino", "value": "M"}, {"label": "Feminino", "value": "F"}],
+                    value="M", clearable=False, style={"width": "150px"},
+                ),
+            ], style={"display": "flex", "gap": "10px", "alignItems": "center", "flexWrap": "wrap"}),
+            html.Button("Interpretar", id="btn-interpret", n_clicks=0, style={"marginTop": "10px"}),
+        ], className="card", style={"maxWidth": "900px"}),
+        html.Div(id="ia-result", style={"marginTop": "20px", "whiteSpace": "pre-wrap"}),
+    ])
+
+
+# ---------------------------------------------------------------------------
+# Callback de renderização de abas
+# ---------------------------------------------------------------------------
+
+@app.callback(Output("tab-content", "children"), Input("tabs-main", "value"))
+def render_tab(tab):
+    if tab == "tab-analise":
+        return _layout_analise()
+    elif tab == "tab-educacao":
+        return _layout_educacao()
+    elif tab == "tab-quiz":
+        return _layout_quiz()
+    elif tab == "tab-simulador":
+        return _layout_simulador()
+    elif tab == "tab-ia":
+        return _layout_ia()
+    return html.Div("Aba não encontrada")
+
+
+# ---------------------------------------------------------------------------
+# Callbacks da aba de educação
+# ---------------------------------------------------------------------------
+
+@app.callback(Output("edu-lead-info", "children"), Input("edu-lead-select", "value"))
+def update_lead_info(lead):
+    try:
+        from education.cameras import explain_lead
+        info = explain_lead(lead)
+        lines = [
+            f"Derivação: {lead}",
+            f"Plano: {info.get('plano', info.get('plane', '?'))}",
+            f"Ângulo: {info.get('angulo', info.get('angle', '?'))}°",
+            f"Polo positivo: {info.get('polo_positivo', info.get('positive_pole', '?'))}",
+            f"Dica: {info.get('dica_clinica', info.get('clinical_tip', ''))}",
+        ]
+        return "\n".join(lines)
+    except Exception as e:
+        return f"Módulo de educação não disponível: {e}"
+
+
+@app.callback(Output("edu-axis-wheel", "figure"), Input("edu-lead-select", "value"))
+def update_axis_wheel(lead):
+    try:
+        from education.interactive import create_axis_wheel_figure
+        return create_axis_wheel_figure()
+    except Exception:
+        # Fallback: roda do eixo simples
+        import plotly.graph_objs as go
+        angles = [-90, -60, -30, 0, 30, 60, 90, 120, 150, 180]
+        labels_ax = ["aVL(-30°)", "I(0°)", "II(60°)", "aVF(90°)", "III(120°)"]
+        fig = go.Figure()
+        fig.add_trace(go.Scatterpolar(
+            r=[1]*5, theta=[-30, 0, 60, 90, 120], mode="markers+text",
+            text=labels_ax, textposition="top center",
+        ))
+        fig.update_layout(
+            title="Roda do Eixo Elétrico Frontal",
+            polar=dict(radialaxis=dict(visible=False), angularaxis=dict(direction="clockwise")),
+            showlegend=False, height=400,
+        )
+        return fig
+
+
+# ---------------------------------------------------------------------------
+# Callbacks da aba de quiz
+# ---------------------------------------------------------------------------
+
+@app.callback(Output("quiz-content", "children"), Input("btn-quiz-generate", "n_clicks"), State("quiz-n", "value"), prevent_initial_call=True)
+def generate_quiz(n_clicks, n_questions):
+    try:
+        from quiz.engine import build_adaptive_quiz
+        result = build_adaptive_quiz({}, n_questions=n_questions or 6, seed=n_clicks)
+        questions = result.get("questions", [])
+        elements = []
+        for i, q in enumerate(questions):
+            choices = []
+            for c in q.get("choices", []):
+                marker = "✓" if c.get("is_correct") else "✗"
+                choices.append(html.Li(f"{c.get('text', '')} [{marker}] — {c.get('explanation', '')}"))
+            elements.append(html.Div([
+                html.H4(f"Questão {i+1}: {q.get('prompt', '')}"),
+                html.Ul(choices),
+            ], className="card", style={"marginBottom": "10px"}))
+        return elements
+    except Exception as e:
+        return html.P(f"Erro ao gerar quiz: {e}")
+
+
+# ---------------------------------------------------------------------------
+# Callbacks da aba de simulador
+# ---------------------------------------------------------------------------
+
+@app.callback(Output("sim-ecg-graph", "figure"), Input("btn-simulate", "n_clicks"),
+              State("sim-hr", "value"), State("sim-duration", "value"), State("sim-pathology", "value"),
+              prevent_initial_call=True)
+def simulate_ecg(n_clicks, hr, duration, pathology):
+    try:
+        from simulation.ecg_generator import generate_ecg
+        result = generate_ecg(hr=hr or 75, duration_s=duration or 5)
+        signal = result.get("signal", result) if isinstance(result, dict) else result
+        if hasattr(signal, 'tolist'):
+            signal = signal.tolist() if len(signal) < 10000 else signal[:10000].tolist()
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(y=signal, mode="lines", name="ECG Simulado"))
+        fig.update_layout(title=f"ECG Simulado — {pathology} ({hr} bpm, {duration}s)",
+                         xaxis_title="Amostras", yaxis_title="mV")
+        return fig
+    except Exception as e:
+        fig = go.Figure()
+        # Fallback: gerar onda sintética simples
+        t = np.linspace(0, duration or 5, (duration or 5) * 500)
+        rr = 60.0 / (hr or 75)
+        signal = synth_wave(n=len(t))
+        fig.add_trace(go.Scatter(y=signal, mode="lines", name="ECG Sintético"))
+        fig.update_layout(title=f"ECG Sintético (fallback) — {hr} bpm", xaxis_title="Amostras", yaxis_title="mV")
+        return fig
+
+
+# ---------------------------------------------------------------------------
+# Callbacks da aba de interpretação IA
+# ---------------------------------------------------------------------------
+
+@app.callback(Output("ia-result", "children"), Input("btn-interpret", "n_clicks"),
+              State("ia-pr", "value"), State("ia-qrs", "value"), State("ia-qt", "value"),
+              State("ia-qtc", "value"), State("ia-rr", "value"), State("ia-axis", "value"),
+              State("ia-age", "value"), State("ia-sex", "value"),
+              prevent_initial_call=True)
+def interpret_ecg(n_clicks, pr, qrs, qt, qtc, rr, axis_deg, age, sex):
+    try:
+        from ai.offline_rules import interpret_report
+        report = {
+            "intervals_refined": {"median": {
+                "PR_ms": pr, "QRS_ms": qrs, "QT_ms": qt, "QTc_B": qtc, "RR_s": rr,
+            }},
+            "axis": {"angle_deg": axis_deg, "label": ""},
+            "flags": [],
+        }
+        result = interpret_report(report)
+
+        elements = [
+            html.H4("Resultado da Interpretação"),
+            dcc.Markdown(result.get("interpretation", "")),
+        ]
+
+        # Limiares ajustados por demografia
+        try:
+            from pathology.thresholds import get_adjusted_thresholds
+            thresholds = get_adjusted_thresholds(age, sex)
+            elements.append(html.Div([
+                html.H5("Limiares Ajustados"),
+                html.P(f"Grupo etário: {thresholds['age_group']} | Sexo: {thresholds['sex']}"),
+                html.P(f"FC normal: {thresholds['hr_range'][0]}-{thresholds['hr_range'][1]} bpm"),
+                html.P(f"QTc normal até: {thresholds['qtc_upper_ms']} ms | Prolongado: >{thresholds['qtc_prolonged_ms']} ms"),
+                html.P(f"STEMI V2-V3: ≥{thresholds['stemi_v2v3_mv']} mV"),
+            ], className="card", style={"marginTop": "10px"}))
+        except ImportError:
+            pass
+
+        # Diagnósticos diferenciais
+        diffs = result.get("differentials", [])
+        if diffs:
+            elements.append(html.H5("Diagnósticos Diferenciais"))
+            elements.append(html.Ul([html.Li(d) for d in diffs]))
+
+        # Recomendações
+        recs = result.get("recommendations", [])
+        if recs:
+            elements.append(html.H5("Recomendações"))
+            elements.append(html.Ul([html.Li(r) for r in recs]))
+
+        # Severidade
+        severity = result.get("severity", "unknown")
+        badge_color = {"critical": "red", "high": "orange", "moderate": "goldenrod", "low": "green", "normal": "green"}.get(severity, "gray")
+        elements.append(html.Div(
+            f"Severidade: {severity.upper()} | Confiança: {result.get('confidence', '?')}",
+            style={"fontWeight": "bold", "color": badge_color, "marginTop": "10px"},
+        ))
+
+        return elements
+    except Exception as e:
+        return html.P(f"Erro na interpretação: {e}")
+
+
+# ---------------------------------------------------------------------------
+# Callbacks da aba de análise (original)
+# ---------------------------------------------------------------------------
 
 @app.callback(
     Output("overlay","figure"),

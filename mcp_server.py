@@ -1,9 +1,11 @@
 """
-Skeleton MCP server for ECGiga tools.
+Servidor MCP do ECGiga — API para ferramentas de análise de ECG.
 
-This FastAPI application provides a minimal prototype of the MCP
-server described in the project instructions.  It exposes three
-placeholder tools — `quiz_validate`, `analyze_intervals` and
+Fornece endpoints para validação de quiz, análise de intervalos,
+processamento de imagens de ECG, interpretação com IA offline,
+quiz adaptativo e verificação de saúde do servidor.
+Integra os módulos de patologia, processamento de sinal e IA.
+Anteriormente: skeleton MCP server. Agora com endpoints reais. — `quiz_validate`, `analyze_intervals` and
 `ecg_image_process` — and an SSE endpoint at `/sse`.  All tool
 endpoints currently return a stubbed response indicating that the
 feature is not yet implemented.  The SSE endpoint emits a single
@@ -17,17 +19,33 @@ as the project progresses.
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import StreamingResponse, JSONResponse
 from pydantic import BaseModel, Field
-from typing import AsyncGenerator, Dict, List, Any
+from typing import AsyncGenerator, Dict, List, Any, Optional
 import json
+import logging
+import time
 
-# Additional imports for tool implementations
+# Imports adicionais para implementação das ferramentas
 import os
 import math
 import requests
 import jsonschema
 from jsonschema import ValidationError
 
-app = FastAPI(title="ECGiga MCP Server", version="0.1.0")
+# Configuração de logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+)
+logger = logging.getLogger("ecgiga.mcp")
+
+app = FastAPI(
+    title="ECGiga MCP Server",
+    version="0.5.0",
+    description="Servidor de ferramentas MCP para análise de ECG educacional",
+)
+
+# Tempo de início para health check
+_START_TIME = time.time()
 
 
 def sse_event(event: str, data: Any) -> str:
@@ -425,3 +443,218 @@ async def catalog() -> JSONResponse:
         ),
     ]
     return JSONResponse(content={"tools": [json.loads(tool.model_dump_json()) for tool in tools]})
+
+
+# ---------------------------------------------------------------------------
+# Endpoint de saúde (health check)
+# ---------------------------------------------------------------------------
+
+@app.get("/health")
+async def health_check() -> JSONResponse:
+    """Verificação de saúde do servidor.
+
+    Retorna status OK com uptime e versão. Utilizado pelo Docker
+    HEALTHCHECK e por sistemas de monitorização.
+    """
+    uptime = time.time() - _START_TIME
+    return JSONResponse(content={
+        "status": "ok",
+        "version": "0.5.0",
+        "uptime_seconds": round(uptime, 1),
+        "modules": {
+            "pathology": _check_module("pathology"),
+            "signal_processing": _check_module("signal_processing"),
+            "ai": _check_module("ai"),
+            "quiz": _check_module("quiz"),
+            "education": _check_module("education"),
+        },
+    })
+
+
+def _check_module(name: str) -> str:
+    """Verifica se um módulo está disponível."""
+    try:
+        __import__(name)
+        return "disponível"
+    except ImportError:
+        return "indisponível"
+
+
+# ---------------------------------------------------------------------------
+# Interpretação de ECG com IA offline
+# ---------------------------------------------------------------------------
+
+class ECGInterpretInput(BaseModel):
+    """Entrada para interpretação de ECG."""
+    intervals: Dict[str, float] = Field(
+        ..., description="Intervalos medidos: PR_ms, QRS_ms, QT_ms, QTc_B, RR_s"
+    )
+    axis_deg: Optional[float] = Field(None, description="Eixo frontal em graus")
+    axis_label: Optional[str] = Field(None, description="Label do eixo (normal, esquerda, direita)")
+    flags: List[str] = Field(default_factory=list, description="Flags clínicas")
+    st_changes: Optional[Dict[str, str]] = Field(None, description="Alterações de ST por derivação")
+    patient_age: Optional[int] = Field(None, description="Idade do paciente")
+    patient_sex: Optional[str] = Field(None, description="Sexo: M ou F")
+
+
+class ECGInterpretOutput(BaseModel):
+    """Saída da interpretação de ECG."""
+    interpretation: str
+    differentials: List[str]
+    recommendations: List[str]
+    severity: str
+    confidence: str
+    pathology_findings: Dict[str, Any] = Field(default_factory=dict)
+
+
+@app.post("/ecg_interpret", response_model=ECGInterpretOutput)
+async def ecg_interpret(data: ECGInterpretInput) -> ECGInterpretOutput:
+    """Interpreta um ECG usando regras offline e detecção de patologias.
+
+    Combina o módulo de regras offline (ai.offline_rules) com os
+    novos módulos de detecção de patologias para uma interpretação
+    abrangente.
+    """
+    logger.info("Requisição de interpretação recebida")
+
+    # Montar report dict no formato interno
+    report = {
+        "intervals_refined": {"median": data.intervals},
+        "axis": {"angle_deg": data.axis_deg, "label": data.axis_label or ""},
+        "flags": data.flags,
+    }
+    if data.st_changes:
+        report["st_changes"] = data.st_changes
+
+    # Interpretação base com regras offline
+    try:
+        from ai.offline_rules import interpret_report
+        result = interpret_report(report)
+    except Exception as e:
+        logger.error(f"Erro na interpretação offline: {e}")
+        result = {
+            "interpretation": "Erro na interpretação",
+            "differentials": [],
+            "recommendations": ["Repetir análise"],
+            "severity": "unknown",
+            "confidence": "baixa",
+        }
+
+    # Detecção de patologias adicionais
+    pathology_findings: Dict[str, Any] = {}
+
+    try:
+        from pathology.arrhythmia import detect_rhythm_irregularity
+        rr_s = data.intervals.get("RR_s")
+        if rr_s and rr_s > 0:
+            # Simular série RR a partir do RR médio para análise básica
+            rr_series = [rr_s] * 10
+            rhythm = detect_rhythm_irregularity(rr_series)
+            pathology_findings["rhythm"] = {
+                "pattern": rhythm["pattern"],
+                "details": rhythm["details"],
+            }
+    except ImportError:
+        pass
+    except Exception as e:
+        logger.warning(f"Erro na análise de ritmo: {e}")
+
+    try:
+        from pathology.electrolyte import detect_hyperkalemia_pattern
+        hyper_k = detect_hyperkalemia_pattern(report)
+        if hyper_k["detected"]:
+            pathology_findings["hyperkalemia"] = {
+                "stage": hyper_k["stage"],
+                "findings": hyper_k["findings"],
+            }
+            result["differentials"].extend(hyper_k.get("recommendations", []))
+    except ImportError:
+        pass
+    except Exception as e:
+        logger.warning(f"Erro na detecção de hipercalemia: {e}")
+
+    # NSTEMI se ST changes disponíveis
+    if data.st_changes:
+        try:
+            from pathology.ischemia import detect_nstemi_pattern
+            nstemi = detect_nstemi_pattern(data.st_changes)
+            if nstemi["detected"]:
+                pathology_findings["nstemi"] = {
+                    "territory": nstemi["territory"],
+                    "risk": nstemi["risk_assessment"],
+                    "criteria": nstemi["criteria_met"],
+                }
+                result["differentials"].extend(nstemi["criteria_met"])
+        except ImportError:
+            pass
+        except Exception as e:
+            logger.warning(f"Erro na detecção de NSTEMI: {e}")
+
+    # Limiares ajustados por demografia
+    if data.patient_age or data.patient_sex:
+        try:
+            from pathology.thresholds import get_adjusted_thresholds
+            thresholds = get_adjusted_thresholds(data.patient_age, data.patient_sex)
+            pathology_findings["adjusted_thresholds"] = {
+                "age_group": thresholds["age_group"],
+                "hr_range": thresholds["hr_range"],
+                "qtc_upper_ms": thresholds["qtc_upper_ms"],
+            }
+        except ImportError:
+            pass
+        except Exception as e:
+            logger.warning(f"Erro nos limiares ajustados: {e}")
+
+    return ECGInterpretOutput(
+        interpretation=result.get("interpretation", ""),
+        differentials=result.get("differentials", []),
+        recommendations=result.get("recommendations", []),
+        severity=result.get("severity", "unknown"),
+        confidence=result.get("confidence", "moderada"),
+        pathology_findings=pathology_findings,
+    )
+
+
+# ---------------------------------------------------------------------------
+# Quiz adaptativo
+# ---------------------------------------------------------------------------
+
+class QuizAdaptiveInput(BaseModel):
+    """Entrada para quiz adaptativo."""
+    report: Optional[Dict[str, Any]] = Field(
+        None, description="Report de ECG para personalizar quiz"
+    )
+    n_questions: int = Field(6, description="Número de questões", ge=1, le=50)
+    seed: Optional[int] = Field(None, description="Semente para reprodutibilidade")
+
+
+class QuizAdaptiveOutput(BaseModel):
+    """Saída do quiz adaptativo."""
+    questions: List[Dict[str, Any]]
+    tags: List[str]
+
+
+@app.post("/quiz_adaptive", response_model=QuizAdaptiveOutput)
+async def quiz_adaptive(data: QuizAdaptiveInput) -> QuizAdaptiveOutput:
+    """Gera um quiz adaptativo baseado no report de ECG.
+
+    Utiliza o motor de quiz para selecionar questões relevantes
+    aos achados do ECG analisado.
+    """
+    logger.info(f"Quiz adaptativo: {data.n_questions} questões")
+
+    try:
+        from quiz.engine import build_adaptive_quiz
+        report = data.report or {}
+        result = build_adaptive_quiz(
+            report,
+            n_questions=data.n_questions,
+            seed=data.seed or 42,
+        )
+        return QuizAdaptiveOutput(
+            questions=result.get("questions", []),
+            tags=result.get("tags", []),
+        )
+    except Exception as e:
+        logger.error(f"Erro no quiz adaptativo: {e}")
+        return QuizAdaptiveOutput(questions=[], tags=[])
