@@ -1,12 +1,12 @@
-"""Sex- and age-adjusted thresholds for ECG measurements.
+"""Limiares ajustados por sexo e idade para medições de ECG.
 
-Provides demographic-adjusted reference ranges for:
-- STEMI criteria (different ST elevation thresholds by sex, age, lead)
-- QTc intervals (different upper limits by sex)
-- Heart rate ranges (pediatric vs adult vs elderly)
-- QRS duration limits (age-adjusted)
+Fornece faixas de referência ajustadas por dados demográficos para:
+- Critérios de STEMI (limiares de supradesnivelamento de ST por sexo, idade, derivação)
+- Intervalos QTc (limites superiores diferentes por sexo)
+- Faixas de frequência cardíaca (pediátrico vs adulto vs idoso)
+- Limites de duração do QRS (ajustados por idade)
 
-References:
+Referências:
 - Thygesen et al., "Fourth Universal Definition of Myocardial Infarction", JACC, 2018.
 - Goldenberg et al., "QT interval: how to measure it and what is 'normal'",
   J Cardiovasc Electrophysiol, 2006.
@@ -18,29 +18,29 @@ from __future__ import annotations
 from typing import Any
 
 
-# STEMI ST-elevation criteria by lead group, sex, and age
-# Values in millivolts (mm on standard calibration = 0.1 mV)
-# From Fourth Universal Definition of MI (2018)
+# Critérios de supradesnivelamento de ST para STEMI por grupo de derivações, sexo e idade
+# Valores em milivolts (mm na calibração padrão = 0,1 mV)
+# Da Quarta Definição Universal de IAM (2018)
 _STEMI_CRITERIA: dict[str, dict[str, float]] = {
-    # V2-V3 leads (anterior) — most variable by demographics
-    "V2_V3_male_ge40": 0.2,      # Men ≥40: ≥2mm (0.2 mV)
-    "V2_V3_male_lt40": 0.25,     # Men <40: ≥2.5mm (0.25 mV)
-    "V2_V3_female": 0.15,        # Women: ≥1.5mm (0.15 mV)
-    # All other leads (same for all demographics)
-    "other_leads": 0.1,           # ≥1mm (0.1 mV)
-    # Posterior leads (V7-V9)
-    "posterior": 0.05,            # ≥0.5mm (0.05 mV)
-    # Right-sided leads (V3R-V4R)
-    "right_sided": 0.05,         # ≥0.5mm for RV infarction
+    # Derivações V2-V3 (anterior) — mais variável por dados demográficos
+    "V2_V3_male_ge40": 0.2,      # Homens >= 40: >= 2mm (0,2 mV)
+    "V2_V3_male_lt40": 0.25,     # Homens < 40: >= 2,5mm (0,25 mV)
+    "V2_V3_female": 0.15,        # Mulheres: >= 1,5mm (0,15 mV)
+    # Todas as outras derivações (igual para todos os dados demográficos)
+    "other_leads": 0.1,           # >= 1mm (0,1 mV)
+    # Derivações posteriores (V7-V9)
+    "posterior": 0.05,            # >= 0,5mm (0,05 mV)
+    # Derivações do lado direito (V3R-V4R)
+    "right_sided": 0.05,         # >= 0,5mm para infarto do VD
 }
 
-# QTc normal ranges by sex
-# From AHA/ACC/HRS guidelines
+# Faixas normais de QTc por sexo
+# Das diretrizes AHA/ACC/HRS
 _QTC_THRESHOLDS: dict[str, dict[str, float]] = {
     "male": {
         "normal_upper": 450,     # ms
         "borderline": 470,       # ms
-        "prolonged": 500,        # ms (high risk TdP)
+        "prolonged": 500,        # ms (alto risco de TdP)
         "short_lower": 340,      # ms
         "short_concerning": 320, # ms
     },
@@ -60,29 +60,29 @@ _QTC_THRESHOLDS: dict[str, dict[str, float]] = {
     },
 }
 
-# Heart rate ranges by age group
+# Faixas de frequência cardíaca por grupo etário
 _HR_RANGES: dict[str, dict[str, tuple[int, int]]] = {
-    "neonate": {"normal": (100, 180), "age_range": "0-28 days"},
-    "infant": {"normal": (100, 160), "age_range": "1-12 months"},
-    "toddler": {"normal": (90, 150), "age_range": "1-3 years"},
-    "child": {"normal": (70, 120), "age_range": "4-11 years"},
-    "adolescent": {"normal": (60, 100), "age_range": "12-17 years"},
-    "adult": {"normal": (60, 100), "age_range": "18-64 years"},
-    "elderly": {"normal": (55, 100), "age_range": "≥65 years"},
-    "athlete": {"normal": (40, 100), "age_range": "trained athletes"},
+    "neonate": {"normal": (100, 180), "age_range": "0-28 dias"},
+    "infant": {"normal": (100, 160), "age_range": "1-12 meses"},
+    "toddler": {"normal": (90, 150), "age_range": "1-3 anos"},
+    "child": {"normal": (70, 120), "age_range": "4-11 anos"},
+    "adolescent": {"normal": (60, 100), "age_range": "12-17 anos"},
+    "adult": {"normal": (60, 100), "age_range": "18-64 anos"},
+    "elderly": {"normal": (55, 100), "age_range": ">=65 anos"},
+    "athlete": {"normal": (40, 100), "age_range": "atletas treinados"},
 }
 
-# PR interval ranges by age
+# Faixas de intervalo PR por idade
 _PR_RANGES: dict[str, tuple[int, int]] = {
     "neonate": (80, 160),
     "infant": (80, 160),
     "child": (100, 180),
     "adolescent": (120, 200),
     "adult": (120, 200),
-    "elderly": (120, 220),  # Slightly longer acceptable in elderly
+    "elderly": (120, 220),  # Ligeiramente mais longo aceitável em idosos
 }
 
-# QRS duration limits by age
+# Limites de duração do QRS por idade
 _QRS_LIMITS: dict[str, int] = {
     "neonate": 80,
     "infant": 80,
@@ -94,7 +94,7 @@ _QRS_LIMITS: dict[str, int] = {
 
 
 def _age_to_group(age: int | None) -> str:
-    """Convert age in years to age group."""
+    """Converte idade em anos para grupo etário."""
     if age is None:
         return "adult"
     if age < 0:
@@ -119,25 +119,25 @@ def get_adjusted_thresholds(
     sex: str | None = None,
     is_athlete: bool = False,
 ) -> dict[str, Any]:
-    """Get comprehensive age/sex-adjusted ECG thresholds.
+    """Obtém limiares de ECG abrangentes ajustados por idade/sexo.
 
-    Parameters
+    Parâmetros
     ----------
-    age : int, optional
-        Patient age in years.
-    sex : str, optional
-        'M', 'F', or None.
+    age : int, opcional
+        Idade do paciente em anos.
+    sex : str, opcional
+        'M', 'F', ou None.
     is_athlete : bool
-        Whether patient is a trained athlete.
+        Se o paciente é atleta treinado.
 
-    Returns
+    Retorna
     -------
     dict
         - hr_range: tuple[int, int]
         - pr_range: tuple[int, int]
         - qrs_upper: int (ms)
         - qtc_upper: float (ms)
-        - qtc_prolonged: float (ms, high-risk threshold)
+        - qtc_prolonged: float (ms, limiar de alto risco)
         - qtc_short: float (ms)
         - stemi_v2v3: float (mV)
         - stemi_other: float (mV)
@@ -147,25 +147,25 @@ def get_adjusted_thresholds(
     age_group = _age_to_group(age)
     sex_key = "male" if sex == "M" else "female" if sex == "F" else "unknown"
 
-    # Heart rate
+    # Frequência cardíaca
     if is_athlete:
         hr_range = _HR_RANGES["athlete"]["normal"]
     else:
         hr_range = _HR_RANGES.get(age_group, _HR_RANGES["adult"])["normal"]
 
-    # PR interval
+    # Intervalo PR
     pr_range = _PR_RANGES.get(age_group, _PR_RANGES["adult"])
 
-    # QRS upper limit
+    # Limite superior do QRS
     qrs_upper = _QRS_LIMITS.get(age_group, _QRS_LIMITS["adult"])
 
-    # QTc thresholds
+    # Limiares de QTc
     qtc_info = _QTC_THRESHOLDS.get(sex_key, _QTC_THRESHOLDS["unknown"])
     qtc_upper = qtc_info["normal_upper"]
     qtc_prolonged = qtc_info["prolonged"]
     qtc_short = qtc_info["short_lower"]
 
-    # STEMI V2-V3 threshold
+    # Limiar de STEMI V2-V3
     if sex == "M":
         if age is not None and age < 40:
             stemi_v2v3 = _STEMI_CRITERIA["V2_V3_male_lt40"]
@@ -174,7 +174,7 @@ def get_adjusted_thresholds(
     elif sex == "F":
         stemi_v2v3 = _STEMI_CRITERIA["V2_V3_female"]
     else:
-        stemi_v2v3 = _STEMI_CRITERIA["V2_V3_male_ge40"]  # Default conservative
+        stemi_v2v3 = _STEMI_CRITERIA["V2_V3_male_ge40"]  # Padrão conservador
 
     stemi_other = _STEMI_CRITERIA["other_leads"]
 
@@ -197,25 +197,25 @@ def get_stemi_criteria(
     sex: str | None = None,
     age: int | None = None,
 ) -> float:
-    """Get STEMI ST-elevation threshold for a specific lead.
+    """Obtém o limiar de supradesnivelamento de ST para STEMI de uma derivação específica.
 
-    Parameters
+    Parâmetros
     ----------
     lead : str
-        ECG lead name (e.g., 'V2', 'II', 'V7').
-    sex : str, optional
-        'M' or 'F'.
-    age : int, optional
-        Patient age in years.
+        Nome da derivação de ECG (ex.: 'V2', 'II', 'V7').
+    sex : str, opcional
+        'M' ou 'F'.
+    age : int, opcional
+        Idade do paciente em anos.
 
-    Returns
+    Retorna
     -------
     float
-        Minimum ST elevation in millivolts to meet STEMI criteria.
+        Supradesnivelamento mínimo de ST em milivolts para preencher critérios de STEMI.
     """
     lead_upper = lead.upper()
 
-    # V2-V3: sex/age dependent
+    # V2-V3: dependente de sexo/idade
     if lead_upper in ("V2", "V3"):
         if sex == "M":
             if age is not None and age < 40:
@@ -226,29 +226,29 @@ def get_stemi_criteria(
         else:
             return _STEMI_CRITERIA["V2_V3_male_ge40"]
 
-    # Posterior leads
+    # Derivações posteriores
     if lead_upper in ("V7", "V8", "V9"):
         return _STEMI_CRITERIA["posterior"]
 
-    # Right-sided leads
+    # Derivações do lado direito
     if lead_upper in ("V3R", "V4R", "V5R", "V6R"):
         return _STEMI_CRITERIA["right_sided"]
 
-    # All other standard leads
+    # Todas as outras derivações padrão
     return _STEMI_CRITERIA["other_leads"]
 
 
 def get_qtc_thresholds(
     sex: str | None = None,
 ) -> dict[str, float]:
-    """Get QTc threshold values adjusted by sex.
+    """Obtém valores de limiares de QTc ajustados por sexo.
 
-    Parameters
+    Parâmetros
     ----------
-    sex : str, optional
-        'M' or 'F'.
+    sex : str, opcional
+        'M' ou 'F'.
 
-    Returns
+    Retorna
     -------
     dict
         - normal_upper: float (ms)
@@ -268,22 +268,22 @@ def evaluate_measurement(
     sex: str | None = None,
     is_athlete: bool = False,
 ) -> dict[str, Any]:
-    """Evaluate a single ECG measurement against adjusted thresholds.
+    """Avalia uma medição de ECG individual contra limiares ajustados.
 
-    Parameters
+    Parâmetros
     ----------
     measurement : str
         'heart_rate', 'pr_interval', 'qrs_duration', 'qtc', 'st_elevation'.
     value : float
-        Measured value (bpm, ms, or mV depending on measurement).
-    age : int, optional
-        Patient age in years.
-    sex : str, optional
-        'M' or 'F'.
+        Valor medido (bpm, ms, ou mV dependendo da medição).
+    age : int, opcional
+        Idade do paciente em anos.
+    sex : str, opcional
+        'M' ou 'F'.
     is_athlete : bool
-        Whether patient is a trained athlete.
+        Se o paciente é atleta treinado.
 
-    Returns
+    Retorna
     -------
     dict
         - status: str ('normal', 'low', 'high', 'critical')
