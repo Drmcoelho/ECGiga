@@ -66,11 +66,12 @@ def _snr_power_ratio(signal: NDArray, fs: float) -> float:
 
     # Banda de sinal: 5-40 Hz
     signal_mask = (freqs >= 5) & (freqs <= 40)
-    signal_power = np.trapz(psd[signal_mask], freqs[signal_mask])
+    _trapz = getattr(np, "trapezoid", getattr(np, "trapz", None))
+    signal_power = _trapz(psd[signal_mask], freqs[signal_mask])
 
     # Banda de ruído: 60 Hz até Nyquist (ou 50-Nyquist dependendo da rede elétrica)
     noise_mask = freqs >= 60
-    noise_power = np.trapz(psd[noise_mask], freqs[noise_mask]) if noise_mask.any() else 1e-10
+    noise_power = _trapz(psd[noise_mask], freqs[noise_mask]) if noise_mask.any() else 1e-10
 
     if noise_power <= 0:
         noise_power = 1e-10
@@ -410,8 +411,9 @@ def _check_baseline_wander(signal: NDArray, fs: float) -> bool:
     bw_mask = freqs < 1.0
     total_mask = freqs < 50.0
 
-    bw_power = np.trapz(psd[bw_mask], freqs[bw_mask]) if bw_mask.any() else 0
-    total_power = np.trapz(psd[total_mask], freqs[total_mask]) if total_mask.any() else 1e-10
+    _trapz = getattr(np, "trapezoid", getattr(np, "trapz", None))
+    bw_power = _trapz(psd[bw_mask], freqs[bw_mask]) if bw_mask.any() else 0
+    total_power = _trapz(psd[total_mask], freqs[total_mask]) if total_mask.any() else 1e-10
 
     # Se >30% da potência da banda diagnóstica está abaixo de 1 Hz, provável oscilação de linha de base
     return (bw_power / max(total_power, 1e-10)) > 0.3

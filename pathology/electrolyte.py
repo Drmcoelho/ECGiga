@@ -1,12 +1,12 @@
-"""Electrolyte disturbance detection from ECG patterns.
+"""Detecção de distúrbios eletrolíticos a partir de padrões de ECG.
 
-Detects ECG manifestations of:
-- Hyperkalemia: peaked T waves, PR prolongation, QRS widening, sine wave
-- Hypokalemia: ST depression, T flattening, U waves, QT prolongation
-- Hypercalcemia: shortened QT, Osborn waves (hypothermia overlap)
-- Hypocalcemia: prolonged QT (primarily ST segment), T wave changes
+Detecta manifestações eletrocardiográficas de:
+- Hipercalemia: ondas T apiculadas, prolongamento de PR, alargamento de QRS, onda senoidal
+- Hipocalemia: infradesnivelamento de ST, achatamento de T, ondas U, prolongamento de QT
+- Hipercalcemia: QT encurtado, ondas de Osborn (sobreposição com hipotermia)
+- Hipocalcemia: QT prolongado (principalmente segmento ST), alterações de onda T
 
-References:
+Referências:
 - Diercks et al., "Electrocardiographic manifestations: electrolyte abnormalities",
   J Emerg Med, 2004.
 - Slovis & Jenkins, "ABC of clinical electrocardiography: Conditions not
@@ -18,7 +18,7 @@ from __future__ import annotations
 from typing import Any
 
 
-# Hyperkalemia ECG progression stages
+# Estágios de progressão eletrocardiográfica da hipercalemia
 _HYPERKALEMIA_STAGES = {
     "mild": {
         "k_range": "5.5-6.5 mEq/L",
@@ -62,21 +62,21 @@ def detect_hyperkalemia_pattern(
     t_wave_amplitude: dict[str, float] | None = None,
     t_wave_peaked: list[str] | None = None,
 ) -> dict[str, Any]:
-    """Detect ECG pattern of hyperkalemia.
+    """Detecta padrão eletrocardiográfico de hipercalemia.
 
-    Uses interval measurements and morphological features to estimate
-    the stage of hyperkalemia based on ECG progression.
+    Utiliza medições de intervalos e características morfológicas para estimar
+    o estágio da hipercalemia com base na progressão eletrocardiográfica.
 
-    Parameters
+    Parâmetros
     ----------
     report : dict
-        ECG report with intervals, axis, flags.
-    t_wave_amplitude : dict, optional
-        T-wave amplitude per lead in mV (e.g., {"V2": 1.2, "V3": 1.4}).
-    t_wave_peaked : list[str], optional
-        List of leads showing peaked T waves.
+        Laudo de ECG com intervalos, eixo, flags.
+    t_wave_amplitude : dict, opcional
+        Amplitude da onda T por derivação em mV (ex.: {"V2": 1.2, "V3": 1.4}).
+    t_wave_peaked : list[str], opcional
+        Lista de derivações com ondas T apiculadas.
 
-    Returns
+    Retorna
     -------
     dict
         - detected: bool
@@ -98,7 +98,7 @@ def detect_hyperkalemia_pattern(
     rr_s = iv.get("RR_s")
     hr = 60.0 / rr_s if rr_s and rr_s > 0 else None
 
-    # Stage 1: Peaked T waves (mild hyperkalemia)
+    # Estágio 1: Ondas T apiculadas (hipercalemia leve)
     peaked_count = 0
     if t_wave_peaked:
         peaked_count = len(t_wave_peaked)
@@ -111,12 +111,12 @@ def detect_hyperkalemia_pattern(
             findings.append(f"T de alta amplitude em {', '.join(tall_t_leads)}")
             score += 0.2
 
-    # Check flags for peaked T
+    # Verifica flags de T apiculada
     if any("t apiculada" in f or "peaked t" in f or "t pontia" in f for f in flags):
         findings.append("Flag: T apiculadas detectadas")
         score += 0.2
 
-    # Stage 2: PR prolongation + QRS widening (moderate)
+    # Estágio 2: Prolongamento de PR + alargamento de QRS (moderado)
     if pr_ms and pr_ms > 200:
         findings.append(f"PR prolongado ({pr_ms:.0f} ms)")
         score += 0.15
@@ -128,27 +128,27 @@ def detect_hyperkalemia_pattern(
             findings.append(f"QRS muito alargado ({qrs_ms:.0f} ms) — padrão de hipercalemia grave")
             score += 0.3
 
-    # Stage 3: P wave absence + very wide QRS (severe)
+    # Estágio 3: Ausência de onda P + QRS muito largo (grave)
     if any("ausência de p" in f or "sem onda p" in f for f in flags):
         findings.append("Ausência de onda P")
         score += 0.3
 
-    # Short QTc (early hyperkalemia can shorten QT)
+    # QTc curto (hipercalemia precoce pode encurtar QT)
     if qtc and qtc < 340:
         findings.append(f"QTc curto ({qtc:.0f} ms) — possível hipercalemia precoce")
         score += 0.1
 
-    # Sine wave pattern in flags
+    # Padrão de onda senoidal nas flags
     if any("onda senoidal" in f or "sine wave" in f for f in flags):
         findings.append("Padrão de onda senoidal — hipercalemia crítica!")
         score += 0.5
 
-    # Combined: PR + QRS + peaked T = stronger signal
+    # Combinado: PR + QRS + T apiculada = sinal mais forte
     if pr_ms and pr_ms > 200 and qrs_ms and qrs_ms > 120 and peaked_count >= 1:
         score += 0.2
         findings.append("Tríade: PR↑ + QRS↑ + T apiculadas — altamente sugestivo")
 
-    # Determine stage
+    # Determina estágio
     score = min(1.0, score)
     if score > 0.7:
         stage = "severe" if qrs_ms and qrs_ms > 160 else "moderate"
@@ -202,27 +202,27 @@ def detect_hypokalemia_pattern(
     t_wave_flat: list[str] | None = None,
     st_depression_leads: list[str] | None = None,
 ) -> dict[str, Any]:
-    """Detect ECG pattern of hypokalemia.
+    """Detecta padrão eletrocardiográfico de hipocalemia.
 
-    Hypokalemia ECG progression:
-    1. T wave flattening
-    2. ST depression
-    3. U wave prominence
-    4. T-U fusion (apparent QT prolongation)
-    5. Severe: P wave prominence, QRS widening
+    Progressão eletrocardiográfica da hipocalemia:
+    1. Achatamento de onda T
+    2. Infradesnivelamento de ST
+    3. Proeminência de onda U
+    4. Fusão T-U (aparente prolongamento de QT)
+    5. Grave: proeminência de onda P, alargamento de QRS
 
-    Parameters
+    Parâmetros
     ----------
     report : dict
-        ECG report.
-    u_wave_present : list[str], optional
-        Leads showing U waves.
-    t_wave_flat : list[str], optional
-        Leads with flattened T waves.
-    st_depression_leads : list[str], optional
-        Leads with ST depression.
+        Laudo de ECG.
+    u_wave_present : list[str], opcional
+        Derivações com ondas U.
+    t_wave_flat : list[str], opcional
+        Derivações com ondas T achatadas.
+    st_depression_leads : list[str], opcional
+        Derivações com infradesnivelamento de ST.
 
-    Returns
+    Retorna
     -------
     dict
         - detected: bool
@@ -240,7 +240,7 @@ def detect_hypokalemia_pattern(
 
     qtc = iv.get("QTc_B")
 
-    # U waves (hallmark of hypokalemia)
+    # Ondas U (marca registrada da hipocalemia)
     if u_wave_present:
         findings.append(f"Onda U presente em {', '.join(u_wave_present)}")
         score += 0.35
@@ -248,17 +248,17 @@ def detect_hypokalemia_pattern(
         findings.append("Flag: onda U detectada")
         score += 0.2
 
-    # T wave flattening
+    # Achatamento de onda T
     if t_wave_flat:
         findings.append(f"T achatada em {', '.join(t_wave_flat)}")
         score += 0.2
 
-    # ST depression
+    # Infradesnivelamento de ST
     if st_depression_leads:
         findings.append(f"Infra de ST em {', '.join(st_depression_leads)}")
         score += 0.15
 
-    # QTc prolongation (from T-U fusion)
+    # Prolongamento de QTc (por fusão T-U)
     if qtc and qtc > 480:
         findings.append(f"QTc prolongado ({qtc:.0f} ms) — possível fusão T-U")
         score += 0.15
@@ -266,7 +266,7 @@ def detect_hypokalemia_pattern(
         findings.append(f"QTc limítrofe ({qtc:.0f} ms)")
         score += 0.05
 
-    # Flag-based detection
+    # Detecção baseada em flags
     if any("hipocalemia" in f or "hypokalemia" in f for f in flags):
         score += 0.3
     if any("t achatada" in f or "flat t" in f for f in flags):
@@ -277,7 +277,7 @@ def detect_hypokalemia_pattern(
 
     score = min(1.0, score)
 
-    # Severity estimation
+    # Estimativa de severidade
     if score > 0.6:
         severity = "severe"
         k_range = "< 2.5 mEq/L"
@@ -312,20 +312,20 @@ def detect_calcium_abnormality(
     report: dict,
     osborn_waves: bool = False,
 ) -> dict[str, Any]:
-    """Detect ECG patterns of calcium abnormalities.
+    """Detecta padrões eletrocardiográficos de alterações de cálcio.
 
-    - Hypercalcemia: shortened QTc (primarily short ST segment)
-    - Hypocalcemia: prolonged QTc (primarily prolonged ST segment)
-    - Osborn (J) waves suggest hypothermia but overlap with hypercalcemia
+    - Hipercalcemia: QTc encurtado (principalmente segmento ST curto)
+    - Hipocalcemia: QTc prolongado (principalmente segmento ST prolongado)
+    - Ondas de Osborn (J) sugerem hipotermia mas sobrepõem-se à hipercalcemia
 
-    Parameters
+    Parâmetros
     ----------
     report : dict
-        ECG report.
+        Laudo de ECG.
     osborn_waves : bool
-        Whether Osborn (J) waves are present.
+        Se ondas de Osborn (J) estão presentes.
 
-    Returns
+    Retorna
     -------
     dict
         - detected: bool
@@ -342,7 +342,7 @@ def detect_calcium_abnormality(
     qtc = iv.get("QTc_B")
     qt_ms = iv.get("QT_ms")
 
-    # Hypercalcemia: short QTc
+    # Hipercalcemia: QTc curto
     if qtc and qtc < 340:
         findings.append(f"QTc encurtado ({qtc:.0f} ms) — sugere hipercalcemia")
         if osborn_waves:
@@ -355,12 +355,12 @@ def detect_calcium_abnormality(
             "details": f"QTc curto ({qtc:.0f} ms) sugestivo de hipercalcemia. Dosar cálcio sérico.",
         }
 
-    # Hypocalcemia: prolonged QTc (primarily from prolonged ST)
+    # Hipocalcemia: QTc prolongado (principalmente por prolongamento do ST)
     if qtc and qtc > 480:
-        # Try to distinguish from other causes of long QT
+        # Tenta distinguir de outras causas de QT longo
         qrs_ms = iv.get("QRS_ms", 0)
-        # Hypocalcemia prolongs ST segment, not T wave
-        # If QRS is normal but QT very long, more likely hypocalcemia
+        # Hipocalcemia prolonga o segmento ST, não a onda T
+        # Se QRS normal mas QT muito longo, mais provável hipocalcemia
         if qrs_ms and qrs_ms < 120:
             findings.append(f"QTc prolongado ({qtc:.0f} ms) com QRS normal — possível hipocalcemia")
             return {

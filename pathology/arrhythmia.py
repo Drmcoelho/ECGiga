@@ -1,16 +1,16 @@
-"""Arrhythmia detection algorithms for ECG analysis.
+"""Algoritmos de detecção de arritmias para análise de ECG.
 
-Implements detection of:
-- Atrial fibrillation (AF) via RR irregularity and P-wave absence
-- Atrial flutter via characteristic rate and F-wave detection
-- Generic rhythm irregularity analysis
-- Wide complex tachycardia (WCT) differentiation: VT vs SVT with aberrancy
+Implementa detecção de:
+- Fibrilação atrial (FA) via irregularidade RR e ausência de onda P
+- Flutter atrial via frequência característica e detecção de ondas F
+- Análise genérica de irregularidade de ritmo
+- Diferenciação de taquicardia de complexo largo (TCL): TV vs TSV com aberrância
 
-References:
+Referências:
 - Dash et al., "Automatic real-time detection of atrial fibrillation",
   Ann Biomed Eng, 2009.
-- Brugada criteria for VT: Brugada et al., Circulation, 1991.
-- Vereckei algorithm for WCT: Vereckei et al., Heart Rhythm, 2008.
+- Critérios de Brugada para TV: Brugada et al., Circulation, 1991.
+- Algoritmo de Vereckei para TCL: Vereckei et al., Heart Rhythm, 2008.
 """
 
 from __future__ import annotations
@@ -26,28 +26,28 @@ def detect_atrial_fibrillation(
     p_wave_present: list[bool] | None = None,
     fs: float | None = None,
 ) -> dict[str, Any]:
-    """Detect atrial fibrillation from RR interval series.
+    """Detecta fibrilação atrial a partir de série de intervalos RR.
 
-    Uses three complementary criteria:
-    1. RR irregularity (coefficient of variation of successive differences)
-    2. Absence of repeating RR patterns (turning point ratio)
-    3. P-wave absence (if provided)
+    Utiliza três critérios complementares:
+    1. Irregularidade RR (coeficiente de variação de diferenças sucessivas)
+    2. Ausência de padrões RR repetitivos (razão de pontos de inflexão)
+    3. Ausência de onda P (se fornecida)
 
-    Parameters
+    Parâmetros
     ----------
-    rr_intervals : list[float] or ndarray
-        RR intervals in seconds.
-    p_wave_present : list[bool], optional
-        Per-beat P-wave presence flags.
-    fs : float, optional
-        Sampling frequency (unused, for API consistency).
+    rr_intervals : list[float] ou ndarray
+        Intervalos RR em segundos.
+    p_wave_present : list[bool], opcional
+        Indicadores de presença de onda P por batimento.
+    fs : float, opcional
+        Frequência de amostragem (não utilizado, para consistência da API).
 
-    Returns
+    Retorna
     -------
     dict
         - detected: bool
         - confidence: float (0-1)
-        - criteria: dict with individual test results
+        - criteria: dict com resultados de testes individuais
         - classification: str ('AF', 'possible_AF', 'not_AF', 'insufficient_data')
         - details: str
     """
@@ -62,7 +62,7 @@ def detect_atrial_fibrillation(
             "details": "Necessário pelo menos 8 intervalos RR para análise de FA",
         }
 
-    # Filter out physiologically impossible RR intervals
+    # Filtra intervalos RR fisiologicamente impossíveis
     rr = rr[(rr > 0.2) & (rr < 3.0)]
     if len(rr) < 8:
         return {
@@ -76,23 +76,23 @@ def detect_atrial_fibrillation(
     criteria = {}
     scores = []
 
-    # Criterion 1: RMSSD / mean RR (coefficient of irregularity)
+    # Critério 1: RMSSD / RR médio (coeficiente de irregularidade)
     diffs = np.diff(rr)
     rmssd = np.sqrt(np.mean(diffs ** 2))
     mean_rr = np.mean(rr)
     irregularity_coeff = rmssd / mean_rr if mean_rr > 0 else 0.0
 
-    # AF typically has irregularity coefficient > 0.10
-    # Sinus rhythm typically < 0.06
+    # FA tipicamente tem coeficiente de irregularidade > 0,10
+    # Ritmo sinusal tipicamente < 0,06
     af_irreg_score = min(1.0, max(0.0, (irregularity_coeff - 0.06) / 0.08))
     criteria["irregularity_coefficient"] = round(irregularity_coeff, 4)
     criteria["irregularity_threshold"] = 0.10
     criteria["irregularity_positive"] = irregularity_coeff > 0.10
     scores.append(af_irreg_score)
 
-    # Criterion 2: Turning point ratio (TPR)
-    # In random (AF) sequences, TPR ≈ 2/3
-    # In regular (sinus) rhythm, TPR is lower
+    # Critério 2: Razão de pontos de inflexão (TPR)
+    # Em sequências aleatórias (FA), TPR ≈ 2/3
+    # Em ritmo regular (sinusal), TPR é menor
     turning_points = 0
     for i in range(1, len(rr) - 1):
         if (rr[i] > rr[i - 1] and rr[i] > rr[i + 1]) or \
@@ -100,15 +100,15 @@ def detect_atrial_fibrillation(
             turning_points += 1
     tpr = turning_points / (len(rr) - 2) if len(rr) > 2 else 0.0
 
-    # AF: TPR > 0.55 (closer to 2/3 = 0.667)
+    # FA: TPR > 0,55 (mais próximo de 2/3 = 0,667)
     tpr_score = min(1.0, max(0.0, (tpr - 0.45) / 0.20))
     criteria["turning_point_ratio"] = round(tpr, 4)
     criteria["tpr_threshold"] = 0.55
     criteria["tpr_positive"] = tpr > 0.55
     scores.append(tpr_score)
 
-    # Criterion 3: Shannon entropy of RR histogram
-    # Higher entropy = more irregular (AF)
+    # Critério 3: Entropia de Shannon do histograma RR
+    # Maior entropia = mais irregular (FA)
     n_bins = max(5, int(np.sqrt(len(rr))))
     hist, _ = np.histogram(rr, bins=n_bins)
     hist_norm = hist / hist.sum()
@@ -123,7 +123,7 @@ def detect_atrial_fibrillation(
     criteria["entropy_positive"] = norm_entropy > 0.75
     scores.append(entropy_score)
 
-    # Criterion 4: P-wave absence (if available)
+    # Critério 4: Ausência de onda P (se disponível)
     if p_wave_present is not None and len(p_wave_present) > 0:
         p_absent_frac = 1.0 - sum(p_wave_present) / len(p_wave_present)
         p_score = min(1.0, max(0.0, (p_absent_frac - 0.3) / 0.4))
@@ -131,10 +131,10 @@ def detect_atrial_fibrillation(
         criteria["p_wave_positive"] = p_absent_frac > 0.5
         scores.append(p_score)
 
-    # Combined confidence
+    # Confiança combinada
     confidence = sum(scores) / len(scores) if scores else 0.0
 
-    # Classification
+    # Classificação
     positive_criteria = sum(1 for s in scores if s > 0.5)
     if confidence > 0.7 and positive_criteria >= 2:
         classification = "AF"
@@ -170,29 +170,29 @@ def detect_atrial_flutter(
     heart_rate: float | None = None,
     p_wave_rate: float | None = None,
 ) -> dict[str, Any]:
-    """Detect atrial flutter pattern.
+    """Detecta padrão de flutter atrial.
 
-    Atrial flutter characteristics:
-    - Atrial rate ~300 bpm (range 250-350)
-    - Ventricular rate often ~150 bpm (2:1 block) or ~100 bpm (3:1) or ~75 bpm (4:1)
-    - Regular or regularly irregular RR intervals
-    - Sawtooth F-waves in inferior leads (II, III, aVF)
+    Características do flutter atrial:
+    - Frequência atrial ~300 bpm (faixa 250-350)
+    - Frequência ventricular frequentemente ~150 bpm (bloqueio 2:1) ou ~100 bpm (3:1) ou ~75 bpm (4:1)
+    - Intervalos RR regulares ou regularmente irregulares
+    - Ondas F em dente de serra nas derivações inferiores (II, III, aVF)
 
-    Parameters
+    Parâmetros
     ----------
-    rr_intervals : list[float] or ndarray
-        RR intervals in seconds.
-    heart_rate : float, optional
-        Computed heart rate in bpm. If None, derived from RR intervals.
-    p_wave_rate : float, optional
-        Detected P/F wave rate in bpm (if F-waves detected).
+    rr_intervals : list[float] ou ndarray
+        Intervalos RR em segundos.
+    heart_rate : float, opcional
+        Frequência cardíaca calculada em bpm. Se None, derivada dos intervalos RR.
+    p_wave_rate : float, opcional
+        Frequência de ondas P/F detectadas em bpm (se ondas F detectadas).
 
-    Returns
+    Retorna
     -------
     dict
         - detected: bool
         - confidence: float (0-1)
-        - likely_conduction_ratio: str (e.g., '2:1', '3:1', '4:1', 'variable')
+        - likely_conduction_ratio: str (ex.: '2:1', '3:1', '4:1', 'variable')
         - estimated_atrial_rate: float
         - details: str
     """
@@ -208,23 +208,23 @@ def detect_atrial_flutter(
             "details": "Dados insuficientes para análise de flutter",
         }
 
-    # Compute ventricular rate
+    # Calcula frequência ventricular
     if heart_rate is None:
         mean_rr = np.mean(rr)
         heart_rate = 60.0 / mean_rr if mean_rr > 0 else 0.0
 
-    # Check regularity (low CV = regular)
+    # Verifica regularidade (CV baixo = regular)
     cv = np.std(rr) / np.mean(rr) if np.mean(rr) > 0 else 1.0
 
     scores = []
 
-    # Criterion 1: Ventricular rate matches typical flutter conduction ratios
-    # Flutter atrial rate = ~300 bpm
-    atrial_rate_estimate = 300.0  # default assumption
+    # Critério 1: Frequência ventricular compatível com razões de condução típicas do flutter
+    # Frequência atrial do flutter = ~300 bpm
+    atrial_rate_estimate = 300.0  # estimativa padrão
     if p_wave_rate and 250 <= p_wave_rate <= 350:
         atrial_rate_estimate = p_wave_rate
 
-    # Check if HR matches a conduction ratio
+    # Verifica se FC corresponde a uma razão de condução
     conduction_ratios = {
         "2:1": atrial_rate_estimate / 2,  # ~150 bpm
         "3:1": atrial_rate_estimate / 3,  # ~100 bpm
@@ -239,16 +239,16 @@ def detect_atrial_flutter(
             best_match = diff
             best_ratio = ratio
 
-    # Close match to a conduction ratio = higher score
+    # Correspondência próxima com razão de condução = pontuação mais alta
     hr_score = max(0.0, 1.0 - best_match * 5)  # 0% diff = 1.0, 20% diff = 0.0
     scores.append(hr_score)
 
-    # Criterion 2: Regular RR intervals (or regularly irregular for variable block)
-    regularity_score = max(0.0, 1.0 - cv * 5)  # CV < 0.05 = very regular
+    # Critério 2: Intervalos RR regulares (ou regularmente irregulares para bloqueio variável)
+    regularity_score = max(0.0, 1.0 - cv * 5)  # CV < 0,05 = muito regular
     scores.append(regularity_score)
 
-    # Criterion 3: Heart rate in typical flutter range
-    # 2:1 flutter: 130-170, 3:1: 85-115, 4:1: 65-85
+    # Critério 3: Frequência cardíaca na faixa típica de flutter
+    # Flutter 2:1: 130-170, 3:1: 85-115, 4:1: 65-85
     hr_in_range = (
         (130 <= heart_rate <= 170) or
         (85 <= heart_rate <= 115) or
@@ -257,7 +257,7 @@ def detect_atrial_flutter(
     range_score = 0.8 if hr_in_range else 0.2
     scores.append(range_score)
 
-    # Criterion 4: P-wave rate if available
+    # Critério 4: Frequência de onda P se disponível
     if p_wave_rate is not None:
         if 250 <= p_wave_rate <= 350:
             scores.append(1.0)
@@ -290,25 +290,25 @@ def detect_atrial_flutter(
 def detect_rhythm_irregularity(
     rr_intervals: list[float] | NDArray,
 ) -> dict[str, Any]:
-    """Comprehensive rhythm irregularity analysis.
+    """Análise abrangente de irregularidade de ritmo.
 
-    Classifies rhythm as:
-    - regular: CV < 0.05 (sinus rhythm, paced, flutter with fixed block)
-    - regularly_irregular: periodic pattern (Wenckebach, bigeminy, trigeminy)
-    - irregularly_irregular: random variation (AF, multifocal atrial tachycardia)
+    Classifica o ritmo como:
+    - regular: CV < 0,05 (ritmo sinusal, marcapasso, flutter com bloqueio fixo)
+    - regularly_irregular: padrão periódico (Wenckebach, bigeminismo, trigeminismo)
+    - irregularly_irregular: variação aleatória (FA, taquicardia atrial multifocal)
 
-    Parameters
+    Parâmetros
     ----------
-    rr_intervals : list[float] or ndarray
-        RR intervals in seconds.
+    rr_intervals : list[float] ou ndarray
+        Intervalos RR em segundos.
 
-    Returns
+    Retorna
     -------
     dict
         - pattern: str ('regular', 'regularly_irregular', 'irregularly_irregular')
-        - cv: float (coefficient of variation)
-        - rmssd_ms: float (root mean square of successive differences in ms)
-        - premature_beats: int (estimated count)
+        - cv: float (coeficiente de variação)
+        - rmssd_ms: float (raiz quadrada média das diferenças sucessivas em ms)
+        - premature_beats: int (contagem estimada)
         - bigeminy: bool
         - trigeminy: bool
         - details: str
@@ -331,18 +331,18 @@ def detect_rhythm_irregularity(
     cv = np.std(rr) / mean_rr if mean_rr > 0 else 0.0
 
     diffs = np.diff(rr)
-    rmssd = np.sqrt(np.mean(diffs ** 2)) * 1000  # Convert to ms
+    rmssd = np.sqrt(np.mean(diffs ** 2)) * 1000  # Converte para ms
 
-    # Premature beat detection: RR < 80% of mean
+    # Detecção de batimentos prematuros: RR < 80% da média
     premature_threshold = mean_rr * 0.80
     premature_beats = int(np.sum(rr < premature_threshold))
 
-    # Bigeminy: alternating short-long pattern
+    # Bigeminismo: padrão alternado curto-longo
     bigeminy = False
     trigeminy = False
 
     if len(rr) >= 6:
-        # Check for bigeminy (period-2 pattern)
+        # Verifica bigeminismo (padrão de período 2)
         even_rr = rr[::2]
         odd_rr = rr[1::2]
         min_len = min(len(even_rr), len(odd_rr))
@@ -357,13 +357,13 @@ def detect_rhythm_irregularity(
                 bigeminy = True
 
     if len(rr) >= 9 and not bigeminy:
-        # Check for trigeminy (period-3 pattern)
+        # Verifica trigeminismo (padrão de período 3)
         for offset in range(3):
             sub = rr[offset::3]
             if len(sub) >= 3:
                 sub_cv = np.std(sub) / np.mean(sub) if np.mean(sub) > 0 else 1.0
                 if sub_cv < 0.10:
-                    # Check if the other phases are also regular but different
+                    # Verifica se as outras fases também são regulares mas diferentes
                     other_cvs = []
                     for o2 in range(3):
                         if o2 != offset:
@@ -374,7 +374,7 @@ def detect_rhythm_irregularity(
                         trigeminy = True
                         break
 
-    # Classify pattern
+    # Classifica padrão
     if cv < 0.05:
         pattern = "regular"
         details = f"Ritmo regular (CV = {cv:.3f}). FC média: {60/mean_rr:.0f} bpm."
@@ -393,7 +393,7 @@ def detect_rhythm_irregularity(
             f"Considerar: fibrilação atrial, taquicardia atrial multifocal."
         )
     else:
-        # Moderate irregularity
+        # Irregularidade moderada
         if premature_beats > len(rr) * 0.1:
             pattern = "regularly_irregular"
             details = (
@@ -428,39 +428,39 @@ def classify_wide_complex_tachycardia(
     morphology_v6: str | None = None,
     previous_bbb: bool = False,
 ) -> dict[str, Any]:
-    """Differentiate ventricular tachycardia from SVT with aberrancy.
+    """Diferencia taquicardia ventricular de TSV com aberrância.
 
-    Implements a composite scoring approach combining:
-    - Brugada criteria (4-step algorithm)
-    - Vereckei aVR criteria
-    - Morphological criteria in V1/V6
+    Implementa abordagem de pontuação composta combinando:
+    - Critérios de Brugada (algoritmo de 4 etapas)
+    - Critérios de Vereckei em aVR
+    - Critérios morfológicos em V1/V6
 
-    Parameters
+    Parâmetros
     ----------
     qrs_duration_ms : float
-        QRS duration in milliseconds.
+        Duração do QRS em milissegundos.
     heart_rate : float
-        Heart rate in bpm.
-    axis_deg : float, optional
-        QRS axis in degrees.
-    concordance : str, optional
-        Precordial concordance: 'positive', 'negative', or None.
+        Frequência cardíaca em bpm.
+    axis_deg : float, opcional
+        Eixo do QRS em graus.
+    concordance : str, opcional
+        Concordância precordial: 'positive', 'negative', ou None.
     av_dissociation : bool
-        Whether AV dissociation is present.
+        Se dissociação AV está presente.
     capture_beats : bool
-        Whether capture beats are seen.
+        Se batimentos de captura são observados.
     fusion_beats : bool
-        Whether fusion beats are seen.
+        Se batimentos de fusão são observados.
     rsr_v1 : bool
-        Whether RSR' pattern in V1 (suggests RBBB = SVT with aberrancy).
-    morphology_v1 : str, optional
-        QRS morphology in V1: 'R', 'qR', 'Rs', 'rS', 'RSR', 'QS'.
-    morphology_v6 : str, optional
-        QRS morphology in V6: 'R', 'Rs', 'rS', 'QS', 'qRs'.
+        Se padrão RSR' em V1 (sugere RBBB = TSV com aberrância).
+    morphology_v1 : str, opcional
+        Morfologia do QRS em V1: 'R', 'qR', 'Rs', 'rS', 'RSR', 'QS'.
+    morphology_v6 : str, opcional
+        Morfologia do QRS em V6: 'R', 'Rs', 'rS', 'QS', 'qRs'.
     previous_bbb : bool
-        Whether patient has known pre-existing bundle branch block.
+        Se o paciente tem bloqueio de ramo prévio conhecido.
 
-    Returns
+    Retorna
     -------
     dict
         - classification: str ('VT', 'SVT_aberrancy', 'uncertain')
@@ -488,7 +488,7 @@ def classify_wide_complex_tachycardia(
     svt_points = 0
     criteria_met: list[str] = []
 
-    # --- Brugada Step 1: RS complex absent in all precordial leads ---
+    # --- Brugada Etapa 1: Ausência de complexo RS em todas as derivações precordiais ---
     if concordance == "negative":
         vt_points += 3
         criteria_met.append("Concordância negativa precordial (VT)")
@@ -496,12 +496,12 @@ def classify_wide_complex_tachycardia(
         vt_points += 2
         criteria_met.append("Concordância positiva precordial (VT)")
 
-    # --- AV dissociation (strongest criterion for VT) ---
+    # --- Dissociação AV (critério mais forte para TV) ---
     if av_dissociation:
         vt_points += 4
         criteria_met.append("Dissociação AV presente (forte indicador de TV)")
 
-    # --- Capture / fusion beats (pathognomonic for VT) ---
+    # --- Batimentos de captura / fusão (patognomônicos de TV) ---
     if capture_beats:
         vt_points += 3
         criteria_met.append("Batimentos de captura (patognomônico de TV)")
@@ -509,7 +509,7 @@ def classify_wide_complex_tachycardia(
         vt_points += 3
         criteria_met.append("Batimentos de fusão (patognomônico de TV)")
 
-    # --- QRS duration ---
+    # --- Duração do QRS ---
     if qrs_duration_ms > 160:
         vt_points += 2
         criteria_met.append(f"QRS muito alargado ({qrs_duration_ms:.0f} ms)")
@@ -517,37 +517,37 @@ def classify_wide_complex_tachycardia(
         vt_points += 1
         criteria_met.append(f"QRS moderadamente alargado ({qrs_duration_ms:.0f} ms)")
 
-    # --- Axis ---
+    # --- Eixo ---
     if axis_deg is not None:
         if -90 < axis_deg < -30 or 180 > axis_deg > 150:
-            # Northwest axis = very suggestive of VT
+            # Eixo noroeste = muito sugestivo de TV
             vt_points += 2
             criteria_met.append(f"Eixo extremo ({axis_deg:.0f}°) — sugere TV")
         elif axis_deg < -90 or axis_deg > 180:
             vt_points += 3
             criteria_met.append(f"Eixo no-man's-land ({axis_deg:.0f}°) — forte indicador de TV")
 
-    # --- RSR' in V1 (suggests SVT with aberrancy / RBBB) ---
+    # --- RSR' em V1 (sugere TSV com aberrância / RBBB) ---
     if rsr_v1 or morphology_v1 == "RSR":
         svt_points += 2
         criteria_met.append("RSR' em V1 sugere TSV com aberrância (BRD)")
 
-    # --- V1 morphology criteria ---
+    # --- Critérios de morfologia em V1 ---
     if morphology_v1 in ("R", "qR"):
         vt_points += 1
         criteria_met.append(f"Morfologia {morphology_v1} em V1 favorece TV")
 
-    # --- V6 morphology ---
+    # --- Morfologia em V6 ---
     if morphology_v6 in ("QS", "rS"):
         vt_points += 1
         criteria_met.append(f"Morfologia {morphology_v6} em V6 favorece TV")
 
-    # --- Known previous BBB reduces VT probability ---
+    # --- BRB prévio conhecido reduz probabilidade de TV ---
     if previous_bbb:
         svt_points += 2
         criteria_met.append("BRB prévio conhecido — favorece TSV com aberrância")
 
-    # --- Classification ---
+    # --- Classificação ---
     total = vt_points + svt_points
     if total == 0:
         vt_prob = 0.5

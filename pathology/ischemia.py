@@ -1,12 +1,12 @@
-"""Ischemia pattern detection and differentiation.
+"""Detecção e diferenciação de padrões isquêmicos.
 
-Detects and differentiates:
-- NSTEMI patterns (ST depression, T inversion in contiguous leads)
-- STEMI vs early repolarization (using Smith criteria, convexity, reciprocity)
-- Wellens syndrome (Type A and B)
-- de Winter pattern (STEMI equivalent)
+Detecta e diferencia:
+- Padrões de NSTEMI (infradesnivelamento de ST, inversão de T em derivações contíguas)
+- STEMI vs repolarização precoce (usando critérios de Smith, convexidade, reciprocidade)
+- Síndrome de Wellens (Tipo A e B)
+- Padrão de de Winter (equivalente de STEMI)
 
-References:
+Referências:
 - Smith et al., "Electrocardiographic differentiation of early repolarization
   from subtle anterior STEMI", Ann Emerg Med, 2012.
 - Rhinehardt et al., "Electrocardiographic manifestations of Wellens' syndrome",
@@ -19,7 +19,7 @@ from __future__ import annotations
 from typing import Any
 
 
-# Contiguous lead groups for NSTEMI pattern recognition
+# Grupos de derivações contíguas para reconhecimento de padrão de NSTEMI
 _CONTIGUOUS_LEADS = {
     "anterior": ["V1", "V2", "V3", "V4"],
     "inferior": ["II", "III", "aVF"],
@@ -37,23 +37,23 @@ def detect_nstemi_pattern(
     t_inversions: list[str] | None = None,
     troponin_positive: bool | None = None,
 ) -> dict[str, Any]:
-    """Detect NSTEMI pattern from ST-T changes.
+    """Detecta padrão de NSTEMI a partir de alterações ST-T.
 
-    NSTEMI criteria:
-    - New ST depression >=0.5mm in >=2 contiguous leads
-    - New T-wave inversion >=1mm in >=2 contiguous leads
-    - Dynamic changes increase specificity
+    Critérios de NSTEMI:
+    - Infradesnivelamento de ST novo >= 0,5mm em >= 2 derivações contíguas
+    - Inversão de onda T nova >= 1mm em >= 2 derivações contíguas
+    - Alterações dinâmicas aumentam a especificidade
 
-    Parameters
+    Parâmetros
     ----------
     st_changes : dict
-        Lead -> change type ('infra', 'supra', 'normal').
-    t_inversions : list[str], optional
-        Leads with T-wave inversions.
-    troponin_positive : bool, optional
-        Whether troponin is elevated.
+        Derivação -> tipo de alteração ('infra', 'supra', 'normal').
+    t_inversions : list[str], opcional
+        Derivações com inversão de onda T.
+    troponin_positive : bool, opcional
+        Se troponina está elevada.
 
-    Returns
+    Retorna
     -------
     dict
         - detected: bool
@@ -71,7 +71,7 @@ def detect_nstemi_pattern(
     score = 0.0
     territory = "indeterminado"
 
-    # Check for contiguous ST depression
+    # Verifica infradesnivelamento de ST contíguo
     for terr_name, leads in _CONTIGUOUS_LEADS.items():
         lead_set = set(leads)
         infra_in_territory = infra_leads & lead_set
@@ -83,7 +83,7 @@ def detect_nstemi_pattern(
             )
             score += 0.4
 
-    # Check for contiguous T inversions
+    # Verifica inversões de T contíguas
     for terr_name, leads in _CONTIGUOUS_LEADS.items():
         lead_set = set(leads)
         t_inv_in_territory = t_inv_set & lead_set
@@ -96,14 +96,14 @@ def detect_nstemi_pattern(
             )
             score += 0.3
 
-    # Combined ST depression + T inversion = stronger
+    # Combinado: infradesnivelamento de ST + inversão de T = mais forte
     if infra_leads and t_inv_set:
         overlap = infra_leads & t_inv_set
         if overlap:
             criteria_met.append("Infra ST + T invertida nas mesmas derivações")
             score += 0.15
 
-    # Widespread ST depression with supra in aVR = left main / 3-vessel disease
+    # Infra difuso com supra em aVR = doença de tronco / triarterial
     if len(infra_leads) >= 6 and "aVR" in supra_leads:
         criteria_met.append(
             "Infra difuso + supra em aVR — PADRÃO DE LESÃO MULTIARTERIAL / TRONCO!"
@@ -111,7 +111,7 @@ def detect_nstemi_pattern(
         score += 0.3
         territory = "difuso (TCE/3V)"
 
-    # Troponin if available
+    # Troponina se disponível
     if troponin_positive is True:
         criteria_met.append("Troponina positiva")
         score += 0.2
@@ -122,7 +122,7 @@ def detect_nstemi_pattern(
     score = min(1.0, max(0.0, score))
     detected = score > 0.3
 
-    # Risk assessment
+    # Avaliação de risco
     if score > 0.7 or "TCE" in territory:
         risk = "high"
     elif score > 0.4:
@@ -155,38 +155,38 @@ def differentiate_stemi_vs_early_repol(
     st_morphology: str | None = None,
     qrs_distortion: bool = False,
 ) -> dict[str, Any]:
-    """Differentiate STEMI from benign early repolarization.
+    """Diferencia STEMI de repolarização precoce benigna.
 
-    Applies Smith criteria and other differentiating features:
-    - ST/T ratio (>0.25 in V1-V4 favors STEMI)
-    - ST morphology (convex favors STEMI, concave favors BER)
-    - Reciprocal ST depression (favors STEMI)
-    - QRS terminal distortion (favors STEMI)
-    - Age/sex demographics
+    Aplica critérios de Smith e outras características diferenciadores:
+    - Razão ST/T (> 0,25 em V1-V4 favorece STEMI)
+    - Morfologia do ST (convexa favorece STEMI, côncava favorece BER)
+    - Infradesnivelamento recíproco de ST (favorece STEMI)
+    - Distorção terminal do QRS (favorece STEMI)
+    - Dados demográficos idade/sexo
 
-    Parameters
+    Parâmetros
     ----------
     st_elevation_mv : dict
-        Lead -> ST elevation in millivolts.
-    t_wave_amplitude : dict, optional
-        Lead -> T wave amplitude in millivolts.
-    patient_age : int, optional
-        Patient age in years.
-    patient_sex : str, optional
-        'M' or 'F'.
+        Derivação -> supradesnivelamento de ST em milivolts.
+    t_wave_amplitude : dict, opcional
+        Derivação -> amplitude da onda T em milivolts.
+    patient_age : int, opcional
+        Idade do paciente em anos.
+    patient_sex : str, opcional
+        'M' ou 'F'.
     reciprocal_changes : bool
-        Whether reciprocal ST depression is present.
-    st_morphology : str, optional
-        'convex' (tombstone), 'concave' (scooped), or 'straight'.
+        Se infradesnivelamento recíproco de ST está presente.
+    st_morphology : str, opcional
+        'convex' (tombstone), 'concave' (côncavo), ou 'straight'.
     qrs_distortion : bool
-        Whether terminal QRS distortion is present.
+        Se distorção terminal do QRS está presente.
 
-    Returns
+    Retorna
     -------
     dict
         - classification: str ('STEMI', 'early_repolarization', 'uncertain')
         - stemi_probability: float (0-1)
-        - smith_score: float (if applicable)
+        - smith_score: float (se aplicável)
         - criteria: list[str]
         - details: str
     """
@@ -194,7 +194,7 @@ def differentiate_stemi_vs_early_repol(
     ber_points = 0.0
     criteria: list[str] = []
 
-    # 1. ST/T amplitude ratio (Smith criterion)
+    # 1. Razão de amplitude ST/T (critério de Smith)
     if t_wave_amplitude:
         st_t_ratios = {}
         precordial = ["V1", "V2", "V3", "V4"]
@@ -215,7 +215,7 @@ def differentiate_stemi_vs_early_repol(
             ber_points += 0.2
             criteria.append("ST/T ratio < 0.25 (favorece repolarização precoce)")
 
-    # 2. ST morphology
+    # 2. Morfologia do ST
     if st_morphology == "convex":
         stemi_points += 0.25
         criteria.append("Morfologia convexa (tombstone) do ST — forte indicador de STEMI")
@@ -226,7 +226,7 @@ def differentiate_stemi_vs_early_repol(
         stemi_points += 0.1
         criteria.append("Morfologia retilínea do ST — possível STEMI precoce")
 
-    # 3. Reciprocal changes
+    # 3. Alterações recíprocas
     if reciprocal_changes:
         stemi_points += 0.3
         criteria.append("Alterações recíprocas presentes — forte indicador de STEMI")
@@ -234,12 +234,12 @@ def differentiate_stemi_vs_early_repol(
         ber_points += 0.15
         criteria.append("Sem alterações recíprocas (favorece repolarização precoce)")
 
-    # 4. QRS terminal distortion
+    # 4. Distorção terminal do QRS
     if qrs_distortion:
         stemi_points += 0.25
         criteria.append("Distorção terminal do QRS — altamente sugestivo de STEMI")
 
-    # 5. Magnitude of ST elevation
+    # 5. Magnitude do supradesnivelamento de ST
     max_st = max(st_elevation_mv.values()) if st_elevation_mv else 0
     if max_st > 0.5:  # > 5mm
         stemi_points += 0.2
@@ -247,7 +247,7 @@ def differentiate_stemi_vs_early_repol(
     elif max_st < 0.1:
         ber_points += 0.1
 
-    # 6. Demographics
+    # 6. Dados demográficos
     if patient_age is not None:
         if patient_age > 50:
             stemi_points += 0.1
@@ -260,7 +260,7 @@ def differentiate_stemi_vs_early_repol(
         ber_points += 0.05
         criteria.append("Homem jovem — BER mais prevalente")
 
-    # Calculate probability
+    # Calcula probabilidade
     total = stemi_points + ber_points
     stemi_prob = stemi_points / total if total > 0 else 0.5
 
@@ -292,26 +292,26 @@ def detect_wellens_pattern(
     troponin_normal: bool = True,
     st_normal: bool = True,
 ) -> dict[str, Any]:
-    """Detect Wellens syndrome pattern.
+    """Detecta padrão da síndrome de Wellens.
 
-    Wellens syndrome indicates critical LAD stenosis:
-    - Type A (25%): Biphasic T in V2-V3 (initially positive, then negative)
-    - Type B (75%): Deep symmetric T inversion in V2-V3
+    Síndrome de Wellens indica estenose crítica da DA (artéria descendente anterior):
+    - Tipo A (25%): T bifásica em V2-V3 (inicialmente positiva, depois negativa)
+    - Tipo B (75%): Inversão profunda e simétrica de T em V2-V3
 
-    Key: occurs in PAIN-FREE period (normal ST during pain-free interval)
+    Importante: ocorre no período LIVRE DE DOR (ST normal durante intervalo sem dor)
 
-    Parameters
+    Parâmetros
     ----------
     t_wave_morphology : dict
-        Lead -> T wave description ('biphasic', 'deep_inversion', 'normal', etc.)
+        Derivação -> descrição da onda T ('biphasic', 'deep_inversion', 'normal', etc.)
     history_chest_pain : bool
-        Whether patient has history of chest pain.
+        Se o paciente tem história de dor torácica.
     troponin_normal : bool
-        Whether troponin is normal or minimally elevated.
+        Se a troponina está normal ou minimamente elevada.
     st_normal : bool
-        Whether ST segments are normal (important: Wellens is pain-free pattern).
+        Se os segmentos ST estão normais (importante: Wellens é padrão do período sem dor).
 
-    Returns
+    Retorna
     -------
     dict
         - detected: bool
@@ -328,24 +328,24 @@ def detect_wellens_pattern(
     wellens_type = "none"
     findings: list[str] = []
 
-    # Type A: Biphasic T in V2-V3
+    # Tipo A: T bifásica em V2-V3
     if "biphasic" in v2_morph or "biphasic" in v3_morph:
         wellens_type = "A"
         score += 0.4
         findings.append("T bifásica em V2-V3 (Wellens tipo A)")
 
-    # Type B: Deep symmetric T inversion in V2-V3
+    # Tipo B: Inversão profunda e simétrica de T em V2-V3
     if "deep_inversion" in v2_morph or "deep_inversion" in v3_morph:
         wellens_type = "B"
         score += 0.4
         findings.append("T invertida profunda e simétrica em V2-V3 (Wellens tipo B)")
 
-    # Spread to V1-V4
+    # Extensão para V1-V4
     if "deep_inversion" in v1_morph or "deep_inversion" in v4_morph:
         score += 0.1
         findings.append("T invertida estende-se a V1 e/ou V4")
 
-    # Context: pain-free period with normal ST
+    # Contexto: período livre de dor com ST normal
     if st_normal:
         score += 0.15
         findings.append("ST normal (padrão de período livre de dor)")
@@ -381,26 +381,26 @@ def detect_de_winter_pattern(
     t_wave_morphology: dict[str, str] | None = None,
     t_wave_amplitude: dict[str, float] | None = None,
 ) -> dict[str, Any]:
-    """Detect de Winter pattern (STEMI equivalent).
+    """Detecta padrão de de Winter (equivalente de STEMI).
 
-    de Winter pattern characteristics:
-    - Upsloping ST depression at J-point in V1-V6 (1-3mm)
-    - Tall, symmetric, peaked T waves in precordial leads
-    - Absence of ST elevation in precordials
-    - May have slight ST elevation in aVR
+    Características do padrão de de Winter:
+    - Infradesnivelamento ascendente de ST no ponto J em V1-V6 (1-3mm)
+    - Ondas T altas, simétricas e apiculadas nas derivações precordiais
+    - Ausência de supradesnivelamento de ST nas precordiais
+    - Pode ter discreto supra de ST em aVR
 
-    Indicates acute LAD occlusion. Treat as STEMI equivalent.
+    Indica oclusão aguda da DA. Tratar como equivalente de STEMI.
 
-    Parameters
+    Parâmetros
     ----------
     st_changes : dict
-        Lead -> ST change type.
-    t_wave_morphology : dict, optional
-        Lead -> T wave description.
-    t_wave_amplitude : dict, optional
-        Lead -> T amplitude in mV.
+        Derivação -> tipo de alteração de ST.
+    t_wave_morphology : dict, opcional
+        Derivação -> descrição da onda T.
+    t_wave_amplitude : dict, opcional
+        Derivação -> amplitude da onda T em mV.
 
-    Returns
+    Retorna
     -------
     dict
         - detected: bool
@@ -412,7 +412,7 @@ def detect_de_winter_pattern(
     criteria_met: list[str] = []
     score = 0.0
 
-    # Criterion 1: Upsloping ST depression in precordials
+    # Critério 1: Infradesnivelamento ascendente de ST nas precordiais
     infra_precordial = [
         lead for lead in precordial
         if st_changes.get(lead, "").lower() == "infra"
@@ -421,7 +421,7 @@ def detect_de_winter_pattern(
         criteria_met.append(f"Infra ST em precordiais: {', '.join(infra_precordial)}")
         score += 0.3
 
-    # Criterion 2: Tall/peaked T waves in precordials
+    # Critério 2: Ondas T altas/apiculadas nas precordiais
     if t_wave_morphology:
         tall_t = [
             lead for lead in precordial
@@ -442,7 +442,7 @@ def detect_de_winter_pattern(
             criteria_met.append(f"T > 1.0 mV em {', '.join(very_tall)}")
             score += 0.2
 
-    # Criterion 3: No ST elevation in precordials
+    # Critério 3: Ausência de supra de ST nas precordiais
     supra_precordial = [
         lead for lead in precordial
         if st_changes.get(lead, "").lower() == "supra"
@@ -451,7 +451,7 @@ def detect_de_winter_pattern(
         criteria_met.append("Ausência de supra de ST precordial (critério de de Winter)")
         score += 0.1
 
-    # Criterion 4: ST elevation in aVR
+    # Critério 4: Supra de ST em aVR
     if st_changes.get("aVR", "").lower() == "supra":
         criteria_met.append("Supra em aVR")
         score += 0.1
