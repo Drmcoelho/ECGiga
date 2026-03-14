@@ -299,7 +299,8 @@ def ingest_image(
     meta_path = pathlib.Path(meta) if meta else p.with_suffix(p.suffix + ".meta.json")
     # Pré-processamento opcional: deskew + normalize (aplicados sequencialmente sobre arquivo temporário em memória)
     from PIL import Image
-    _img = Image.open(_buf).convert("RGB")
+    import io as _io
+    _img = Image.open(str(p)).convert("RGB")
     if deskew:
         from cv.deskew import estimate_rotation_angle, rotate_image
         _info = estimate_rotation_angle(_img, search_deg=6.0, step=0.5)
@@ -308,7 +309,6 @@ def ingest_image(
         from cv.normalize import normalize_scale
         _img, _scale, _pxmm = normalize_scale(_img, target_px_per_mm=10.0)
     # Substitui path por buffer em memória para etapas seguintes que leem a imagem
-    import io as _io
     _buf = _io.BytesIO()
     _img.save(_buf, format="PNG")
     _buf.seek(0)
@@ -343,46 +343,43 @@ def ingest_image(
             import numpy as _np
             from cv.grid_detect import estimate_grid_period_px
             from cv.segmentation import segment_12leads_basic, find_content_bbox
+            _buf.seek(0)
             arr = _np.asarray(Image.open(_buf).convert("RGB"))
             grid = estimate_grid_period_px(arr)
+            _buf.seek(0)
             gray = _np.asarray(Image.open(_buf).convert("L"))
             bbox = find_content_bbox(gray)
             seg_leads = segment_12leads_basic(gray, bbox=bbox)
             seg = {"content_bbox": bbox, "leads": seg_leads}
-        if auto_leads:
-            from cv.lead_ocr import choose_layout
-            cand = {"3x4":[d["bbox"] for d in seg_leads]}
-            layout_det = choose_layout(_np.asarray(Image.open(p).convert("L")), {"3x4":[d["bbox"] for d in seg_leads]})
-            lead_labels = layout_det.get("labels")
-        if rpeaks_lead:
-            from cv.rpeaks_from_image import extract_trace_centerline, smooth_signal, detect_rpeaks_from_trace, estimate_px_per_sec
-            # procura bbox do lead requisitado
-            _lab2box = {d["lead"]: d["bbox"] for d in seg_leads}
-            if rpeaks_lead in _lab2box:
-                _x0,_y0,_x1,_y1 = _lab2box[rpeaks_lead]
-                _gray = _np.asarray(Image.open(p).convert("L"))
-                _crop = _gray[_y0:_y1, _x0:_x1]
-                _trace = smooth_signal(extract_trace_centerline(_crop, band=0.8), win=11)
-                _pxmm = (grid.get("px_small_x") if grid else None) or (grid.get("px_small_y") if grid else None)
-                _pxsec = estimate_px_per_sec(_pxmm, 25.0) or 250.0
-                rpeaks_out = detect_rpeaks_from_trace(_trace, px_per_sec=_pxsec, zthr=2.0)
-                if intervals_refined_flag:
-                    from cv.intervals_refined import intervals_refined_from_trace
-                    intervals_refined_out = intervals_refined_from_trace(_trace, rpeaks_out.get('peaks_idx') or [], _pxsec)
-                if axis_flag:
-                    from cv.axis import frontal_axis_from_image
-                    axis_out = frontal_axis_from_image(_np.asarray(Image.open(_buf).convert('L')), {lab: _lab2box.get(lab) for lab in ['I','aVF']}, {rpeaks_lead: rpeaks_out.get('peaks_idx', [])}, {rpeaks_lead: _pxsec})
-
-                if rpeaks_robust:
-                    from cv.rpeaks_robust import pan_tompkins_like
-                    _rob = pan_tompkins_like(_trace, _pxsec)
-                    rpeaks_out = {"peaks_idx": _rob["peaks_idx"], "method": "pan_tompkins_like"}
-                if intervals:
-                    from cv.intervals import intervals_from_trace
-                    intervals_out = intervals_from_trace(_trace, rpeaks_out.get("peaks_idx") or [], _pxsec)
-
-                rpeaks_out["lead_used"] = rpeaks_lead
-        
+            if auto_leads:
+                from cv.lead_ocr import choose_layout
+                layout_det = choose_layout(gray, {"3x4": [d["bbox"] for d in seg_leads]})
+                lead_labels = layout_det.get("labels")
+            if rpeaks_lead:
+                from cv.rpeaks_from_image import extract_trace_centerline, smooth_signal, detect_rpeaks_from_trace, estimate_px_per_sec
+                _lab2box = {d["lead"]: d["bbox"] for d in seg_leads}
+                if rpeaks_lead in _lab2box:
+                    _x0, _y0, _x1, _y1 = _lab2box[rpeaks_lead]
+                    _crop = gray[_y0:_y1, _x0:_x1]
+                    _trace = smooth_signal(extract_trace_centerline(_crop, band=0.8), win=11)
+                    _pxmm = (grid.get("px_small_x") if grid else None) or (grid.get("px_small_y") if grid else None)
+                    _pxsec = estimate_px_per_sec(_pxmm, 25.0) or 250.0
+                    rpeaks_out = detect_rpeaks_from_trace(_trace, px_per_sec=_pxsec, zthr=2.0)
+                    if intervals_refined_flag:
+                        from cv.intervals_refined import intervals_refined_from_trace
+                        intervals_refined_out = intervals_refined_from_trace(_trace, rpeaks_out.get('peaks_idx') or [], _pxsec)
+                    if axis_flag:
+                        from cv.axis import frontal_axis_from_image
+                        _buf.seek(0)
+                        axis_out = frontal_axis_from_image(_np.asarray(Image.open(_buf).convert('L')), {lab: _lab2box.get(lab) for lab in ['I', 'aVF']}, {rpeaks_lead: rpeaks_out.get('peaks_idx', [])}, {rpeaks_lead: _pxsec})
+                    if rpeaks_robust:
+                        from cv.rpeaks_robust import pan_tompkins_like
+                        _rob = pan_tompkins_like(_trace, _pxsec)
+                        rpeaks_out = {"peaks_idx": _rob["peaks_idx"], "method": "pan_tompkins_like"}
+                    if intervals:
+                        from cv.intervals import intervals_from_trace
+                        intervals_out = intervals_from_trace(_trace, rpeaks_out.get("peaks_idx") or [], _pxsec)
+                    rpeaks_out["lead_used"] = rpeaks_lead
         except Exception as e:
             typer.echo(f"Auto-grid falhou: {e}", err=True)
     
@@ -487,7 +484,15 @@ def ingest_image(
             if fc_bpm: f.write(f"- FC: {fc_bpm:.1f} bpm\\n")
             if qt_ms: f.write(f"- QT: {qt_ms} ms | QTc (B/F): {qb}/{qf} ms\\n")
             if axis_label: f.write(f"- Eixo: {axis_label} ({angle:.1f}°)\\n")
-            if flags:\n                f.write("\\n## Flags\\n"); [f.write(f"- {fl}\\n") for fl in flags]\n            if suggested:\n                f.write("\\n## Sugestões/Observações\\n"); [f.write(f"- {s}\\n") for s in suggested]\n        print(Panel.fit("[bold green]Laudos salvos em reports/"))
+            if flags:
+                f.write("\n## Flags\n")
+                for fl in flags:
+                    f.write(f"- {fl}\n")
+            if suggested:
+                f.write("\n## Sugestões/Observações\n")
+                for s in suggested:
+                    f.write(f"- {s}\n")
+        print(Panel.fit("[bold green]Laudos salvos em reports/"))
 
 app.add_typer(ingest_app, name="ingest")
 
@@ -594,7 +599,7 @@ def cv_deskew(image_path: str = typer.Argument(..., help="PNG/JPG"),
     from PIL import Image
     from cv.deskew import estimate_rotation_angle, rotate_image
     p = pathlib.Path(image_path)
-    img = Image.open(_buf).convert("RGB")
+    img = Image.open(str(p)).convert("RGB")
     info = estimate_rotation_angle(img, search_deg=search_deg, step=0.5)
     print(f"Ângulo estimado: {info['angle_deg']:.2f}° (score {info['score']:.3f} vs {info['score0']:.3f})")
     if save:
@@ -610,7 +615,7 @@ def cv_normalize(image_path: str = typer.Argument(..., help="PNG/JPG"),
     from PIL import Image
     from cv.normalize import normalize_scale
     p = pathlib.Path(image_path)
-    img = Image.open(_buf).convert("RGB")
+    img = Image.open(str(p)).convert("RGB")
     im1, scale, pxmm = normalize_scale(img, target_px_per_mm=target_pxmm)
     print(f"px/mm estimado: {pxmm} | scale aplicado: {scale:.3f}")
     if save:
@@ -919,16 +924,15 @@ def cv_overlay(image_path: str = typer.Argument(..., help="PNG/JPG"),
     pxsec = estimate_px_per_sec(pxmm, 25.0) or 250.0
     rdet = pan_tompkins_like(trace, pxsec)
     iv = intervals_refined_from_trace(trace, rdet["peaks_idx"], pxsec)
-    Path(_os.path.dirname(out_path)).mkdir(parents=True, exist_ok=True)
+    pathlib.Path(_os.path.dirname(out_path)).mkdir(parents=True, exist_ok=True)
     outp = draw_overlay(image_path, lab2box, {lead: rdet["peaks_idx"]}, iv, out_path, highlight_lead=lead)
     print(f"Overlay salvo em {outp}")
 
 
-@app.command("report")
-def report(): ...
+report_app = typer.Typer(help="Relatórios e exportações.")
 
 
-@report.command("export")
+@report_app.command("export")
 def export_report(report_json: str = typer.Argument(..., help="Laudo JSON (v0.5)"),
                   out_md: str = typer.Option(None, "--md"),
                   out_html: str = typer.Option(None, "--html"),
@@ -944,7 +948,7 @@ def export_report(report_json: str = typer.Argument(..., help="Laudo JSON (v0.5)
             rob = robust_from_intervals(iv)
             rep["intervals_refined"].update(rob)
             _json.dump(rep, open(report_json,"w",encoding="utf-8"), ensure_ascii=False, indent=2)
-    _export(report_json, out_md, out_html, overlay)
+    _export(report_json, out_md, out_html)
     print("Export concluído.")
 
 
@@ -962,7 +966,10 @@ def cv_axis_hex(image_path: str = typer.Argument(..., help="PNG/JPG"),
     return ax
 
 
-@report.command("validate")
+app.add_typer(report_app, name="report")
+
+
+@report_app.command("validate")
 def validate_report(report_json: str = typer.Argument(..., help="Laudo JSON (v0.5)")):
     """Validações leves de schema e semântica (tipos, ranges superficiais)."""
     import json as _json
@@ -975,11 +982,11 @@ def validate_report(report_json: str = typer.Argument(..., help="Laudo JSON (v0.
     print("✓ Laudo válido (checagem leve)")
 
 
-@app.command("rhythm")
-def rhythm(): ...
+rhythm_app = typer.Typer(help="Análise de ritmo cardíaco.")
+app.add_typer(rhythm_app, name="rhythm")
 
 
-@rhythm.command("analyze")
+@rhythm_app.command("analyze")
 def rhythm_analyze(image_path: str = typer.Argument(..., help="PNG/JPG"),
                    lead: str = typer.Option("II", "--lead"),
                    layout: str = typer.Option("3x4", "--layout"),
@@ -993,11 +1000,11 @@ def rhythm_analyze(image_path: str = typer.Argument(..., help="PNG/JPG"),
     return rep
 
 
-@app.command("precordials")
-def precordials(): ...
+precordials_app = typer.Typer(help="Análise de derivações precordiais.")
+app.add_typer(precordials_app, name="precordials")
 
 
-@precordials.command("transition")
+@precordials_app.command("transition")
 def precordials_transition(image_path: str = typer.Argument(..., help="PNG/JPG"),
                            layout: str = typer.Option("3x4", "--layout"),
                            anchor: str = typer.Option("II", "--anchor"),
@@ -1011,11 +1018,11 @@ def precordials_transition(image_path: str = typer.Argument(..., help="PNG/JPG")
     return rep
 
 
-@app.command("checklist")
-def checklist(): ...
+checklist_app = typer.Typer(help="Checklists clínicos.")
+app.add_typer(checklist_app, name="checklist")
 
 
-@checklist.command("lvh")
+@checklist_app.command("lvh")
 def checklist_lvh(image_path: str = typer.Argument(..., help="PNG/JPG"),
                   sex: str = typer.Option("male", "--sex", help="male/female"),
                   layout: str = typer.Option("3x4", "--layout"),

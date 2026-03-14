@@ -58,17 +58,6 @@ def to_html(md_text: str) -> str:
     html_text = html_text.replace("\n", "<br/>\n")
     return f"<!doctype html><meta charset='utf-8'><style>body{{font-family:system-ui, -apple-system, Segoe UI, sans-serif; max-width: 920px; margin: 2rem auto; line-height:1.5}}</style>{html_text}"
 
-def export(report_json: str, out_md: str = None, out_html: str = None) -> tuple[str,str]:
-    rep = json.loads(Path(report_json).read_text(encoding='utf-8'))
-    md = to_md(rep)
-    if out_md:
-        Path(out_md).write_text(md, encoding='utf-8')
-    html = to_html(md)
-    if out_html:
-        Path(out_html).write_text(html, encoding='utf-8')
-    return out_md, out_html
-
-
 def _embed_base64_image(path: str) -> str:
     import base64, mimetypes
     data = Path(path).read_bytes()
@@ -81,9 +70,9 @@ def export(report_json: str, out_md: str = None, out_html: str = None, overlay_p
     md = to_md(rep)
     if out_md:
         Path(out_md).write_text(md, encoding='utf-8')
-    html = to_html(md)
+    html_out = to_html(md)
     if overlay_path and Path(overlay_path).exists():
-        html += "<hr/>" + _embed_base64_image(overlay_path)
+        html_out += "<hr/>" + _embed_base64_image(overlay_path)
     if out_html:
-        Path(out_html).write_text(html, encoding='utf-8')
+        Path(out_html).write_text(html_out, encoding='utf-8')
     return out_md, out_html

@@ -12,7 +12,7 @@ def _find_onset_offset(sig: np.ndarray, center: int, fs: float, max_pre_ms=120.0
     th_rel: fração do pico de gradiente para limiar.
     """
     g = _grad_abs(sig)
-    g = (g - g.min())/(g.ptp()+1e-6)
+    g = (g - g.min())/((g.max() - g.min())+1e-6)
     # janelas
     pre = int(max_pre_ms*fs/1000.0)
     pos = int(max_post_ms*fs/1000.0)
@@ -38,7 +38,7 @@ def _t_end(sig: np.ndarray, qrs_off: int, fs: float, max_ms=520.0) -> Optional[i
     """
     Fim da onda T: após QRS, onde o gradiente retorna estável a ~0 por 30 ms.
     """
-    g = _grad_abs(sig); g = (g - g.min())/(g.ptp()+1e-6)
+    g = _grad_abs(sig); g = (g - g.min())/((g.max() - g.min())+1e-6)
     end_win = int(0.03*fs)
     max_samp = int(max_ms*fs/1000.0)
     i0 = qrs_off
@@ -52,7 +52,7 @@ def _p_onset(sig: np.ndarray, qrs_on: int, fs: float, max_ms=280.0) -> Optional[
     """
     Início da P: antes do QRS, procura pequeno aumento de energia sustentado por 20 ms.
     """
-    g = _grad_abs(sig); g = (g - g.min())/(g.ptp()+1e-6)
+    g = _grad_abs(sig); g = (g - g.min())/((g.max() - g.min())+1e-6)
     start_win = int(0.02*fs)
     max_samp = int(max_ms*fs/1000.0)
     i0 = max(0, qrs_on - max_samp)
