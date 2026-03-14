@@ -1,13 +1,13 @@
-"""Digital filters for ECG signal processing.
+"""Filtros digitais para processamento de sinais de ECG.
 
-Implements Butterworth bandpass, highpass, lowpass, and notch filters
-with zero-phase filtering (filtfilt) for distortion-free ECG processing.
+Implementa filtros Butterworth passa-banda, passa-alta, passa-baixa e notch
+com filtragem de fase zero (filtfilt) para processamento de ECG sem distorção.
 
-All filters use second-order sections (SOS) for numerical stability.
+Todos os filtros utilizam seções de segunda ordem (SOS) para estabilidade numérica.
 
-References:
-- AHA/ACC ECG filtering recommendations: 0.05-150 Hz for diagnostic quality
-- IEC 60601-2-51: 0.05-40 Hz for monitoring, 0.05-150 Hz for diagnostic
+Referências:
+- Recomendações AHA/ACC para filtragem de ECG: 0,05-150 Hz para qualidade diagnóstica
+- IEC 60601-2-51: 0,05-40 Hz para monitorização, 0,05-150 Hz para diagnóstico
 """
 
 from __future__ import annotations
@@ -20,7 +20,7 @@ from numpy.typing import NDArray
 
 
 def _validate_signal(signal: NDArray[np.floating[Any]], fs: float) -> None:
-    """Validate signal and sampling frequency parameters."""
+    """Valida os parâmetros de sinal e frequência de amostragem."""
     if not isinstance(signal, np.ndarray):
         raise TypeError("signal must be a numpy array")
     if signal.ndim not in (1, 2):
@@ -32,11 +32,11 @@ def _validate_signal(signal: NDArray[np.floating[Any]], fs: float) -> None:
 
 
 def _pad_length(signal_length: int, order: int) -> int:
-    """Calculate appropriate padding length for filtfilt."""
-    # filtfilt needs at least 3 * max(len(a), len(b)) samples
-    # For SOS, each section is order 2, so padding = 3 * (2 * n_sections + 1)
+    """Calcula o comprimento de preenchimento apropriado para filtfilt."""
+    # filtfilt precisa de pelo menos 3 * max(len(a), len(b)) amostras
+    # Para SOS, cada seção é de ordem 2, então padding = 3 * (2 * n_sections + 1)
     pad = 3 * (2 * order + 1)
-    # But don't pad more than signal length
+    # Não preencher mais do que o comprimento do sinal
     return min(pad, signal_length - 1)
 
 
@@ -47,25 +47,25 @@ def bandpass_filter(
     highcut: float = 150.0,
     order: int = 4,
 ) -> NDArray[np.floating[Any]]:
-    """Apply zero-phase Butterworth bandpass filter.
+    """Aplica filtro passa-banda Butterworth de fase zero.
 
-    Parameters
+    Parâmetros
     ----------
     signal : ndarray
-        ECG signal (1D single-lead or 2D multi-lead with shape [samples, leads]).
+        Sinal de ECG (1D derivação única ou 2D multiderivação com forma [amostras, derivações]).
     fs : float
-        Sampling frequency in Hz.
+        Frequência de amostragem em Hz.
     lowcut : float
-        Lower cutoff frequency in Hz (default 0.05 Hz per AHA).
+        Frequência de corte inferior em Hz (padrão 0,05 Hz conforme AHA).
     highcut : float
-        Upper cutoff frequency in Hz (default 150 Hz for diagnostic quality).
+        Frequência de corte superior em Hz (padrão 150 Hz para qualidade diagnóstica).
     order : int
-        Filter order (default 4, giving 8th-order after filtfilt).
+        Ordem do filtro (padrão 4, resultando em 8ª ordem após filtfilt).
 
-    Returns
+    Retorna
     -------
     ndarray
-        Filtered signal with same shape as input.
+        Sinal filtrado com a mesma forma da entrada.
     """
     from scipy.signal import butter, sosfiltfilt
 
@@ -77,7 +77,7 @@ def bandpass_filter(
     if lowcut >= highcut:
         raise ValueError(f"lowcut ({lowcut}) must be less than highcut ({highcut})")
     if highcut >= nyq:
-        highcut = nyq * 0.99  # Clamp to just below Nyquist
+        highcut = nyq * 0.99  # Limita logo abaixo de Nyquist
 
     low = lowcut / nyq
     high = highcut / nyq
@@ -88,7 +88,7 @@ def bandpass_filter(
         padlen = _pad_length(len(signal), order)
         return sosfiltfilt(sos, signal, padlen=padlen)
     else:
-        # Multi-lead: filter each lead independently
+        # Multiderivação: filtra cada derivação independentemente
         result = np.empty_like(signal)
         padlen = _pad_length(signal.shape[0], order)
         for i in range(signal.shape[1]):
@@ -102,26 +102,26 @@ def highpass_filter(
     cutoff: float = 0.05,
     order: int = 4,
 ) -> NDArray[np.floating[Any]]:
-    """Apply zero-phase Butterworth highpass filter.
+    """Aplica filtro passa-alta Butterworth de fase zero.
 
-    Primarily used for baseline wander removal. The AHA recommends
-    0.05 Hz for diagnostic ECG and 0.67 Hz for monitoring.
+    Utilizado principalmente para remoção de oscilação de linha de base.
+    A AHA recomenda 0,05 Hz para ECG diagnóstico e 0,67 Hz para monitorização.
 
-    Parameters
+    Parâmetros
     ----------
     signal : ndarray
-        ECG signal.
+        Sinal de ECG.
     fs : float
-        Sampling frequency in Hz.
+        Frequência de amostragem em Hz.
     cutoff : float
-        Cutoff frequency in Hz (default 0.05 Hz).
+        Frequência de corte em Hz (padrão 0,05 Hz).
     order : int
-        Filter order.
+        Ordem do filtro.
 
-    Returns
+    Retorna
     -------
     ndarray
-        Highpass-filtered signal.
+        Sinal filtrado em passa-alta.
     """
     from scipy.signal import butter, sosfiltfilt
 
@@ -152,26 +152,26 @@ def lowpass_filter(
     cutoff: float = 40.0,
     order: int = 4,
 ) -> NDArray[np.floating[Any]]:
-    """Apply zero-phase Butterworth lowpass filter.
+    """Aplica filtro passa-baixa Butterworth de fase zero.
 
-    Used for high-frequency noise removal. 40 Hz is typical for
-    monitoring mode; 150 Hz for diagnostic mode.
+    Utilizado para remoção de ruído de alta frequência. 40 Hz é típico
+    para modo de monitorização; 150 Hz para modo diagnóstico.
 
-    Parameters
+    Parâmetros
     ----------
     signal : ndarray
-        ECG signal.
+        Sinal de ECG.
     fs : float
-        Sampling frequency in Hz.
+        Frequência de amostragem em Hz.
     cutoff : float
-        Cutoff frequency in Hz (default 40 Hz).
+        Frequência de corte em Hz (padrão 40 Hz).
     order : int
-        Filter order.
+        Ordem do filtro.
 
-    Returns
+    Retorna
     -------
     ndarray
-        Lowpass-filtered signal.
+        Sinal filtrado em passa-baixa.
     """
     from scipy.signal import butter, sosfiltfilt
 
@@ -203,27 +203,27 @@ def notch_filter(
     quality: float = 30.0,
     harmonics: int = 3,
 ) -> NDArray[np.floating[Any]]:
-    """Apply notch filter for powerline interference removal.
+    """Aplica filtro notch para remoção de interferência da rede elétrica.
 
-    Removes the fundamental frequency and its harmonics.
+    Remove a frequência fundamental e suas harmônicas.
 
-    Parameters
+    Parâmetros
     ----------
     signal : ndarray
-        ECG signal.
+        Sinal de ECG.
     fs : float
-        Sampling frequency in Hz.
+        Frequência de amostragem em Hz.
     freq : float
-        Powerline frequency (50 Hz in Europe/Brazil, 60 Hz in Americas).
+        Frequência da rede elétrica (50 Hz na Europa/Brasil, 60 Hz nas Américas).
     quality : float
-        Quality factor (Q = f0 / bandwidth). Higher = narrower notch.
+        Fator de qualidade (Q = f0 / largura de banda). Maior = notch mais estreito.
     harmonics : int
-        Number of harmonics to remove (default 3: f0, 2*f0, 3*f0).
+        Número de harmônicas a remover (padrão 3: f0, 2*f0, 3*f0).
 
-    Returns
+    Retorna
     -------
     ndarray
-        Filtered signal with powerline interference removed.
+        Sinal filtrado com interferência da rede elétrica removida.
     """
     from scipy.signal import iirnotch, sosfiltfilt
 
@@ -237,8 +237,8 @@ def notch_filter(
             break
 
         b, a = iirnotch(notch_freq, quality, fs)
-        # Convert to SOS for stability
-        # iirnotch returns b,a so we use filtfilt directly
+        # Converte para SOS para estabilidade
+        # iirnotch retorna b,a então usamos filtfilt diretamente
         from scipy.signal import filtfilt
         if result.ndim == 1:
             result = filtfilt(b, a, result)
@@ -256,29 +256,29 @@ def remove_baseline_wander(
     cutoff: float = 0.5,
     window_s: float = 0.6,
 ) -> NDArray[np.floating[Any]]:
-    """Remove baseline wander from ECG signal.
+    """Remove oscilação de linha de base do sinal de ECG.
 
-    Supports two methods:
-    - 'highpass': Butterworth highpass filter (fast, standard)
-    - 'median': Cascaded median filter (preserves morphology better)
+    Suporta dois métodos:
+    - 'highpass': Filtro passa-alta Butterworth (rápido, padrão)
+    - 'median': Filtro mediano em cascata (preserva melhor a morfologia)
 
-    Parameters
+    Parâmetros
     ----------
     signal : ndarray
-        ECG signal.
+        Sinal de ECG.
     fs : float
-        Sampling frequency in Hz.
+        Frequência de amostragem em Hz.
     method : str
-        'highpass' or 'median'.
+        'highpass' ou 'median'.
     cutoff : float
-        Cutoff frequency for highpass method (default 0.5 Hz).
+        Frequência de corte para método highpass (padrão 0,5 Hz).
     window_s : float
-        Window duration in seconds for median method (default 0.6s ~ QT interval).
+        Duração da janela em segundos para método median (padrão 0,6s ~ intervalo QT).
 
-    Returns
+    Retorna
     -------
     ndarray
-        Signal with baseline wander removed.
+        Sinal com oscilação de linha de base removida.
     """
     _validate_signal(signal, fs)
 
@@ -297,24 +297,24 @@ def _median_baseline_removal(
     fs: float,
     window_s: float = 0.6,
 ) -> NDArray[np.floating[Any]]:
-    """Two-pass median filter baseline removal.
+    """Remoção de linha de base por filtro mediano de duas passagens.
 
-    First pass: median filter with ~200ms window (captures QRS)
-    Second pass: median filter with ~600ms window (captures T wave)
-    Baseline = second pass result, subtract from original.
+    Primeira passagem: filtro mediano com janela de ~200ms (captura QRS)
+    Segunda passagem: filtro mediano com janela de ~600ms (captura onda T)
+    Linha de base = resultado da segunda passagem, subtrai do original.
 
-    Reference: de Chazal et al., IEEE TBME 2004.
+    Referência: de Chazal et al., IEEE TBME 2004.
     """
     from scipy.ndimage import median_filter
 
     def _apply_1d(sig: NDArray) -> NDArray:
-        # First pass: short window to remove QRS
+        # Primeira passagem: janela curta para remover QRS
         win1 = max(int(0.2 * fs), 3)
         if win1 % 2 == 0:
             win1 += 1
         baseline1 = median_filter(sig, size=win1)
 
-        # Second pass: longer window on first-pass result
+        # Segunda passagem: janela mais longa sobre resultado da primeira passagem
         win2 = max(int(window_s * fs), 3)
         if win2 % 2 == 0:
             win2 += 1
