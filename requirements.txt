@@ -1,36 +1,50 @@
+# Core CLI / Web
 typer>=0.12
 rich>=13.7
-pydantic>=2.7
-jsonschema>=4.23
+dash>=2.17
+plotly>=5.22
+
+# Data processing
 numpy>=1.26
 pandas>=2.2
 scipy>=1.11
+
+# Validation
+pydantic>=2.7
+jsonschema>=4.23
+
+# Visualization
 matplotlib>=3.8
-plotly>=5.22
-dash>=2.17
+
+# Image processing
 pillow>=10.2
 opencv-python-headless>=4.10
+
+# Medical / ECG
 neurokit2>=0.2.9
 wfdb>=4.1.2
+
+# Web / Network
 requests>=2.32
+beautifulsoup4>=4.12.2
+lxml>=4.9.3
+
+# Config
 pyyaml>=6.0
 toml>=0.10
+
+# OCR / Fuzzy matching
+pytesseract>=0.3.10
+rapidfuzz>=3.6.1
+
+# API server
+fastapi>=0.110
+uvicorn>=0.27
+
+# Testing / Code quality
 pytest>=8.3
 black>=24.8
 ruff>=0.6
 
-# --- p3c additions ---
-requests>=2.31.0
-beautifulsoup4>=4.12.2
-lxml>=4.9.3
-pillow-avif-plugin>=1.4.6 ; platform_system != "Windows"  # opcional; será detectado em runtime
-
-# --- p6 additions ---
-opencv-python-headless>=4.9.0.80    # template matching e utilidades de imagem
-pytesseract>=0.3.10                 # OCR opcional (requer binário tesseract instalado no sistema)
-rapidfuzz>=3.6.1                    # fuzzy matching para mapear tokens a rótulos esperados
-
-# --- p6 additions ---
-opencv-python-headless>=4.9.0.80
-pytesseract>=0.3.10
-rapidfuzz>=3.6.1
+# Optional
+pillow-avif-plugin>=1.4.6 ; platform_system != "Windows"

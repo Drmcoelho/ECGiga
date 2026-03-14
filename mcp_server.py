@@ -258,23 +258,24 @@ class ECGImageProcessOutput(BaseModel):
 @app.post("/ecg_image_process", response_model=ECGImageProcessOutput)
 async def ecg_image_process(data: ECGImageProcessInput) -> ECGImageProcessOutput:
     """
-    Process an ECG image and return a structured report.
+    Process an ECG image through the full CV pipeline.
 
-    This simplified implementation fetches the image from the provided
-    URL and performs very limited processing.  If ``normalize`` is
-    requested (i.e., 'normalize' present in ``ops``), the image is
-    converted to grayscale.  For any other operations the function
-    returns a placeholder flag indicating that the feature is not
-    implemented.  The returned report contains basic metadata and
-    echoes back the operations requested.
-
-    Note: This function does not perform any deskew, segmentation,
-    R‑peak detection or interval measurements.  Extend this stub with
-    calls into your computer vision pipeline for full functionality.
+    Supported operations (via ``ops`` list):
+      - ``deskew``: Correct image rotation
+      - ``normalize``: Scale to ~10 px/mm
+      - ``grid``: Detect grid period
+      - ``segment``: Segment 12 leads (3x4 layout)
+      - ``rpeaks``: Detect R-peaks (Pan-Tompkins)
+      - ``intervals``: Measure PR/QRS/QT/QTc
+      - ``axis``: Calculate frontal axis (I/aVF)
     """
+    import numpy as np
+    from PIL import Image
+    import io
+
     report: Dict[str, Any] = {
         "meta": {
-            "source": "ecg_image_process_stub",
+            "source": "ecg_image_process",
             "fetched_url": data.image_url,
         },
         "capabilities": [],
@@ -284,25 +285,101 @@ async def ecg_image_process(data: ECGImageProcessInput) -> ECGImageProcessOutput
     }
 
     try:
-        # Download the image data
         resp = requests.get(data.image_url)
         resp.raise_for_status()
-        img_bytes = resp.content
+        img = Image.open(io.BytesIO(resp.content)).convert("RGB")
+        ops_lower = [op.lower() for op in data.ops]
 
-        # Attempt minimal processing using Pillow
-        from PIL import Image
-        import io
+        # Deskew
+        if "deskew" in ops_lower:
+            from cv.deskew import estimate_rotation_angle, rotate_image
+            info = estimate_rotation_angle(img, search_deg=6.0, step=0.5)
+            img = rotate_image(img, info["angle_deg"])
+            report["capabilities"].append("deskew")
+            report["measures"]["deskew_angle_deg"] = info["angle_deg"]
 
-        img = Image.open(io.BytesIO(img_bytes))
-        # Normalize: convert to grayscale if requested
-        if any(op.lower() == "normalize" for op in data.ops):
-            img = img.convert("L")
+        # Normalize scale
+        if "normalize" in ops_lower:
+            from cv.normalize import normalize_scale
+            img, scale, pxmm = normalize_scale(img, 10.0)
             report["capabilities"].append("normalize")
-        # Additional ops not yet implemented
-        unhandled = [op for op in data.ops if op.lower() not in {"normalize"}]
-        if unhandled:
-            report["flags"].append(f"ops_not_implemented: {', '.join(unhandled)}")
-        # Optionally, we could save or analyze the image further here
+            report["measures"]["normalize_scale"] = scale
+            report["measures"]["px_per_mm_estimated"] = pxmm
+
+        arr = np.asarray(img)
+        gray = np.asarray(img.convert("L"))
+
+        # Grid detection
+        grid_info = None
+        if "grid" in ops_lower or "segment" in ops_lower or "rpeaks" in ops_lower or "intervals" in ops_lower or "axis" in ops_lower:
+            from cv.grid_detect import estimate_grid_period_px
+            grid_info = estimate_grid_period_px(arr)
+            report["capabilities"].append("grid")
+            report["measures"]["grid"] = grid_info
+
+        # Segmentation
+        seg_leads = None
+        if "segment" in ops_lower or "rpeaks" in ops_lower or "intervals" in ops_lower or "axis" in ops_lower:
+            from cv.segmentation import find_content_bbox
+            from cv.segmentation_ext import segment_layout
+            bbox = find_content_bbox(gray)
+            seg_leads = segment_layout(gray, layout="3x4", bbox=bbox)
+            report["capabilities"].append("segment")
+            report["measures"]["content_bbox"] = bbox
+            report["measures"]["leads_count"] = len(seg_leads)
+
+        # R-peaks
+        rpeaks_result = None
+        pxsec = 250.0
+        if ("rpeaks" in ops_lower or "intervals" in ops_lower or "axis" in ops_lower) and seg_leads:
+            from cv.rpeaks_from_image import extract_trace_centerline, smooth_signal, estimate_px_per_sec
+            from cv.rpeaks_robust import pan_tompkins_like
+            lab2box = {d["lead"]: d["bbox"] for d in seg_leads}
+            lead = "II" if "II" in lab2box else next(iter(lab2box.keys()))
+            x0, y0, x1, y1 = lab2box[lead]
+            crop = gray[y0:y1, x0:x1]
+            trace = smooth_signal(extract_trace_centerline(crop), win=11)
+            pxmm = (grid_info.get("px_small_x") or grid_info.get("px_small_y") or 10.0) if grid_info else 10.0
+            pxsec = estimate_px_per_sec(pxmm, 25.0) or 250.0
+            rpeaks_result = pan_tompkins_like(trace, pxsec)
+            peaks = rpeaks_result.get("peaks_idx", [])
+            report["capabilities"].append("rpeaks")
+            report["measures"]["rpeaks_lead"] = lead
+            report["measures"]["rpeaks_count"] = len(peaks)
+            if len(peaks) >= 2:
+                rr = np.diff(peaks) / pxsec
+                report["measures"]["hr_bpm"] = round(60.0 / float(np.median(rr)), 1)
+
+        # Intervals
+        if "intervals" in ops_lower and rpeaks_result and seg_leads:
+            from cv.intervals_refined import intervals_refined_from_trace
+            lab2box = {d["lead"]: d["bbox"] for d in seg_leads}
+            lead = report["measures"].get("rpeaks_lead", "II")
+            x0, y0, x1, y1 = lab2box[lead]
+            crop = gray[y0:y1, x0:x1]
+            trace = smooth_signal(extract_trace_centerline(crop), win=11)
+            iv = intervals_refined_from_trace(trace, rpeaks_result["peaks_idx"], pxsec)
+            report["capabilities"].append("intervals")
+            report["measures"]["intervals"] = iv.get("median", {})
+
+        # Axis
+        if "axis" in ops_lower and rpeaks_result and seg_leads:
+            from cv.axis import frontal_axis_from_image
+            lab2box = {d["lead"]: d["bbox"] for d in seg_leads}
+            if "I" in lab2box and "aVF" in lab2box:
+                peaks = rpeaks_result.get("peaks_idx", [])
+                axis = frontal_axis_from_image(
+                    gray,
+                    {"I": lab2box["I"], "aVF": lab2box["aVF"]},
+                    {"I": peaks, "aVF": peaks},
+                    {"I": pxsec, "aVF": pxsec},
+                )
+                report["capabilities"].append("axis")
+                report["measures"]["axis"] = {
+                    "angle_deg": axis.get("angle_deg"),
+                    "label": axis.get("label"),
+                }
+
     except Exception as e:
         report["flags"].append(f"error: {str(e)[:200]}")
 

@@ -1,6 +1,6 @@
 
 import dash
-from dash import html, dcc, Input, Output, State
+from dash import html, dcc, Input, Output, State, ctx
 import plotly.graph_objs as go
 import numpy as np, base64, json
 from PIL import Image
@@ -20,10 +20,10 @@ def synth_wave(phase=0.0, n=2000):
 leads = ["I","II","III","aVR","aVL","aVF","V1","V2","V3","V4","V5","V6"]
 series = [synth_wave(phase=i*0.1) for i in range(len(leads))]
 traces = [go.Scatter(y=series[i], mode="lines", name=leads[i], visible=True) for i in range(len(leads))]
-layout = go.Layout(title="12 derivações sintéticas — zoom habilitado",
+fig_layout = go.Layout(title="12 derivações sintéticas — zoom habilitado",
                    legend=dict(orientation="h"), xaxis=dict(title="Tempo (s)"),
                    yaxis=dict(title="mV"))
-fig_synth = go.Figure(data=traces, layout=layout)
+fig_synth = go.Figure(data=traces, layout=fig_layout)
 
 def decode_image(content):
     header, b64 = content.split(",")
@@ -70,26 +70,27 @@ app.layout = html.Div([
             ),
             dcc.Textarea(id="upload-meta", placeholder="Cole o sidecar META (JSON) opcional...", style={"width":"100%","height":"120px"}),
             html.Div([
-    dcc.Checklist(id='ops', options=[
-        {'label':'Deskew','value':'deskew'},
-        {'label':'Normalize (px/mm≈10)','value':'normalize'}
-    ], value=[]),
-    html.Label('Layout'), dcc.Dropdown(id='layout-select', options=[
-        {'label':'3x4','value':'3x4'},
-        {'label':'6x2','value':'6x2'},
-        {'label':'3x4 + ritmo (II)','value':'3x4+rhythm'}
-    ], value='3x4', clearable=False, style={'width':'260px'})
-], style={'display':'flex','gap':'16px','alignItems':'center','marginBottom':'8px'}),
-html.Button("Processar", id="btn-process", n_clicks=0),
+                dcc.Checklist(id='ops', options=[
+                    {'label':'Deskew','value':'deskew'},
+                    {'label':'Normalize (px/mm≈10)','value':'normalize'}
+                ], value=[]),
+                html.Label('Layout'), dcc.Dropdown(id='layout-select', options=[
+                    {'label':'3x4','value':'3x4'},
+                    {'label':'6x2','value':'6x2'},
+                    {'label':'3x4 + ritmo (II)','value':'3x4+rhythm'}
+                ], value='3x4', clearable=False, style={'width':'260px'})
+            ], style={'display':'flex','gap':'16px','alignItems':'center','marginBottom':'8px'}),
+            html.Button("Processar", id="btn-process", n_clicks=0),
             html.Div(id="upload-summary", style={"marginTop":"10px","whiteSpace":"pre-wrap"}),
-html.Div([
-  html.Label('Lead para FC (R-peaks)'),
-  dcc.Dropdown(id='lead-select', options=[{'label':l,'value':l} for l in ['II','V2','V5']], value='II', clearable=False, style={'width':'200px'}),
-  html.Button('R-peaks robustos', id='btn-rrob', n_clicks=0),
-  html.Button('Intervalos (PR/QRS/QT/QTc)', id='btn-intervals', n_clicks=0),
-  html.Button('Eixo (I/aVF)', id='btn-axis', n_clicks=0)
-], style={'display':'flex','gap':'12px','alignItems':'center','marginTop':'8px'})
-            dcc.Graph(id="overlay", figure=go.Figure())
+            html.Div([
+                html.Label('Lead para FC (R-peaks)'),
+                dcc.Dropdown(id='lead-select', options=[{'label':l,'value':l} for l in ['II','V2','V5']], value='II', clearable=False, style={'width':'200px'}),
+                html.Button('R-peaks robustos', id='btn-rrob', n_clicks=0),
+                html.Button('Intervalos (PR/QRS/QT/QTc)', id='btn-intervals', n_clicks=0),
+                html.Button('Eixo (I/aVF)', id='btn-axis', n_clicks=0),
+                html.Button('Ritmo', id='btn-rhythm', n_clicks=0),
+            ], style={'display':'flex','gap':'12px','alignItems':'center','marginTop':'8px'}),
+            dcc.Graph(id="overlay", figure=go.Figure()),
         ], className="card", style={"maxWidth":"900px"})
     ], style={"marginBottom":"16px"}),
     html.Div([
@@ -104,13 +105,20 @@ html.Div([
 @app.callback(
     Output("overlay","figure"),
     Output("upload-summary","children"),
-    Input("btn-process","n_clicks"), Input('btn-hr','n_clicks'), Input('btn-rrob','n_clicks'), Input('btn-intervals','n_clicks'), Input('btn-axis','n_clicks'),
+    Input("btn-process","n_clicks"),
+    Input('btn-rrob','n_clicks'),
+    Input('btn-intervals','n_clicks'),
+    Input('btn-axis','n_clicks'),
+    Input('btn-rhythm','n_clicks'),
     State("upload-ecg","contents"),
     State("upload-ecg","filename"),
-    State("upload-meta","value"), State('ops','value'), State('layout-select','value'),
+    State("upload-meta","value"),
+    State('ops','value'),
+    State('layout-select','value'),
+    State('lead-select','value'),
     prevent_initial_call=True
 )
-def process(n, nhr, nrrob, nintv, naxis, content, filename, meta_text, ops, layout):
+def process(n, nrrob, nintv, naxis, nrhythm, content, filename, meta_text, ops, layout_sel, lead_sel):
     if not content:
         return go.Figure(), "Nenhuma imagem enviada."
     img = decode_image(content)
@@ -121,72 +129,109 @@ def process(n, nhr, nrrob, nintv, naxis, content, filename, meta_text, ops, layo
         img = rotate_image(img, info['angle_deg'])
     if ops and 'normalize' in ops:
         from cv.normalize import normalize_scale
-        img, scale, pxmm = normalize_scale(img, 10.0)
+        img, _scale, _pxmm = normalize_scale(img, 10.0)
     # META opcional
     meta = None
     if meta_text:
         try: meta = json.loads(meta_text)
         except Exception as e: meta = {"_error": f"Falha lendo META: {e}"}
 
-    # Grid + segmentação básica (servidor)
+    # Grid + segmentação
     from cv.grid_detect import estimate_grid_period_px
-    from cv.segmentation import segment_12leads_basic, find_content_bbox
-from cv.segmentation_ext import segment_layout
+    from cv.segmentation import find_content_bbox
+    from cv.segmentation_ext import segment_layout
     arr = np.asarray(img.convert("L"))
     grid = estimate_grid_period_px(np.asarray(img))
     bbox = find_content_bbox(arr)
-    leads = segment_layout(arr, layout=layout, bbox=bbox)
+    seg_leads = segment_layout(arr, layout=layout_sel, bbox=bbox)
     from cv.lead_ocr import detect_labels_per_box
-    seg = {"content_bbox": bbox, "leads": leads}
-    labels = detect_labels_per_box(arr, [d['bbox'] for d in leads])
-    summary = [f"Arquivo: {filename}", f"Layout: {layout}", f"Rótulos detectados: {sum(1 for d in labels if d.get('label'))}/{len(labels)}",
-               f"Grid small≈{grid.get('px_small_x') or grid.get('px_small_y'):.1f}px, big≈{grid.get('px_big_x') or grid.get('px_big_y'):.1f}px (conf {grid.get('confidence',0):.2f})",
-               f"Content bbox: {bbox} | Leads: {len(leads)}"]
+    seg = {"content_bbox": bbox, "leads": seg_leads}
+    labels = detect_labels_per_box(arr, [d['bbox'] for d in seg_leads])
+    px_small = grid.get('px_small_x') or grid.get('px_small_y') or 0
+    px_big = grid.get('px_big_x') or grid.get('px_big_y') or 0
+    summary = [
+        f"Arquivo: {filename}",
+        f"Layout: {layout_sel}",
+        f"Rótulos detectados: {sum(1 for d in labels if d.get('label'))}/{len(labels)}",
+        f"Grid small≈{px_small:.1f}px, big≈{px_big:.1f}px (conf {grid.get('confidence',0):.2f})",
+        f"Content bbox: {bbox} | Leads: {len(seg_leads)}",
+    ]
     if meta and isinstance(meta, dict):
         m = meta.get("measures", {})
         qt = m.get("qt_ms"); rr = m.get("rr_ms") or (60000.0/(m.get("fc_bpm") or 0) if m.get("fc_bpm") else None)
         if qt and rr:
             summary.append(f"QT: {qt} ms | QTc (B/F): {qtc_b(qt, rr):.1f}/{qtc_f(qt, rr):.1f} ms")
-    # Se solicitado Estimar FC, calcula em lead selecionável (II por padrão)
+
+    # CV imports for analysis
     from cv.rpeaks_from_image import extract_trace_centerline, smooth_signal, estimate_px_per_sec
     from cv.rpeaks_robust import pan_tompkins_like
     from cv.intervals import intervals_from_trace
-    # estimadores (opcionais, via botões)
-    if nrrob or nintv:
-        lab = 'II'
-        lab2box = {d['lead']: d['bbox'] for d in leads}
+
+    lab2box = {d['lead']: d['bbox'] for d in seg_leads}
+
+    # Helper: get px/sec
+    def _get_pxsec():
+        pxmm = grid.get('px_small_x') or grid.get('px_small_y') or 10.0
+        return estimate_px_per_sec(pxmm, 25.0) or 250.0
+
+    triggered = ctx.triggered_id
+
+    # R-peaks robustos
+    if triggered == 'btn-rrob' or triggered == 'btn-intervals':
+        lab = lead_sel or 'II'
         if lab in lab2box:
             x0,y0,x1,y1 = lab2box[lab]
             crop = arr[y0:y1, x0:x1]
             trace = smooth_signal(extract_trace_centerline(crop), win=11)
-            from cv.grid_detect import estimate_grid_period_px
-            pxmm = (estimate_grid_period_px(np.asarray(img)).get('px_small_x') or estimate_grid_period_px(np.asarray(img)).get('px_small_y'))
-            pxsec = estimate_px_per_sec(pxmm, 25.0) or 250.0
-            if nrrob:
-                rdet = pan_tompkins_like(trace, pxsec)
-                summary.append(f"R-peaks robustos: {len(rdet['peaks_idx'])} picos (fs≈{pxsec:.1f} px/s)")
-            if nintv:
-                rdet = pan_tompkins_like(trace, pxsec)
+            pxsec = _get_pxsec()
+            rdet = pan_tompkins_like(trace, pxsec)
+            if triggered == 'btn-rrob':
+                summary.append(f"R-peaks robustos ({lab}): {len(rdet['peaks_idx'])} picos (fs≈{pxsec:.1f} px/s)")
+            if triggered == 'btn-intervals':
                 iv = intervals_from_trace(trace, rdet['peaks_idx'], pxsec)
                 m = iv['median']
                 summary.append(f"PR {m.get('PR_ms')} ms | QRS {m.get('QRS_ms')} ms | QT {m.get('QT_ms')} ms | QTcB {m.get('QTc_B')} ms | QTcF {m.get('QTc_F')} ms")
-    if naxis:
+
+    # Eixo
+    if triggered == 'btn-axis':
         from cv.axis import frontal_axis_from_image
-        lab2box = {d['lead']: d['bbox'] for d in leads}
-        from cv.rpeaks_from_image import extract_trace_centerline, smooth_signal, estimate_px_per_sec
-        from cv.rpeaks_robust import pan_tompkins_like
-        from cv.grid_detect import estimate_grid_period_px
-        lab = 'II'
         if 'I' in lab2box and 'aVF' in lab2box:
             arrL = np.asarray(img.convert('L'))
-            x0,y0,x1,y1 = lab2box[lab] if lab in lab2box else list(lab2box.values())[0]['bbox']
+            ref_lead = lead_sel if lead_sel in lab2box else 'II'
+            x0,y0,x1,y1 = lab2box.get(ref_lead, list(lab2box.values())[0])
             crop = arrL[y0:y1, x0:x1]
             trace = smooth_signal(extract_trace_centerline(crop), win=11)
-            pxmm = (estimate_grid_period_px(np.asarray(img)).get('px_small_x') or estimate_grid_period_px(np.asarray(img)).get('px_small_y'))
-            pxsec = estimate_px_per_sec(pxmm, 25.0) or 250.0
+            pxsec = _get_pxsec()
             rdet = pan_tompkins_like(trace, pxsec)
             axis = frontal_axis_from_image(arrL, {'I': lab2box['I'], 'aVF': lab2box['aVF']}, {'I': rdet['peaks_idx'], 'aVF': rdet['peaks_idx']}, {'I': pxsec, 'aVF': pxsec})
             summary.append(f"Eixo: {axis.get('angle_deg',0):.1f}° — {axis.get('label','?')}")
+
+    # Ritmo
+    if triggered == 'btn-rhythm':
+        lab = lead_sel or 'II'
+        if lab in lab2box:
+            x0,y0,x1,y1 = lab2box[lab]
+            crop = arr[y0:y1, x0:x1]
+            trace = smooth_signal(extract_trace_centerline(crop), win=11)
+            pxsec = _get_pxsec()
+            rdet = pan_tompkins_like(trace, pxsec)
+            peaks = rdet.get('peaks_idx', [])
+            if len(peaks) >= 2:
+                rr_arr = np.diff(peaks) / pxsec
+                hr = 60.0 / np.median(rr_arr)
+                sdnn = 1000.0 * float(np.std(rr_arr, ddof=1)) if len(rr_arr) > 1 else 0.0
+                cv_rr = float(np.std(rr_arr) / (np.mean(rr_arr) + 1e-9))
+                label = "Indeterminado"
+                if cv_rr < 0.06 and sdnn < 60:
+                    label = "Provável sinusal (RR regular)"
+                elif cv_rr > 0.12 and sdnn > 100:
+                    label = "Irregular (suspeitar FA se P ausente)"
+                else:
+                    label = "Possível irregularidade leve/variação sinusal"
+                summary.append(f"Ritmo ({lab}): {label} | HR≈{hr:.0f} bpm | SDNN≈{sdnn:.1f} ms | CV-RR={cv_rr:.3f}")
+            else:
+                summary.append(f"Ritmo ({lab}): Picos insuficientes ({len(peaks)})")
+
     fig = make_overlay_figure(img, seg)
     return fig, "\n".join(summary)
 

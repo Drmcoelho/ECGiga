@@ -13,10 +13,10 @@ def _energy(x, win):
     win = max(3, int(win) | 1)
     k = np.ones(win)/win
     y = np.convolve(x*x, k, mode="same")
-    return (y - y.min())/(y.ptp()+1e-9)
+    return (y - y.min())/((y.max() - y.min())+1e-9)
 
 def _norm01(x):
-    return (x - x.min())/(x.ptp()+1e-9)
+    return (x - x.min())/((x.max() - x.min())+1e-9)
 
 def _stable(gabs, start, direction, fs, dur_ms=15, thr=0.12):
     dur = int(max(1, dur_ms*fs/1000.0))
