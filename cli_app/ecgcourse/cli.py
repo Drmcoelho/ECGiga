@@ -1036,3 +1036,128 @@ def checklist_lvh(image_path: str = typer.Argument(..., help="PNG/JPG"),
         sl = rep['sokolow_lyon_mm']; cm = rep['cornell_mm']; thr = rep['cornell_threshold_mm']
         print(f"Sokolow-Lyon={sl:.1f} mm | Cornell={cm:.1f} mm (thr={thr:.1f}) | LVH: S-L={rep['LVH_sokolow']} Cornell={rep['LVH_cornell']}")
     return rep
+
+
+# ── Phase 18 — Datasets clínicos (PTB-XL, PhysioNet) ──────────────────────
+
+datasets_app = typer.Typer(help="Datasets clínicos (PTB-XL, PhysioNet).")
+app.add_typer(datasets_app, name="datasets")
+
+
+@datasets_app.command("download")
+def datasets_download(
+    name: str = typer.Option("ptb-xl", "--name", help="Nome do dataset (ex: ptb-xl, mit-bih)."),
+    dest: str = typer.Option(None, "--dest", help="Diretório destino."),
+):
+    """Baixar um dataset do PhysioNet."""
+    from datasets.physionet import download_dataset, DATASETS
+
+    if name not in DATASETS:
+        available = ", ".join(sorted(DATASETS.keys()))
+        print(f"[bold red]Dataset '{name}' não reconhecido.[/] Disponíveis: {available}")
+        raise typer.Exit(code=1)
+
+    dest_dir = dest or f"datasets/{name}"
+    print(f"[bold cyan]Baixando dataset '{name}' para {dest_dir}...[/]")
+    try:
+        result_path = download_dataset(name, dest_dir=dest_dir)
+        print(f"[bold green]Download concluído![/] Salvo em: {result_path}")
+    except Exception as e:
+        print(f"[bold red]Erro no download:[/] {e}")
+        raise typer.Exit(code=1)
+
+
+@datasets_app.command("browse")
+def datasets_browse(
+    name: str = typer.Option("ptb-xl", "--name", help="Nome do dataset."),
+    diagnosis: str = typer.Option(None, "--diagnosis", help="Filtrar por código SCP (ex: MI, NORM)."),
+    page: int = typer.Option(0, "--page", help="Número da página (0-indexed)."),
+):
+    """Navegar registros de um dataset."""
+    if name != "ptb-xl":
+        print(f"[bold red]Browse disponível apenas para ptb-xl no momento.[/]")
+        raise typer.Exit(code=1)
+
+    from datasets.ptbxl import browse_records, PTBXL_LABELS
+
+    base_dir = f"datasets/{name}"
+    try:
+        result = browse_records(base_dir, diagnosis=diagnosis, page=page)
+    except FileNotFoundError as e:
+        print(f"[bold red]Dataset não encontrado.[/] {e}")
+        print("Execute [bold]ecgcourse datasets download --name ptb-xl[/] primeiro.")
+        raise typer.Exit(code=1)
+
+    table = Table(title=f"PTB-XL — Página {result['page']+1}/{result['total_pages']} ({result['total']} registros)")
+    table.add_column("ECG ID", style="cyan")
+    table.add_column("Idade", justify="center")
+    table.add_column("Sexo", justify="center")
+    table.add_column("Diagnósticos", style="green")
+
+    for rec in result["records"]:
+        diag_str = ", ".join(rec["label_descriptions"][:5])
+        if len(rec["label_descriptions"]) > 5:
+            diag_str += f" (+{len(rec['label_descriptions'])-5})"
+        table.add_row(
+            str(rec["ecg_id"]),
+            str(rec.get("patient_age", "?")),
+            str(rec.get("sex", "?")),
+            diag_str,
+        )
+
+    print(table)
+
+
+@datasets_app.command("info")
+def datasets_info(
+    name: str = typer.Option("ptb-xl", "--name", help="Nome do dataset."),
+):
+    """Exibir informações sobre um dataset."""
+    from datasets.physionet import DATASETS
+
+    if name not in DATASETS:
+        available = ", ".join(sorted(DATASETS.keys()))
+        print(f"[bold red]Dataset '{name}' não reconhecido.[/] Disponíveis: {available}")
+        raise typer.Exit(code=1)
+
+    info = DATASETS[name]
+    panel_text = (
+        f"[bold]{info['name']}[/]\n\n"
+        f"{info['description']}\n\n"
+        f"[bold]Registros:[/] {info['records']}\n"
+        f"[bold]Derivações:[/] {info['leads']}\n"
+        f"[bold]Freq. amostragem:[/] {info['sampling_rates']} Hz\n"
+        f"[bold]URL:[/] {info['url']}\n"
+        f"[bold]Referência:[/] {info['reference']}"
+    )
+    print(Panel.fit(panel_text, title="Dataset Info"))
+
+
+@datasets_app.command("render")
+def datasets_render(
+    name: str = typer.Option("ptb-xl", "--name", help="Nome do dataset."),
+    record_id: str = typer.Option(..., "--record-id", help="ID do registro (ex: 00001)."),
+    lead: str = typer.Option("II", "--lead", help="Derivação a renderizar."),
+    out: str = typer.Option("render.png", "--out", help="Caminho do arquivo de saída."),
+):
+    """Renderizar um registro como imagem PNG."""
+    if name != "ptb-xl":
+        print(f"[bold red]Render disponível apenas para ptb-xl no momento.[/]")
+        raise typer.Exit(code=1)
+
+    from datasets.ptbxl import load_record, record_to_image
+
+    base_dir = f"datasets/{name}"
+    try:
+        record = load_record(base_dir, record_id)
+    except FileNotFoundError as e:
+        print(f"[bold red]Registro não encontrado.[/] {e}")
+        raise typer.Exit(code=1)
+
+    try:
+        img = record_to_image(record, lead=lead)
+        img.save(out)
+        print(f"[bold green]Imagem salva em:[/] {out}")
+    except ValueError as e:
+        print(f"[bold red]Erro:[/] {e}")
+        raise typer.Exit(code=1)
