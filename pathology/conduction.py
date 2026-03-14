@@ -1,11 +1,11 @@
-"""Conduction abnormality detection.
+"""Detecção de anormalidades de condução.
 
-Detects:
-- Brugada pattern (Type 1, 2, 3) in right precordial leads
-- Digitalis effect (ST "scooping", PR prolongation)
-- Bundle branch block classification (RBBB, LBBB, fascicular blocks)
+Detecta:
+- Padrão de Brugada (Tipo 1, 2, 3) nas derivações precordiais direitas
+- Efeito digitálico (ST em colher, prolongamento de PR)
+- Classificação de bloqueio de ramo (BRD, BRE, bloqueios fasciculares)
 
-References:
+Referências:
 - Brugada et al., "Present status of Brugada syndrome", JACC, 2018.
 - Surawicz & Knilans, "Chou's Electrocardiography in Clinical Practice", 6th ed.
 """
@@ -26,32 +26,32 @@ def detect_brugada_pattern(
     fever: bool = False,
     family_history_scd: bool = False,
 ) -> dict[str, Any]:
-    """Detect Brugada pattern in right precordial leads.
+    """Detecta padrão de Brugada nas derivações precordiais direitas.
 
-    Brugada types:
-    - Type 1 (coved): ST elevation >=2mm with coved morphology and T inversion in V1-V2
-      → Diagnostic (pathognomonic)
-    - Type 2 (saddleback): ST elevation >=2mm with saddleback morphology in V1-V2
-      → Suggestive (needs provocation test)
-    - Type 3: ST elevation <1mm with saddleback morphology
-      → Non-diagnostic alone
+    Tipos de Brugada:
+    - Tipo 1 (coved): Supra de ST >= 2mm com morfologia coved e T invertida em V1-V2
+      -> Diagnóstico (patognomônico)
+    - Tipo 2 (saddleback): Supra de ST >= 2mm com morfologia saddleback em V1-V2
+      -> Sugestivo (necessita teste provocativo)
+    - Tipo 3: Supra de ST < 1mm com morfologia saddleback
+      -> Não diagnóstico isoladamente
 
-    Parameters
+    Parâmetros
     ----------
-    st_morphology_v1, st_morphology_v2 : str, optional
-        'coved', 'saddleback', 'normal', or None.
-    st_elevation_v1_mv, st_elevation_v2_mv : float, optional
-        ST elevation in millivolts.
-    t_wave_v1, t_wave_v2 : str, optional
-        T wave description ('inverted', 'positive', 'biphasic').
+    st_morphology_v1, st_morphology_v2 : str, opcional
+        'coved', 'saddleback', 'normal', ou None.
+    st_elevation_v1_mv, st_elevation_v2_mv : float, opcional
+        Supradesnivelamento de ST em milivolts.
+    t_wave_v1, t_wave_v2 : str, opcional
+        Descrição da onda T ('inverted', 'positive', 'biphasic').
     rbbb_pattern : bool
-        Whether RBBB-like pattern is present (common in Brugada).
+        Se padrão tipo RBBB está presente (comum em Brugada).
     fever : bool
-        Fever can unmask or worsen Brugada pattern.
+        Febre pode desmascarar ou agravar padrão de Brugada.
     family_history_scd : bool
-        Family history of sudden cardiac death.
+        História familiar de morte súbita cardíaca.
 
-    Returns
+    Retorna
     -------
     dict
         - detected: bool
@@ -76,7 +76,7 @@ def detect_brugada_pattern(
     brugada_type = "none"
     score = 0.0
 
-    # Type 1: Coved ST >= 2mm (0.2 mV) with T inversion
+    # Tipo 1: Coved ST >= 2mm (0,2 mV) com T invertida
     if ("coved" in morph_v1 or "coved" in morph_v2) and max_st >= 0.2:
         if "invert" in t_v1 or "invert" in t_v2:
             brugada_type = "1"
@@ -86,7 +86,7 @@ def detect_brugada_pattern(
             )
             findings.append("PADRÃO DIAGNÓSTICO — não necessita teste provocativo")
 
-    # Type 2: Saddleback ST >= 2mm
+    # Tipo 2: Saddleback ST >= 2mm
     elif ("saddleback" in morph_v1 or "saddleback" in morph_v2) and max_st >= 0.2:
         brugada_type = "2"
         score = 0.5
@@ -95,18 +95,18 @@ def detect_brugada_pattern(
         )
         findings.append("Padrão sugestivo — requer teste provocativo (ajmalina/flecainida)")
 
-    # Type 3: Saddleback ST < 1mm
+    # Tipo 3: Saddleback ST < 1mm
     elif ("saddleback" in morph_v1 or "saddleback" in morph_v2) and max_st < 0.1:
         brugada_type = "3"
         score = 0.2
         findings.append("Padrão Brugada Tipo 3: saddleback com ST < 1mm")
 
-    # ST elevation without clear morphology description
+    # Supra de ST sem descrição clara de morfologia
     elif max_st >= 0.2 and (rbbb_pattern or "invert" in t_v1 or "invert" in t_v2):
         score = 0.3
         findings.append(f"ST elevado em V1/V2 ({max_st:.1f} mV) com padrão atípico")
 
-    # Modifiers
+    # Modificadores
     if fever and brugada_type != "none":
         score = min(1.0, score + 0.1)
         findings.append("Febre pode desmascarar/agravar padrão de Brugada")
@@ -121,7 +121,7 @@ def detect_brugada_pattern(
 
     detected = brugada_type in ("1", "2") and score > 0.3
 
-    # Recommendations
+    # Recomendações
     if brugada_type == "1":
         recommendations = [
             "Encaminhar para eletrofisiologista",
@@ -160,31 +160,31 @@ def detect_digitalis_effect(
     st_morphology: dict[str, str] | None = None,
     medication_digitalis: bool = False,
 ) -> dict[str, Any]:
-    """Detect digitalis (digoxin) effect on ECG.
+    """Detecta efeito digitálico (digoxina) no ECG.
 
-    Digitalis effect (NOT toxicity):
-    - ST depression with "reverse tick" / scooping morphology
-    - Short QTc
-    - T wave flattening or inversion
-    - PR prolongation (vagal effect)
-    - Possible U waves
+    Efeito digitálico (NÃO toxicidade):
+    - Infradesnivelamento de ST com morfologia em colher / "reverse tick"
+    - QTc curto
+    - Achatamento ou inversão de onda T
+    - Prolongamento de PR (efeito vagotônico)
+    - Possíveis ondas U
 
-    Digitalis toxicity:
-    - All of the above plus arrhythmias
-    - Atrial tachycardia with block
-    - Bidirectional VT
-    - Regularized AF
+    Toxicidade digitálica:
+    - Todos os achados acima mais arritmias
+    - Taquicardia atrial com bloqueio
+    - TV bidirecional
+    - FA regularizada
 
-    Parameters
+    Parâmetros
     ----------
     report : dict
-        ECG report.
-    st_morphology : dict, optional
-        Lead -> ST morphology description.
+        Laudo de ECG.
+    st_morphology : dict, opcional
+        Derivação -> descrição da morfologia do ST.
     medication_digitalis : bool
-        Whether patient is known to be on digoxin.
+        Se o paciente sabidamente usa digoxina.
 
-    Returns
+    Retorna
     -------
     dict
         - detected: bool
@@ -202,7 +202,7 @@ def detect_digitalis_effect(
     pr_ms = iv.get("PR_ms")
     qtc = iv.get("QTc_B")
 
-    # ST "scooping" / reverse tick pattern
+    # Padrão de ST em colher / "reverse tick"
     if st_morphology:
         scooped_leads = [
             lead for lead, morph in st_morphology.items()
@@ -213,17 +213,17 @@ def detect_digitalis_effect(
             findings.append(f"ST em colher (scooping) em {', '.join(scooped_leads)}")
             score += 0.35
 
-    # Short QTc
+    # QTc curto
     if qtc and qtc < 360:
         findings.append(f"QTc encurtado ({qtc:.0f} ms)")
         score += 0.15
 
-    # PR prolongation
+    # Prolongamento de PR
     if pr_ms and pr_ms > 200:
         findings.append(f"PR prolongado ({pr_ms:.0f} ms) — efeito vagotônico")
         score += 0.15
 
-    # Known medication
+    # Medicação conhecida
     if medication_digitalis:
         score += 0.25
         findings.append("Uso conhecido de digitálico")
@@ -236,7 +236,7 @@ def detect_digitalis_effect(
 
     score = min(1.0, score)
 
-    # Check for toxicity signs
+    # Verifica sinais de toxicidade
     toxicity_signs = []
     hr = 60.0 / iv.get("RR_s", 1) if iv.get("RR_s") else None
     if hr and hr > 100 and pr_ms and pr_ms > 200:
@@ -277,35 +277,35 @@ def classify_bundle_branch_block(
     septal_q_absent: bool = False,
     broad_notched_r_lateral: bool = False,
 ) -> dict[str, Any]:
-    """Classify bundle branch blocks and fascicular blocks.
+    """Classifica bloqueios de ramo e bloqueios fasciculares.
 
-    Classifications:
-    - Complete RBBB: QRS ≥120ms + rSR'/rsR' in V1 + wide S in V6/I
-    - Complete LBBB: QRS ≥120ms + broad R in V6 + QS/rS in V1 + no septal Q
-    - Incomplete RBBB/LBBB: QRS 100-119ms with morphological criteria
-    - LAFB: Left axis (-45° to -90°) + qR in I/aVL + rS in II/III
-    - LPFB: Right axis (>90°) + rS in I/aVL + qR in III + no RVH
+    Classificações:
+    - BRD completo: QRS >= 120ms + rSR'/rsR' em V1 + S largo em V6/I
+    - BRE completo: QRS >= 120ms + R largo em V6 + QS/rS em V1 + sem Q septal
+    - BRD/BRE incompleto: QRS 100-119ms com critérios morfológicos
+    - BDAS (LAFB): Desvio do eixo para esquerda (-45° a -90°) + qR em I/aVL + rS em II/III
+    - BDPI (LPFB): Desvio do eixo para direita (>90°) + rS em I/aVL + qR em III + sem SVD
 
-    Parameters
+    Parâmetros
     ----------
     qrs_duration_ms : float
-        QRS duration in ms.
-    morphology_v1 : str, optional
-        QRS morphology in V1: 'rsR', 'rSR', 'RSR', 'QS', 'rS', 'R', etc.
-    morphology_v6 : str, optional
-        QRS morphology in V6: 'qRs', 'R', 'RS', 'rS', 'QS', etc.
-    axis_deg : float, optional
-        QRS axis in degrees.
+        Duração do QRS em ms.
+    morphology_v1 : str, opcional
+        Morfologia do QRS em V1: 'rsR', 'rSR', 'RSR', 'QS', 'rS', 'R', etc.
+    morphology_v6 : str, opcional
+        Morfologia do QRS em V6: 'qRs', 'R', 'RS', 'rS', 'QS', etc.
+    axis_deg : float, opcional
+        Eixo do QRS em graus.
     septal_q_absent : bool
-        Whether septal Q waves are absent in V5/V6 (LBBB criterion).
+        Se ondas Q septais estão ausentes em V5/V6 (critério de BRE).
     broad_notched_r_lateral : bool
-        Whether broad/notched R in lateral leads (LBBB).
+        Se R alargado/entalhado nas derivações laterais (BRE).
 
-    Returns
+    Retorna
     -------
     dict
-        - classification: str (e.g., 'RBBB', 'LBBB', 'LAFB', etc.)
-        - complete: bool (True for complete, False for incomplete)
+        - classification: str (ex.: 'RBBB', 'LBBB', 'LAFB', etc.)
+        - complete: bool (True para completo, False para incompleto)
         - confidence: float (0-1)
         - criteria_met: list[str]
         - clinical_significance: str
@@ -328,7 +328,7 @@ def classify_bundle_branch_block(
 
     complete = qrs_duration_ms >= 120
 
-    # --- RBBB detection ---
+    # --- Detecção de BRD ---
     rbbb_score = 0.0
     if "RSR" in v1 or "RSR'" in v1 or v1 in ("RSR", "RSRP"):
         rbbb_score += 0.4
@@ -345,7 +345,7 @@ def classify_bundle_branch_block(
         rbbb_score += 0.2
         criteria_met.append(f"QRS ≥ 120 ms ({qrs_duration_ms:.0f} ms)")
 
-    # --- LBBB detection ---
+    # --- Detecção de BRE ---
     lbbb_score = 0.0
     if v1 in ("QS", "RS") or "RS" in v1.lower():
         lbbb_score += 0.2
@@ -368,7 +368,7 @@ def classify_bundle_branch_block(
     if complete:
         lbbb_score += 0.2
 
-    # --- Fascicular blocks ---
+    # --- Bloqueios fasciculares ---
     lafb_score = 0.0
     lpfb_score = 0.0
 
@@ -380,7 +380,7 @@ def classify_bundle_branch_block(
             lpfb_score += 0.4
             criteria_met.append(f"Desvio do eixo para direita ({axis_deg:.0f}°)")
 
-    # --- Determine winner ---
+    # --- Determina vencedor ---
     classifications = {
         "RBBB": rbbb_score,
         "LBBB": lbbb_score,
@@ -391,7 +391,7 @@ def classify_bundle_branch_block(
     best = max(classifications, key=classifications.get)
     best_score = classifications[best]
 
-    # Bifascicular block detection
+    # Detecção de bloqueio bifascicular
     if rbbb_score > 0.3 and lafb_score > 0.3:
         best = "RBBB + LAFB (bifascicular)"
         best_score = (rbbb_score + lafb_score) / 2
@@ -405,7 +405,7 @@ def classify_bundle_branch_block(
         best = "nonspecific_IVCD"
         criteria_met.append("Atraso de condução intraventricular inespecífico")
 
-    # Clinical significance
+    # Significado clínico
     if "LBBB" in best:
         significance = (
             "BRE novo pode indicar IAM. BRE crônico: avaliar cardiomiopatia, "
