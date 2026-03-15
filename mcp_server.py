@@ -1,19 +1,22 @@
 """
-Servidor MCP do ECGiga — API para ferramentas de análise de ECG.
+Servidor MCP do ECGiga — API completa para ferramentas de análise de ECG.
 
-Fornece endpoints para validação de quiz, análise de intervalos,
-processamento de imagens de ECG, interpretação com IA offline,
-quiz adaptativo e verificação de saúde do servidor.
-Integra os módulos de patologia, processamento de sinal e IA.
-Anteriormente: skeleton MCP server. Agora com endpoints reais. — `quiz_validate`, `analyze_intervals` and
-`ecg_image_process` — and an SSE endpoint at `/sse`.  All tool
-endpoints currently return a stubbed response indicating that the
-feature is not yet implemented.  The SSE endpoint emits a single
-"hello" event to establish a connection.  This file is intended as
-scaffolding to unblock early integration work; it does not attempt
-to fully implement the MCP specification or the underlying business
-logic.  Extend or replace these stubs with the real implementations
-as the project progresses.
+Este módulo implementa o servidor MCP (Model Context Protocol) do ECGiga,
+expondo endpoints reais e funcionais para:
+
+  /quiz_validate     — Validação de bancos MCQ contra schema JSON.
+  /analyze_intervals — Cálculo de QTc (Bazett) e flags clínicas.
+  /ecg_image_process — Pipeline completo de CV: deskew, normalização,
+                       grade, segmentação 12D, R-peaks, intervalos, eixo.
+  /ecg_interpret     — Interpretação offline com regras clínicas e patologias.
+  /quiz_adaptive     — Quiz adaptativo baseado no laudo do ECG.
+  /catalog           — Catálogo de ferramentas (schemas I/O).
+  /health            — Verificação de saúde com uptime e módulos.
+  /sse               — Server-Sent Events para handshake MCP.
+
+Todos os endpoints retornam dados estruturados (JSON) e estão integrados
+com os módulos de CV (cv/), patologia (pathology/), processamento
+de sinal (signal_processing/) e IA offline (ai/).
 """
 
 from fastapi import FastAPI, HTTPException, Request
@@ -49,57 +52,54 @@ _START_TIME = time.time()
 
 
 def sse_event(event: str, data: Any) -> str:
-    """Serialize a Server‑Sent Events (SSE) message.
+    """Serializa uma mensagem Server-Sent Events (SSE).
 
-    Parameters
+    Parâmetros
     ----------
-    event: str
-        Name of the SSE event.
-    data: Any
-        JSON‑serializable payload.
+    event : str
+        Nome do evento SSE.
+    data : Any
+        Payload serializável em JSON.
 
-    Returns
+    Retorna
     -------
     str
-        A formatted SSE message string.
+        String formatada conforme o protocolo SSE.
     """
     return f"event: {event}\ndata: {json.dumps(data)}\n\n"
 
 
 @app.get("/sse")
 async def sse_endpoint() -> StreamingResponse:
-    """Minimal Server‑Sent Events endpoint.
+    """Endpoint Server-Sent Events para handshake MCP.
 
-    This yields a single "hello" event to signal that the server is
-    alive.  In a full implementation this endpoint would produce
-    continuous updates or handshake messages as required by the MCP
-    protocol.  Clients must set the `Accept` header to
-    `text/event-stream` when connecting.
+    Emite um evento "hello" sinalizando que o servidor está ativo.
+    Clientes devem definir o header ``Accept: text/event-stream``
+    ao conectar.
     """
 
     async def event_generator() -> AsyncGenerator[str, None]:
-        # Yield a single handshake event then complete.
-        yield sse_event("hello", {"message": "MCP server skeleton ready"})
+        # Emite evento de handshake e encerra.
+        yield sse_event("hello", {"message": "Servidor MCP ECGiga pronto"})
 
     return StreamingResponse(event_generator(), media_type="text/event-stream")
 
 
 class QuizValidateInput(BaseModel):
-    """Input schema for the quiz_validate tool.
+    """Schema de entrada para a ferramenta quiz_validate.
 
-    Parameters
+    Parâmetros
     ----------
-    path: str
-        Path to the quiz file to validate.  This could be a JSON
-        file containing multiple choice questions and their
-        metadata.
+    path : str
+        Caminho (local ou URL) para o arquivo JSON do quiz contendo
+        questões de múltipla escolha e seus metadados.
     """
 
-    path: str = Field(..., description="Path to the quiz JSON file")
+    path: str = Field(..., description="Caminho para o arquivo JSON do quiz")
 
 
 class QuizValidateOutput(BaseModel):
-    """Output schema for the quiz_validate tool."""
+    """Schema de saída para a ferramenta quiz_validate."""
 
     valid: bool
     errors: List[str]
@@ -108,19 +108,16 @@ class QuizValidateOutput(BaseModel):
 @app.post("/quiz_validate", response_model=QuizValidateOutput)
 async def quiz_validate(data: QuizValidateInput) -> QuizValidateOutput:
     """
-    Validate a quiz bank against the MCQ schema defined in
-    ``quiz/schema/mcq.schema.json``.
+    Valida um banco de questões MCQ contra o schema JSON padrão.
 
-    The function accepts a path that can be either a local file path
-    or an HTTP(S) URL.  It attempts to load the JSON content and
-    validate each question entry against the predefined schema.  The
-    schema is inlined here to avoid external file dependencies.  If
-    any validation errors occur they are collected and returned.
+    Aceita um caminho local ou URL HTTP(S). Carrega o JSON e valida
+    cada questão contra o schema (inlined). Erros são coletados e
+    retornados para que o autor possa corrigir as questões.
     """
     errors: List[str] = []
     valid = True
 
-    # Inline MCQ schema (draft 2020‑12) for validation
+    # Schema MCQ inline (draft 2020-12) para validação
     mcq_schema: Dict[str, Any] = {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "title": "ECG MCQ",
@@ -144,21 +141,21 @@ async def quiz_validate(data: QuizValidateInput) -> QuizValidateOutput:
     }
 
     try:
-        # Load JSON content from file or URL
+        # Carrega conteúdo JSON de arquivo ou URL
         if data.path.startswith("http://") or data.path.startswith("https://"):
             resp = requests.get(data.path)
             resp.raise_for_status()
             content = resp.text
         else:
-            # Expand user (~) and check file exists
+            # Expande ~ e verifica se o arquivo existe
             file_path = os.path.expanduser(data.path)
             with open(file_path, "r", encoding="utf-8") as f:
                 content = f.read()
 
-        # Parse JSON
+        # Parseia o JSON
         quiz_data = json.loads(content)
 
-        # Determine the list of items to validate
+        # Determina a lista de itens para validar
         if isinstance(quiz_data, dict) and "questions" in quiz_data:
             items = quiz_data["questions"]
         elif isinstance(quiz_data, list):
@@ -166,13 +163,13 @@ async def quiz_validate(data: QuizValidateInput) -> QuizValidateOutput:
         else:
             items = [quiz_data]
 
-        # Validate each item against the schema
+        # Valida cada item contra o schema
         for idx, item in enumerate(items):
             try:
                 jsonschema.validate(instance=item, schema=mcq_schema)
             except ValidationError as ve:
                 valid = False
-                # Include index to help locate invalid item
+                # Inclui índice para facilitar localização do item inválido
                 errors.append(f"item {idx}: {ve.message}")
     except Exception as e:
         valid = False
@@ -182,7 +179,7 @@ async def quiz_validate(data: QuizValidateInput) -> QuizValidateOutput:
 
 
 class AnalyzeIntervalsInput(BaseModel):
-    """Input schema for the analyze_intervals tool."""
+    """Schema de entrada para a ferramenta analyze_intervals."""
 
     pr_ms: float = Field(..., description="PR interval (ms)")
     qrs_ms: float = Field(..., description="QRS duration (ms)")
@@ -191,7 +188,7 @@ class AnalyzeIntervalsInput(BaseModel):
 
 
 class AnalyzeIntervalsOutput(BaseModel):
-    """Output schema for the analyze_intervals tool."""
+    """Schema de saída para a ferramenta analyze_intervals."""
 
     qtc_ms: float
     flags: List[str]
@@ -201,28 +198,26 @@ class AnalyzeIntervalsOutput(BaseModel):
 @app.post("/analyze_intervals", response_model=AnalyzeIntervalsOutput)
 async def analyze_intervals(data: AnalyzeIntervalsInput) -> AnalyzeIntervalsOutput:
     """
-    Analyze cardiac intervals and calculate QTc (Bazett) with basic
-    clinical flagging.
+    Analisa intervalos cardíacos e calcula QTc (Bazett) com flags clínicas.
 
-    Given PR, QRS, QT and RR intervals (in milliseconds), the
-    corrected QT is calculated using Bazett's formula.  Flags are
-    appended based on simple threshold rules:
+    Recebe PR, QRS, QT e RR em milissegundos. O QT corrigido é calculado
+    pela fórmula de Bazett. Flags são geradas por regras de limiar:
 
-      - PR > 200 ms → first‑degree AV block
-      - PR < 120 ms and QRS < 120 ms → possible pre‑excitation
-      - QRS ≥ 120 ms → complete bundle branch block/ventricular origin
-      - QRS 110–119 ms → incomplete bundle branch block
-      - QTc ≥ 460 ms → prolonged QT
-      - QTc < 350 ms → short QT
+      - PR > 200 ms → BAV de 1º grau
+      - PR < 120 ms e QRS < 120 ms → possível pré-excitação
+      - QRS ≥ 120 ms → bloqueio de ramo completo / origem ventricular
+      - QRS 110–119 ms → bloqueio de ramo incompleto
+      - QTc ≥ 460 ms → QT prolongado
+      - QTc < 350 ms → QT curto
 
-    The explanation string concatenates all flags for human readability.
+    A string de explicação concatena todas as flags para leitura humana.
     """
     pr_ms = data.pr_ms
     qrs_ms = data.qrs_ms
     qt_ms = data.qt_ms
     rr_ms = data.rr_ms
 
-    # Compute QTc using Bazett formula (ms)
+    # Calcula QTc pela fórmula de Bazett (ms)
     try:
         rr_sec = rr_ms / 1000.0
         qtc_ms = qt_ms / math.sqrt(rr_sec) if rr_sec > 0 else float("nan")
@@ -231,7 +226,7 @@ async def analyze_intervals(data: AnalyzeIntervalsInput) -> AnalyzeIntervalsOutp
 
     flags: List[str] = []
 
-    # Flagging rules
+    # Regras de flag clínicas
     if pr_ms is not None:
         if pr_ms > 200:
             flags.append("PR > 200 ms: possível BAV de 1º grau")
@@ -244,7 +239,7 @@ async def analyze_intervals(data: AnalyzeIntervalsInput) -> AnalyzeIntervalsOutp
         elif 110 <= qrs_ms < 120:
             flags.append("QRS 110–119 ms: possível bloqueio de ramo incompleto")
 
-    # QTc thresholds (sex‑agnostic, conservative)
+    # Limiares de QTc (conservadores, sem distinção de sexo)
     if not math.isnan(qtc_ms):
         if qtc_ms >= 460:
             flags.append("QTc prolongado (≥460 ms)")
@@ -261,14 +256,14 @@ async def analyze_intervals(data: AnalyzeIntervalsInput) -> AnalyzeIntervalsOutp
 
 
 class ECGImageProcessInput(BaseModel):
-    """Input schema for the ecg_image_process tool."""
+    """Schema de entrada para a ferramenta ecg_image_process."""
 
-    image_url: str = Field(..., description="URL of the ECG image to process")
-    ops: List[str] = Field(..., description="List of operations to apply, e.g. deskew, normalize, rpeaks")
+    image_url: str = Field(..., description="URL da imagem de ECG para processamento")
+    ops: List[str] = Field(..., description="Lista de operações: deskew, normalize, grid, segment, rpeaks, intervals, axis")
 
 
 class ECGImageProcessOutput(BaseModel):
-    """Output schema for the ecg_image_process tool."""
+    """Schema de saída para a ferramenta ecg_image_process."""
 
     report: Dict[str, Any]
 
@@ -276,16 +271,16 @@ class ECGImageProcessOutput(BaseModel):
 @app.post("/ecg_image_process", response_model=ECGImageProcessOutput)
 async def ecg_image_process(data: ECGImageProcessInput) -> ECGImageProcessOutput:
     """
-    Process an ECG image through the full CV pipeline.
+    Processa uma imagem de ECG pelo pipeline completo de visão computacional.
 
-    Supported operations (via ``ops`` list):
-      - ``deskew``: Correct image rotation
-      - ``normalize``: Scale to ~10 px/mm
-      - ``grid``: Detect grid period
-      - ``segment``: Segment 12 leads (3x4 layout)
-      - ``rpeaks``: Detect R-peaks (Pan-Tompkins)
-      - ``intervals``: Measure PR/QRS/QT/QTc
-      - ``axis``: Calculate frontal axis (I/aVF)
+    Operações suportadas (via lista ``ops``):
+      - ``deskew``     — Corrige rotação da imagem.
+      - ``normalize``  — Normaliza escala para ~10 px/mm.
+      - ``grid``       — Detecta período de grade (autocorrelação).
+      - ``segment``    — Segmenta 12 derivações (layout 3×4).
+      - ``rpeaks``     — Detecta R-peaks (Pan-Tompkins-like).
+      - ``intervals``  — Mede PR/QRS/QT/QTc (multi-evidência).
+      - ``axis``       — Calcula eixo frontal a partir de I e aVF.
     """
     import numpy as np
     from PIL import Image
@@ -308,7 +303,7 @@ async def ecg_image_process(data: ECGImageProcessInput) -> ECGImageProcessOutput
         img = Image.open(io.BytesIO(resp.content)).convert("RGB")
         ops_lower = [op.lower() for op in data.ops]
 
-        # Deskew
+        # Correção de rotação (deskew)
         if "deskew" in ops_lower:
             from cv.deskew import estimate_rotation_angle, rotate_image
             info = estimate_rotation_angle(img, search_deg=6.0, step=0.5)
@@ -316,7 +311,7 @@ async def ecg_image_process(data: ECGImageProcessInput) -> ECGImageProcessOutput
             report["capabilities"].append("deskew")
             report["measures"]["deskew_angle_deg"] = info["angle_deg"]
 
-        # Normalize scale
+        # Normalização de escala
         if "normalize" in ops_lower:
             from cv.normalize import normalize_scale
             img, scale, pxmm = normalize_scale(img, 10.0)
@@ -327,7 +322,7 @@ async def ecg_image_process(data: ECGImageProcessInput) -> ECGImageProcessOutput
         arr = np.asarray(img)
         gray = np.asarray(img.convert("L"))
 
-        # Grid detection
+        # Detecção de grade
         grid_info = None
         if "grid" in ops_lower or "segment" in ops_lower or "rpeaks" in ops_lower or "intervals" in ops_lower or "axis" in ops_lower:
             from cv.grid_detect import estimate_grid_period_px
@@ -335,7 +330,7 @@ async def ecg_image_process(data: ECGImageProcessInput) -> ECGImageProcessOutput
             report["capabilities"].append("grid")
             report["measures"]["grid"] = grid_info
 
-        # Segmentation
+        # Segmentação 12 derivações
         seg_leads = None
         if "segment" in ops_lower or "rpeaks" in ops_lower or "intervals" in ops_lower or "axis" in ops_lower:
             from cv.segmentation import find_content_bbox
@@ -346,7 +341,7 @@ async def ecg_image_process(data: ECGImageProcessInput) -> ECGImageProcessOutput
             report["measures"]["content_bbox"] = bbox
             report["measures"]["leads_count"] = len(seg_leads)
 
-        # R-peaks
+        # Detecção de R-peaks
         rpeaks_result = None
         pxsec = 250.0
         if ("rpeaks" in ops_lower or "intervals" in ops_lower or "axis" in ops_lower) and seg_leads:
@@ -368,7 +363,7 @@ async def ecg_image_process(data: ECGImageProcessInput) -> ECGImageProcessOutput
                 rr = np.diff(peaks) / pxsec
                 report["measures"]["hr_bpm"] = round(60.0 / float(np.median(rr)), 1)
 
-        # Intervals
+        # Medição de intervalos (PR/QRS/QT/QTc)
         if "intervals" in ops_lower and rpeaks_result and seg_leads:
             from cv.intervals_refined import intervals_refined_from_trace
             lab2box = {d["lead"]: d["bbox"] for d in seg_leads}
@@ -380,7 +375,7 @@ async def ecg_image_process(data: ECGImageProcessInput) -> ECGImageProcessOutput
             report["capabilities"].append("intervals")
             report["measures"]["intervals"] = iv.get("median", {})
 
-        # Axis
+        # Cálculo do eixo frontal (I/aVF)
         if "axis" in ops_lower and rpeaks_result and seg_leads:
             from cv.axis import frontal_axis_from_image
             lab2box = {d["lead"]: d["bbox"] for d in seg_leads}
@@ -405,7 +400,7 @@ async def ecg_image_process(data: ECGImageProcessInput) -> ECGImageProcessOutput
 
 
 class ToolDefinition(BaseModel):
-    """Definition of a single tool in the MCP catalog."""
+    """Definição de uma ferramenta no catálogo MCP."""
 
     name: str
     description: str
@@ -415,29 +410,29 @@ class ToolDefinition(BaseModel):
 
 @app.get("/catalog")
 async def catalog() -> JSONResponse:
-    """Return a catalog of available tools and their schemas.
+    """Retorna o catálogo de ferramentas disponíveis e seus schemas.
 
-    The MCP spec requires the server to advertise its tools.  This
-    endpoint returns a JSON object describing the names, human
-    descriptions and JSON schemas for input/output of each tool.
-    Clients can introspect this to drive dynamic calling.
+    O protocolo MCP exige que o servidor divulgue suas ferramentas.
+    Este endpoint retorna um JSON com nomes, descrições e schemas
+    JSON de entrada/saída de cada ferramenta. Clientes podem usar
+    este catálogo para chamadas dinâmicas.
     """
     tools: List[ToolDefinition] = [
         ToolDefinition(
             name="quiz_validate",
-            description="Validate a multiple‑choice quiz bank",
+            description="Valida um banco de questões de múltipla escolha (MCQ)",
             input_schema=QuizValidateInput.model_json_schema(),
             output_schema=QuizValidateOutput.model_json_schema(),
         ),
         ToolDefinition(
             name="analyze_intervals",
-            description="Calculate QTc and derive flags from measured intervals",
+            description="Calcula QTc e gera flags clínicas a partir de intervalos medidos",
             input_schema=AnalyzeIntervalsInput.model_json_schema(),
             output_schema=AnalyzeIntervalsOutput.model_json_schema(),
         ),
         ToolDefinition(
             name="ecg_image_process",
-            description="Process an ECG image and extract structured data",
+            description="Processa imagem de ECG e extrai dados estruturados (CV pipeline)",
             input_schema=ECGImageProcessInput.model_json_schema(),
             output_schema=ECGImageProcessOutput.model_json_schema(),
         ),

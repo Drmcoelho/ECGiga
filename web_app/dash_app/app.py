@@ -77,11 +77,16 @@ app.layout = html.Div([
 # ---------------------------------------------------------------------------
 
 def _layout_analise():
-    """Layout da aba de análise de ECG."""
+    """Layout da aba de análise de ECG — pipeline completo de CV."""
     return html.Div([
     html.Div([
         html.Div([
             html.H3("Upload de ECG (PNG/JPG)"),
+            html.P(
+                "Envie uma imagem de ECG para análise automática. O pipeline detecta a grade, "
+                "segmenta as 12 derivações, localiza R-peaks, mede intervalos e calcula o eixo.",
+                style={"fontSize": "0.9em", "color": "#555", "marginBottom": "10px"},
+            ),
             dcc.Upload(
                 id='upload-ecg', children=html.Div(['Arraste e solte ou ', html.A('selecione um arquivo')]),
                 multiple=False, style={'width':'100%','height':'60px','lineHeight':'60px','borderWidth':'1px','borderStyle':'dashed','borderRadius':'5px','textAlign':'center','marginBottom':'10px'}
@@ -122,24 +127,41 @@ def _layout_analise():
 
 
 def _layout_educacao():
-    """Layout da aba de educação."""
+    """Layout da aba de educação — conteúdo didático sobre ECG."""
     return html.Div([
         html.H3("Módulo Educacional — Analogia das Câmeras"),
-        html.P(
-            "Imagine o coração como um objeto sendo fotografado por 12 câmeras (derivações). "
-            "Cada derivação vê o mesmo evento elétrico de um ângulo diferente."
-        ),
         html.Div([
-            html.H4("Mnemônico CAFÉ"),
+            html.P(
+                "Imagine o coração como um objeto sendo fotografado por 12 câmeras (derivações). "
+                "Cada derivação vê o mesmo evento elétrico de um ângulo diferente. "
+                "A atividade elétrica que se aproxima do eletrodo positivo gera uma deflexão "
+                "positiva (para cima); a que se afasta gera deflexão negativa (para baixo)."
+            ),
+            html.P(
+                "As derivações dos membros (I, II, III, aVR, aVL, aVF) avaliam o plano frontal, "
+                "enquanto as precordiais (V1–V6) avaliam o plano horizontal. Juntas, fornecem "
+                "uma visão tridimensional da atividade elétrica cardíaca.",
+                style={"marginTop": "8px"},
+            ),
+        ], className="card", style={"maxWidth": "700px"}),
+        html.Div([
+            html.H4("Mnemônico CAFÉ — Como interpretar deflexões"),
             html.Ul([
-                html.Li("C — Câmera = polo positivo"),
-                html.Li("A — Aproximando = deflexão positiva"),
-                html.Li("F — Fugindo = deflexão negativa"),
-                html.Li("É — Esquece (perpendicular) = bifásico"),
+                html.Li([html.B("C"), " — Câmera = polo positivo (onde está o eletrodo explorador)"]),
+                html.Li([html.B("A"), " — Aproximando = deflexão positiva (vetor vem em direção à câmera)"]),
+                html.Li([html.B("F"), " — Fugindo = deflexão negativa (vetor se afasta da câmera)"]),
+                html.Li([html.B("É"), " — Esquece (perpendicular) = bifásico (vetor cruza perpendicular à câmera)"]),
             ]),
-        ], className="card", style={"maxWidth": "600px"}),
+            html.P(
+                "Exemplo prático: em DII, o vetor do QRS normal (≈+60°) se aproxima do polo positivo "
+                "(perna esquerda), gerando um QRS predominantemente positivo. Em aVR, o mesmo vetor "
+                "foge do polo positivo (braço direito), gerando QRS negativo.",
+                style={"marginTop": "8px", "fontStyle": "italic"},
+            ),
+        ], className="card", style={"maxWidth": "700px", "marginTop": "16px"}),
         html.Div([
             html.H4("Explorar Derivações"),
+            html.P("Selecione uma derivação para ver sua posição anatômica, ângulo e dica clínica:"),
             dcc.Dropdown(
                 id="edu-lead-select",
                 options=[{"label": l, "value": l} for l in leads],
@@ -148,19 +170,29 @@ def _layout_educacao():
                 style={"width": "200px"},
             ),
             html.Div(id="edu-lead-info", style={"marginTop": "10px", "whiteSpace": "pre-wrap"}),
-        ], className="card", style={"maxWidth": "600px", "marginTop": "16px"}),
+        ], className="card", style={"maxWidth": "700px", "marginTop": "16px"}),
         html.Div([
-            html.H4("Visualização do Eixo Elétrico"),
+            html.H4("Visualização do Eixo Elétrico Frontal"),
+            html.P(
+                "O eixo elétrico indica a direção predominante da despolarização ventricular. "
+                "Normal: entre −30° e +90°. Desvio para a esquerda pode sugerir BDASE; "
+                "desvio para a direita pode sugerir BDPSE ou sobrecarga de VD."
+            ),
             dcc.Graph(id="edu-axis-wheel"),
-        ], className="card", style={"maxWidth": "600px", "marginTop": "16px"}),
+        ], className="card", style={"maxWidth": "700px", "marginTop": "16px"}),
     ])
 
 
 def _layout_quiz():
-    """Layout da aba de quiz."""
+    """Layout da aba de quiz — questões de múltipla escolha adaptativas."""
     return html.Div([
         html.H3("Quiz Adaptativo de ECG"),
-        html.P("Teste seus conhecimentos com questões adaptativas baseadas na análise do ECG."),
+        html.P(
+            "Teste seus conhecimentos com questões de múltipla escolha (MCQ) geradas "
+            "automaticamente. As questões são adaptadas aos achados do ECG analisado, "
+            "focando nas áreas onde há maior potencial de aprendizado — como intervalos "
+            "anormais, desvios de eixo ou padrões patológicos detectados."
+        ),
         html.Div([
             html.Label("Número de questões:"),
             dcc.Input(id="quiz-n", type="number", value=6, min=1, max=20, step=1),
@@ -171,10 +203,14 @@ def _layout_quiz():
 
 
 def _layout_simulador():
-    """Layout da aba de simulador de ECG."""
+    """Layout da aba de simulador de ECG — geração de sinais sintéticos."""
     return html.Div([
         html.H3("Simulador de ECG"),
-        html.P("Gere sinais de ECG sintéticos com diferentes patologias para estudo."),
+        html.P(
+            "Gere sinais de ECG sintéticos com diferentes patologias para estudo. "
+            "O simulador modela ondas P-QRS-T com parâmetros ajustáveis, permitindo "
+            "visualizar como alterações de frequência e patologias afetam o traçado."
+        ),
         html.Div([
             html.Label("FC (bpm):"),
             dcc.Input(id="sim-hr", type="number", value=75, min=30, max=250, step=1),
@@ -203,11 +239,16 @@ def _layout_simulador():
 
 
 def _layout_ia():
-    """Layout da aba de interpretação com IA."""
+    """Layout da aba de interpretação com IA offline — regras clínicas."""
     return html.Div([
         html.H3("Interpretação de ECG com IA Offline"),
-        html.P("Interprete um ECG fornecendo os intervalos medidos. "
-               "Utiliza regras clínicas offline com detecção de patologias."),
+        html.P(
+            "Interprete um ECG fornecendo os intervalos medidos. "
+            "O sistema aplica regras clínicas validadas (offline, sem enviar dados externos) "
+            "para gerar interpretação, diagnósticos diferenciais e recomendações. "
+            "Inclui detecção de patologias (arritmias, bloqueios, isquemia) e "
+            "limiares ajustados por idade e sexo."
+        ),
         html.Div([
             html.Div([
                 html.Label("PR (ms):"), dcc.Input(id="ia-pr", type="number", value=160, step=1),
@@ -275,7 +316,7 @@ def update_axis_wheel(lead):
         from education.interactive import create_axis_wheel_figure
         return create_axis_wheel_figure()
     except Exception:
-        # Fallback: roda do eixo simples
+        # Fallback: roda do eixo frontal simplificada
         import plotly.graph_objs as go
         angles = [-90, -60, -30, 0, 30, 60, 90, 120, 150, 180]
         labels_ax = ["aVL(-30°)", "I(0°)", "II(60°)", "aVF(90°)", "III(120°)"]
@@ -338,7 +379,7 @@ def simulate_ecg(n_clicks, hr, duration, pathology):
         return fig
     except Exception as e:
         fig = go.Figure()
-        # Fallback: gerar onda sintética simples
+        # Fallback: gera onda sintética simples como demonstração
         t = np.linspace(0, duration or 5, (duration or 5) * 500)
         rr = 60.0 / (hr or 75)
         signal = synth_wave(n=len(t))
@@ -476,14 +517,14 @@ def process(n, nrrob, nintv, naxis, nrhythm, content, filename, meta_text, ops, 
         if qt and rr:
             summary.append(f"QT: {qt} ms | QTc (B/F): {qtc_b(qt, rr):.1f}/{qtc_f(qt, rr):.1f} ms")
 
-    # CV imports for analysis
+    # Imports de CV para análise de R-peaks/intervalos/eixo
     from cv.rpeaks_from_image import extract_trace_centerline, smooth_signal, estimate_px_per_sec
     from cv.rpeaks_robust import pan_tompkins_like
     from cv.intervals import intervals_from_trace
 
     lab2box = {d['lead']: d['bbox'] for d in seg_leads}
 
-    # Helper: get px/sec
+    # Auxiliar: calcula px/s a partir da grade
     def _get_pxsec():
         pxmm = grid.get('px_small_x') or grid.get('px_small_y') or 10.0
         return estimate_px_per_sec(pxmm, 25.0) or 250.0

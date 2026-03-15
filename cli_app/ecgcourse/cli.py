@@ -121,7 +121,7 @@ def quiz(
             print(Panel.fit("[bold green]Relatórios salvos em reports/"))
         raise typer.Exit(code=0)
 
-# Analyze subapp
+# Subcomando de análise de valores
 analyze_app = typer.Typer(help="Análises de valores estruturados de ECG (p2).")
 
 def axis_from_I_aVF(lead_i_mv, avf_mv):
@@ -252,7 +252,7 @@ if __name__ == "__main__":
     app()
 
 # --------------------------
-# INGEST commands (p3)
+# Comandos de ingestão (p3)
 # --------------------------
 ingest_app = typer.Typer(help="Ingestão de ECG por imagem (PNG/JPG).")
 
@@ -326,7 +326,7 @@ def ingest_image(
     ms_per_div = meta_data.get("ms_per_div")
     layout = meta_data.get("leads_layout", "3x4")
     measures = meta_data.get("measures", {})
-    # Auto grid/segmentation if requested or if no calibration present
+    # Grade/segmentação automática quando solicitado ou sem calibração
     seg = None
     grid = None
     layout_det = None
@@ -498,7 +498,7 @@ app.add_typer(ingest_app, name="ingest")
 
 
 # --------------------------
-# ASSETS commands (p3c)
+# Comandos de assets (p3c)
 # --------------------------
 assets_app = typer.Typer(help="Automação de assets (download, verificação de licenças, pré-processamento).")
 
@@ -534,7 +534,7 @@ app.add_typer(assets_app, name="assets")
 
 
 # --------------------------
-# CV commands (p4)
+# Comandos de visão computacional (p4)
 # --------------------------
 cv_app = typer.Typer(help="Visão computacional (grade + segmentação 12D).")
 
@@ -701,7 +701,7 @@ def cv_rpeaks(image_path: str = typer.Argument(..., help="PNG/JPG"),
     gray = _np.asarray(Image.open(image_path).convert("L"))
     bbox = find_content_bbox(gray)
     seg = segment_layout(gray, layout, bbox=bbox)
-    # Seleciona caixa pela label esperada
+    # Seleciona caixa pelo rótulo esperado da derivação
     label2idx = {d["lead"]: i for i,d in enumerate(seg)}
     if lead not in label2idx:
         raise typer.Exit(code=2)
@@ -1038,7 +1038,7 @@ def checklist_lvh(image_path: str = typer.Argument(..., help="PNG/JPG"),
     return rep
 
 
-# ── Phase 18 — Datasets clínicos (PTB-XL, PhysioNet) ──────────────────────
+# ── Fase 18 — Datasets clínicos (PTB-XL, PhysioNet) ───────────────────────
 
 datasets_app = typer.Typer(help="Datasets clínicos (PTB-XL, PhysioNet).")
 app.add_typer(datasets_app, name="datasets")
