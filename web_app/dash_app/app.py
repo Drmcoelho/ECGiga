@@ -67,6 +67,7 @@ app.layout = html.Div([
         dcc.Tab(label="Quiz", value="tab-quiz"),
         dcc.Tab(label="Simulador", value="tab-simulador"),
         dcc.Tab(label="Interpretação IA", value="tab-ia"),
+        dcc.Tab(label="Eletrólitos & ECG", value="tab-electrolytes"),
     ]),
     html.Div(id="tab-content"),
 ])
@@ -463,7 +464,11 @@ def _layout_simulador():
                     {"label": "BRD (RSR' em V1)", "value": "rbbb"},
                     {"label": "Fibrilação atrial", "value": "af"},
                     {"label": "WPW (PR curto, onda delta)", "value": "wpw"},
-                    {"label": "Hipercalemia (T apiculadas)", "value": "hyperkalemia"},
+                    {"label": "Hipercalemia leve (T apiculadas)", "value": "hyperkalemia"},
+                    {"label": "Hipercalemia grave (sine wave)", "value": "hyperkalemia_severe"},
+                    {"label": "Hipocalemia (T achata, onda U)", "value": "hypokalemia"},
+                    {"label": "Hipercalcemia (QT curto)", "value": "hypercalcemia"},
+                    {"label": "Hipocalcemia (QT longo, ST longo)", "value": "hypocalcemia"},
                     {"label": "QT longo", "value": "long_qt"},
                 ],
                 value="normal",
@@ -473,6 +478,208 @@ def _layout_simulador():
             html.Button("Simular", id="btn-simulate", n_clicks=0),
         ], style={"display": "flex", "gap": "10px", "alignItems": "center", "flexWrap": "wrap"}),
         dcc.Graph(id="sim-ecg-graph"),
+    ])
+
+
+def _layout_electrolytes():
+    """Layout da aba de eletrólitos e ECG — mega-analogia clínico-eletrolítica."""
+    return html.Div([
+        html.H3("Eletrólitos & ECG — Mega-Analogia Clínico-Eletrolítica"),
+        html.P(
+            "Explore como distúrbios eletrolíticos alteram o ECG. Cada íon é um "
+            "'diretor' que controla uma fase diferente do potencial de ação. "
+            "Visualize os ECGs sintéticos e teste seus conhecimentos com quiz.",
+            style={"marginBottom": "16px"},
+        ),
+
+        # --- SEÇÃO 1: Conceitos fundamentais ---
+        html.Div([
+            html.H4("Conceitos Fundamentais: Íons como Diretores do Filme Cardíaco"),
+            html.P(
+                "O potencial de ação cardíaco é o 'roteiro' que cada célula segue. "
+                "Os eletrólitos são os 'diretores' que controlam cada fase:"
+            ),
+            html.Ul([
+                html.Li([html.B("K+ (Potássio)"), " — Diretor da REPOLARIZAÇÃO (fases 3-4). "
+                         "Controla forma das ondas T, QRS, P. O que MAIS muda o ECG."]),
+                html.Li([html.B("Ca²+ (Cálcio)"), " — Diretor do PLATEAU (fase 2). "
+                         "Controla duração do QT. Não mexe na forma das ondas."]),
+                html.Li([html.B("Mg²+ (Magnésio)"), " — Codiretor silencioso. "
+                         "Estabiliza canais K+/Ca²+. Baixo → instabilidade → Torsades."]),
+            ]),
+            html.Div([
+                html.P([
+                    html.B("Regra de ouro: "),
+                    '"K+ mexe nas ONDAS. Ca²+ mexe no INTERVALO. Mg²+ mexe na ESTABILIDADE."',
+                ], style={"fontWeight": "bold", "color": "#c0392b", "marginTop": "10px"}),
+            ]),
+        ], className="card", style={"maxWidth": "800px"}),
+
+        # --- SEÇÃO 2: Hipercalemia ---
+        html.Div([
+            html.H4("Hipercalemia — Os 4 Estágios do K+ Alto"),
+            html.P("O ECG é o 'exame de potássio mais rápido'. A progressão é previsível:"),
+            html.Div([
+                html.Div([
+                    html.H5("Estágio 1 — Leve (K+ 5.5-6.5)"),
+                    html.P("T APICULADAS: altas, simétricas, base estreita (tent-shaped)."),
+                    html.P(
+                        "A repolarização acelerada faz o 'ator T' correr na direção da câmera "
+                        "em vez de caminhar → imagem mais alta e estreita.",
+                        style={"fontStyle": "italic"},
+                    ),
+                ], style={"borderLeft": "4px solid #f39c12", "paddingLeft": "12px", "marginBottom": "12px"}),
+                html.Div([
+                    html.H5("Estágio 2 — Moderado (K+ 6.5-7.5)"),
+                    html.P("PR prolonga → P achata e SOME → QRS ALARGA."),
+                    html.P(
+                        "O 'porteiro' AV demora mais (PR↑). Os atores atriais param (P some). "
+                        "Os ventriculares ficam em câmera lenta (QRS largo).",
+                        style={"fontStyle": "italic"},
+                    ),
+                ], style={"borderLeft": "4px solid #e67e22", "paddingLeft": "12px", "marginBottom": "12px"}),
+                html.Div([
+                    html.H5("Estágio 3 — Grave (K+ 7.5-8.5)"),
+                    html.P("SINE WAVE: QRS funde com T. Sem P. Padrão sinusoidal."),
+                    html.P(
+                        "A câmera não distingue mais quem é quem — QRS, ST e T viraram uma "
+                        "massa única ondulante. EMERGÊNCIA!",
+                        style={"fontStyle": "italic", "color": "#c0392b"},
+                    ),
+                ], style={"borderLeft": "4px solid #e74c3c", "paddingLeft": "12px", "marginBottom": "12px"}),
+                html.Div([
+                    html.H5("Estágio 4 — Crítico (K+ > 8.5)"),
+                    html.P("Bradicardia extrema → FV ou ASSISTOLIA → PARADA."),
+                    html.P(
+                        "O diretor destruiu o set. Os atores param. Silêncio. Linha reta.",
+                        style={"fontStyle": "italic", "color": "#c0392b", "fontWeight": "bold"},
+                    ),
+                ], style={"borderLeft": "4px solid #900", "paddingLeft": "12px", "marginBottom": "12px"}),
+            ]),
+        ], className="card", style={"maxWidth": "800px", "marginTop": "16px"}),
+
+        # --- SEÇÃO 3: Hipocalemia ---
+        html.Div([
+            html.H4("Hipocalemia — O K+ Cai e a Onda U Entra em Cena"),
+            html.P("O oposto da hipercalemia: repolarização arrasta em vez de correr."),
+            html.Ul([
+                html.Li([html.B("1. T achata"), " — repolarização lenta, amplitude diminui"]),
+                html.Li([html.B("2. Infra de ST"), " — segmento ST desce suavemente"]),
+                html.Li([html.B("3. Onda U aparece"), " — 'ator extra' sobe ao palco (V2-V3). "
+                         "Repolarização tardia de fibras de Purkinje"]),
+                html.Li([html.B("4. Fusão T-U"), " — U cresce e funde com T → QT aparente longo. "
+                         "RISCO de Torsades!"]),
+                html.Li([html.B("5. Tardio"), " — QRS pode alargar, arritmias, risco de parada"]),
+            ]),
+            html.P([
+                html.B("Dica: "),
+                "Hipocalemia refratária? DOSA O MAGNÉSIO! Sem corrigir Mg²+, o K+ não normaliza.",
+            ], style={"color": "#c0392b", "marginTop": "8px"}),
+        ], className="card", style={"maxWidth": "800px", "marginTop": "16px"}),
+
+        # --- SEÇÃO 4: Cálcio ---
+        html.Div([
+            html.H4("Cálcio — O Diretor do Plateau (QT)"),
+            html.Div([
+                html.Div([
+                    html.H5("Hipercalcemia — QT Curto"),
+                    html.P("Ca²+ alto → plateau curto → ST quase ausente → T 'gruda' no QRS"),
+                    html.P(
+                        "A pausa dramática entre os atos foi eliminada. Os atores passam de "
+                        "um ato ao próximo sem intervalo.",
+                        style={"fontStyle": "italic"},
+                    ),
+                ], style={"flex": "1", "marginRight": "8px"}),
+                html.Div([
+                    html.H5("Hipocalcemia — QT Longo"),
+                    html.P("Ca²+ baixo → plateau longo → ST prolongado → T normal"),
+                    html.P(
+                        "Pausa dramática enorme entre QRS e T. Mas quando T aparece, "
+                        "está perfeita. PISTA: ST longo + T normal = Ca²+ baixo.",
+                        style={"fontStyle": "italic"},
+                    ),
+                ], style={"flex": "1"}),
+            ], style={"display": "flex", "gap": "8px"}),
+        ], className="card", style={"maxWidth": "800px", "marginTop": "16px"}),
+
+        # --- SEÇÃO 5: Tabela comparativa ---
+        html.Div([
+            html.H4("Tabela Comparativa Rápida"),
+            html.Table([
+                html.Thead(html.Tr([
+                    html.Th("Distúrbio"), html.Th("Fase afetada"), html.Th("O que a câmera vê"),
+                ])),
+                html.Tbody([
+                    html.Tr([html.Td("K+ alto"), html.Td("Fases 3-4"), html.Td("T apiculada → P some → QRS alarga → sine wave")]),
+                    html.Tr([html.Td("K+ baixo"), html.Td("Fase 3"), html.Td("T achata → infra ST → onda U → fusão T-U")]),
+                    html.Tr([html.Td("Ca²+ alto"), html.Td("Fase 2"), html.Td("ST encurta → QT curto (T gruda no QRS)")]),
+                    html.Tr([html.Td("Ca²+ baixo"), html.Td("Fase 2"), html.Td("ST prolonga → QT longo (T normal)")]),
+                    html.Tr([html.Td("Mg²+ baixo"), html.Td("Canais K+/Ca²+"), html.Td("≈ K+ baixo + QT longo + Torsades")]),
+                ]),
+            ], style={"width": "100%", "borderCollapse": "collapse", "fontSize": "0.9em"}),
+        ], className="card", style={"maxWidth": "800px", "marginTop": "16px"}),
+
+        # --- SEÇÃO 6: Visualizador de ECG eletrolítico ---
+        html.Div([
+            html.H4("Visualizador de ECG — Distúrbios Eletrolíticos"),
+            html.P("Selecione um distúrbio para gerar o ECG sintético correspondente:"),
+            html.Div([
+                dcc.Dropdown(
+                    id="elec-pathology-select",
+                    options=[
+                        {"label": "Normal (referência)", "value": "normal"},
+                        {"label": "Hipercalemia leve (T apiculadas)", "value": "hyperkalemia"},
+                        {"label": "Hipercalemia grave (sine wave)", "value": "hyperkalemia_severe"},
+                        {"label": "Hipocalemia (T achata, onda U)", "value": "hypokalemia"},
+                        {"label": "Hipercalcemia (QT curto)", "value": "hypercalcemia"},
+                        {"label": "Hipocalcemia (QT longo, ST longo)", "value": "hypocalcemia"},
+                    ],
+                    value="normal",
+                    clearable=False,
+                    style={"width": "400px"},
+                ),
+                html.Button("Gerar ECG", id="btn-elec-ecg", n_clicks=0, style={"marginLeft": "10px"}),
+            ], style={"display": "flex", "alignItems": "center", "marginBottom": "10px"}),
+            dcc.Graph(id="elec-ecg-graph"),
+            html.Div(id="elec-ecg-description", style={"marginTop": "8px", "fontStyle": "italic"}),
+        ], className="card", style={"maxWidth": "800px", "marginTop": "16px"}),
+
+        # --- SEÇÃO 7: Quiz de eletrólitos ---
+        html.Div([
+            html.H4("Quiz — Eletrólitos & ECG"),
+            html.P("Teste seus conhecimentos. Questões com e sem ECG sintético."),
+            html.Div([
+                html.Label("Tipo:"),
+                dcc.Dropdown(
+                    id="elec-quiz-type",
+                    options=[
+                        {"label": "Todas as questões", "value": "all"},
+                        {"label": "Apenas com ECG (imagem)", "value": "image"},
+                        {"label": "Apenas texto (sem imagem)", "value": "text"},
+                    ],
+                    value="all",
+                    clearable=False,
+                    style={"width": "250px"},
+                ),
+                html.Label("Nº de questões:", style={"marginLeft": "10px"}),
+                dcc.Input(id="elec-quiz-n", type="number", value=5, min=1, max=20, step=1),
+                html.Button("Gerar Quiz", id="btn-elec-quiz", n_clicks=0, style={"marginLeft": "10px"}),
+            ], style={"display": "flex", "gap": "8px", "alignItems": "center", "flexWrap": "wrap"}),
+            html.Div(id="elec-quiz-content", style={"marginTop": "20px"}),
+        ], className="card", style={"maxWidth": "800px", "marginTop": "16px"}),
+
+        # --- SEÇÃO 8: Pérolas clínicas ---
+        html.Div([
+            html.H4("Pérolas Clínicas"),
+            html.Ul([
+                html.Li([html.B("1. "), "O ECG é o exame de potássio mais rápido. T apiculada + QRS largo → trate ANTES do resultado."]),
+                html.Li([html.B("2. "), "Hipocalemia + hipomagnesemia = a dupla mais arritmogênica. Tratar AMBOS."]),
+                html.Li([html.B("3. "), "QT longo com T normal = Ca²+. QT longo com T estranha = K+/Mg²+/drogas."]),
+                html.Li([html.B("4. "), "Gluconato de Ca²+ IV é o 'escudo' da hipercalemia. Age em 1-3 min."]),
+                html.Li([html.B("5. "), "Sulfato de Mg²+ IV é o tratamento de Torsades, MESMO com Mg²+ sérico normal."]),
+                html.Li([html.B("6. "), "Acidose + hipercalemia = combinação letal. Corrigir acidose ajuda o K+."]),
+            ]),
+        ], className="card", style={"maxWidth": "800px", "marginTop": "16px"}),
     ])
 
 
@@ -524,6 +731,8 @@ def render_tab(tab):
         return _layout_simulador()
     elif tab == "tab-ia":
         return _layout_ia()
+    elif tab == "tab-electrolytes":
+        return _layout_electrolytes()
     return html.Div("Aba não encontrada")
 
 
@@ -590,6 +799,147 @@ def generate_quiz(n_clicks, n_questions):
                 html.H4(f"Questão {i+1}: {q.get('prompt', '')}"),
                 html.Ul(choices),
             ], className="card", style={"marginBottom": "10px"}))
+        return elements
+    except Exception as e:
+        return html.P(f"Erro ao gerar quiz: {e}")
+
+
+# ---------------------------------------------------------------------------
+# Callbacks da aba de eletrólitos
+# ---------------------------------------------------------------------------
+
+@app.callback(
+    Output("elec-ecg-graph", "figure"),
+    Output("elec-ecg-description", "children"),
+    Input("btn-elec-ecg", "n_clicks"),
+    State("elec-pathology-select", "value"),
+    prevent_initial_call=True,
+)
+def generate_electrolyte_ecg(n_clicks, pathology):
+    pathology = pathology or "normal"
+    descriptions = {
+        "normal": "ECG normal — referência para comparação.",
+        "hyperkalemia": (
+            "Hipercalemia leve (K+ 5.5-6.5): observe as ondas T apiculadas, "
+            "simétricas e de base estreita, especialmente em V2-V4. PR e QRS normais."
+        ),
+        "hyperkalemia_severe": (
+            "Hipercalemia grave (K+ > 7.5): padrão sine wave — QRS muito alargado "
+            "fundindo com T, sem onda P. EMERGÊNCIA: gluconato de cálcio IV imediato!"
+        ),
+        "hypokalemia": (
+            "Hipocalemia: T achatada, infradesnivelamento de ST e onda U proeminente "
+            "(deflexão positiva após T). Melhor visualizada em V2-V3."
+        ),
+        "hypercalcemia": (
+            "Hipercalcemia: QT curto — o segmento ST praticamente desaparece. "
+            "A onda T parece 'grudada' no QRS, sem a pausa habitual."
+        ),
+        "hypocalcemia": (
+            "Hipocalcemia: QT longo por prolongamento do segmento ST. "
+            "A onda T mantém morfologia normal — a pausa entre QRS e T é longa."
+        ),
+    }
+    try:
+        from simulation.ecg_generator import generate_ecg, generate_pathological_ecg
+        if pathology == "normal":
+            result = generate_ecg(hr_bpm=72, duration_s=10)
+        else:
+            result = generate_pathological_ecg(pathology)
+        leads_data = result.get("leads", {})
+        fig = go.Figure()
+        for lead_name in ["II", "V2", "V4"]:
+            if lead_name in leads_data:
+                sig = leads_data[lead_name]
+                t = result.get("time")
+                x_vals = t.tolist() if t is not None else None
+                y_vals = sig.tolist() if hasattr(sig, 'tolist') else sig
+                # Show only 5 seconds
+                if x_vals and len(x_vals) > 2500:
+                    x_vals = x_vals[:2500]
+                    y_vals = y_vals[:2500]
+                fig.add_trace(go.Scatter(
+                    x=x_vals, y=y_vals, mode="lines", name=lead_name,
+                ))
+        desc_label = result.get("pathology_description_pt", pathology)
+        fig.update_layout(
+            title=f"ECG Eletrolítico — {desc_label}",
+            xaxis_title="Tempo (s)", yaxis_title="mV",
+            legend=dict(orientation="h"),
+            paper_bgcolor="#FFF5F5", plot_bgcolor="#FFF5F5",
+            xaxis=dict(showgrid=True, gridcolor="rgba(255,150,150,0.3)", dtick=0.2),
+            yaxis=dict(showgrid=True, gridcolor="rgba(255,150,150,0.3)", dtick=0.5),
+        )
+        return fig, descriptions.get(pathology, "")
+    except Exception as exc:
+        fig = go.Figure()
+        fig.update_layout(title=f"Erro: {exc}")
+        return fig, f"Erro ao gerar ECG: {exc}"
+
+
+@app.callback(
+    Output("elec-quiz-content", "children"),
+    Input("btn-elec-quiz", "n_clicks"),
+    State("elec-quiz-type", "value"),
+    State("elec-quiz-n", "value"),
+    prevent_initial_call=True,
+)
+def generate_electrolyte_quiz(n_clicks, quiz_type, n_questions):
+    import random as _rnd
+    _rnd.seed(n_clicks)
+    n_questions = n_questions or 5
+    try:
+        from quiz.electrolyte_questions import ALL_QUESTIONS, get_image_questions, get_text_questions
+        if quiz_type == "image":
+            pool = get_image_questions()
+        elif quiz_type == "text":
+            pool = get_text_questions()
+        else:
+            pool = list(ALL_QUESTIONS)
+        _rnd.shuffle(pool)
+        selected = pool[:n_questions]
+        elements = []
+        for i, q in enumerate(selected):
+            # Build question card
+            q_elements = [html.H5(f"Questão {i+1} [{q['difficulty']}] — {q['topic']}")]
+            # If question has image, generate ECG figure
+            if q.get("image_pathology"):
+                try:
+                    from simulation.ecg_generator import generate_ecg, generate_pathological_ecg
+                    pathology = q["image_pathology"]
+                    if pathology == "normal":
+                        result = generate_ecg(hr_bpm=72, duration_s=5)
+                    else:
+                        result = generate_pathological_ecg(pathology)
+                    leads_data = result.get("leads", {})
+                    fig = go.Figure()
+                    for lead_name in ["II", "V2"]:
+                        if lead_name in leads_data:
+                            sig = leads_data[lead_name]
+                            y_vals = sig[:2500].tolist() if hasattr(sig, 'tolist') else sig[:2500]
+                            fig.add_trace(go.Scatter(y=y_vals, mode="lines", name=lead_name))
+                    fig.update_layout(
+                        height=250, margin=dict(l=40, r=20, t=30, b=20),
+                        paper_bgcolor="#FFF5F5", plot_bgcolor="#FFF5F5",
+                        xaxis=dict(showgrid=True, gridcolor="rgba(255,150,150,0.3)"),
+                        yaxis=dict(showgrid=True, gridcolor="rgba(255,150,150,0.3)"),
+                        legend=dict(orientation="h"),
+                    )
+                    q_elements.append(dcc.Graph(figure=fig, style={"marginBottom": "8px"}))
+                except Exception:
+                    q_elements.append(html.P("[ECG não pôde ser gerado]", style={"color": "gray"}))
+            q_elements.append(html.P(q["stem"], style={"fontWeight": "bold"}))
+            # Options with reveal
+            choices = []
+            for j, opt in enumerate(q["options"]):
+                marker = "✓" if j == q["answer_index"] else "✗"
+                choices.append(html.Li(f"[{marker}] {opt}"))
+            q_elements.append(html.Ul(choices))
+            q_elements.append(html.Details([
+                html.Summary("Ver explicação"),
+                html.P(q["explanation"], style={"marginTop": "6px", "color": "#2c3e50"}),
+            ]))
+            elements.append(html.Div(q_elements, className="card", style={"marginBottom": "12px"}))
         return elements
     except Exception as e:
         return html.P(f"Erro ao gerar quiz: {e}")

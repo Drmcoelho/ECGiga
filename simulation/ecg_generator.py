@@ -261,6 +261,21 @@ _PATHOLOGY_CONFIGS: dict[str, dict[str, Any]] = {
     "hyperkalemia": {
         "description_pt": "Hipercalemia — T apiculadas, QRS alargado",
     },
+    "hyperkalemia_severe": {
+        "qrs_ms": 160,
+        "description_pt": "Hipercalemia grave — sine wave, QRS muito alargado",
+    },
+    "hypokalemia": {
+        "description_pt": "Hipocalemia — T achatada, onda U proeminente, infra de ST",
+    },
+    "hypercalcemia": {
+        "qt_ms": 280,
+        "description_pt": "Hipercalcemia — QT curto, ST quase ausente",
+    },
+    "hypocalcemia": {
+        "qt_ms": 520,
+        "description_pt": "Hipocalcemia — QT longo por prolongamento do ST",
+    },
     "long_qt": {
         "qt_ms": 520,
         "description_pt": "QT longo — risco de Torsades de Pointes",
@@ -480,6 +495,97 @@ def generate_pathological_ecg(pathology: str = "stemi_anterior") -> dict[str, An
                     signal[seg_start:seg_end] = np.convolve(padded, kernel, mode="valid")[
                         : len(seg)
                     ]
+
+    elif pathology == "hyperkalemia_severe":
+        # Sine wave pattern: very peaked T + very wide QRS fusing together
+        rr_samples = int(500 * 60.0 / hr)
+        for lead_name in LEAD_NAMES:
+            signal = ecg_data["leads"][lead_name]
+            n = len(signal)
+            for beat_start in range(0, n, rr_samples):
+                # Very peaked T wave
+                t_center = beat_start + int(rr_samples * 0.55)
+                if t_center + 30 > n:
+                    break
+                t_local = np.arange(60) - 30
+                peaked_t = 0.8 * np.exp(-(t_local**2) / (2 * 7**2))
+                start = max(0, t_center - 30)
+                end = min(n, t_center + 30)
+                actual_len = end - start
+                signal[start:end] += peaked_t[:actual_len]
+
+            # Heavy QRS smoothing (sine wave effect)
+            kernel = np.ones(15) / 15
+            for beat_start in range(0, n, rr_samples):
+                seg_end = min(n, beat_start + rr_samples)
+                seg = signal[beat_start:seg_end]
+                if len(seg) > len(kernel):
+                    padded = np.pad(seg, 7, mode="edge")
+                    signal[beat_start:seg_end] = np.convolve(
+                        padded, kernel, mode="valid"
+                    )[: len(seg)]
+
+            # Suppress P waves
+            for beat_start in range(0, n, rr_samples):
+                p_end = min(n, beat_start + int(rr_samples * 0.15))
+                signal[beat_start:p_end] *= 0.1
+
+    elif pathology == "hypokalemia":
+        # Flattened T waves + ST depression + prominent U waves
+        rr_samples = int(500 * 60.0 / hr)
+        for lead_name in LEAD_NAMES:
+            signal = ecg_data["leads"][lead_name]
+            n = len(signal)
+            for beat_start in range(0, n, rr_samples):
+                # Flatten T wave (reduce amplitude)
+                t_start = beat_start + int(rr_samples * 0.45)
+                t_end = beat_start + int(rr_samples * 0.65)
+                if t_end > n:
+                    break
+                signal[t_start:t_end] *= 0.25
+
+                # ST depression
+                st_start = beat_start + int(rr_samples * 0.35)
+                st_end = beat_start + int(rr_samples * 0.50)
+                if st_end > n:
+                    break
+                seg_len = st_end - st_start
+                depression = 0.12 * np.ones(seg_len)
+                ramp = min(8, seg_len)
+                depression[:ramp] = np.linspace(0, 0.12, ramp)
+                depression[-ramp:] = np.linspace(0.12, 0, ramp)
+                signal[st_start:st_end] -= depression
+
+                # Prominent U wave after T
+                u_center = beat_start + int(rr_samples * 0.72)
+                if u_center + 15 > n:
+                    break
+                t_local = np.arange(30) - 15
+                u_wave = 0.15 * np.exp(-(t_local**2) / (2 * 8**2))
+                start = max(0, u_center - 15)
+                end = min(n, u_center + 15)
+                actual_len = end - start
+                signal[start:end] += u_wave[:actual_len]
+
+    elif pathology == "hypercalcemia":
+        # Short QT already set via config; further shorten ST segment
+        rr_samples = int(500 * 60.0 / hr)
+        for lead_name in LEAD_NAMES:
+            signal = ecg_data["leads"][lead_name]
+            n = len(signal)
+            for beat_start in range(0, n, rr_samples):
+                # Compress ST segment (bring T closer to QRS)
+                st_start = beat_start + int(rr_samples * 0.30)
+                st_end = beat_start + int(rr_samples * 0.42)
+                if st_end > n:
+                    break
+                seg_len = st_end - st_start
+                # Elevate ST slightly to simulate T merging with QRS
+                bump = 0.08 * np.ones(seg_len)
+                signal[st_start:st_end] += bump
+
+    elif pathology == "hypocalcemia":
+        pass  # QT prolongation already set via config (qt_ms=520)
 
     elif pathology == "long_qt":
         pass  # QT already set to 520 ms via config
