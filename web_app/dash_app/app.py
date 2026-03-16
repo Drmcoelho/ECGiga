@@ -260,6 +260,162 @@ def _layout_educacao():
                 ]),
             ]),
         ], className="card", style={"maxWidth": "700px", "marginTop": "16px"}),
+        html.Div([
+            html.H4("Inversão da Onda T — Quando a Câmera Vê a Repolarização Fugindo"),
+            html.P(
+                "A onda T normal é positiva nas mesmas derivações em que o QRS é positivo. "
+                "Entender o porquê — e quando isso se inverte — é essencial para reconhecer "
+                "isquemia, sobrecarga e outras condições.",
+                style={"marginBottom": "12px"},
+            ),
+            html.Div([
+                html.H5("Por que a T normal é positiva?"),
+                html.P(
+                    "A despolarização vai do endocárdio para o epicárdio (de dentro para fora) — "
+                    "o vetor vem na direção da câmera de superfície → QRS positivo."
+                ),
+                html.P(
+                    "A repolarização vai na direção oposta: do epicárdio para o endocárdio (de fora "
+                    "para dentro), porque o epicárdio tem potencial de ação mais curto e repolariza "
+                    "primeiro. Mas a repolarização é o processo elétrico oposto da despolarização.",
+                    style={"marginTop": "6px"},
+                ),
+                html.P([
+                    "Dois 'negativos' fazem um positivo: ",
+                    html.B("(processo invertido) × (direção invertida) = mesmo sinal. "),
+                    "A câmera registra T positiva onde o QRS é positivo. É como um ator que caminha "
+                    "de costas se afastando — a câmera vê a cena como se ele estivesse de frente "
+                    "se aproximando.",
+                ], style={"marginTop": "6px"}),
+            ], style={"marginBottom": "16px"}),
+            html.Div([
+                html.H5("Inversão por isquemia — a repolarização muda de direção"),
+                html.P(
+                    "Na isquemia, o epicárdio lesado demora mais para repolarizar. A repolarização "
+                    "agora vai do endocárdio para o epicárdio (de dentro para fora) — na DIREÇÃO "
+                    "da câmera. Mas como é um processo negativo vindo na direção da câmera, o "
+                    "resultado é deflexão negativa → T invertida."
+                ),
+                html.Ul([
+                    html.Li([
+                        html.B("Padrão de Wellens: "),
+                        "T profunda, simétrica e invertida em V2-V3 → altamente específico para "
+                        "estenose crítica da artéria descendente anterior. As câmeras anteriores "
+                        "filmam a repolarização invertida da parede anterior isquêmica.",
+                    ]),
+                ]),
+            ], style={"marginBottom": "16px"}),
+            html.Div([
+                html.H5("Inversão por sobrecarga (strain pattern)"),
+                html.P(
+                    "Na hipertrofia ventricular, a parede espessa sofre isquemia relativa crônica. "
+                    "O padrão de strain é característico: infra de ST descendente (convexo) + T "
+                    "invertida assimétrica (descida lenta, subida rápida)."
+                ),
+                html.Ul([
+                    html.Li([html.B("HVE: "), "strain em V5-V6, DI, aVL — câmeras laterais veem o VE estressado"]),
+                    html.Li([html.B("HVD: "), "strain em V1-V3, DIII, aVF — câmeras direitas veem o VD estressado"]),
+                ]),
+            ], style={"marginBottom": "16px"}),
+            html.Div([
+                html.H5("Outras causas de inversão da T"),
+                html.Ul([
+                    html.Li([html.B("TEP (embolia pulmonar): "), "sobrecarga aguda do VD → T invertida em V1-V4 + S1Q3T3"]),
+                    html.Li([html.B("Memória cardíaca: "), "após taquicardia/pacing, T fica invertida por horas-dias (o coração 'lembra' o padrão anormal)"]),
+                    html.Li([html.B("HSA (hemorragia subaracnóidea): "), "descarga simpática → T gigantes invertidas ('T cerebrais') difusas"]),
+                    html.Li([html.B("Padrão juvenil: "), "T invertida em V1-V3 em jovens — benigno, desaparece com a idade"]),
+                    html.Li([html.B("QT longo: "), "repolarização prolongada e heterogênea → T invertida ou bífida"]),
+                ]),
+            ]),
+        ], className="card", style={"maxWidth": "700px", "marginTop": "16px"}),
+        html.Div([
+            html.H4("Onda Q Patológica — A Câmera Filma Através da Necrose"),
+            html.P(
+                "A onda Q patológica é a assinatura eletrocardiográfica do infarto consumado. "
+                "Entender a 'teoria da janela elétrica' é a chave para interpretar infartos antigos "
+                "e localizar a necrose.",
+                style={"marginBottom": "12px"},
+            ),
+            html.Div([
+                html.H5("A onda q fisiológica (minúscula) — normal"),
+                html.P(
+                    "A despolarização ventricular começa pelo septo, da esquerda para a direita. "
+                    "As câmeras laterais (V5-V6, DI) veem esse primeiro vetor se afastando brevemente "
+                    "→ registram uma q pequena (< 40 ms, < 25% do R). É como o ator principal dando "
+                    "um passo para trás antes de avançar na direção da câmera."
+                ),
+            ], style={"marginBottom": "16px"}),
+            html.Div([
+                html.H5("A onda Q patológica — a 'janela elétrica'"),
+                html.P(
+                    "Quando uma região do miocárdio sofre necrose (infarto), o tecido morre e vira "
+                    "cicatriz fibrosa — eletricamente muda. Não gera vetor."
+                ),
+                html.P([
+                    "A câmera voltada para essa região morta olha e não vê nada ali. Mas ",
+                    html.B("através da 'janela' da necrose"),
+                    ", ela enxerga a parede oposta — que está viva, mas gerando vetor na direção "
+                    "contrária (se afastando). Resultado: Q profunda e larga.",
+                ], style={"marginTop": "6px"}),
+                html.P(
+                    "Analogia: o ator principal (parede viva) não compareceu. A câmera, preparada "
+                    "para filmá-lo, olha para o palco vazio e, através do cenário, vê figurantes "
+                    "caminhando de costas no fundo. Tudo é negativo — essa é a Q patológica.",
+                    style={"fontStyle": "italic", "marginTop": "6px"},
+                ),
+            ], style={"marginBottom": "16px"}),
+            html.Div([
+                html.H5("q fisiológica vs. Q patológica"),
+                html.Ul([
+                    html.Li([
+                        html.B("q fisiológica: "),
+                        "< 40 ms, < 25% do R, derivações isoladas. O ator deu um passo para trás "
+                        "antes de avançar.",
+                    ]),
+                    html.Li([
+                        html.B("Q patológica: "),
+                        "≥ 40 ms (1 quadradinho) ou ≥ 25% do R, em derivações contíguas. "
+                        "O ator morreu — a câmera filma através da janela.",
+                    ]),
+                    html.Li([
+                        html.B("QS (sem R): "),
+                        "necrose transmural completa. A câmera não vê NENHUM vetor vindo. "
+                        "Tudo negativo. O ator não existe mais nessa cena.",
+                    ]),
+                ]),
+            ], style={"marginBottom": "16px"}),
+            html.Div([
+                html.H5("Territórios — qual câmera vê qual necrose?"),
+                html.Ul([
+                    html.Li([html.B("Anterior (DA): "), "Q/QS em V1-V4 — câmeras anteriores filmam através da janela anterior"]),
+                    html.Li([html.B("Inferior (CD): "), "Q em DII, DIII, aVF — câmeras inferiores filmam através da janela inferior"]),
+                    html.Li([html.B("Lateral (Cx): "), "Q em DI, aVL, V5-V6 — câmeras laterais filmam através da janela lateral"]),
+                    html.Li([html.B("Posterior (CD/Cx): "), "sem Q direta — pista indireta: R alto em V1-V2 (imagem espelho da Q posterior)"]),
+                ]),
+            ], style={"marginBottom": "16px"}),
+            html.Div([
+                html.H5("Evolução do infarto — os 4 capítulos na câmera"),
+                html.P(
+                    "O ECG do infarto conta uma história em fases, como capítulos de um filme:",
+                    style={"marginBottom": "6px"},
+                ),
+                html.Ul([
+                    html.Li([html.B("1. Hiperagudo (minutos): "), "T apiculadas — primeiros sinais de fumaça"]),
+                    html.Li([html.B("2. Agudo (horas): "), "supra de ST + Q começa a surgir — o incêndio em tempo real"]),
+                    html.Li([html.B("3. Subagudo (dias-semanas): "), "ST normaliza, T inverte profundamente, Q se aprofunda — a fuligem"]),
+                    html.Li([html.B("4. Crônico (permanente): "), "ST e T podem normalizar, mas Q persiste para sempre — a cicatriz"]),
+                ]),
+            ], style={"marginBottom": "16px"}),
+            html.Div([
+                html.H5("Armadilhas — quando Q NÃO é infarto"),
+                html.Ul([
+                    html.Li([html.B("Miocardiopatia hipertrófica: "), "septo espesso → Q profunda e estreita em laterais/inferiores (excesso de vetor, não janela)"]),
+                    html.Li([html.B("WPW: "), "pré-excitação gera onda delta que simula Q ('pseudo-Q')"]),
+                    html.Li([html.B("BRE: "), "condução invertida → QS em V1-V3 sem necrose"]),
+                    html.Li([html.B("Eletrodos mal posicionados: "), "câmera no ângulo errado simula Q — sempre verificar posicionamento"]),
+                ]),
+            ]),
+        ], className="card", style={"maxWidth": "700px", "marginTop": "16px"}),
     ])
 
 

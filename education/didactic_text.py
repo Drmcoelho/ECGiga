@@ -315,6 +315,37 @@ WAVE_EXPLANATIONS: dict = {
             "repolarização absurdamente rápida e intensa)."
         ),
     },
+    "Q": {
+        "nome": "Onda Q — A cicatriz filmada pela câmera",
+        "descricao": (
+            "A onda Q é uma deflexão negativa inicial do complexo QRS — "
+            "ou seja, aparece ANTES da onda R. Uma q pequena é fisiológica "
+            "em várias derivações (septal). Mas uma Q profunda e larga "
+            "(patológica) indica necrose miocárdica: tecido morto que virou "
+            "uma 'janela elétrica'."
+        ),
+        "camera_analogy": (
+            "Normalmente, a câmera DII vê o vetor ventricular se "
+            "aproximando e registra um R alto. Mas se a parede inferior "
+            "morreu (infarto antigo), aquela região não gera mais atividade "
+            "elétrica. A câmera DII, que olha diretamente para a parede "
+            "inferior, agora vê ATRAVÉS da necrose — como uma janela — e "
+            "enxerga o vetor da parede oposta se AFASTANDO dela. Resultado: "
+            "uma Q profunda no início do QRS.\n\n"
+            "A câmera V1-V4, se a parede anterior morreu, também vê através "
+            "da necrose: em vez de R progressivo, aparece QS (tudo negativo) "
+            "porque não há mais músculo anterior gerando vetor em sua "
+            "direção."
+        ),
+        "dica_clinica": (
+            "Q patológica = duração ≥ 40 ms OU profundidade ≥ 25% da onda R "
+            "na mesma derivação. Q em V1-V4 = necrose anterior (DA). "
+            "Q em II/III/aVF = necrose inferior (CD). Q em I/aVL/V5-V6 = "
+            "necrose lateral (Cx). A q septal fisiológica (V5-V6, < 40 ms) "
+            "é normal — representa a despolarização septal da esquerda para "
+            "a direita fugindo dessas câmeras laterais."
+        ),
+    },
 }
 
 # =====================================================================
@@ -670,4 +701,367 @@ Hipotermia (Onda de Osborn):
   → Aparece uma deflexão positiva no ponto J (onda J ou onda de Osborn)
   → A câmera registra um "tropeço" entre o QRS e o ST — como se o
     ator parasse brevemente no meio do caminho antes de continuar
+"""
+
+# =====================================================================
+# T_INVERSION_EXPLAINED — Inversão da onda T pela analogia das câmeras
+# =====================================================================
+
+T_INVERSION_EXPLAINED: str = """\
+INVERSÃO DA ONDA T: QUANDO A CÂMERA VÊ A REPOLARIZAÇÃO FUGINDO
+
+═══════════════════════════════════════════════════════════════════════
+PRIMEIRO: POR QUE A ONDA T NORMAL É POSITIVA?
+═══════════════════════════════════════════════════════════════════════
+
+Para entender a inversão, primeiro precisamos entender o normal.
+
+A despolarização ventricular vai do endocárdio (dentro) para o epicárdio
+(fora). A câmera na superfície do tórax vê o vetor de despolarização
+vindo na sua direção → QRS positivo.
+
+A repolarização, porém, NÃO segue o mesmo caminho de volta. Ela começa
+pelo epicárdio (fora) e vai para o endocárdio (dentro). Por quê? Porque
+o epicárdio tem um potencial de ação mais curto — ele "cansa" primeiro e
+repolariza antes.
+
+Agora vem o ponto crucial: a repolarização é o OPOSTO elétrico da
+despolarização. Se uma onda de despolarização vindo na sua direção gera
+deflexão positiva, uma onda de repolarização vindo na sua direção
+deveria gerar deflexão negativa. Mas como a repolarização vai de FORA
+para DENTRO (epicárdio → endocárdio), ela está SE AFASTANDO da câmera
+de superfície. E uma repolarização se afastando gera deflexão POSITIVA.
+
+Dois "negativos" fazem um positivo:
+  (processo oposto) × (direção oposta) = mesmo sinal
+
+É por isso que, em condições normais, a onda T tem a MESMA polaridade
+que o QRS. A câmera vê a repolarização como "positiva" porque o processo
+invertido caminhando na direção invertida produz o mesmo sinal na tela.
+
+Analogia: imagine dois atores. O Ator A (despolarização) caminha em
+direção à câmera — a câmera registra aproximação. O Ator B
+(repolarização) caminha DE COSTAS se AFASTANDO da câmera — mas como está
+de costas (processo invertido), a câmera registra como se estivesse
+de frente se aproximando. O resultado na tela é o mesmo: ambos parecem
+"positivos" para a câmera.
+
+═══════════════════════════════════════════════════════════════════════
+INVERSÃO DA T POR ISQUEMIA — A CÂMERA VÊ A REPOLARIZAÇÃO MUDAR
+═══════════════════════════════════════════════════════════════════════
+
+Na isquemia (sem necrose completa, sem oclusão total), a zona isquêmica
+sofre um prolongamento do potencial de ação. O epicárdio isquêmico
+demora mais para repolarizar — ele perde a "vantagem" de repolarizar
+primeiro.
+
+O que acontece então? A repolarização muda de direção:
+  Normal: epicárdio → endocárdio (de fora para dentro)
+  Isquemia: endocárdio → epicárdio (de dentro para fora)
+
+Agora a repolarização VEM na direção da câmera de superfície. E como a
+repolarização é um processo eletricamente negativo, uma repolarização
+vindo na direção da câmera gera deflexão NEGATIVA.
+
+  (processo negativo) × (agora vindo na direção da câmera) = negativo
+
+A câmera registra: onda T INVERTIDA (negativa onde antes era positiva).
+
+Analogia: o Ator B (repolarização), que antes caminhava de costas se
+afastando (parecendo positivo), agora se virou e caminha de costas na
+DIREÇÃO da câmera — a câmera vê as costas dele se aproximando. O
+resultado é invertido: a imagem agora é negativa.
+
+── PADRÃO CLÁSSICO: T DE WELLENS ──
+
+A inversão de T profunda e simétrica nas derivações precordiais (V1-V4)
+é o padrão de Wellens — altamente específico para estenose crítica da
+artéria descendente anterior (DA). As câmeras anteriores veem a
+repolarização invertida na parede anterior isquêmica.
+
+Tipo A (mais comum): T profundamente invertida e simétrica em V2-V3
+Tipo B: T bifásica (positiva-negativa) em V2-V3
+
+A câmera V2-V3 está filmando diretamente a parede anterior que sofre
+isquemia. A repolarização dessa parede mudou de direção → a câmera
+registra T negativa onde antes era positiva.
+
+═══════════════════════════════════════════════════════════════════════
+INVERSÃO DA T POR SOBRECARGA (STRAIN PATTERN)
+═══════════════════════════════════════════════════════════════════════
+
+Na hipertrofia ventricular (HVE ou HVD), a parede hipertrofiada é tão
+espessa que a repolarização é alterada de forma crônica. O subendocárdio
+fica cronicamente "estressado" — isquemia relativa por demanda.
+
+O padrão de strain é característico:
+• Infradesnivelamento de ST descendente + T invertida assimétrica
+• A parte descendente do ST é lenta e convexa
+• A parte ascendente da T invertida é rápida e abrupta
+• Aparece nas derivações que "olham" para o ventrículo hipertrofiado
+
+Na HVE: strain em V5-V6, DI, aVL (câmeras laterais veem o VE estressado)
+Na HVD: strain em V1-V3, DIII, aVF (câmeras direitas/inferiores veem o
+VD estressado)
+
+Analogia: a câmera vê um ator (repolarização) que está exausto e não
+consegue mais caminhar normalmente. Em vez do movimento fluido habitual,
+ele tropeça e cai (ST descende lentamente e T inverte assimetricamente).
+
+═══════════════════════════════════════════════════════════════════════
+INVERSÃO DA T — OUTRAS CAUSAS IMPORTANTES
+═══════════════════════════════════════════════════════════════════════
+
+Memória cardíaca (pós-taquicardia/pós-pacing):
+  → Após um período de despolarização anormal (taquicardia, marcapasso),
+    o miocárdio "lembra" do padrão alterado por horas a dias
+  → A repolarização continua invertida mesmo após voltar ao ritmo normal
+  → A câmera vê uma onda T que ainda está "com a direção errada" — como
+    um ator que se acostumou a caminhar de costas e demora a se readaptar
+
+Embolia pulmonar (TEP):
+  → Sobrecarga aguda do VD → strain agudo nas câmeras V1-V4 + DIII
+  → T invertida nas precordiais direitas + padrão S1Q3T3
+  → A câmera V1-V3 vê o VD subitamente sobrecarregado, com repolarização
+    alterada de forma aguda
+
+Síndrome do QT longo:
+  → Repolarização prolongada e heterogênea
+  → T pode ser invertida, bífida ou com morfologia bizarra
+  → A câmera vê uma repolarização "confusa" — o ator não sabe para
+    que direção caminhar
+
+Padrão juvenil:
+  → Normal em crianças e adolescentes: T invertida em V1-V3
+  → O coração jovem tem uma repolarização que ainda está "amadurecendo"
+  → A câmera registra inversão benigna que desaparece com a idade
+  → NÃO confundir com isquemia!
+
+Hemorragia subaracnóidea (HSA):
+  → Descarga simpática maciça → "tempestade" na repolarização
+  → T gigantes invertidas ("T cerebrais") em múltiplas derivações
+  → A câmera vê ondas T enormes e profundas — como se o ator caísse
+    de forma dramática em todas as cenas ao mesmo tempo
+
+═══════════════════════════════════════════════════════════════════════
+RESUMO: COMO A CÂMERA DIFERENCIA OS TIPOS DE INVERSÃO DE T
+═══════════════════════════════════════════════════════════════════════
+
+T invertida SIMÉTRICA e profunda (derivações focais):
+  → Isquemia. A câmera daquela região vê a repolarização invertida.
+  → Se em V1-V4: pensar em Wellens (estenose da DA).
+
+T invertida ASSIMÉTRICA com infra de ST descendente:
+  → Strain (sobrecarga). A câmera vê estresse crônico na parede
+    hipertrofiada. O formato é descente-lento, subida-rápida.
+
+T invertida DIFUSA em múltiplas derivações:
+  → Causas sistêmicas: HSA, TEP, distúrbios eletrolíticos.
+  → Todas as câmeras veem alteração — não é focal.
+
+T invertida apenas em V1-V3 em jovem assintomático:
+  → Padrão juvenil. Benigno. A câmera registra imaturidade normal
+    da repolarização do VD.
+"""
+
+# =====================================================================
+# PATHOLOGICAL_Q_EXPLAINED — Onda Q patológica: a janela da necrose
+# =====================================================================
+
+PATHOLOGICAL_Q_EXPLAINED: str = """\
+A ONDA Q PATOLÓGICA: QUANDO A CÂMERA FILMA ATRAVÉS DA NECROSE
+
+═══════════════════════════════════════════════════════════════════════
+PRIMEIRO: O QUE É A ONDA Q E POR QUE ELA EXISTE?
+═══════════════════════════════════════════════════════════════════════
+
+A onda Q é qualquer deflexão negativa que aparece ANTES da primeira onda
+R no complexo QRS. É a primeira coisa que a câmera registra quando os
+ventrículos começam a se despolarizar.
+
+Em muitas derivações, uma q pequena (minúscula) é completamente normal.
+Por exemplo:
+
+• q septal em V5-V6 e DI: a despolarização do septo interventricular
+  vai da esquerda para a direita (primeiro vetor do QRS). As câmeras
+  laterais (V5-V6, DI) veem esse vetor inicial se AFASTANDO delas →
+  registram uma q pequena antes do R. É fisiológico!
+
+• q em DII, DIII, aVF: o primeiro vetor (septal) foge parcialmente
+  dessas câmeras inferiores → q pequena. Normal.
+
+A q fisiológica é estreita (< 40 ms = 1 quadradinho) e rasa
+(< 25% da onda R que vem depois). A câmera registra um breve momento
+de vetor fugindo antes de o vetor principal se aproximar.
+
+═══════════════════════════════════════════════════════════════════════
+A ONDA Q PATOLÓGICA: A "JANELA ELÉTRICA"
+═══════════════════════════════════════════════════════════════════════
+
+Quando uma região do miocárdio sofre necrose (infarto consumado), aquele
+tecido morre e é substituído por cicatriz fibrosa. A cicatriz não gera
+atividade elétrica — é eletricamente "muda". Não produz vetor.
+
+Agora imagine o que a câmera posicionada diretamente sobre essa região
+vê:
+
+ANTES DO INFARTO:
+  A câmera V3 (parede anterior) vê a despolarização da parede anterior
+  vindo na sua direção → R alto e positivo. A parede está viva, gera
+  vetor, a câmera foca.
+
+DEPOIS DO INFARTO (necrose anterior):
+  A parede anterior morreu. Não gera vetor. A câmera V3 olha para a
+  parede anterior e não vê nada — é como uma JANELA aberta. Através
+  dessa janela, a câmera enxerga a parede POSTERIOR (oposta), que
+  continua viva e gerando vetor, mas na direção contrária (se afastando
+  de V3).
+
+  Resultado: a câmera registra uma Q profunda — toda a atividade
+  elétrica que ela capta está FUGINDO dela, vindo da parede oposta.
+
+É a teoria da "janela elétrica": a necrose cria um buraco na parede
+muscular (eletricamente falando). A câmera, em vez de filmar o músculo
+vivo na sua frente, filma ATRAVÉS do buraco e vê o músculo do outro
+lado se afastando.
+
+Analogia cinematográfica: imagine que o ator principal (parede anterior)
+não compareceu à filmagem. A câmera, que estava preparada para filmá-lo,
+olha para o palco vazio e, através do cenário, vê o figurante
+(parede posterior) caminhando DE COSTAS, se afastando. A câmera registra
+uma cena "negativa" — tudo fugindo. Essa é a onda Q patológica.
+
+═══════════════════════════════════════════════════════════════════════
+Q FISIOLÓGICA vs. Q PATOLÓGICA — COMO A CÂMERA DIFERENCIA
+═══════════════════════════════════════════════════════════════════════
+
+Q FISIOLÓGICA (septal):
+  → Duração < 40 ms (menos de 1 quadradinho pequeno)
+  → Profundidade < 25% da onda R subsequente
+  → Presente em poucas derivações (V5-V6, DI)
+  → Mecanismo: vetor septal normal fugindo brevemente da câmera
+  → Analogia: o ator principal (VE) ainda está em cena — ele só deu
+    um passo para trás antes de avançar. A câmera registra um breve
+    recuo (q) seguido de grande avanço (R).
+
+Q PATOLÓGICA (necrose):
+  → Duração ≥ 40 ms (1 quadradinho ou mais)
+  → Profundidade ≥ 25% da onda R (ou QS completo, sem R)
+  → Presente em derivações contíguas de um mesmo território
+  → Mecanismo: necrose → janela elétrica → câmera vê parede oposta
+  → Analogia: o ator principal MORREU. A câmera olha para o palco
+    vazio e vê apenas figurantes no fundo, de costas. A deflexão
+    negativa é grande e longa porque não há músculo vivo para gerar
+    o R esperado.
+
+═══════════════════════════════════════════════════════════════════════
+TERRITÓRIOS E Q PATOLÓGICA — QUAL CÂMERA VÊ QUAL NECROSE
+═══════════════════════════════════════════════════════════════════════
+
+NECROSE ANTERIOR (artéria descendente anterior — DA):
+  → Q patológica (ou QS) em V1-V4
+  → As câmeras anteriores olham diretamente para a parede morta
+  → Através da janela, veem a parede posterior fugindo
+  → Quanto mais câmeras mostram Q, maior a extensão da necrose:
+    V1-V2 = septal | V3-V4 = anterior | V1-V4 = antero-septal extenso
+
+NECROSE INFERIOR (artéria coronária direita — CD):
+  → Q patológica em DII, DIII, aVF
+  → As câmeras inferiores olham para a parede inferior morta
+  → Através da janela, veem vetores da parede lateral/superior fugindo
+  → Se Q em DIII > Q em DI → reforça o padrão inferior
+
+NECROSE LATERAL (artéria circunflexa — Cx):
+  → Q patológica em DI, aVL, V5-V6
+  → As câmeras laterais filmam através da necrose lateral
+  → Padrão menos comum isoladamente, pode acompanhar IAM anterior
+
+NECROSE POSTERIOR (artéria coronária direita ou Cx):
+  → Não há derivações padrão que olhem diretamente para trás
+  → A pista é INDIRETA: R alto em V1-V2 (que é a imagem ESPELHO da Q
+    posterior vista por trás)
+  → A câmera V1, ao olhar para frente, vê o vetor da parede posterior
+    (normalmente geraria S em V1). Com necrose posterior, esse vetor
+    desaparece, e a câmera V1 vê mais R do que deveria — é a Q
+    posterior vista ao contrário!
+
+═══════════════════════════════════════════════════════════════════════
+EVOLUÇÃO TEMPORAL: SUPRA → T INVERTIDA → Q
+═══════════════════════════════════════════════════════════════════════
+
+No infarto agudo, o ECG evolui em fases que a câmera registra como
+capítulos de uma história:
+
+CAPÍTULO 1 — Hiperagudo (minutos a horas):
+  → T apiculadas nas câmeras que filmam a zona isquêmica
+  → A câmera vê a repolarização se alterando — como os primeiros
+    sinais de fumaça antes do incêndio
+
+CAPÍTULO 2 — Agudo (horas):
+  → SUPRA de ST — corrente de lesão transmural
+  → A câmera filma o incêndio em tempo real
+  → Q patológica começa a aparecer se há necrose
+
+CAPÍTULO 3 — Subagudo (dias a semanas):
+  → ST começa a normalizar (o incêndio se apaga)
+  → T inverte profundamente (a repolarização da zona lesada está
+    alterada — a câmera vê a "fuligem" que ficou)
+  → Q se aprofunda e se estabelece (a necrose é definitiva)
+
+CAPÍTULO 4 — Crônico (semanas a permanente):
+  → ST normalizado
+  → T pode normalizar (ou permanecer invertida)
+  → Q persiste PERMANENTEMENTE — é a cicatriz
+  → A câmera continua filmando a janela para sempre. O ator não volta.
+  → A Q patológica crônica é o "memorial" eletrocardiográfico do
+    infarto: a prova de que aquele pedaço de coração morreu.
+
+═══════════════════════════════════════════════════════════════════════
+ARMADILHAS: QUANDO A Q NÃO É INFARTO
+═══════════════════════════════════════════════════════════════════════
+
+Nem toda Q profunda significa necrose! A câmera pode ser enganada:
+
+Hipertrofia septal (miocardiopatia hipertrófica):
+  → Septo muito espesso gera vetores septais exagerados
+  → Q profunda e estreita em derivações laterais e inferiores
+  → Não é janela — é excesso de vetor septal fugindo das câmeras laterais
+
+WPW (Wolff-Parkinson-White):
+  → A pré-excitação por feixe acessório muda o início da despolarização
+  → A onda delta pode simular Q patológica ("pseudo-Q")
+  → A câmera registra o início da despolarização vindo de um ângulo
+    inesperado
+
+BRE (Bloqueio de Ramo Esquerdo):
+  → A despolarização septal é invertida (da direita para a esquerda)
+  → Pode aparecer QS em V1-V3 sem necrose
+  → A câmera vê tudo fugindo porque a condução anormal inverte os
+    vetores iniciais — não é janela, é desvio de rota
+
+Posicionamento de eletrodos:
+  → Eletrodos precordiais colocados alto demais podem simular Q em V1-V2
+  → A câmera está no ângulo errado — como filmar um ator de um ângulo
+    que faz parecer que ele está de costas quando na verdade não está
+
+═══════════════════════════════════════════════════════════════════════
+RESUMO COM ANALOGIA DAS CÂMERAS
+═══════════════════════════════════════════════════════════════════════
+
+q fisiológica (minúscula):
+  → O ator principal deu um passo para trás antes de avançar
+  → A câmera registra um breve recuo → q pequena, seguida de R normal
+  → Normal, esperado, saudável
+
+Q patológica (maiúscula):
+  → O ator principal morreu (necrose). O palco está vazio.
+  → A câmera olha através da "janela" e vê figurantes de costas
+  → Q profunda, larga, em derivações contíguas
+  → Cicatriz permanente: a Q não desaparece
+
+QS (sem R nenhum):
+  → Necrose completa — toda a espessura da parede morreu (transmural)
+  → A câmera não vê NENHUM vetor vindo. Só vê vetor fugindo.
+  → Tudo negativo, sem nenhuma positividade. O ator não existe mais
+    naquela cena.
 """
