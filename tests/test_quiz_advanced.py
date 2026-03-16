@@ -189,7 +189,7 @@ class TestAdaptiveEngine:
 class TestProgressTracker:
     def test_init_creates_dir(self, tmp_path):
         data_dir = str(tmp_path / "progress_test")
-        pt = ProgressTracker(data_dir=data_dir)
+        ProgressTracker(data_dir=data_dir)
         assert pathlib.Path(data_dir).exists()
 
     def test_record_session(self, tmp_path):

@@ -96,7 +96,7 @@ def detect_hyperkalemia_pattern(
     qrs_ms = iv.get("QRS_ms")
     qtc = iv.get("QTc_B")
     rr_s = iv.get("RR_s")
-    hr = 60.0 / rr_s if rr_s and rr_s > 0 else None
+    60.0 / rr_s if rr_s and rr_s > 0 else None
 
     # Estágio 1: Ondas T apiculadas (hipercalemia leve)
     peaked_count = 0
@@ -340,7 +340,7 @@ def detect_calcium_abnormality(
     findings: list[str] = []
 
     qtc = iv.get("QTc_B")
-    qt_ms = iv.get("QT_ms")
+    iv.get("QT_ms")
 
     # Hipercalcemia: QTc curto
     if qtc and qtc < 340:

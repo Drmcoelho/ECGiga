@@ -394,7 +394,7 @@ def interpret_report(report: dict) -> dict:
     # --- Axis analysis ---
     axis = report.get("axis") or report.get("axis_hex") or {}
     angle = axis.get("angle_deg")
-    label = axis.get("label", "")
+    axis.get("label", "")
 
     if angle is not None:
         if -30 <= angle <= 90:

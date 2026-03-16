@@ -143,12 +143,11 @@ def detect_pr_depression(pr_segments: Dict[str, float]) -> bool:
         ``True`` if PR depression is detected.
     """
     depressed_count = 0
-    avr_elevated = False
 
     for lead, val in pr_segments.items():
         if lead == "aVR":
             if val >= 0.5:
-                avr_elevated = True
+                pass
             continue
         if val <= -0.5:
             depressed_count += 1

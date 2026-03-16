@@ -142,7 +142,7 @@ def build_interpretation_prompt(report: dict) -> str:
     if rr_list:
         avg_rr = sum(rr_list) / len(rr_list)
         hr = 60.0 / avg_rr if avg_rr > 0 else 0
-        sections.append(f"\n### Frequência Cardíaca Estimada")
+        sections.append("\n### Frequência Cardíaca Estimada")
         sections.append(f"- **FC:** ~{hr:.0f} bpm (RR médio: {avg_rr:.3f} s)")
 
     # Flags

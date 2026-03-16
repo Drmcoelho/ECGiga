@@ -1,0 +1,58 @@
+{
+  "id": "case_bav",
+  "title": "Síncope em Idoso de 78 Anos",
+  "difficulty": "medium",
+  "patient": {
+    "age": 78,
+    "sex": "M",
+    "history": "Hipertensão arterial há 25 anos, doença arterial coronariana crônica (IAM inferior há 10 anos tratado com angioplastia), insuficiência renal crônica estágio 3, bradicardia sinusal documentada previamente. Em uso de carvedilol 12,5 mg 2x/dia, AAS 100 mg/dia, atorvastatina 40 mg, enalapril 5 mg 2x/dia."
+  },
+  "presentation": "Paciente trazido pelo SAMU após episódio de síncope súbita em domicílio. A esposa relata que o paciente estava sentado, queixou-se de tontura intensa e perdeu a consciência por aproximadamente 20 segundos, com recuperação espontânea e completa. Nos últimos dias, vinha apresentando episódios de tontura e cansaço progressivo. Sinais vitais: PA 100/60 mmHg, FC 35 bpm, FR 18 irpm, SpO2 95%. Ao exame: lúcido, orientado, pálido, bradicárdico, sem sinais de insuficiência cardíaca descompensada. Ausculta com ondas A em canhão intermitentes no pulso venoso jugular.",
+  "ecg_findings": {
+    "rhythm": "Dissociação atrioventricular completa",
+    "p_wave": "Ondas P sinusais presentes com frequência de 75 bpm, morfologia normal, sem relação com os complexos QRS",
+    "pr_interval": "Variável e sem padrão — os intervalos entre P e QRS mudam a cada batimento de forma aleatória",
+    "qrs_duration": "140 ms (alargado) com morfologia de bloqueio de ramo direito",
+    "axis": "-60° (desvio para a esquerda)",
+    "st_segment": "Alterações de ST-T secundárias ao bloqueio de ramo (discordância)",
+    "t_wave": "Inversão de T em V1-V3 secundária ao BRD",
+    "q_waves": "Ondas Q em DII, DIII e aVF (sequela de IAM inferior prévio)",
+    "other": "Ritmo de escape ventricular com FC de 35 bpm, completamente independente das ondas P atriais"
+  },
+  "phases": [
+    {
+      "question": "Analise a relação entre as ondas P e os complexos QRS. O que você observa?",
+      "hint": "Marque todas as ondas P e todos os complexos QRS separadamente. Os intervalos PR são constantes ou variam? Existe algum padrão?",
+      "answer": "As ondas P e os complexos QRS são completamente independentes. As ondas P mantêm uma frequência própria (75 bpm), enquanto os QRS têm frequência diferente (35 bpm). Os intervalos PR variam aleatoriamente, sem qualquer relação fixa — isso configura dissociação atrioventricular completa.",
+      "explanation": "No bloqueio atrioventricular de 3° grau (BAV total), nenhum impulso atrial é conduzido aos ventrículos. Os átrios continuam sendo comandados pelo nó sinusal (P a 75 bpm), mas os ventrículos dependem de um marca-passo de escape (neste caso, ventricular a 35 bpm). Como não há comunicação entre os dois níveis, os intervalos PR são completamente variáveis e aleatórios. Ao exame físico, isso se manifesta como ondas A em canhão intermitentes no pulso jugular (quando o átrio contrai contra a valva tricúspide fechada)."
+    },
+    {
+      "question": "Qual é o tipo de bloqueio AV e onde provavelmente está a lesão no sistema de condução?",
+      "hint": "Observe a duração do QRS e a morfologia do ritmo de escape. QRS estreito sugere escape juncional (lesão no nó AV). QRS largo sugere escape ventricular (lesão infranodal).",
+      "answer": "BAV de 3° grau (completo) com escape ventricular. A localização é infranodal (abaixo do nó AV, no sistema His-Purkinje), evidenciada pelo QRS largo (140 ms) com morfologia de BRD e frequência de escape baixa (35 bpm).",
+      "explanation": "A localização do bloqueio determina o tipo de escape e o prognóstico: (1) Bloqueio no nó AV → escape juncional com QRS estreito, FC 40-60 bpm — mais estável; (2) Bloqueio infranodal (His-Purkinje) → escape ventricular com QRS largo, FC 20-40 bpm — menos confiável, maior risco de assistolia. Neste paciente, o QRS largo com BRD, a FC muito baixa (35 bpm) e o desvio de eixo para a esquerda (sugerindo BDAS associado) indicam doença extensa do sistema de condução infranodal. O IAM inferior prévio provavelmente contribuiu para a fibrose do sistema de condução."
+    },
+    {
+      "question": "Qual é a relação entre a história de IAM inferior prévio e o quadro atual?",
+      "hint": "Considere a irrigação do sistema de condução. Qual artéria irriga o nó AV e a porção proximal do feixe de His?",
+      "answer": "O IAM inferior prévio (por oclusão da coronária direita) provavelmente causou fibrose e dano progressivo ao sistema de condução. A artéria do nó AV origina-se da coronária direita em 85% dos casos, e o ramo septal da DA irriga o feixe de His.",
+      "explanation": "A artéria coronária direita irriga o nó AV em ~85% das pessoas e a artéria do nó sinusal em ~60%. O IAM inferior pode causar: (1) BAV transitório na fase aguda (edema e isquemia do nó AV — geralmente reversível); (2) Fibrose progressiva do sistema de condução ao longo dos anos, levando a BAV tardio. As ondas Q em DII, DIII e aVF confirmam a cicatriz de IAM inferior. O QRS com BRD e desvio de eixo para a esquerda (BDAS) indica doença bifascicular associada, sugerindo comprometimento extenso do sistema His-Purkinje."
+    },
+    {
+      "question": "Qual é a conduta imediata e o tratamento definitivo para este paciente?",
+      "hint": "O paciente tem BAV completo com escape ventricular de 35 bpm e síncope. Isso é uma emergência — qual é o tratamento farmacológico de emergência e o tratamento definitivo?",
+      "answer": "Conduta imediata: atropina 0,5-1 mg IV (pode não funcionar em bloqueio infranodal), se refratário → marca-passo transcutâneo externo ou infusão de isoproterenol/dopamina. Tratamento definitivo: implante de marca-passo cardíaco permanente (indicação classe I).",
+      "explanation": "O BAV de 3° grau sintomático (síncope) com escape ventricular é indicação inequívoca de marca-passo permanente (classe I nas diretrizes). Na emergência: (1) Atropina 0,5-1 mg IV — age no nó AV, portanto pode ter pouco efeito em bloqueios infranodais; (2) Marca-passo transcutâneo (MP externo) como ponte até o implante definitivo; (3) Dopamina ou isoproterenol em infusão para aumentar a FC se necessário. Importante: suspender carvedilol (betabloqueador pode agravar a bradicardia). O marca-passo definitivo (geralmente DDD — dupla câmara) restabelece a sincronia AV e previne novos episódios de síncope e morte súbita."
+    }
+  ],
+  "final_diagnosis": "Bloqueio atrioventricular de 3° grau (completo) com ritmo de escape ventricular a 35 bpm, QRS com padrão de BRD + BDAS (doença trifascicular), secundário a doença degenerativa do sistema de condução e sequela de IAM inferior prévio.",
+  "teaching_points": [
+    "BAV 3° grau = dissociação AV completa — P e QRS são independentes, sem relação fixa entre eles.",
+    "QRS do escape determina o nível do bloqueio: estreito = juncional (nó AV), largo = ventricular (His-Purkinje).",
+    "Escape ventricular (QRS largo, FC 20-40 bpm) é menos confiável que escape juncional — maior risco de assistolia.",
+    "IAM inferior pode causar BAV por lesão do nó AV e do feixe de His (irrigados pela coronária direita).",
+    "Ondas A em canhão intermitentes no exame físico são um achado clássico de dissociação AV.",
+    "BAV 3° grau sintomático = indicação inequívoca de marca-passo permanente (classe I). Atropina pode não funcionar em bloqueio infranodal."
+  ],
+  "disclaimer": "Conteúdo exclusivamente educacional. Este caso clínico é fictício e destina-se ao ensino de eletrocardiografia. Não substitui avaliação clínica profissional. Decisões diagnósticas e terapêuticas devem ser realizadas por profissionais habilitados com base no contexto clínico completo."
+}

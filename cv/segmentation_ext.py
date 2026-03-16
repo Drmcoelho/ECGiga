@@ -44,7 +44,7 @@ def segment_layout(gray, layout="3x4", bbox=None, margin=0.02):
         # 3x4 clássico + tira longa (II) em faixa inferior de 15% da altura
         base_h = int((y1-y0)*0.85)
         base_bbox = (x0,y0,x1,y0+base_h)
-        rhythm_bbox = (x0,y0+base_h,x1,y1)
+        (x0,y0+base_h,x1,y1)
         labels = ["I","II","III","aVR","aVL","aVF","V1","V2","V3","V4","V5","V6"]
         boxes = _grid_boxes(base_bbox, 3, 4, margin)
         out = [{"lead": lab, "bbox": box} for lab, box in zip(labels, boxes)]

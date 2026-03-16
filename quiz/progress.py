@@ -187,7 +187,7 @@ class ProgressTracker:
         earned = []
         history = self.get_history()
         total_answers = len(history)
-        total_correct = sum(1 for h in history if h.get("correct", False))
+        sum(1 for h in history if h.get("correct", False))
         streak = self.get_streak()
 
         # Topic-specific stats

@@ -13,6 +13,7 @@ dependencies = []
 
 [project.scripts]
 ecgcourse = "cli_app.ecgcourse.cli:app"
+mega = "mega.cli:app"
 
 [tool.black]
 line-length = 100

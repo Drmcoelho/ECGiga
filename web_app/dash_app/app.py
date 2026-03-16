@@ -318,7 +318,6 @@ def update_axis_wheel(lead):
     except Exception:
         # Fallback: roda do eixo frontal simplificada
         import plotly.graph_objs as go
-        angles = [-90, -60, -30, 0, 30, 60, 90, 120, 150, 180]
         labels_ax = ["aVL(-30°)", "I(0°)", "II(60°)", "aVF(90°)", "III(120°)"]
         fig = go.Figure()
         fig.add_trace(go.Scatterpolar(
@@ -366,25 +365,57 @@ def generate_quiz(n_clicks, n_questions):
               State("sim-hr", "value"), State("sim-duration", "value"), State("sim-pathology", "value"),
               prevent_initial_call=True)
 def simulate_ecg(n_clicks, hr, duration, pathology):
+    pathology_params = {
+        "normal": {},
+        "tachycardia": {"hr_bpm": max(hr or 75, 120)},
+        "bradycardia": {"hr_bpm": min(hr or 75, 50)},
+        "first_degree_block": {"pr_ms": 240},
+        "lbbb": {"qrs_ms": 160},
+        "afib": {"noise": 0.15},
+        "stemi": {},
+    }
+    pathology_labels = {
+        "normal": "Normal (sinusal)",
+        "tachycardia": "Taquicardia sinusal",
+        "bradycardia": "Bradicardia sinusal",
+        "first_degree_block": "BAV 1° grau (PR prolongado)",
+        "lbbb": "BRE (QRS alargado)",
+        "afib": "Fibrilação atrial",
+        "stemi": "Supra de ST (STEMI)",
+    }
     try:
         from simulation.ecg_generator import generate_ecg
-        result = generate_ecg(hr=hr or 75, duration_s=duration or 5)
-        signal = result.get("signal", result) if isinstance(result, dict) else result
-        if hasattr(signal, 'tolist'):
-            signal = signal.tolist() if len(signal) < 10000 else signal[:10000].tolist()
+        params = pathology_params.get(pathology, {})
+        base_hr = params.pop("hr_bpm", hr or 75)
+        result = generate_ecg(hr_bpm=base_hr, duration_s=duration or 5, **params)
+        leads_data = result.get("leads", {})
         fig = go.Figure()
-        fig.add_trace(go.Scatter(y=signal, mode="lines", name="ECG Simulado"))
-        fig.update_layout(title=f"ECG Simulado — {pathology} ({hr} bpm, {duration}s)",
-                         xaxis_title="Amostras", yaxis_title="mV")
+        if leads_data:
+            for lead_name in ["II", "V1", "V5"]:
+                if lead_name in leads_data:
+                    sig = leads_data[lead_name]
+                    fig.add_trace(go.Scatter(
+                        y=sig.tolist() if hasattr(sig, 'tolist') else sig,
+                        mode="lines", name=lead_name,
+                    ))
+        else:
+            signal = result.get("signal", result) if isinstance(result, dict) else result
+            if hasattr(signal, 'tolist'):
+                signal = signal.tolist() if len(signal) < 10000 else signal[:10000].tolist()
+            fig.add_trace(go.Scatter(y=signal, mode="lines", name="ECG"))
+        label = pathology_labels.get(pathology, pathology)
+        fig.update_layout(
+            title=f"ECG Simulado — {label} ({base_hr} bpm, {duration}s)",
+            xaxis_title="Amostras", yaxis_title="mV",
+            legend=dict(orientation="h"),
+        )
         return fig
-    except Exception as e:
+    except Exception as exc:
         fig = go.Figure()
-        # Fallback: gera onda sintética simples como demonstração
         t = np.linspace(0, duration or 5, (duration or 5) * 500)
-        rr = 60.0 / (hr or 75)
         signal = synth_wave(n=len(t))
         fig.add_trace(go.Scatter(y=signal, mode="lines", name="ECG Sintético"))
-        fig.update_layout(title=f"ECG Sintético (fallback) — {hr} bpm", xaxis_title="Amostras", yaxis_title="mV")
+        fig.update_layout(title=f"ECG Sintético (fallback) — {hr} bpm ({exc})", xaxis_title="Amostras", yaxis_title="mV")
         return fig
 
 

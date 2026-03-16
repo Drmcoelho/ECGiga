@@ -65,7 +65,7 @@ from cv.pathology.channelopathy import (
 def _synthetic_ecg(fs=500, duration_s=3, heart_rate=75, st_elevation_mv=0.0):
     """Generate a minimal synthetic ECG trace with controllable ST elevation."""
     n_samples = int(fs * duration_s)
-    t = np.arange(n_samples) / fs
+    np.arange(n_samples) / fs
     rr_interval = 60.0 / heart_rate
     r_peaks = []
     trace = np.zeros(n_samples)

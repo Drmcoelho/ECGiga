@@ -40,9 +40,9 @@ def draw_overlay(image_path: str,
     # desenha R-peaks (todas as leads) se fornecidas no espaço da imagem (índices relativos ao crop da lead)
     if rpeaks_map:
         for lab, peaks in rpeaks_map.items():
-            box = lab2box.get(lab); 
+            box = lab2box.get(lab) 
             if not box: continue
-            x0,y0,x1,y1 = box; w = x1-x0; h = y1-y0
+            x0,y0,x1,y1 = box; w = x1-x0; y1-y0
             for p in peaks or []:
                 x = x0 + int((p/ max(1,w)) * w) if isinstance(p,float) and 0<=p<=1 else (x0 + int(p))
                 dr.line([(x,y0),(x,y1)], fill=(0,128,255,120), width=2)

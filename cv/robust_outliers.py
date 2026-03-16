@@ -37,8 +37,8 @@ def robust_from_intervals(intervals_refined: Dict, prefer: str = "QT_ms") -> Dic
     n = max(len(PR), len(QRS), len(QT))
     # normaliza tamanhos (preenche com None)
     def norm(a): 
-        a = list(a); 
-        if len(a) < n: a = a + [None]*(n-len(a)); 
+        a = list(a) 
+        if len(a) < n: a = a + [None]*(n-len(a)) 
         return a
     PR, QRS, QT = norm(PR), norm(QRS), norm(QT)
     base = QT if prefer == "QT_ms" else (QRS if prefer=="QRS_ms" else PR)
