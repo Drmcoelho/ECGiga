@@ -221,12 +221,14 @@ def _layout_simulador():
                 id="sim-pathology",
                 options=[
                     {"label": "Normal (sinusal)", "value": "normal"},
-                    {"label": "Taquicardia sinusal", "value": "tachycardia"},
-                    {"label": "Bradicardia sinusal", "value": "bradycardia"},
-                    {"label": "PR prolongado (BAV 1°)", "value": "first_degree_block"},
-                    {"label": "QRS alargado (BRE)", "value": "lbbb"},
-                    {"label": "Fibrilação atrial", "value": "afib"},
-                    {"label": "Supra de ST (STEMI)", "value": "stemi"},
+                    {"label": "STEMI anterior (V1-V4)", "value": "stemi_anterior"},
+                    {"label": "STEMI inferior (II,III,aVF)", "value": "stemi_inferior"},
+                    {"label": "BRE (QRS alargado)", "value": "lbbb"},
+                    {"label": "BRD (RSR' em V1)", "value": "rbbb"},
+                    {"label": "Fibrilação atrial", "value": "af"},
+                    {"label": "WPW (PR curto, onda delta)", "value": "wpw"},
+                    {"label": "Hipercalemia (T apiculadas)", "value": "hyperkalemia"},
+                    {"label": "QT longo", "value": "long_qt"},
                 ],
                 value="normal",
                 clearable=False,
@@ -365,54 +367,40 @@ def generate_quiz(n_clicks, n_questions):
               State("sim-hr", "value"), State("sim-duration", "value"), State("sim-pathology", "value"),
               prevent_initial_call=True)
 def simulate_ecg(n_clicks, hr, duration, pathology):
-    pathology_params = {
-        "normal": {},
-        "tachycardia": {"hr_bpm": max(hr or 75, 120)},
-        "bradycardia": {"hr_bpm": min(hr or 75, 50)},
-        "first_degree_block": {"pr_ms": 240},
-        "lbbb": {"qrs_ms": 160},
-        "afib": {"noise": 0.15},
-        "stemi": {},
-    }
-    pathology_labels = {
-        "normal": "Normal (sinusal)",
-        "tachycardia": "Taquicardia sinusal",
-        "bradycardia": "Bradicardia sinusal",
-        "first_degree_block": "BAV 1° grau (PR prolongado)",
-        "lbbb": "BRE (QRS alargado)",
-        "afib": "Fibrilação atrial",
-        "stemi": "Supra de ST (STEMI)",
-    }
+    hr = hr or 75
+    duration = duration or 5
+    pathology = pathology or "normal"
     try:
-        from simulation.ecg_generator import generate_ecg
-        params = pathology_params.get(pathology, {})
-        base_hr = params.pop("hr_bpm", hr or 75)
-        result = generate_ecg(hr_bpm=base_hr, duration_s=duration or 5, **params)
-        leads_data = result.get("leads", {})
-        fig = go.Figure()
-        if leads_data:
-            for lead_name in ["II", "V1", "V5"]:
-                if lead_name in leads_data:
-                    sig = leads_data[lead_name]
-                    fig.add_trace(go.Scatter(
-                        y=sig.tolist() if hasattr(sig, 'tolist') else sig,
-                        mode="lines", name=lead_name,
-                    ))
+        from simulation.ecg_generator import generate_ecg, generate_pathological_ecg
+
+        if pathology == "normal":
+            result = generate_ecg(hr_bpm=hr, duration_s=duration)
         else:
-            signal = result.get("signal", result) if isinstance(result, dict) else result
-            if hasattr(signal, 'tolist'):
-                signal = signal.tolist() if len(signal) < 10000 else signal[:10000].tolist()
-            fig.add_trace(go.Scatter(y=signal, mode="lines", name="ECG"))
-        label = pathology_labels.get(pathology, pathology)
+            result = generate_pathological_ecg(pathology)
+
+        leads_data = result.get("leads", {})
+        desc = result.get("pathology_description_pt", pathology)
+        actual_hr = result.get("params", {}).get("hr_bpm", hr)
+
+        fig = go.Figure()
+        for lead_name in ["II", "V1", "V5"]:
+            if lead_name in leads_data:
+                sig = leads_data[lead_name]
+                fig.add_trace(go.Scatter(
+                    y=sig.tolist() if hasattr(sig, 'tolist') else sig,
+                    mode="lines", name=lead_name,
+                ))
+
+        title = f"ECG Simulado — {desc} ({actual_hr} bpm)"
         fig.update_layout(
-            title=f"ECG Simulado — {label} ({base_hr} bpm, {duration}s)",
+            title=title,
             xaxis_title="Amostras", yaxis_title="mV",
             legend=dict(orientation="h"),
         )
         return fig
     except Exception as exc:
         fig = go.Figure()
-        t = np.linspace(0, duration or 5, (duration or 5) * 500)
+        t = np.linspace(0, duration, duration * 500)
         signal = synth_wave(n=len(t))
         fig.add_trace(go.Scatter(y=signal, mode="lines", name="ECG Sintético"))
         fig.update_layout(title=f"ECG Sintético (fallback) — {hr} bpm ({exc})", xaxis_title="Amostras", yaxis_title="mV")
