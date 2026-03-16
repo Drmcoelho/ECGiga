@@ -180,6 +180,86 @@ def _layout_educacao():
             ),
             dcc.Graph(id="edu-axis-wheel"),
         ], className="card", style={"maxWidth": "700px", "marginTop": "16px"}),
+        html.Div([
+            html.H4("Segmento ST — Foco, Desfoco e a Linha de Base"),
+            html.P(
+                "O segmento ST é o trecho entre o fim do QRS (ponto J) e o início da onda T. "
+                "Entender por que ele é normalmente isoelétrico — e quando sai da linha de base — "
+                "é fundamental para diagnosticar isquemia e infarto.",
+                style={"marginBottom": "12px"},
+            ),
+            html.Div([
+                html.H5("Por que o ST normal fica na linha de base?"),
+                html.P(
+                    "Durante a despolarização (QRS), parte do miocárdio está despolarizada e parte "
+                    "ainda em repouso — isso cria um gradiente, um vetor, que a câmera registra como "
+                    "deflexão (positiva se vem, negativa se foge). A câmera FOCA no movimento."
+                ),
+                html.P(
+                    "Mas quando TODA a parede ventricular atinge o plateau (fase 2 do potencial de ação), "
+                    "todas as células estão no mesmo estado elétrico. Sem diferença de potencial, sem vetor, "
+                    "sem sinal. Nenhuma câmera vê contraste. O registro volta ao zero — a linha de base. "
+                    "É como uma sala toda iluminada por igual: nenhuma câmera detecta movimento.",
+                    style={"marginTop": "6px"},
+                ),
+                html.P(
+                    "Depois, a repolarização (onda T) recria um gradiente — do epicárdio para o endocárdio — "
+                    "e a câmera volta a focar. Como a repolarização vai de fora para dentro (oposta à "
+                    "despolarização), o vetor T aponta na mesma direção geral do QRS. Por isso, "
+                    "normalmente T e QRS têm a mesma polaridade.",
+                    style={"marginTop": "6px"},
+                ),
+            ], style={"marginBottom": "16px"}),
+            html.Div([
+                html.H5("Supra de ST — Lesão transmural (STEMI)"),
+                html.P(
+                    "Quando uma artéria é totalmente ocluída, a região lesada não mantém o plateau normal. "
+                    "As células lesadas repolarizam prematuramente, criando um gradiente durante o que "
+                    "deveria ser um plateau uniforme. Surge uma corrente de lesão."
+                ),
+                html.Ul([
+                    html.Li([
+                        html.B("Câmera voltada para a lesão: "),
+                        "vê a corrente de lesão vindo → ST sobe acima da base → SUPRA. "
+                        "É como filmar um incêndio diretamente.",
+                    ]),
+                    html.Li([
+                        html.B("Câmera oposta (recíproca): "),
+                        "vê a corrente de lesão fugindo → ST desce → INFRA recíproco. "
+                        "É como ver a sombra do incêndio na parede oposta.",
+                    ]),
+                ]),
+                html.P(
+                    "Territórios: IAM anterior → supra em V1-V4 + infra em II/III/aVF | "
+                    "IAM inferior → supra em II/III/aVF + infra em I/aVL | "
+                    "IAM lateral → supra em I/aVL/V5/V6.",
+                    style={"fontStyle": "italic", "marginTop": "6px"},
+                ),
+            ], style={"marginBottom": "16px"}),
+            html.Div([
+                html.H5("Infra de ST — Isquemia subendocárdica"),
+                html.P(
+                    "Sem oclusão total, a lesão atinge o subendocárdio (camada interna, mais vulnerável). "
+                    "O vetor de corrente de lesão aponta para dentro do ventrículo — fugindo de TODAS "
+                    "as câmeras de superfície. Resultado: infra de ST difuso, sem supra recíproco."
+                ),
+                html.P(
+                    "É como um defeito escondido por dentro da parede: todas as câmeras veem uma sombra "
+                    "sutil por igual, mas nenhuma filma a lesão diretamente.",
+                    style={"fontStyle": "italic", "marginTop": "6px"},
+                ),
+            ], style={"marginBottom": "16px"}),
+            html.Div([
+                html.H5("Outras causas de alteração do ST"),
+                html.Ul([
+                    html.Li([html.B("Pericardite: "), "inflamação difusa → supra côncavo generalizado (todas as câmeras veem irritação)"]),
+                    html.Li([html.B("BRE: "), "condução anormal distorce o ST (discordante ao QRS) — artefato, não lesão"]),
+                    html.Li([html.B("Repolarização precoce: "), "variante normal em jovens → supra côncavo com entalhe no ponto J"]),
+                    html.Li([html.B("Hipercalemia: "), "potássio alto altera o plateau → ST funde-se com T apiculada"]),
+                    html.Li([html.B("Hipotermia: "), "frio prolonga o plateau → onda J (Osborn) no ponto J"]),
+                ]),
+            ]),
+        ], className="card", style={"maxWidth": "700px", "marginTop": "16px"}),
     ])
 
 

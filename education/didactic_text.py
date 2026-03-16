@@ -269,6 +269,31 @@ WAVE_EXPLANATIONS: dict = {
             "BRE → V6 vê um R largo e entalhado (VE despolariza devagar)."
         ),
     },
+    "ST": {
+        "nome": "Segmento ST — O silêncio entre foco e desfoco",
+        "descricao": (
+            "O segmento ST é o trecho entre o fim do QRS (ponto J) e o início "
+            "da onda T. Nesse momento, toda a parede ventricular está "
+            "uniformemente despolarizada (plateau do potencial de ação). "
+            "Sem gradiente, sem vetor, sem sinal — o registro é isoelétrico."
+        ),
+        "camera_analogy": (
+            "É como se todos os atores de uma cena parassem completamente ao "
+            "mesmo tempo. Nenhuma câmera registra movimento. A tela fica "
+            "'parada'. Quando a lesão (isquemia, infarto) quebra essa "
+            "uniformidade, uma corrente de lesão surge: a câmera voltada para "
+            "a zona lesada vê o gradiente se aproximando (SUPRA de ST) e a "
+            "câmera oposta vê o gradiente fugindo (INFRA recíproco). Na "
+            "isquemia subendocárdica, o gradiente foge de todas as câmeras "
+            "de superfície → INFRA difuso."
+        ),
+        "dica_clinica": (
+            "Supra de ST focal + infra recíproco = STEMI até provar o contrário. "
+            "Infra de ST difuso sem supra = isquemia subendocárdica ou strain. "
+            "Supra difuso e côncavo sem recíproco (exceto aVR) = pericardite. "
+            "Sempre comparar com ECG prévio quando disponível."
+        ),
+    },
     "T": {
         "nome": "Onda T — A repolarização filmada",
         "descricao": (
@@ -446,3 +471,203 @@ COMMON_PATTERNS_CAMERAS: dict = {
         ),
     },
 }
+
+# =====================================================================
+# ST_SEGMENT_EXPLAINED — Segmento ST: foco vs. desfoco nas câmeras
+# =====================================================================
+
+ST_SEGMENT_EXPLAINED: str = """\
+O SEGMENTO ST: POR QUE A CÂMERA VOLTA À LINHA DE BASE — E QUANDO NÃO VOLTA
+
+Para entender o segmento ST, precisamos entender o que cada câmera
+(derivação) realmente "vê" em cada fase do ciclo ventricular. Pense assim:
+
+═══════════════════════════════════════════════════════════════════════
+FASE 1 — DESPOLARIZAÇÃO VENTRICULAR (QRS): A CÂMERA FOCA
+═══════════════════════════════════════════════════════════════════════
+
+Durante o QRS, uma onda de despolarização varre os ventrículos. Essa onda
+cria uma diferença de potencial porque parte do miocárdio já está
+despolarizada e parte ainda está em repouso. As câmeras registram essa
+diferença como deflexão:
+
+• A câmera voltada para o segmento que está sendo despolarizado "na
+  direção dela" FOCA — registra deflexão positiva. O vetor se aproxima.
+  É como se o ator principal entrasse em cena caminhando na direção da
+  câmera: a imagem fica grande, nítida, dominante.
+
+• A câmera no lado oposto vê o vetor se afastando — DESFOCA — registra
+  deflexão negativa. O ator está de costas, se afastando: a imagem
+  encolhe, fica escura.
+
+É como a lente de uma câmera de cinema: o objeto que vem na sua direção
+fica nítido e grande (deflexão positiva); o que se afasta fica embaçado
+e pequeno (deflexão negativa). A amplitude da onda reflete o quanto de
+massa muscular está se movendo na direção daquela câmera.
+
+═══════════════════════════════════════════════════════════════════════
+FASE 2 — PLATEAU (SEGMENTO ST): TODAS AS CÂMERAS VOLTAM À BASE
+═══════════════════════════════════════════════════════════════════════
+
+Aqui está o ponto-chave que confunde muitos estudantes: quando TODA a
+parede ventricular está uniformemente despolarizada (fase 2 do potencial
+de ação — o plateau), não existe mais diferença de potencial entre uma
+região e outra. Não há vetor. Nenhuma câmera vê nada se movendo — nem
+vindo, nem indo.
+
+Imagine uma sala toda iluminada uniformemente: nenhuma câmera detecta
+contraste. Não há sombra, não há destaque. Não há "frente de onda" para
+filmar. O registro volta à linha de base — o ponto zero, o isoelétrico.
+
+Por isso o segmento ST normal é ISOELÉTRICO: entre o fim do QRS (ponto J)
+e o início da onda T, todas as células ventriculares estão no mesmo
+estado elétrico. Sem gradiente → sem sinal → linha de base.
+
+Pense no plateau como o momento em que todos os atores de um filme ficam
+completamente imóveis ao mesmo tempo. Nenhuma câmera registra movimento.
+A tela fica "parada" — isoelétrica.
+
+═══════════════════════════════════════════════════════════════════════
+FASE 3 — REPOLARIZAÇÃO (ONDA T): A CÂMERA FOCA DE NOVO
+═══════════════════════════════════════════════════════════════════════
+
+A repolarização não é instantânea. Ela começa pelo epicárdio (camada
+externa) e avança para o endocárdio (camada interna). Isso recria uma
+diferença de potencial — agora entre regiões já repolarizadas e regiões
+ainda em plateau.
+
+Curiosamente, como a repolarização vai de fora para dentro (oposto da
+despolarização, que vai de dentro para fora), os dois processos
+"invertidos" produzem vetores na mesma direção geral. É por isso que
+normalmente a onda T tem a MESMA polaridade que o QRS — a câmera que viu
+a despolarização como positiva também vê a repolarização como positiva.
+
+É como se o ator, depois de parar (plateau/ST), começasse a caminhar
+de novo na mesma direção da câmera: a câmera foca novamente.
+
+═══════════════════════════════════════════════════════════════════════
+POR QUE O ST SAI DA LINHA DE BASE? — SUPRA E INFRA DE ST
+═══════════════════════════════════════════════════════════════════════
+
+Se o ST é normalmente isoelétrico porque não há gradiente durante o
+plateau, o que acontece quando há lesão em uma parte do miocárdio?
+
+A resposta: a lesão QUEBRA a uniformidade do plateau.
+
+── LESÃO TRANSMURAL (STEMI) — SUPRADESNIVELAMENTO DE ST ──
+
+Quando uma artéria coronária é ocluída (infarto agudo), a região lesada
+não consegue manter o plateau normal. As células lesadas têm um potencial
+de repouso mais negativo e repolarizam prematuramente. Enquanto o
+miocárdio saudável ainda está no plateau (totalmente despolarizado), a
+zona lesada já "caiu" para um estado mais negativo.
+
+Resultado: durante o que deveria ser um plateau uniforme, agora existe
+um gradiente — uma corrente de lesão que aponta DA zona lesada (mais
+negativa) PARA a zona saudável (ainda em plateau).
+
+Mas como o ECG registra isso? O ECG convencional usa a linha de base do
+segmento TP (entre batimentos) como referência zero. Acontece que durante
+o TP, a zona lesada também tem um potencial diferente das células
+saudáveis (corrente de lesão diastólica), o que ABAIXA a referência
+real. O efeito combinado dos gradientes sistólico e diastólico é que o
+segmento ST PARECE elevado — o famoso SUPRA de ST.
+
+Para a câmera voltada diretamente para a zona de lesão:
+→ A câmera vê um "desequilíbrio" durante o plateau
+→ A corrente de lesão aponta na direção dela
+→ O ST sobe acima da linha de base → SUPRADESNIVELAMENTO
+→ É como se a câmera filmasse um incêndio na parede cardíaca
+
+Para a câmera do lado oposto (derivação recíproca):
+→ A mesma corrente de lesão se afasta dela
+→ O ST desce abaixo da linha de base → INFRADESNIVELAMENTO recíproco
+→ É como ver apenas a sombra do incêndio projetada na parede oposta
+
+Exemplos por território:
+• IAM anterior: supra em V1-V4 (câmeras anteriores filmam a lesão
+  diretamente) + infra em DII, DIII, aVF (câmeras inferiores veem
+  o reflexo)
+• IAM inferior: supra em DII, DIII, aVF (câmeras inferiores) + infra
+  em DI, aVL (câmeras laterais altas veem o espelho)
+• IAM lateral: supra em DI, aVL, V5, V6 (câmeras laterais)
+
+── ISQUEMIA SUBENDOCÁRDICA — INFRADESNIVELAMENTO DE ST ──
+
+Na isquemia sem oclusão total (angina, estenose parcial), a lesão é
+mais restrita ao subendocárdio — a camada interna do ventrículo, que
+é a mais vulnerável porque está mais longe da artéria e sofre mais
+pressão durante a sístole.
+
+Nesse caso, o vetor de corrente de lesão aponta do endocárdio (lesado)
+para o epicárdio (preservado) — ou seja, aponta para dentro do
+ventrículo, FUGINDO de todas as câmeras que estão na superfície do
+tórax.
+
+Resultado: as câmeras de superfície veem o vetor de lesão se afastando
+→ INFRA de ST difuso, em múltiplas derivações, sem derivações recíprocas
+com supra. O padrão é bem diferente do STEMI.
+
+É como um defeito escondido atrás da parede: todas as câmeras veem uma
+"sombra" sutil por igual, mas nenhuma vê a lesão diretamente.
+
+═══════════════════════════════════════════════════════════════════════
+RESUMO COM ANALOGIA DAS CÂMERAS
+═══════════════════════════════════════════════════════════════════════
+
+CORAÇÃO NORMAL DURANTE O PLATEAU (SEGMENTO ST):
+  → Toda a parede uniformemente despolarizada
+  → Nenhuma câmera vê contraste → ST na linha de base (isoelétrico)
+  → Como uma sala toda pintada de uma cor só: sem contraste, sem imagem
+
+STEMI (lesão transmural por oclusão total):
+  → Parte da parede "desligou" prematuramente durante o plateau
+  → A câmera voltada para a lesão vê um gradiente vindo → SUPRA de ST
+  → A câmera oposta vê o gradiente fugindo → INFRA recíproco
+  → Como um buraco no muro: a câmera de frente vê o buraco, a de trás
+    vê a luz vazando pelo outro lado
+
+ISQUEMIA SUBENDOCÁRDICA (sem oclusão total):
+  → Lesão parcial na camada interna do ventrículo
+  → O gradiente aponta para dentro (foge de todas as câmeras)
+  → INFRA de ST difuso em múltiplas câmeras
+  → Como um defeito escondido por dentro da parede: todas as câmeras
+    veem uma sombra sutil, mas nenhuma vê diretamente a lesão
+
+═══════════════════════════════════════════════════════════════════════
+OUTRAS CAUSAS DE ALTERAÇÃO DO SEGMENTO ST
+═══════════════════════════════════════════════════════════════════════
+
+Pericardite:
+  → Inflamação difusa do pericárdio (envolve o coração inteiro)
+  → Todas as câmeras veem irritação por toda parte
+  → Supra de ST difuso e côncavo (em quase todas as derivações)
+  → Diferente do STEMI, que é focal e com recíproco
+
+Bloqueio de Ramo Esquerdo (BRE):
+  → A despolarização anormal distorce tanto o QRS que o ST é
+    "discordante" (oposto ao QRS) — esperado no BRE
+  → A câmera registra artefato da condução lenta, não lesão verdadeira
+  → Por isso, diagnosticar STEMI na presença de BRE é difícil
+    (critérios de Sgarbossa)
+
+Repolarização Precoce:
+  → Variante normal frequente em jovens atletas
+  → Supra de ST côncavo com entalhe no ponto J ("fishhook")
+  → A câmera capta uma repolarização que começa um pouco mais cedo
+    que o habitual, mas de forma benigna — o plateau é ligeiramente
+    mais curto no epicárdio
+
+Hipercalemia:
+  → Potássio extracelular elevado altera o potencial de repouso e
+    o formato do plateau
+  → ST pode subir ou fundir-se com uma onda T apiculada e simétrica
+  → A câmera vê uma repolarização violentamente rápida e intensa —
+    como um ator que sai de cena correndo em vez de caminhar
+
+Hipotermia (Onda de Osborn):
+  → O frio prolonga o plateau de forma desigual
+  → Aparece uma deflexão positiva no ponto J (onda J ou onda de Osborn)
+  → A câmera registra um "tropeço" entre o QRS e o ST — como se o
+    ator parasse brevemente no meio do caminho antes de continuar
+"""
