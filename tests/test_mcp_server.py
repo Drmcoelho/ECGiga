@@ -27,6 +27,8 @@ def test_catalog(client):
     assert "quiz_validate" in tool_names
     assert "analyze_intervals" in tool_names
     assert "ecg_image_process" in tool_names
+    assert "ecg_interpret" in tool_names
+    assert "quiz_adaptive" in tool_names
 
 
 def test_analyze_intervals_normal(client):
@@ -43,6 +45,20 @@ def test_analyze_intervals_normal(client):
     assert 300 < data["qtc_ms"] < 600
     # Normal intervals should have no flags
     assert len(data["flags"]) == 0
+
+
+def test_analyze_intervals_invalid_rr(client):
+    resp = client.post(
+        "/analyze_intervals",
+        json={"pr_ms": 160, "qrs_ms": 90, "qt_ms": 380, "rr_ms": 0},
+    )
+    assert resp.status_code == 422
+
+    resp = client.post(
+        "/analyze_intervals",
+        json={"pr_ms": 160, "qrs_ms": 90, "qt_ms": 380, "rr_ms": -100},
+    )
+    assert resp.status_code == 422
 
 
 def test_analyze_intervals_prolonged_pr(client):

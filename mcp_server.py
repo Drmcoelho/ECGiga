@@ -217,12 +217,16 @@ async def analyze_intervals(data: AnalyzeIntervalsInput) -> AnalyzeIntervalsOutp
     qt_ms = data.qt_ms
     rr_ms = data.rr_ms
 
+    # Valida RR antes de calcular QTc
+    if rr_ms <= 0:
+        raise HTTPException(
+            status_code=422,
+            detail="rr_ms deve ser positivo para cálculo de QTc",
+        )
+
     # Calcula QTc pela fórmula de Bazett (ms)
-    try:
-        rr_sec = rr_ms / 1000.0
-        qtc_ms = qt_ms / math.sqrt(rr_sec) if rr_sec > 0 else float("nan")
-    except Exception:
-        qtc_ms = float("nan")
+    rr_sec = rr_ms / 1000.0
+    qtc_ms = qt_ms / math.sqrt(rr_sec)
 
     flags: List[str] = []
 
@@ -298,7 +302,7 @@ async def ecg_image_process(data: ECGImageProcessInput) -> ECGImageProcessOutput
     }
 
     try:
-        resp = requests.get(data.image_url)
+        resp = requests.get(data.image_url, timeout=30)
         resp.raise_for_status()
         img = Image.open(io.BytesIO(resp.content)).convert("RGB")
         ops_lower = [op.lower() for op in data.ops]
@@ -435,6 +439,18 @@ async def catalog() -> JSONResponse:
             description="Processa imagem de ECG e extrai dados estruturados (CV pipeline)",
             input_schema=ECGImageProcessInput.model_json_schema(),
             output_schema=ECGImageProcessOutput.model_json_schema(),
+        ),
+        ToolDefinition(
+            name="ecg_interpret",
+            description="Interpreta ECG usando regras offline e detecção de patologias",
+            input_schema=ECGInterpretInput.model_json_schema(),
+            output_schema=ECGInterpretOutput.model_json_schema(),
+        ),
+        ToolDefinition(
+            name="quiz_adaptive",
+            description="Gera quiz adaptativo baseado no report de ECG",
+            input_schema=QuizAdaptiveInput.model_json_schema(),
+            output_schema=QuizAdaptiveOutput.model_json_schema(),
         ),
     ]
     return JSONResponse(content={"tools": [json.loads(tool.model_dump_json()) for tool in tools]})
