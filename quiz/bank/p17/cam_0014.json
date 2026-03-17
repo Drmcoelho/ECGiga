@@ -1,0 +1,14 @@
+{
+  "id": "cam_0014",
+  "topic": "cameras_cardiacas",
+  "difficulty": "hard",
+  "stem": "Um paciente apresenta onda P positiva em DII e negativa em aVR. Pela analogia das câmeras, isso indica:",
+  "options": [
+    "Ritmo ventricular — os átrios estão em fibrilação",
+    "Ritmo sinusal — o vetor de despolarização atrial se aproxima de DII e se afasta de aVR, consistente com origem no nó sinusal",
+    "Marcapasso artificial — o estímulo vem de baixo",
+    "Flutter atrial com condução 2:1"
+  ],
+  "answer_index": 1,
+  "explanation": "O nó sinusal fica no topo do átrio direito. A despolarização atrial desce para a esquerda (~60°). A câmera DII (60°) vê o vetor se aproximando → P positiva. A câmera aVR (-150°) vê o vetor fugindo → P negativa. Este padrão confirma ritmo sinusal — é o critério clássico."
+}

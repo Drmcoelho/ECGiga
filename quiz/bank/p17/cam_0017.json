@@ -1,0 +1,14 @@
+{
+  "id": "cam_0017",
+  "topic": "cameras_cardiacas",
+  "difficulty": "easy",
+  "stem": "Na analogia das câmeras, o que acontece quando o vetor elétrico se APROXIMA de uma derivação?",
+  "options": [
+    "A câmera registra deflexão negativa",
+    "A câmera registra deflexão positiva",
+    "A câmera não registra nada",
+    "A câmera registra apenas ruído"
+  ],
+  "answer_index": 1,
+  "explanation": "Regra CAFÉ — 'A' de Aproximando: quando o vetor elétrico se aproxima da câmera (polo positivo), a deflexão registrada é POSITIVA (onda para cima). É como a câmera obtendo uma imagem cada vez mais nítida do vetor que se aproxima."
+}

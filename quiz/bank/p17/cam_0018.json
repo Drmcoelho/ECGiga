@@ -1,0 +1,14 @@
+{
+  "id": "cam_0018",
+  "topic": "cameras_cardiacas",
+  "difficulty": "medium",
+  "stem": "Supradesnivelamento de ST em V1 a V4 indica que estas câmeras estão filmando lesão em qual parede?",
+  "options": [
+    "Parede inferior",
+    "Parede lateral",
+    "Parede anterior e septal",
+    "Parede posterior"
+  ],
+  "answer_index": 2,
+  "explanation": "V1-V2 são as câmeras septais e V3-V4 são as câmeras anteriores. Quando estas câmeras mostram supra de ST, estão filmando diretamente uma lesão (isquemia transmural) na parede anterior/septal. Isso sugere oclusão da artéria descendente anterior (DA)."
+}

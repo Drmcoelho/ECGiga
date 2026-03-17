@@ -36,7 +36,7 @@ def _rr_features(peaks: List[int], fs: float) -> Dict[str, float]:
 def _p_energy_heuristic(sig: np.ndarray, peaks: List[int], fs: float) -> float:
     """Energia média de baixa frequência antes do QRS (proxy rudimentar de P)."""
     if not peaks: return 0.0
-    win = max(1, int(0.12*fs))
+    max(1, int(0.12*fs))
     e_vals = []
     for r in peaks:
         i0 = max(0, r - int(0.20*fs))

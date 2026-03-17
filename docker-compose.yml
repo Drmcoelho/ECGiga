@@ -1,0 +1,59 @@
+version: "3.9"
+
+services:
+  # -----------------------------------------------------------------------
+  # web: Dash interactive dashboard (port 8050)
+  # -----------------------------------------------------------------------
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      python -m web_app.dash_app.app
+      --host 0.0.0.0 --port 8050
+    ports:
+      - "8050:8050"
+    volumes:
+      - ecgiga-data:/app/data
+    environment:
+      - ECGIGA_DB_PATH=/app/data/ecgiga.db
+      - ECGIGA_SECRET_KEY=${ECGIGA_SECRET_KEY:-change-me-in-production}
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # -----------------------------------------------------------------------
+  # api: FastAPI MCP server (port 8000)
+  # -----------------------------------------------------------------------
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      uvicorn mcp_server:app
+      --host 0.0.0.0 --port 8000
+      --workers 2
+      --log-level info
+    ports:
+      - "8000:8000"
+    volumes:
+      - ecgiga-data:/app/data
+    environment:
+      - ECGIGA_DB_PATH=/app/data/ecgiga.db
+      - ECGIGA_SECRET_KEY=${ECGIGA_SECRET_KEY:-change-me-in-production}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
+# Shared named volume for persistent data (SQLite DB, uploads, reports)
+volumes:
+  ecgiga-data:
+    driver: local

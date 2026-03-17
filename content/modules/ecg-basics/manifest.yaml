@@ -1,0 +1,64 @@
+module:
+  id: ecg-basics
+  title: "ECG Básico — Fundamentos da Eletrocardiografia"
+  description: >
+    Módulo introdutório que cobre os fundamentos essenciais do eletrocardiograma:
+    anatomia elétrica cardíaca, sistema de derivações (com analogia de câmeras),
+    ondas e intervalos, eixo elétrico e critérios de ritmo sinusal normal.
+    Ideal para estudantes de medicina nos primeiros contatos com o ECG.
+  version: "1.0.0"
+  language: pt-BR
+  difficulty: beginner
+  estimated_hours: 8
+  prerequisites: []
+  authors:
+    - ECGiga Team
+  tags:
+    - ecg
+    - básico
+    - fundamentos
+    - eletrocardiografia
+
+lessons:
+  - id: anatomia_eletrica
+    file: lessons/01_anatomia_eletrica.md
+    title: "Anatomia Elétrica do Coração"
+    description: "Sistema de condução cardíaca: do nó sinusal ao sistema His-Purkinje."
+    order: 1
+
+  - id: derivacoes
+    file: lessons/02_derivacoes.md
+    title: "Derivações do ECG"
+    description: "As 12 derivações como câmeras filmando o coração de diferentes ângulos."
+    order: 2
+
+  - id: ondas_intervalos
+    file: lessons/03_ondas_intervalos.md
+    title: "Ondas, Segmentos e Intervalos"
+    description: "Identificação e significado de P, QRS, T, ST, PR e QT."
+    order: 3
+
+  - id: eixo_eletrico
+    file: lessons/04_eixo_eletrico.md
+    title: "Eixo Elétrico Cardíaco"
+    description: "Como determinar o eixo elétrico usando as derivações frontais."
+    order: 4
+
+  - id: ritmo_sinusal
+    file: lessons/05_ritmo_sinusal.md
+    title: "Ritmo Sinusal Normal"
+    description: "Critérios de normalidade e abordagem sistemática de leitura do ECG."
+    order: 5
+
+quizzes:
+  - id: quiz_derivacoes
+    file: quizzes/quiz_derivacoes.json
+    title: "Quiz — Derivações do ECG"
+    related_lesson: derivacoes
+    question_count: 5
+
+  - id: quiz_intervalos
+    file: quizzes/quiz_intervalos.json
+    title: "Quiz — Ondas, Segmentos e Intervalos"
+    related_lesson: ondas_intervalos
+    question_count: 5

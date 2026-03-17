@@ -1,0 +1,14 @@
+{
+  "id": "pat_0009",
+  "topic": "brugada",
+  "difficulty": "hard",
+  "stem": "Qual é a diferença morfológica entre o padrão coved (Tipo 1) e saddleback (Tipo 2) de Brugada?",
+  "options": [
+    "Coved: duas corcundas; Saddleback: cúpula única",
+    "Coved: cúpula única com descenso suave e T negativa; Saddleback: duas corcundas (forma de sela) com T positiva",
+    "Não há diferença morfológica, apenas na amplitude",
+    "Coved: presente em V5-V6; Saddleback: presente em V1-V2"
+  ],
+  "answer_index": 1,
+  "explanation": "Coved (Tipo 1): a câmera vê uma cúpula convexa (côncava para baixo) que desce até T negativa — uma montanha única. Saddleback (Tipo 2): a câmera vê duas 'corcundas' — como uma sela de cavalo — com T positiva ou bifásica. Ambos em V1-V2, mas apenas o coved é diagnóstico."
+}

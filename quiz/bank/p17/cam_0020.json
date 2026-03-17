@@ -1,0 +1,14 @@
+{
+  "id": "cam_0020",
+  "topic": "cameras_cardiacas",
+  "difficulty": "medium",
+  "stem": "A onda P é bifásica em V1 (primeiro componente positivo, segundo negativo). Pela analogia das câmeras, isso ocorre porque:",
+  "options": [
+    "V1 vê o átrio direito se aproximando (componente positivo) e depois o átrio esquerdo se afastando para trás (componente negativo)",
+    "V1 não consegue registrar ondas P adequadamente",
+    "O nó sinusal está localizado em V1",
+    "A onda P é sempre bifásica em todas as derivações"
+  ],
+  "answer_index": 0,
+  "explanation": "A câmera V1 está muito perto dos átrios. Primeiro, o átrio direito (anterior) se despolariza em direção a V1 → componente positivo. Depois, o átrio esquerdo (posterior) se despolariza afastando-se de V1, para trás → componente negativo. P bifásica em V1 é normal! Se o componente negativo for muito grande, sugere sobrecarga atrial esquerda."
+}

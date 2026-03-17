@@ -1,0 +1,14 @@
+{
+  "id": "cam_0011",
+  "topic": "cameras_cardiacas",
+  "difficulty": "hard",
+  "stem": "No bloqueio de ramo esquerdo (BRE), por que a câmera V6 registra um R largo e entalhado?",
+  "options": [
+    "Porque V6 está com defeito de calibração",
+    "Porque o VE despolariza lentamente via fibras musculares (ramo esquerdo bloqueado), e V6 vê esse vetor se aproximando devagar — como uma cena em câmera lenta",
+    "Porque o septo se despolariza duas vezes",
+    "Porque a repolarização é muito rápida no BRE"
+  ],
+  "answer_index": 1,
+  "explanation": "No BRE, o ramo esquerdo não funciona. O VE despolariza célula a célula, lentamente. A câmera V6, posicionada sobre o VE, vê esse vetor lento vindo em sua direção — o R é largo (demora mais) e entalhado (condução irregular). É como filmar um ator andando em câmera lenta."
+}

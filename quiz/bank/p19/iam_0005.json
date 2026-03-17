@@ -1,0 +1,14 @@
+{
+  "id": "iam_0005",
+  "topic": "stemi",
+  "difficulty": "hard",
+  "stem": "Paciente com STEMI inferior. Para investigar extensão ao ventrículo direito, qual derivação adicional é mais importante?",
+  "options": [
+    "V7",
+    "V4R",
+    "aVL",
+    "V1"
+  ],
+  "answer_index": 1,
+  "explanation": "V4R é a câmera posicionada sobre o ventrículo direito. Em STEMI inferior (CD/RCA), a oclusão proximal pode afetar também o VD. Elevação de ST ≥ 1 mm em V4R confirma envolvimento do VD — informação crucial pois contraindica nitratos e volume deve ser reposto generosamente."
+}

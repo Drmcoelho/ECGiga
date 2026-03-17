@@ -1,0 +1,72 @@
+[
+  {
+    "id": "interv-0001",
+    "topic": "Intervalos — PR",
+    "difficulty": "easy",
+    "stem": "Qual é a faixa de duração normal do intervalo PR no ECG?",
+    "options": [
+      "80–120 ms",
+      "120–200 ms",
+      "200–300 ms",
+      "300–400 ms"
+    ],
+    "answer_index": 1,
+    "explanation": "O intervalo PR normal mede entre 120 e 200 ms (3 a 5 quadradinhos). PR > 200 ms indica bloqueio atrioventricular de 1° grau. PR < 120 ms pode indicar síndrome de pré-excitação (Wolff-Parkinson-White) ou ritmo juncional."
+  },
+  {
+    "id": "interv-0002",
+    "topic": "Ondas — Onda P",
+    "difficulty": "easy",
+    "stem": "Uma onda P com duração > 120 ms e morfologia bidentada ('em M') em DII sugere:",
+    "options": [
+      "Sobrecarga de átrio direito (P pulmonale)",
+      "Sobrecarga de átrio esquerdo (P mitrale)",
+      "Fibrilação atrial",
+      "Bloqueio AV de 1° grau"
+    ],
+    "answer_index": 1,
+    "explanation": "A onda P larga (> 120 ms) e bidentada em DII é chamada de P mitrale e indica sobrecarga de átrio esquerdo, frequentemente associada a valvopatia mitral. Já a P pulmonale (sobrecarga de átrio direito) é alta e pontiaguda (> 2,5 mm), sem aumento de duração."
+  },
+  {
+    "id": "interv-0003",
+    "topic": "Intervalos — QT",
+    "difficulty": "medium",
+    "stem": "Um paciente apresenta QTc de 520 ms. Qual é a principal preocupação clínica?",
+    "options": [
+      "Risco aumentado de bloqueio atrioventricular completo",
+      "Risco aumentado de fibrilação atrial",
+      "Risco aumentado de Torsades de Pointes (taquicardia ventricular polimórfica)",
+      "Risco aumentado de assistolia"
+    ],
+    "answer_index": 2,
+    "explanation": "QTc > 500 ms confere risco significativamente aumentado de Torsades de Pointes, uma forma de taquicardia ventricular polimórfica que pode degenerar em fibrilação ventricular e morte súbita. Causas incluem medicamentos (antiarrítmicos, antipsicóticos), distúrbios eletrolíticos (hipocalemia, hipomagnesemia) e síndromes congênitas do QT longo."
+  },
+  {
+    "id": "interv-0004",
+    "topic": "Segmento ST — Alterações",
+    "difficulty": "medium",
+    "stem": "Supradesnivelamento de ST côncavo e difuso em múltiplas derivações, acompanhado de infradesnivelamento do segmento PR, sugere qual diagnóstico?",
+    "options": [
+      "Infarto agudo do miocárdio com supra de ST (STEMI)",
+      "Pericardite aguda",
+      "Repolarização precoce benigna",
+      "Síndrome de Brugada"
+    ],
+    "answer_index": 1,
+    "explanation": "A pericardite aguda tipicamente causa supra de ST difuso (não limitado a um território coronariano), com morfologia côncava ('em sela'), acompanhado de infra do segmento PR (sinal bastante específico). Diferentemente do STEMI, não há supra de ST convexo localizado em território coronariano específico nem imagem em espelho típica."
+  },
+  {
+    "id": "interv-0005",
+    "topic": "Ondas — QRS",
+    "difficulty": "medium",
+    "stem": "Qual dos seguintes achados no complexo QRS indica duração anormal e sugere bloqueio de ramo?",
+    "options": [
+      "QRS de 90 ms com morfologia normal",
+      "QRS de 110 ms com ondas Q septais em V5-V6",
+      "QRS de 130 ms com padrão rsR' em V1",
+      "QRS de 80 ms com baixa voltagem"
+    ],
+    "answer_index": 2,
+    "explanation": "QRS ≥ 120 ms (130 ms neste caso) indica atraso na condução intraventricular. O padrão rsR' (ou 'orelhas de coelho') em V1 com QRS alargado é o achado clássico do bloqueio de ramo direito (BRD). As outras opções têm QRS dentro da faixa normal (< 120 ms) e não configuram bloqueio de ramo."
+  }
+]

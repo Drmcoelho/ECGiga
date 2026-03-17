@@ -1,0 +1,14 @@
+{
+  "id": "dev_0008",
+  "topic": "channelopathy",
+  "difficulty": "easy",
+  "stem": "QTc ≤ 340 ms sugere:",
+  "options": [
+    "QT normal",
+    "Síndrome do QT longo",
+    "Síndrome do QT curto",
+    "Hipocalcemia"
+  ],
+  "answer_index": 2,
+  "explanation": "QTc ≤ 340 ms é o critério diagnóstico para Síndrome do QT Curto. Todas as câmeras mostram que o coração 'recarrega' rápido demais. Essa recarga prematura torna o miocárdio vulnerável a reentradas e fibrilação ventricular. É raro mas potencialmente letal — especialmente em jovens com síncope ou história familiar de morte súbita."
+}

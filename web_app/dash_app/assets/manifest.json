@@ -1,0 +1,13 @@
+{
+  "name": "ECGiga — Curso Interativo de ECG",
+  "short_name": "ECGiga",
+  "description": "Plataforma interativa para aprendizado de eletrocardiografia",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1a73e8",
+  "icons": [
+    {"src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png"}
+  ]
+}

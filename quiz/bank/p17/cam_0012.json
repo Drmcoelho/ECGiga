@@ -1,0 +1,14 @@
+{
+  "id": "cam_0012",
+  "topic": "cameras_cardiacas",
+  "difficulty": "easy",
+  "stem": "As derivações DI, DII, DIII, aVR, aVL e aVF são câmeras de qual plano?",
+  "options": [
+    "Plano horizontal",
+    "Plano sagital",
+    "Plano frontal",
+    "Plano transversal precordial"
+  ],
+  "answer_index": 2,
+  "explanation": "As 6 derivações dos membros (DI, DII, DIII, aVR, aVL, aVF) formam câmeras no plano frontal — olham o coração de frente, como um retrato. As derivações precordiais (V1-V6) ficam no plano horizontal."
+}

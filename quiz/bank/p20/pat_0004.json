@@ -1,0 +1,14 @@
+{
+  "id": "pat_0004",
+  "topic": "pe_tep",
+  "difficulty": "easy",
+  "stem": "O padrão S1Q3T3 no ECG sugere:",
+  "options": [
+    "Infarto anterior",
+    "Pericardite aguda",
+    "Tromboembolismo pulmonar / sobrecarga aguda de VD",
+    "Síndrome de Brugada"
+  ],
+  "answer_index": 2,
+  "explanation": "S1Q3T3 significa: onda S em DI, onda Q em DIII e T invertida em DIII. Indica sobrecarga aguda do ventrículo direito, clássico do TEP. A câmera DI vê o VE 'encolher' (S), a câmera DIII vê o VD 'empurrar para frente' (Q) e sofrer isquemia (T invertida)."
+}

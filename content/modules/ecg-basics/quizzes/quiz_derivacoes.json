@@ -1,0 +1,72 @@
+[
+  {
+    "id": "deriv-0001",
+    "topic": "Derivações — Plano Frontal",
+    "difficulty": "easy",
+    "stem": "A derivação DII registra a diferença de potencial entre quais pontos?",
+    "options": [
+      "Braço esquerdo (positivo) e braço direito (negativo)",
+      "Perna esquerda (positivo) e braço direito (negativo)",
+      "Perna esquerda (positivo) e braço esquerdo (negativo)",
+      "Braço direito (positivo) e perna esquerda (negativo)"
+    ],
+    "answer_index": 1,
+    "explanation": "DII tem o polo positivo na perna esquerda (LL) e o polo negativo no braço direito (RA). É a derivação que melhor se alinha ao eixo normal de despolarização cardíaca (+60°), por isso costuma produzir as maiores ondas P e QRS."
+  },
+  {
+    "id": "deriv-0002",
+    "topic": "Derivações — Territórios",
+    "difficulty": "easy",
+    "stem": "Quais derivações são consideradas as 'câmeras' da parede inferior do coração?",
+    "options": [
+      "V1, V2 e V3",
+      "DI, aVL e V6",
+      "DII, DIII e aVF",
+      "V4, V5 e V6"
+    ],
+    "answer_index": 2,
+    "explanation": "DII (+60°), DIII (+120°) e aVF (+90°) são as derivações que 'filmam' a parede inferior do coração. Alterações de ST nessas três derivações em conjunto sugerem evento isquêmico no território inferior, geralmente irrigado pela artéria coronária direita."
+  },
+  {
+    "id": "deriv-0003",
+    "topic": "Derivações — Precordiais",
+    "difficulty": "medium",
+    "stem": "A zona de transição no ECG normal (onde a amplitude da onda R iguala a amplitude da onda S) ocorre tipicamente entre quais derivações precordiais?",
+    "options": [
+      "V1 e V2",
+      "V2 e V3",
+      "V3 e V4",
+      "V5 e V6"
+    ],
+    "answer_index": 2,
+    "explanation": "A zona de transição ocorre normalmente entre V3 e V4, onde o complexo QRS passa de predominantemente negativo (rS em V1) para predominantemente positivo (qRs em V6). Na transição, R ≈ S. Usando a analogia das câmeras, é o ponto onde o vetor de despolarização passa 'de lado' pela câmera."
+  },
+  {
+    "id": "deriv-0004",
+    "topic": "Derivações — Posicionamento",
+    "difficulty": "medium",
+    "stem": "O eletrodo V1 deve ser posicionado em qual localização anatômica?",
+    "options": [
+      "4° espaço intercostal, linha hemiclavicular esquerda",
+      "4° espaço intercostal, borda esternal direita",
+      "5° espaço intercostal, borda esternal direita",
+      "2° espaço intercostal, borda esternal direita"
+    ],
+    "answer_index": 1,
+    "explanation": "V1 é posicionado no 4° espaço intercostal, borda esternal direita. V2 fica na mesma altura, mas na borda esternal esquerda. A referência anatômica é o ângulo de Louis (junção manúbrio-esternal), logo abaixo do qual se encontra o 2° espaço intercostal — conte dois espaços para baixo para localizar o 4° EIC."
+  },
+  {
+    "id": "deriv-0005",
+    "topic": "Derivações — Lei de Einthoven",
+    "difficulty": "medium",
+    "stem": "De acordo com a lei de Einthoven, qual relação matemática entre as derivações bipolares deve ser sempre verdadeira?",
+    "options": [
+      "DI = DII + DIII",
+      "DII = DI + DIII",
+      "DIII = DI + DII",
+      "DI = DII − DIII"
+    ],
+    "answer_index": 1,
+    "explanation": "A lei de Einthoven estabelece que DII = DI + DIII. Essa relação matemática sempre deve ser satisfeita; se não for, indica erro técnico como inversão de cabos dos eletrodos. Isso serve como controle de qualidade do ECG."
+  }
+]

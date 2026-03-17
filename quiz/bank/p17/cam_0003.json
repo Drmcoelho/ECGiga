@@ -1,0 +1,14 @@
+{
+  "id": "cam_0003",
+  "topic": "cameras_cardiacas",
+  "difficulty": "easy",
+  "stem": "Qual 'câmera' do ECG é considerada a melhor para observar a parede inferior do coração?",
+  "options": [
+    "aVL",
+    "V1",
+    "aVF",
+    "DI"
+  ],
+  "answer_index": 2,
+  "explanation": "aVF está a 90° — é a câmera posicionada embaixo do coração, olhando diretamente para cima. Juntamente com DII e DIII, forma o grupo de câmeras inferiores. Qualquer evento na parede inferior (como IAM inferior) será melhor filmado por estas câmeras."
+}

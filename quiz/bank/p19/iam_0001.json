@@ -1,0 +1,14 @@
+{
+  "id": "iam_0001",
+  "topic": "stemi",
+  "difficulty": "easy",
+  "stem": "Elevação de ST em V1-V4 com depressão recíproca em DII, DIII e aVF sugere infarto de qual parede?",
+  "options": [
+    "Parede inferior",
+    "Parede anterior",
+    "Parede lateral",
+    "Parede posterior"
+  ],
+  "answer_index": 1,
+  "explanation": "As câmeras V1-V4 apontam para a parede anterior. Quando todas mostram 'fumaça' (elevação de ST), o 'incêndio' está na parede anterior, irrigada pela artéria descendente anterior (DA/LAD). As câmeras opostas (DII, DIII, aVF) veem o mesmo evento de trás — por isso mostram depressão recíproca."
+}

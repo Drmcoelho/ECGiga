@@ -1,0 +1,73 @@
+{
+  "_comment": "ECGiga Case Template — All fields documented below",
+  "id": "string — Unique case identifier (auto-generated from report hash)",
+  "title": "string — Human-readable case title, e.g. 'Fibrilacao Atrial em Paciente Idoso'",
+  "description": "string — Clinical context / history presented to the student",
+  "image_url": "string — Path or URL to the ECG image (PNG/JPG). May be empty for text-only cases",
+  "report": {
+    "_comment": "Original structured ECG report used to generate this case",
+    "diagnosis": "string — Primary diagnosis / conclusion",
+    "clinical_history": "string — Patient background information",
+    "rhythm": "string — e.g. 'sinus', 'atrial_fibrillation'",
+    "rate": "number — Heart rate in bpm",
+    "axis": "string — e.g. 'normal', 'left_deviation'",
+    "p_wave": "string — P-wave description",
+    "qrs_complex": "string — QRS complex description",
+    "st_segment": "string — ST segment description",
+    "t_wave": "string — T-wave description",
+    "intervals": {
+      "pr_ms": "number — PR interval in ms",
+      "qrs_ms": "number — QRS duration in ms",
+      "qt_ms": "number — QT interval in ms",
+      "qtc_ms": "number — Corrected QT in ms"
+    }
+  },
+  "annotations": [
+    {
+      "label": "string — Structure label, e.g. 'P_wave', 'QRS', 'T_wave', 'ST_segment'",
+      "description": "string — Textual description of the finding at this annotation",
+      "boxes": [
+        {
+          "x": "number — Top-left X coordinate in pixels",
+          "y": "number — Top-left Y coordinate in pixels",
+          "w": "number — Width in pixels",
+          "h": "number — Height in pixels"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "string — Question identifier, e.g. 'q1'",
+      "type": "string — One of: 'multiple_choice', 'annotation', 'free_text', 'measurement'",
+      "text": "string — Question text in Portuguese",
+      "options": [
+        "string — Option A (only for multiple_choice)",
+        "string — Option B",
+        "string — Option C",
+        "string — Option D"
+      ],
+      "correct": "number — Zero-based index of the correct option (only for multiple_choice)"
+    }
+  ],
+  "answer_key": {
+    "_comment": "Ground-truth data for scoring",
+    "annotations": [
+      {
+        "label": "string — Same labels as in 'annotations' above",
+        "description": "string"
+      }
+    ],
+    "rhythm": "string — Expected rhythm classification",
+    "axis": "string — Expected axis classification",
+    "boxes": {
+      "P_wave": [
+        {"x": 0, "y": 0, "w": 0, "h": 0}
+      ],
+      "QRS": [
+        {"x": 0, "y": 0, "w": 0, "h": 0}
+      ]
+    }
+  },
+  "difficulty": "string — One of: 'easy', 'medium', 'hard'"
+}

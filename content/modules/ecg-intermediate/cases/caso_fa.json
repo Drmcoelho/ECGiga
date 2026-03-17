@@ -1,0 +1,58 @@
+{
+  "id": "case_fa",
+  "title": "Palpitações e Dispneia em Mulher de 72 Anos",
+  "difficulty": "medium",
+  "patient": {
+    "age": 72,
+    "sex": "F",
+    "history": "Hipertensão arterial há 20 anos, insuficiência cardíaca com fração de ejeção preservada (ICFEp), valvopatia mitral reumática (estenose mitral moderada), diabetes mellitus tipo 2. Em uso de enalapril 10 mg 2x/dia, furosemida 40 mg/dia, metformina 500 mg 2x/dia."
+  },
+  "presentation": "Paciente procura o pronto-socorro com queixa de palpitações de início há 6 horas, associadas a dispneia aos pequenos esforços e tontura. Nega dor torácica ou síncope. Sinais vitais: PA 130/85 mmHg, FC 142 bpm (irregular), FR 24 irpm, SpO2 94% em ar ambiente. Ao exame: pulso irregular com déficit de pulso, turgência jugular discreta, estertores crepitantes em bases pulmonares bilateralmente, B1 hiperfonética, sopro diastólico em foco mitral.",
+  "ecg_findings": {
+    "rhythm": "Ritmo irregular, sem ondas P identificáveis, FC ventricular média de 142 bpm",
+    "p_wave": "Ausentes — linha de base com ondulações irregulares (ondas f fibrilatórias)",
+    "pr_interval": "Não mensurável (ausência de ondas P)",
+    "qrs_duration": "88 ms (normal, estreito)",
+    "axis": "+30° (normal)",
+    "st_segment": "Infradesnivelamento difuso de ST de 1 mm em V4-V6, DI e aVL (provavelmente secundário à taquicardia)",
+    "t_wave": "Achatamento de T em derivações laterais",
+    "q_waves": "Ausentes",
+    "other": "Sinais sugestivos de sobrecarga de átrio esquerdo nos batimentos prévios (quando em ritmo sinusal) — contexto clínico"
+  },
+  "phases": [
+    {
+      "question": "Qual é o ritmo cardíaco desta paciente? Quais são os achados-chave que permitem o diagnóstico?",
+      "hint": "Observe a regularidade dos intervalos RR e procure ondas P. Lembre-se: qual arritmia é 'irregularmente irregular'?",
+      "answer": "Fibrilação atrial (FA) com resposta ventricular rápida (RVR). Os achados-chave são: ausência de ondas P, intervalos RR irregularmente irregulares e linha de base com ondulações fibrilatórias.",
+      "explanation": "A fibrilação atrial é definida pela tríade: (1) ausência de ondas P organizadas, substituídas por atividade elétrica atrial caótica (ondas f); (2) intervalos RR irregularmente irregulares (sem qualquer padrão de regularidade); (3) QRS geralmente estreito (salvo bloqueio de ramo preexistente). Neste caso, a FC ventricular elevada (142 bpm) configura FA com resposta ventricular rápida, o que explica os sintomas da paciente."
+    },
+    {
+      "question": "Por que esta paciente tem risco aumentado de desenvolver FA? Identifique os fatores de risco na história clínica.",
+      "hint": "Considere as condições cardíacas que causam dilatação do átrio esquerdo.",
+      "answer": "Estenose mitral reumática (causa dilatação e remodelamento do átrio esquerdo), hipertensão arterial (causa hipertrofia e disfunção diastólica), insuficiência cardíaca e idade avançada.",
+      "explanation": "A estenose mitral é uma das causas clássicas de FA — o obstáculo ao fluxo mitral causa aumento de pressão e dilatação progressiva do átrio esquerdo, criando substrato anatômico para fibrilação. A HAS causa hipertrofia ventricular esquerda e disfunção diastólica, elevando a pressão atrial esquerda. A idade avançada causa fibrose atrial progressiva. Todos esses fatores promovem remodelamento elétrico e anatômico atrial, facilitando a manutenção da FA."
+    },
+    {
+      "question": "Calcule o escore CHA₂DS₂-VASc desta paciente. Ela necessita de anticoagulação?",
+      "hint": "CHA₂DS₂-VASc: C (ICC/disfunção VE) = 1, H (HAS) = 1, A₂ (≥75 anos) = 2, D (DM) = 1, S₂ (AVC/AIT) = 2, V (doença vascular) = 1, A (65-74 anos) = 1, Sc (sexo feminino) = 1.",
+      "answer": "CHA₂DS₂-VASc = 5 pontos: C (IC) = 1, H (HAS) = 1, A₂ (72 anos — pontua 1 por 65-74) = 1, D (DM) = 1, Sc (sexo feminino) = 1. Risco anual de AVC elevado — anticoagulação oral está fortemente indicada.",
+      "explanation": "Com CHA₂DS₂-VASc ≥ 2 em mulheres (ou ≥ 1 em homens), a anticoagulação oral está indicada para prevenção de AVC cardioembólico. Nesta paciente com escore de 5, o risco anual de tromboembolismo é substancial (~6-7%). As opções incluem anticoagulantes orais diretos (DOACs: apixabana, rivaroxabana, dabigatrana, edoxabana) ou varfarina. Na presença de estenose mitral moderada a grave (valvopatia reumática), a varfarina é geralmente preferida, pois os DOACs não foram estudados neste contexto."
+    },
+    {
+      "question": "Qual é a estratégia inicial de manejo para controlar os sintomas desta paciente?",
+      "hint": "A paciente está sintomática com FC elevada. Pense em controle de frequência vs. controle de ritmo.",
+      "answer": "Controle de frequência com betabloqueador IV (metoprolol) ou bloqueador de canal de cálcio não di-hidropiridínico (diltiazem) para reduzir a FC para < 110 bpm. Considerar cardioversão se não melhorar ou se instabilização.",
+      "explanation": "Na FA de início recente (< 48h) com paciente hemodinamicamente estável, a estratégia inicial é o controle de frequência ventricular. Betabloqueadores e bloqueadores de canal de cálcio (diltiazem, verapamil) são primeira linha. Digoxina é opção para pacientes com IC. O alvo de FC é < 110 bpm (estratégia leniente) ou < 80 bpm (estratégia estrita). Se os sintomas persistirem apesar do controle de frequência adequado, ou se a FA tiver < 48h, pode-se considerar cardioversão (elétrica ou farmacológica). Se FA > 48h e sem anticoagulação prévia, é necessário ecocardiograma transesofágico antes da cardioversão para excluir trombo atrial."
+    }
+  ],
+  "final_diagnosis": "Fibrilação atrial com resposta ventricular rápida, em paciente com estenose mitral reumática, hipertensão arterial, insuficiência cardíaca e diabetes mellitus.",
+  "teaching_points": [
+    "FA: ausência de ondas P + RR irregularmente irregular + ondas f fibrilatórias. É a arritmia sustentada mais comum.",
+    "Estenose mitral é causa clássica de FA por dilatação e remodelamento do átrio esquerdo.",
+    "Sempre calcular CHA₂DS₂-VASc para decisão de anticoagulação. Na valvopatia mitral reumática, preferir varfarina.",
+    "Controle de frequência (FC < 110 bpm) é a estratégia inicial na maioria dos casos de FA estável.",
+    "FA > 48h sem anticoagulação prévia → ecocardiograma transesofágico antes de cardioverter para excluir trombo.",
+    "O infra de ST durante FA com RVR pode ser secundário à taquicardia (demanda aumentada) e não necessariamente indica doença coronariana."
+  ],
+  "disclaimer": "Conteúdo exclusivamente educacional. Este caso clínico é fictício e destina-se ao ensino de eletrocardiografia. Não substitui avaliação clínica profissional. Decisões diagnósticas e terapêuticas devem ser realizadas por profissionais habilitados com base no contexto clínico completo."
+}

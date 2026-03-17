@@ -1,0 +1,14 @@
+{
+  "id": "pat_0006",
+  "topic": "pe_tep",
+  "difficulty": "hard",
+  "stem": "No TEP, inversão de ondas T em V1-V4 indica:",
+  "options": [
+    "Isquemia da parede anterior",
+    "Strain (sobrecarga) do ventrículo direito",
+    "Hipocalemia",
+    "Efeito digitálico"
+  ],
+  "answer_index": 1,
+  "explanation": "As câmeras V1-V4 apontam para o ventrículo direito. Inversão de T nessas derivações indica sofrimento (strain) do VD sob pressão elevada. É diferente da isquemia anterior por STEMI — no TEP não há elevação de ST, apenas inversão de T pela dilatação e isquemia aguda do VD."
+}

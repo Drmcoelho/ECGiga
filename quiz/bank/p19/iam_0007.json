@@ -1,0 +1,14 @@
+{
+  "id": "iam_0007",
+  "topic": "stemi",
+  "difficulty": "easy",
+  "stem": "Elevação de ST em DI, aVL, V5 e V6 indica infarto de qual território?",
+  "options": [
+    "Anterior",
+    "Inferior",
+    "Lateral",
+    "Posterior"
+  ],
+  "answer_index": 2,
+  "explanation": "As câmeras DI, aVL, V5 e V6 apontam para a parede lateral do coração, irrigada principalmente pela artéria circunflexa (Cx). Elevação de ST nessas quatro câmeras laterais indica que o 'incêndio' está na parede lateral."
+}

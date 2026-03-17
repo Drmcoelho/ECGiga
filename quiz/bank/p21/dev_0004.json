@@ -1,0 +1,14 @@
+{
+  "id": "dev_0004",
+  "topic": "channelopathy",
+  "difficulty": "easy",
+  "stem": "QTc ≥ 500 ms indica:",
+  "options": [
+    "QT curto — baixo risco",
+    "QT normal",
+    "QT longo — alto risco de Torsades de Pointes",
+    "Síndrome de Brugada"
+  ],
+  "answer_index": 2,
+  "explanation": "QTc ≥ 500 ms é alto risco. Todas as câmeras do ECG mostram que o coração demora demais para 'recarregar' (repolarizar). Esse atraso cria uma janela de vulnerabilidade onde pode ocorrer Torsades de Pointes — uma arritmia ventricular potencialmente fatal."
+}

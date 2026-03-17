@@ -1,0 +1,58 @@
+{
+  "id": "case_iam_anterior",
+  "title": "Dor Torácica Súbita em Homem de 58 Anos",
+  "difficulty": "medium",
+  "patient": {
+    "age": 58,
+    "sex": "M",
+    "history": "Hipertensão arterial há 15 anos, diabetes mellitus tipo 2, tabagismo ativo (30 maços-ano), dislipidemia. Em uso de losartana 50 mg, metformina 850 mg 2x/dia e atorvastatina 20 mg."
+  },
+  "presentation": "Paciente chega ao pronto-socorro com dor torácica retroesternal intensa, tipo aperto, irradiando para membro superior esquerdo e mandíbula, iniciada há 45 minutos. Refere sudorese fria, náuseas e sensação de morte iminente. Sinais vitais: PA 150/90 mmHg, FC 95 bpm, FR 22 irpm, SpO2 96%. Ao exame: pálido, sudoreico, turgência jugular ausente, ausculta pulmonar limpa, B4 presente.",
+  "ecg_findings": {
+    "rhythm": "Sinusal, FC 95 bpm",
+    "p_wave": "Normal, positiva em DII",
+    "pr_interval": "160 ms (normal)",
+    "qrs_duration": "90 ms (normal)",
+    "axis": "+45° (normal)",
+    "st_segment": "Supradesnivelamento de ST de 4 mm em V1-V4 com morfologia convexa ('em lápide'); infradesnivelamento recíproco de ST em DII, DIII e aVF de 1,5 mm",
+    "t_wave": "Ondas T hiperagudas (altas, pontiagudas e simétricas) em V2-V5",
+    "q_waves": "Ausentes (fase hiperaguda)",
+    "other": "Nenhuma outra alteração significativa"
+  },
+  "phases": [
+    {
+      "question": "Qual é a primeira alteração que você identifica no ECG deste paciente?",
+      "hint": "Observe as derivações precordiais V1 a V4 e compare o segmento ST com a linha de base.",
+      "answer": "Supradesnivelamento de ST em V1-V4 com morfologia convexa, acompanhado de ondas T hiperagudas em V2-V5.",
+      "explanation": "O supradesnivelamento de ST convexo ('em lápide') nas derivações precordiais anteriores é o achado cardinal do STEMI anterior. As ondas T hiperagudas (altas, pontiagudas e simétricas) indicam que estamos na fase muito inicial do infarto, quando a isquemia transmural está se instalando. Este padrão reflete oclusão aguda da artéria descendente anterior (DA)."
+    },
+    {
+      "question": "Identifique as alterações recíprocas. O que elas significam?",
+      "hint": "Compare as derivações inferiores (DII, DIII, aVF) com as precordiais anteriores — procure a 'imagem em espelho'.",
+      "answer": "Infradesnivelamento de ST em DII, DIII e aVF, que representa a imagem em espelho (reciprocidade) do supra de ST anterior.",
+      "explanation": "A presença de alterações recíprocas (infra de ST nas derivações que 'filmam' a parede oposta) aumenta significativamente a especificidade do diagnóstico de STEMI. As câmeras inferiores (DII, DIII, aVF) veem o evento de isquemia anterior pelo lado de trás, como um reflexo em espelho. A reciprocidade também sugere maior extensão de miocárdio em risco."
+    },
+    {
+      "question": "Qual é o território afetado e a artéria coronária provavelmente culpada?",
+      "hint": "Use o mapa territorial: quais derivações estão alteradas? V1-V4 correspondem a qual parede cardíaca?",
+      "answer": "Território anterosseptal (V1-V4), com artéria culpada sendo a descendente anterior (DA), provavelmente segmento proximal a médio.",
+      "explanation": "As derivações V1 e V2 filmam o septo interventricular e V3-V4 filmam a parede anterior do ventrículo esquerdo. A DA irriga essas regiões. A extensão do supra de V1 a V4 (e as T hiperagudas até V5) sugere oclusão da DA em seu segmento proximal a médio, colocando uma grande área de miocárdio em risco. Se o supra se estendesse até V6, DI e aVL, indicaria oclusão da DA muito proximal ('widow maker')."
+    },
+    {
+      "question": "Qual é a conduta prioritária e o tempo-alvo para intervenção?",
+      "hint": "Este é um STEMI — qual é o tratamento definitivo e em quanto tempo deve ser realizado?",
+      "answer": "Ativação imediata do protocolo de STEMI com angioplastia primária (ICP) em tempo porta-balão < 90 minutos. Enquanto isso: AAS 300 mg VO, clopidogrel 600 mg (ou ticagrelor 180 mg), anticoagulação com heparina, morfina se dor refratária, monitorização contínua.",
+      "explanation": "No STEMI, o tempo é miocárdio — cada minuto de oclusão coronariana resulta em mais necrose. O tratamento definitivo é a reperfusão coronariana, preferencialmente por intervenção coronariana percutânea (ICP/angioplastia primária) com tempo porta-balão < 90 minutos. Se ICP não estiver disponível em < 120 minutos, considerar fibrinolítico com tempo porta-agulha < 30 minutos. A terapia antitrombótica dupla (AAS + inibidor de P2Y12) e a anticoagulação são fundamentais para evitar retrombose."
+    }
+  ],
+  "final_diagnosis": "Infarto agudo do miocárdio com supradesnivelamento de ST (STEMI) anterior, em fase hiperaguda, por provável oclusão da artéria descendente anterior.",
+  "teaching_points": [
+    "Supra de ST convexo em ≥ 2 derivações contíguas com clínica compatível = STEMI → ativar cateterismo.",
+    "Ondas T hiperagudas podem ser o primeiro sinal de STEMI, antes mesmo do supra de ST clássico — não espere evolução para agir.",
+    "Alterações recíprocas (imagem em espelho) aumentam a especificidade do diagnóstico e sugerem maior área de risco.",
+    "V1-V4 = território anterosseptal = artéria descendente anterior (DA). IAM anterior extenso (DA proximal) é a forma mais perigosa de STEMI.",
+    "Tempo é miocárdio: porta-balão < 90 min (ICP) ou porta-agulha < 30 min (fibrinolítico).",
+    "Sempre procurar extensão: solicitar V3R-V4R e V7-V9 se houver dúvida sobre envolvimento de VD ou parede posterior."
+  ],
+  "disclaimer": "Conteúdo exclusivamente educacional. Este caso clínico é fictício e destina-se ao ensino de eletrocardiografia. Não substitui avaliação clínica profissional. Decisões diagnósticas e terapêuticas devem ser realizadas por profissionais habilitados com base no contexto clínico completo."
+}

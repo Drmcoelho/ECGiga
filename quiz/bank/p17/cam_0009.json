@@ -1,0 +1,14 @@
+{
+  "id": "cam_0009",
+  "topic": "cameras_cardiacas",
+  "difficulty": "medium",
+  "stem": "As derivações V1 a V6 representam câmeras no plano horizontal. O que a 'progressão do R' de V1 a V6 significa na analogia das câmeras?",
+  "options": [
+    "Todas as câmeras veem o mesmo vetor com intensidade igual",
+    "A câmera V1 vê o vetor do VE se afastando (S grande) e V6 vê o VE se aproximando (R grande) — é o vetor girando no plano horizontal",
+    "V1 está com defeito e V6 funciona melhor",
+    "A progressão do R indica bloqueio de ramo direito"
+  ],
+  "answer_index": 1,
+  "explanation": "De V1 a V6, as câmeras fazem um arco ao redor do coração. V1 vê o vetor do VE fugindo (S profundo), V3 vê de lado (transição R≈S), e V6 vê o vetor vindo (R alto). É como um pan cinematográfico — cada câmera tem um ângulo diferente do mesmo evento."
+}

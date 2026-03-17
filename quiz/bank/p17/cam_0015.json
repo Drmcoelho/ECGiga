@@ -1,0 +1,14 @@
+{
+  "id": "cam_0015",
+  "topic": "cameras_cardiacas",
+  "difficulty": "medium",
+  "stem": "A câmera V1 normalmente registra padrão rS no QRS. O que o 'r' pequeno representa na analogia das câmeras?",
+  "options": [
+    "A repolarização do átrio direito",
+    "A despolarização septal que se aproxima de V1 (septo despolariza da esquerda para a direita)",
+    "Um artefato de movimento",
+    "A despolarização do VE se aproximando de V1"
+  ],
+  "answer_index": 1,
+  "explanation": "O septo interventricular se despolariza da esquerda para a direita. A câmera V1, posicionada à direita do esterno, vê esse pequeno vetor se aproximando — registra o r pequeno. Logo depois, o VE (muito mais potente) despolariza para a esquerda, fugindo de V1 → S profundo."
+}

@@ -1,0 +1,14 @@
+{
+  "id": "cam_0006",
+  "topic": "cameras_cardiacas",
+  "difficulty": "medium",
+  "stem": "Se o QRS é bifásico em aVL (-30°), qual é o eixo cardíaco aproximado?",
+  "options": [
+    "0°",
+    "-30°",
+    "60°",
+    "120°"
+  ],
+  "answer_index": 2,
+  "explanation": "Se a câmera aVL mostra QRS bifásico, o vetor é perpendicular a ela. aVL está a -30°, e perpendicular a -30° é +60° (diferença de 90°). Portanto, o eixo é ~60° — perfeitamente normal! É o método das câmeras para calcular o eixo."
+}

@@ -1,0 +1,14 @@
+{
+  "id": "cam_0008",
+  "topic": "cameras_cardiacas",
+  "difficulty": "easy",
+  "stem": "No mnemônico CAFÉ, a letra 'C' representa:",
+  "options": [
+    "Corrente elétrica do coração",
+    "Câmera = polo positivo da derivação",
+    "Complexo QRS",
+    "Ciclo cardíaco"
+  ],
+  "answer_index": 1,
+  "explanation": "CAFÉ: C = Câmera, que é o polo positivo da derivação. Cada derivação tem um polo positivo (a câmera) e quando o vetor se dirige a esse polo, a deflexão é positiva. A câmera é o ponto de referência de cada derivação."
+}

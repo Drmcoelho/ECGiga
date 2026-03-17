@@ -1,0 +1,14 @@
+{
+  "id": "iam_0003",
+  "topic": "stemi",
+  "difficulty": "medium",
+  "stem": "Para diagnóstico de STEMI, quantas derivações contíguas devem ter elevação de ST ≥ 1 mm?",
+  "options": [
+    "1 derivação",
+    "2 derivações contíguas",
+    "4 derivações quaisquer",
+    "Todas as 12 derivações"
+  ],
+  "answer_index": 1,
+  "explanation": "O critério de STEMI exige elevação de ST ≥ 1 mm em pelo menos 2 derivações contíguas (câmeras adjacentes que olham para a mesma parede). Se apenas uma câmera vê o problema, pode ser artefato; quando duas câmeras vizinhas concordam, a certeza aumenta muito."
+}

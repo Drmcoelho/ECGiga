@@ -1,0 +1,60 @@
+module:
+  id: ecg-intermediate
+  title: "ECG Intermediário — Patologias e Casos Clínicos"
+  description: >
+    Módulo intermediário que aborda os principais achados patológicos no ECG:
+    bloqueios de ramo, isquemia e infarto (incluindo STEMI), e arritmias comuns.
+    Inclui casos clínicos interativos para prática de raciocínio diagnóstico.
+  version: "1.0.0"
+  language: pt-BR
+  difficulty: intermediate
+  estimated_hours: 12
+  prerequisites:
+    - ecg-basics
+  authors:
+    - ECGiga Team
+  tags:
+    - ecg
+    - intermediário
+    - patologia
+    - arritmias
+    - isquemia
+    - bloqueios
+
+lessons:
+  - id: bloqueios
+    file: lessons/01_bloqueios.md
+    title: "Bloqueios de Ramo e Fasciculares"
+    description: "BRD, BRE, BDAS e BDPI: critérios diagnósticos e significado clínico."
+    order: 1
+
+  - id: isquemia
+    file: lessons/02_isquemia.md
+    title: "Isquemia, Lesão e Infarto no ECG"
+    description: "Reconhecimento de STEMI, NSTEMI e padrões isquêmicos."
+    order: 2
+
+  - id: arritmias
+    file: lessons/03_arritmias.md
+    title: "Arritmias Comuns"
+    description: "FA, flutter, taquicardias, bradicardias e bloqueios atrioventriculares."
+    order: 3
+
+cases:
+  - id: caso_iam_anterior
+    file: cases/caso_iam_anterior.json
+    title: "Caso Clínico — IAM Anterior"
+    difficulty: medium
+    related_lesson: isquemia
+
+  - id: caso_fa
+    file: cases/caso_fa.json
+    title: "Caso Clínico — Fibrilação Atrial"
+    difficulty: medium
+    related_lesson: arritmias
+
+  - id: caso_bav
+    file: cases/caso_bav.json
+    title: "Caso Clínico — Bloqueio Atrioventricular"
+    difficulty: medium
+    related_lesson: arritmias
