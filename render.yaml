@@ -7,4 +7,4 @@ services:
     startCommand: "gunicorn web_app.dash_app.app:server --bind 0.0.0.0:$PORT"
     envVars:
       - key: PYTHON_VERSION
-        value: "3.11"
+        value: "3.11.12"
