@@ -425,18 +425,14 @@ def _layout_quiz():
     """Layout da aba de quiz — questões de múltipla escolha adaptativas."""
     return html.Div([
         html.H3("Quiz Adaptativo de ECG"),
-        html.P(
-            "Teste seus conhecimentos com questões de múltipla escolha (MCQ) geradas "
-            "automaticamente. As questões são adaptadas aos achados do ECG analisado, "
-            "focando nas áreas onde há maior potencial de aprendizado — como intervalos "
-            "anormais, desvios de eixo ou padrões patológicos detectados."
-        ),
         html.Div([
-            html.Label("Número de questões:"),
+            html.Label("Número de questões: "),
             dcc.Input(id="quiz-n", type="number", value=6, min=1, max=20, step=1),
             html.Button("Gerar Quiz", id="btn-quiz-generate", n_clicks=0, style={"marginLeft": "10px"}),
-        ], style={"display": "flex", "gap": "10px", "alignItems": "center"}),
+            html.Button("Ver Progresso", id="btn-quiz-progress", n_clicks=0, style={"marginLeft": "10px"}),
+        ]),
         html.Div(id="quiz-content", style={"marginTop": "20px"}),
+        html.Div(id="quiz-progress-content", style={"marginTop": "20px"}),
     ])
 
 
@@ -1133,22 +1129,88 @@ def update_axis_wheel(lead):
 @app.callback(Output("quiz-content", "children"), Input("btn-quiz-generate", "n_clicks"), State("quiz-n", "value"), prevent_initial_call=True)
 def generate_quiz(n_clicks, n_questions):
     try:
-        from quiz.engine import build_adaptive_quiz
-        result = build_adaptive_quiz({}, n_questions=n_questions or 6, seed=n_clicks)
-        questions = result.get("questions", [])
-        elements = []
+        from quiz.adaptive import AdaptiveEngine
+        engine = AdaptiveEngine(quiz_bank_path="quiz/bank")
+        questions = []
+        history = []
+        for _ in range(n_questions or 6):
+            q = engine.select_next_question(history)
+            if not q:
+                break
+            questions.append(q)
+            history.append({"question_id": q.get("id", ""), "correct": True, "tag": q.get("tag", q.get("topic", ""))})
+
+        if not questions:
+            # Fallback to simple engine
+            from quiz.engine import build_adaptive_quiz
+            result = build_adaptive_quiz({}, n_questions=n_questions or 6, seed=n_clicks)
+            questions = result.get("questions", [])
+
+        items = []
         for i, q in enumerate(questions):
-            choices = []
-            for c in q.get("choices", []):
-                marker = "✓" if c.get("is_correct") else "✗"
-                choices.append(html.Li(f"{c.get('text', '')} [{marker}] — {c.get('explanation', '')}"))
-            elements.append(html.Div([
-                html.H4(f"Questão {i+1}: {q.get('prompt', '')}"),
-                html.Ul(choices),
-            ], className="card", style={"marginBottom": "10px"}))
-        return elements
+            correct_idx = q.get("answer_index", 0)
+            options_html = []
+            for j, opt in enumerate(q.get("options", [])):
+                marker = "\u2713" if j == correct_idx else "\u2717"
+                color = "green" if j == correct_idx else "gray"
+                options_html.append(html.Li(f"{marker} {opt}", style={"color": color}))
+            items.append(html.Div([
+                html.H4(f"{i+1}. [{q.get('difficulty','?')}] {q.get('topic','?')}"),
+                html.P(q.get("stem", "")),
+                html.Ul(options_html),
+                html.Details([
+                    html.Summary("Explicação"),
+                    html.P(q.get("explanation", "Sem explicação."))
+                ]),
+                html.Hr(),
+            ]))
+        return html.Div(items) if items else html.P("Nenhuma questão disponível.")
     except Exception as e:
         return html.P(f"Erro ao gerar quiz: {e}")
+
+
+@app.callback(Output("quiz-progress-content", "children"), Input("btn-quiz-progress", "n_clicks"), prevent_initial_call=True)
+def show_quiz_progress(n_clicks):
+    try:
+        from quiz.progress import ProgressTracker
+        from quiz.spaced_repetition import SpacedRepetitionScheduler
+        tracker = ProgressTracker(data_dir="quiz_progress")
+        sr = SpacedRepetitionScheduler(data_path="quiz_progress/sr_state.json")
+
+        dashboard = tracker.get_dashboard_data()
+        sr_stats = sr.get_stats()
+
+        badges_html = []
+        for b in dashboard.get("badges", []):
+            icon = "\U0001f3c6" if b["earned"] else "\U0001f512"
+            badges_html.append(html.Span(f"{icon} {b['name']}  ", style={"color": "gold" if b["earned"] else "gray"}))
+
+        topic_rows = []
+        for topic, stats in dashboard.get("topic_breakdown", {}).items():
+            topic_rows.append(html.Tr([
+                html.Td(topic),
+                html.Td(f"{stats['correct']}/{stats['total']}"),
+                html.Td(f"{stats['accuracy']*100:.0f}%"),
+            ]))
+
+        return html.Div([
+            html.H4("Seu Progresso"),
+            html.Div([
+                html.Span(f"Total: {dashboard['total_questions_answered']} | ", style={"fontWeight": "bold"}),
+                html.Span(f"Acur\u00e1cia: {dashboard['overall_accuracy']*100:.0f}% | "),
+                html.Span(f"Streak: {dashboard['streak']} dias | "),
+                html.Span(f"Dominadas: {sr_stats['mastered']} | "),
+                html.Span(f"Aprendendo: {sr_stats['learning']} | "),
+                html.Span(f"Para revisar hoje: {sr_stats['due_today']}"),
+            ], style={"marginBottom": "15px"}),
+            html.Div(badges_html, style={"marginBottom": "15px"}),
+            html.Table([
+                html.Thead(html.Tr([html.Th("T\u00f3pico"), html.Th("Acertos"), html.Th("Acur\u00e1cia")])),
+                html.Tbody(topic_rows),
+            ], style={"width": "100%", "borderCollapse": "collapse"}) if topic_rows else html.P("Nenhuma sess\u00e3o registrada ainda. Gere um quiz para come\u00e7ar!"),
+        ])
+    except Exception as e:
+        return html.P(f"Erro ao carregar progresso: {e}")
 
 
 # ---------------------------------------------------------------------------

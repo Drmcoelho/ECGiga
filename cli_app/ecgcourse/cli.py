@@ -133,6 +133,254 @@ def quiz(
             print(Panel.fit("[bold green]Relatórios salvos em reports/"))
         raise typer.Exit(code=0)
 
+@app.command()
+def quiz_adaptive(
+    n: int = typer.Option(10, "--n", help="Número de questões"),
+    bank: str = typer.Option("quiz/bank", "--bank", help="Diretório do banco de questões"),
+    data_dir: str = typer.Option("quiz_progress", "--data-dir", help="Diretório de persistência"),
+):
+    """Quiz adaptativo integrado com spaced repetition e tracking de progresso."""
+    # Lazy imports to avoid errors when quiz modules aren't available
+    from quiz.adaptive import AdaptiveEngine
+    from quiz.spaced_repetition import SpacedRepetitionScheduler
+    from quiz.progress import ProgressTracker
+
+    bank_path = pathlib.Path(bank)
+    if not bank_path.is_absolute():
+        bank_path = REPO_ROOT / bank_path
+    data_path = pathlib.Path(data_dir)
+    if not data_path.is_absolute():
+        data_path = REPO_ROOT / data_path
+
+    engine = AdaptiveEngine(str(bank_path))
+    sr = SpacedRepetitionScheduler(data_path=str(data_path / "sr_state.json"))
+    tracker = ProgressTracker(data_dir=str(data_path))
+
+    history = tracker.get_history()
+    badges_before = {b["id"] for b in tracker.get_badges() if b["earned"]}
+
+    # Build question list: due SR questions first, then adaptive selection
+    questions = []
+    due_ids = sr.get_due_questions(n=n)
+
+    # Load due questions from the bank
+    bank_items = {}
+    if bank_path.exists():
+        for fp in sorted(bank_path.rglob("*.json")):
+            try:
+                with open(fp, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                if isinstance(data, dict) and "id" in data:
+                    bank_items[data["id"]] = data
+                elif isinstance(data, dict) and "questions" in data:
+                    for q in data["questions"]:
+                        if "id" in q:
+                            bank_items[q["id"]] = q
+                elif isinstance(data, list):
+                    for q in data:
+                        if isinstance(q, dict) and "id" in q:
+                            bank_items[q["id"]] = q
+            except (json.JSONDecodeError, OSError):
+                continue
+
+    schema = load_schema()
+    for qid in due_ids:
+        if qid in bank_items and len(questions) < n:
+            validate_item(bank_items[qid], schema)
+            questions.append(bank_items[qid])
+
+    # Fill remaining slots with adaptive selection
+    used_ids = {q.get("id") for q in questions}
+    while len(questions) < n:
+        q = engine.select_next_question(history)
+        if not q:
+            break
+        qid = q.get("id", "")
+        if qid in used_ids:
+            # Add to history to avoid re-selection in the same loop
+            history.append({"question_id": qid, "correct": True, "topic": q.get("topic", "general")})
+            continue
+        try:
+            validate_item(q, schema)
+        except Exception:
+            used_ids.add(qid)
+            continue
+        questions.append(q)
+        used_ids.add(qid)
+
+    if not questions:
+        print(Panel.fit("[bold yellow]Nenhuma questão disponível no banco.[/]"))
+        raise typer.Exit(code=0)
+
+    print(Panel.fit(f"[bold cyan]Quiz Adaptativo[/] — {len(questions)} questões selecionadas"))
+    print(f"  [dim](due SR: {len(due_ids)}, banco: {len(bank_items)} questões)[/]\n")
+
+    results = []
+    for i, item in enumerate(questions, 1):
+        print(f"\n[bold]— Questão {i}/{len(questions)} —[/]")
+        ans = ask_item(item)
+        if ans == (None, None):
+            break
+        ok, chosen = ans
+        qid = item.get("id", f"unknown_{i}")
+        topic = item.get("tag", item.get("topic", "general"))
+
+        # Record to spaced repetition (quality: correct=5, incorrect=1)
+        sr.record_answer(qid, quality=5 if ok else 1)
+
+        results.append({
+            "question_id": qid,
+            "correct": bool(ok),
+            "chosen_index": chosen,
+            "answer_index": item.get("answer_index"),
+            "tag": topic,
+            "topic": topic,
+            "difficulty": item.get("difficulty"),
+        })
+        print("-" * 60)
+
+    if not results:
+        print(Panel.fit("[bold yellow]Sem respostas registradas.[/]"))
+        raise typer.Exit(code=0)
+
+    # Record session to progress tracker
+    tracker.record_session(results)
+
+    # Summary table
+    total = len(results)
+    acertos = sum(1 for r in results if r["correct"])
+    pct = 100.0 * acertos / total
+
+    tbl = Table(title="Resumo — Quiz Adaptativo")
+    tbl.add_column("Total")
+    tbl.add_column("Acertos")
+    tbl.add_column("%")
+    tbl.add_row(str(total), str(acertos), f"{pct:.1f}")
+    print(tbl)
+
+    # Check for new badges
+    badges_after = {b["id"] for b in tracker.get_badges() if b["earned"]}
+    new_badges = badges_after - badges_before
+    if new_badges:
+        all_badges = {b["id"]: b for b in tracker.get_badges()}
+        print(Panel.fit("[bold green]Novas conquistas![/]"))
+        for bid in new_badges:
+            b = all_badges[bid]
+            print(f"  [{b.get('icon', 'star')}] [bold]{b['name']}[/] — {b['description']}")
+
+    # Adaptive engine progress report
+    updated_history = tracker.get_history()
+    report = engine.generate_progress_report(updated_history)
+    print(Panel.fit(
+        f"[bold]Habilidade estimada:[/] {report['ability']:.2f} | "
+        f"[bold]Precisão geral:[/] {report['overall_accuracy']*100:.1f}% | "
+        f"[bold]Tendência:[/] {report['trend']}"
+    ))
+    if report.get("weak_topics"):
+        print(f"  [yellow]Tópicos para revisar:[/] {', '.join(report['weak_topics'])}")
+    if report.get("strong_topics"):
+        print(f"  [green]Pontos fortes:[/] {', '.join(report['strong_topics'])}")
+
+
+@app.command()
+def quiz_progress(
+    data_dir: str = typer.Option("quiz_progress", "--data-dir", help="Diretório de persistência"),
+):
+    """Mostra dashboard de progresso: estatísticas, badges, streak e breakdown por tópico."""
+    # Lazy imports to avoid errors when quiz modules aren't available
+    from quiz.spaced_repetition import SpacedRepetitionScheduler
+    from quiz.progress import ProgressTracker
+
+    data_path = pathlib.Path(data_dir)
+    if not data_path.is_absolute():
+        data_path = REPO_ROOT / data_path
+
+    tracker = ProgressTracker(data_dir=str(data_path))
+    sr = SpacedRepetitionScheduler(data_path=str(data_path / "sr_state.json"))
+
+    dashboard = tracker.get_dashboard_data()
+    sr_stats = sr.get_stats()
+
+    # Overall stats
+    stats_tbl = Table(title="Estatísticas Gerais")
+    stats_tbl.add_column("Métrica", style="bold")
+    stats_tbl.add_column("Valor")
+    stats_tbl.add_row("Total de questões", str(dashboard["total_questions_answered"]))
+    stats_tbl.add_row("Acertos", str(dashboard["total_correct"]))
+    stats_tbl.add_row("Precisão geral", f"{dashboard['overall_accuracy']*100:.1f}%")
+    stats_tbl.add_row("Sessões completadas", str(dashboard["total_sessions"]))
+    stats_tbl.add_row("Streak (dias consecutivos)", str(dashboard["streak"]))
+    print(stats_tbl)
+
+    # SR stats
+    sr_tbl = Table(title="Spaced Repetition")
+    sr_tbl.add_column("Métrica", style="bold")
+    sr_tbl.add_column("Valor")
+    sr_tbl.add_row("Questões rastreadas", str(sr_stats["total_questions"]))
+    sr_tbl.add_row("Dominadas (mastered)", str(sr_stats["mastered"]))
+    sr_tbl.add_row("Em aprendizado", str(sr_stats["learning"]))
+    sr_tbl.add_row("Pendentes hoje", str(sr_stats["due_today"]))
+    sr_tbl.add_row("Precisão SR", f"{sr_stats['accuracy']*100:.1f}%")
+    print(sr_tbl)
+
+    # Badges
+    BADGE_ICONS = {
+        "star": "\u2b50", "fire": "\U0001f525", "calendar": "\U0001f4c5",
+        "compass": "\U0001f9ed", "camera": "\U0001f4f7", "trophy": "\U0001f3c6",
+        "medal": "\U0001f3c5", "ruler": "\U0001f4cf", "heartbeat": "\u2764\ufe0f",
+        "crown": "\U0001f451",
+    }
+    badges_tbl = Table(title=f"Badges ({dashboard['badges_earned']}/{dashboard['badges_total']})")
+    badges_tbl.add_column("", width=3)
+    badges_tbl.add_column("Badge", style="bold")
+    badges_tbl.add_column("Descrição")
+    badges_tbl.add_column("Status")
+    for b in dashboard["badges"]:
+        icon = BADGE_ICONS.get(b.get("icon", ""), "")
+        status = "[green]Conquistado[/]" if b["earned"] else "[dim]Pendente[/]"
+        if b["earned"] and b.get("earned_date"):
+            status += f" ({b['earned_date']})"
+        badges_tbl.add_row(icon, b["name"], b["description"], status)
+    print(badges_tbl)
+
+    # Topic breakdown
+    topic_data = dashboard.get("topic_breakdown", {})
+    if topic_data:
+        topic_tbl = Table(title="Breakdown por Tópico")
+        topic_tbl.add_column("Tópico", style="bold")
+        topic_tbl.add_column("Total")
+        topic_tbl.add_column("Acertos")
+        topic_tbl.add_column("Precisão")
+        for topic, stats in sorted(topic_data.items()):
+            topic_tbl.add_row(
+                topic,
+                str(stats["total"]),
+                str(stats["correct"]),
+                f"{stats['accuracy']*100:.1f}%",
+            )
+        print(topic_tbl)
+
+    # Recent sessions
+    recent = dashboard.get("recent_sessions", [])
+    if recent:
+        recent_tbl = Table(title="Sessões Recentes")
+        recent_tbl.add_column("Data")
+        recent_tbl.add_column("Total")
+        recent_tbl.add_column("Acertos")
+        recent_tbl.add_column("Precisão")
+        for s in recent:
+            recent_tbl.add_row(
+                s["date"],
+                str(s["total"]),
+                str(s["correct"]),
+                f"{s['accuracy']*100:.1f}%",
+            )
+        print(recent_tbl)
+
+    if not dashboard["total_questions_answered"]:
+        print(Panel.fit("[bold yellow]Nenhum dado ainda. Execute 'quiz-adaptive' para começar![/]"))
+
+
 # Subcomando de análise de valores
 analyze_app = typer.Typer(help="Análises de valores estruturados de ECG (p2).")
 
@@ -911,7 +1159,7 @@ def cv_axis(image_path: str = typer.Argument(..., help="PNG/JPG"),
 
 
 @quiz_app.command("adaptive")
-def quiz_adaptive(report_json: str = typer.Argument(..., help="Laudo JSON (v0.4+ com intervals/axis)"),
+def quiz_adaptive_from_report(report_json: str = typer.Argument(..., help="Laudo JSON (v0.4+ com intervals/axis)"),
                   out_json: str = typer.Option(None, "--out", help="Arquivo de saída (JSON)"),
                   n_questions: int = typer.Option(6, "--n", help="Número de questões")):
     """Gera quiz adaptativo (MCQ) com base nas lacunas inferidas do laudo (QRS/PR/QTc/eixo)."""

@@ -25,6 +25,7 @@ from pydantic import BaseModel, Field
 from typing import AsyncGenerator, Dict, List, Any, Optional
 import json
 import logging
+import random
 import time
 
 # Imports adicionais para implementação das ferramentas
@@ -692,25 +693,46 @@ class QuizAdaptiveOutput(BaseModel):
 
 @app.post("/quiz_adaptive", response_model=QuizAdaptiveOutput)
 async def quiz_adaptive(data: QuizAdaptiveInput) -> QuizAdaptiveOutput:
-    """Gera um quiz adaptativo baseado no report de ECG.
-
-    Utiliza o motor de quiz para selecionar questões relevantes
-    aos achados do ECG analisado.
-    """
+    """Gera um quiz adaptativo baseado no report de ECG."""
     logger.info(f"Quiz adaptativo: {data.n_questions} questões")
 
     try:
+        from quiz.adaptive import AdaptiveEngine
+        engine = AdaptiveEngine(quiz_bank_path="quiz/bank")
+
+        # Build history from report if available
+        history = []
+        if data.report:
+            from quiz.engine import infer_gaps_from_report
+            gaps = infer_gaps_from_report(data.report)
+            # Convert gaps to pseudo-history so the engine prioritizes weak topics
+            for tag in gaps:
+                history.append({"question_id": f"_gap_{tag}", "correct": False, "tag": tag})
+
+        # Select questions using adaptive engine
+        random.seed(data.seed or 42)
+        questions = []
+        tags = set()
+        for _ in range(data.n_questions):
+            q = engine.select_next_question(history)
+            if not q:
+                break
+            questions.append(q)
+            tags.add(q.get("tag", q.get("topic", "general")))
+            # Add to history to avoid re-selecting same question
+            history.append({"question_id": q.get("id", ""), "correct": True, "tag": q.get("tag", q.get("topic", ""))})
+
+        if questions:
+            return QuizAdaptiveOutput(questions=questions, tags=sorted(tags))
+    except Exception as e:
+        logger.warning(f"AdaptiveEngine falhou, usando engine simples: {e}")
+
+    # Fallback to simple engine
+    try:
         from quiz.engine import build_adaptive_quiz
         report = data.report or {}
-        result = build_adaptive_quiz(
-            report,
-            n_questions=data.n_questions,
-            seed=data.seed or 42,
-        )
-        return QuizAdaptiveOutput(
-            questions=result.get("questions", []),
-            tags=result.get("tags", []),
-        )
+        result = build_adaptive_quiz(report, n_questions=data.n_questions, seed=data.seed or 42)
+        return QuizAdaptiveOutput(questions=result.get("questions", []), tags=result.get("tags", []))
     except Exception as e:
         logger.error(f"Erro no quiz adaptativo: {e}")
         return QuizAdaptiveOutput(questions=[], tags=[])
