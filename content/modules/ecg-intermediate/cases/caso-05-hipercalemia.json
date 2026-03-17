@@ -1,0 +1,64 @@
+{
+  "id": "caso-05-hipercalemia",
+  "title": "Hipercalemia \u2014 Altera\u00e7\u00f5es Eletrol\u00edticas no ECG",
+  "difficulty": "hard",
+  "context": "Paciente de 71 anos, masculino, portador de doen\u00e7a renal cr\u00f4nica est\u00e1gio 4 (TFG 22 mL/min), diabetes mellitus tipo 2 e hipertens\u00e3o arterial. Em uso de enalapril 10mg 2x/dia, espironolactona 25mg/dia e insulina NPH. Procura PS com fraqueza muscular generalizada h\u00e1 2 dias, c\u00e2imbras e parestesias em membros. Laborat\u00f3rio: K\u207a = 7,2 mEq/L, Cr = 4,8 mg/dL. PA: 110/70 mmHg, FC: 48 bpm.",
+  "phases": [
+    {
+      "step": 1,
+      "instruction": "Observe a morfologia das ondas T em todas as deriva\u00e7\u00f5es. O que h\u00e1 de anormal?",
+      "expected": "Ondas T apiculadas (altas, estreitas e pontiagudas, sim\u00e9tricas), especialmente vis\u00edveis em V2-V6 e DII. Este \u00e9 o sinal mais precoce de hipercalemia no ECG, aparecendo tipicamente com K\u207a entre 5,5-6,5 mEq/L.",
+      "hints": [
+        "Ondas T normais s\u00e3o assimetricas, com ramo ascendente lento e descendente r\u00e1pido",
+        "Na hipercalemia, as T ficam altas, estreitas, sim\u00e9tricas e 'em tenda'"
+      ]
+    },
+    {
+      "step": 2,
+      "instruction": "Analise a dura\u00e7\u00e3o do QRS e a presen\u00e7a de onda P. H\u00e1 altera\u00e7\u00f5es?",
+      "expected": "QRS alargado (140ms) com morfologia sinusoidal incipiente. Ondas P achatadas e de baixa amplitude, quase invis\u00edveis em algumas deriva\u00e7\u00f5es. Esses achados indicam hipercalemia grave (K\u207a > 7,0 mEq/L) com efeito t\u00f3xico sobre a condu\u00e7\u00e3o card\u00edaca.",
+      "hints": [
+        "O pot\u00e1ssio elevado deprime a condu\u00e7\u00e3o atrial (P desaparece) e intraventricular (QRS alarga)",
+        "QRS > 120ms na hipercalemia indica gravidade"
+      ]
+    },
+    {
+      "step": 3,
+      "instruction": "Descreva a progress\u00e3o das altera\u00e7\u00f5es eletrocardiogr\u00e1ficas conforme o pot\u00e1ssio se eleva.",
+      "expected": "Progress\u00e3o: (1) K\u207a 5,5-6,5: ondas T apiculadas; (2) K\u207a 6,5-7,5: achatamento/desaparecimento da onda P, prolongamento do PR, alargamento do QRS; (3) K\u207a 7,5-8,0: padr\u00e3o sinusoidal (fus\u00e3o do QRS alargado com onda T); (4) K\u207a > 8,0: fibrila\u00e7\u00e3o ventricular ou assistolia.",
+      "hints": [
+        "A sequ\u00eancia reflete a depress\u00e3o progressiva da condu\u00e7\u00e3o card\u00edaca pelo pot\u00e1ssio",
+        "O padr\u00e3o sinusoidal \u00e9 pr\u00e9-parada card\u00edaca"
+      ]
+    },
+    {
+      "step": 4,
+      "instruction": "Identifique as causas da hipercalemia neste paciente.",
+      "expected": "M\u00faltiplas causas: (1) DRC avan\u00e7ada (TFG 22 mL/min) \u2014 redu\u00e7\u00e3o da excre\u00e7\u00e3o renal de pot\u00e1ssio; (2) Espironolactona \u2014 diur\u00e9tico poupador de pot\u00e1ssio, bloqueia aldosterona; (3) Enalapril (IECA) \u2014 reduz aldosterona, diminuindo excre\u00e7\u00e3o de K\u207a. A combina\u00e7\u00e3o IECA + espironolactona em paciente com DRC \u00e9 de alto risco para hipercalemia.",
+      "hints": [
+        "IECA + espironolactona \u00e9 uma combina\u00e7\u00e3o de alto risco para hipercalemia",
+        "A DRC \u00e9 o principal fator predisponente"
+      ]
+    },
+    {
+      "step": 5,
+      "instruction": "Qual a conduta de emerg\u00eancia? Organize as medidas por prioridade.",
+      "expected": "1\u00ba) Gluconato de c\u00e1lcio 10% 10mL IV em 2-3 min \u2014 estabiliza a membrana card\u00edaca (N\u00c3O reduz K\u207a, mas protege o cora\u00e7\u00e3o); 2\u00ba) Insulina regular 10 UI + glicose 50% 50mL IV \u2014 desloca K\u207a para dentro da c\u00e9lula; 3\u00ba) Nebuliza\u00e7\u00e3o com salbutamol 10-20mg \u2014 tamb\u00e9m desloca K\u207a para intracelular; 4\u00ba) Resina de troca (poliestirenossulfonato de c\u00e1lcio) ou patiromer VO para remo\u00e7\u00e3o de K\u207a; 5\u00ba) Di\u00e1lise de emerg\u00eancia se refrat\u00e1rio ou K\u207a > 7 com altera\u00e7\u00f5es graves no ECG. Suspender espironolactona e enalapril.",
+      "hints": [
+        "Gluconato de c\u00e1lcio \u00e9 a PRIMEIRA medida quando h\u00e1 altera\u00e7\u00f5es no ECG",
+        "Insulina + glicose \u00e9 a medida mais eficaz para reduzir K\u207a rapidamente"
+      ]
+    }
+  ],
+  "final_interpretation": "ECG com bradicardia (FC 48 bpm), ondas T apiculadas difusas, ondas P achatadas e QRS alargado (140ms), compat\u00edvel com hipercalemia grave (K\u207a = 7,2 mEq/L) em paciente com DRC avan\u00e7ada em uso de IECA e espironolactona.",
+  "learning_points": [
+    "Ondas T apiculadas (altas, estreitas, sim\u00e9tricas) s\u00e3o o sinal mais precoce de hipercalemia no ECG",
+    "A progress\u00e3o da hipercalemia no ECG: T apiculada \u2192 P achatada/ausente + PR longo \u2192 QRS alargado \u2192 padr\u00e3o sinusoidal \u2192 FV/assistolia",
+    "Gluconato de c\u00e1lcio IV \u00e9 a PRIMEIRA medida quando h\u00e1 altera\u00e7\u00f5es eletrocardiogr\u00e1ficas \u2014 estabiliza a membrana, mas n\u00e3o reduz o K\u207a",
+    "IECA + espironolactona + DRC \u00e9 uma combina\u00e7\u00e3o de alto risco para hipercalemia grave",
+    "Hipercalemia \u00e9 uma emerg\u00eancia m\u00e9dica que pode evoluir para parada card\u00edaca se n\u00e3o tratada rapidamente",
+    "O ECG pode mostrar altera\u00e7\u00f5es de hipercalemia antes que o laborat\u00f3rio esteja dispon\u00edvel \u2014 reconhecimento r\u00e1pido salva vidas"
+  ],
+  "linked_skills": ["electrolyte_effects", "t_wave_morphology", "emergency_management"],
+  "disclaimer": "Conte\u00fado exclusivamente educacional. Este caso cl\u00ednico \u00e9 fict\u00edcio e destina-se ao ensino de eletrocardiografia. N\u00e3o substitui avalia\u00e7\u00e3o cl\u00ednica profissional."
+}

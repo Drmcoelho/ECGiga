@@ -1,37 +1,39 @@
 module:
   id: ecg-intermediate
-  title: "ECG Intermediário — Patologias e Casos Clínicos"
+  title: "ECG Intermediario -- Patologias e Casos Clinicos"
   description: >
-    Módulo intermediário que aborda os principais achados patológicos no ECG:
-    bloqueios de ramo, isquemia e infarto (incluindo STEMI), e arritmias comuns.
-    Inclui casos clínicos interativos para prática de raciocínio diagnóstico.
-  version: "1.0.0"
+    Modulo intermediario que aborda os principais achados patologicos no ECG:
+    bloqueios de ramo, isquemia e infarto (incluindo STEMI), arritmias comuns
+    e disturbios eletroliticos. Inclui casos clinicos interativos para pratica
+    de raciocinio diagnostico.
+  version: "2.0.0"
   language: pt-BR
   difficulty: intermediate
-  estimated_hours: 12
+  estimated_hours: 16
   prerequisites:
     - ecg-basics
   authors:
     - ECGiga Team
   tags:
     - ecg
-    - intermediário
+    - intermediario
     - patologia
     - arritmias
     - isquemia
     - bloqueios
+    - eletroliticos
 
 lessons:
   - id: bloqueios
     file: lessons/01_bloqueios.md
     title: "Bloqueios de Ramo e Fasciculares"
-    description: "BRD, BRE, BDAS e BDPI: critérios diagnósticos e significado clínico."
+    description: "BRD, BRE, BDAS e BDPI: criterios diagnosticos e significado clinico."
     order: 1
 
   - id: isquemia
     file: lessons/02_isquemia.md
-    title: "Isquemia, Lesão e Infarto no ECG"
-    description: "Reconhecimento de STEMI, NSTEMI e padrões isquêmicos."
+    title: "Isquemia, Lesao e Infarto no ECG"
+    description: "Reconhecimento de STEMI, NSTEMI e padroes isquemicos."
     order: 2
 
   - id: arritmias
@@ -43,18 +45,68 @@ lessons:
 cases:
   - id: caso_iam_anterior
     file: cases/caso_iam_anterior.json
-    title: "Caso Clínico — IAM Anterior"
+    title: "Caso Clinico -- IAM Anterior"
     difficulty: medium
     related_lesson: isquemia
 
   - id: caso_fa
     file: cases/caso_fa.json
-    title: "Caso Clínico — Fibrilação Atrial"
+    title: "Caso Clinico -- Fibrilacao Atrial"
     difficulty: medium
     related_lesson: arritmias
 
   - id: caso_bav
     file: cases/caso_bav.json
-    title: "Caso Clínico — Bloqueio Atrioventricular"
+    title: "Caso Clinico -- Bloqueio Atrioventricular"
     difficulty: medium
     related_lesson: arritmias
+
+  - id: caso-02-bav1
+    file: cases/caso-02-bav1.json
+    title: "BAV de 1o Grau -- Achado Incidental"
+    difficulty: medium
+    related_lesson: arritmias
+    linked_skills:
+      - pr_interval
+      - conduction_blocks
+      - drug_effects
+
+  - id: caso-03-fa
+    file: cases/caso-03-fa.json
+    title: "Fibrilacao Atrial -- Taquicardia Irregular no Idoso"
+    difficulty: medium
+    related_lesson: arritmias
+    linked_skills:
+      - rhythm_analysis
+      - atrial_fibrillation
+      - anticoagulation
+
+  - id: caso-04-stemi
+    file: cases/caso-04-stemi.json
+    title: "STEMI Inferior -- Dor Toracica Aguda"
+    difficulty: hard
+    related_lesson: isquemia
+    linked_skills:
+      - st_segment
+      - coronary_territories
+      - reperfusion
+
+  - id: caso-05-hipercalemia
+    file: cases/caso-05-hipercalemia.json
+    title: "Hipercalemia -- Alteracoes Eletroliticas no ECG"
+    difficulty: hard
+    related_lesson: arritmias
+    linked_skills:
+      - electrolyte_effects
+      - t_wave_morphology
+      - emergency_management
+
+quizzes:
+  - id: intermediate-quiz
+    file: quizzes/intermediate.json
+    title: "Quiz Intermediario -- BAV, FA, STEMI, Hipercalemia e Bloqueios de Ramo"
+    difficulty: medium-hard
+    linked_lessons:
+      - bloqueios
+      - isquemia
+      - arritmias

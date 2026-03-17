@@ -1,0 +1,64 @@
+{
+  "id": "caso-04-stemi",
+  "title": "STEMI Inferior \u2014 Dor Tor\u00e1cica Aguda",
+  "difficulty": "hard",
+  "context": "Paciente de 62 anos, masculino, tabagista (40 ma\u00e7os-ano), dislipid\u00eamico, com dor tor\u00e1cica retroesternal intensa tipo aperto, irradiando para epig\u00e1strio, iniciada h\u00e1 1 hora. Apresenta sudorese fria, n\u00e1useas e v\u00f4mitos. PA: 90/60 mmHg, FC: 52 bpm, FR: 20 irpm, SpO2: 97%. Ao exame: p\u00e1lido, sudoreico, bradicardico, turg\u00eancia jugular presente, ausculta pulmonar limpa.",
+  "phases": [
+    {
+      "step": 1,
+      "instruction": "Observe o segmento ST nas deriva\u00e7\u00f5es DII, DIII e aVF. O que voc\u00ea identifica?",
+      "expected": "Supradesnivelamento de ST \u2265 1mm em DII, DIII e aVF, com morfologia convexa. O supra \u00e9 mais pronunciado em DIII do que em DII, sugerindo envolvimento da coron\u00e1ria direita.",
+      "hints": [
+        "Compare o segmento ST com a linha de base (segmento TP)",
+        "DII, DIII e aVF s\u00e3o as 'c\u00e2meras' da parede inferior do cora\u00e7\u00e3o"
+      ]
+    },
+    {
+      "step": 2,
+      "instruction": "Procure altera\u00e7\u00f5es rec\u00edprocas. Em quais deriva\u00e7\u00f5es voc\u00ea as encontra?",
+      "expected": "Infradesnivelamento rec\u00edproco de ST em DI e aVL (imagem em espelho do supra inferior). Pode haver infra tamb\u00e9m em V1-V3.",
+      "hints": [
+        "Altera\u00e7\u00f5es rec\u00edprocas s\u00e3o a 'imagem em espelho' vista pelas deriva\u00e7\u00f5es opostas",
+        "DI e aVL s\u00e3o laterais altas \u2014 opostas \u00e0s inferiores"
+      ]
+    },
+    {
+      "step": 3,
+      "instruction": "Qual o territ\u00f3rio afetado e a art\u00e9ria culpada? O paciente apresenta sinais de envolvimento de VD?",
+      "expected": "Territ\u00f3rio inferior \u2014 art\u00e9ria coron\u00e1ria direita (CD). Os sinais cl\u00ednicos de hipotens\u00e3o, bradicardia e turg\u00eancia jugular com pulmao limpo sugerem fortemente infarto de ventr\u00edculo direito (VD) associado. Solicitar V3R e V4R para confirmar: supra de ST \u2265 1mm em V4R confirma IAM de VD.",
+      "hints": [
+        "Supra em DIII > DII sugere CD como culpada (e n\u00e3o circunflexa)",
+        "Tr\u00edade do IAM de VD: hipotens\u00e3o + turg\u00eancia jugular + pulm\u00e3o limpo"
+      ]
+    },
+    {
+      "step": 4,
+      "instruction": "A bradicardia (FC 52 bpm) tem rela\u00e7\u00e3o com o infarto? Explique.",
+      "expected": "Sim. A coron\u00e1ria direita irriga o n\u00f3 sinusal (~60% dos casos) e o n\u00f3 AV (~85%). Sua oclus\u00e3o pode causar bradicardia sinusal, BAV de 1\u00ba, 2\u00ba (Mobitz I) ou at\u00e9 3\u00ba grau. Al\u00e9m disso, o reflexo de Bezold-Jarisch (reflexo vagal) contribui para bradicardia e hipotens\u00e3o no IAM inferior.",
+      "hints": [
+        "Qual art\u00e9ria irriga o n\u00f3 sinusal e o n\u00f3 AV?",
+        "O reflexo de Bezold-Jarisch \u00e9 mediado pelo vago"
+      ]
+    },
+    {
+      "step": 5,
+      "instruction": "Qual a conduta imediata? H\u00e1 algum cuidado especial no IAM inferior com envolvimento de VD?",
+      "expected": "Ativa\u00e7\u00e3o imediata do protocolo STEMI: ICP prim\u00e1ria com porta-bal\u00e3o < 90 min. AAS 300mg + inibidor de P2Y12 (ticagrelor 180mg ou clopidogrel 600mg) + heparina. CUIDADO NO IAM DE VD: evitar nitratos e diur\u00e9ticos (reduzem pr\u00e9-carga e pioram hipotens\u00e3o). Expansao vol\u00eamica com SF 0,9% 250-500mL se hipotens\u00e3o. Atropina 0,5mg IV se bradicardia sintom\u00e1tica.",
+      "hints": [
+        "No IAM de VD, o VD depende de pr\u00e9-carga adequada para manter d\u00e9bito",
+        "Nitratos s\u00e3o CONTRAINDICADOS no IAM de VD"
+      ]
+    }
+  ],
+  "final_interpretation": "ECG com ritmo sinusal bradicardico (FC 52 bpm), supradesnivelamento de ST em DII, DIII e aVF com altera\u00e7\u00f5es rec\u00edprocas em DI e aVL, compat\u00edvel com STEMI inferior agudo por oclus\u00e3o da coron\u00e1ria direita. Quadro cl\u00ednico sugere envolvimento de VD associado.",
+  "learning_points": [
+    "STEMI inferior: supra de ST em DII, DIII e aVF. Supra em DIII > DII sugere coron\u00e1ria direita como culpada",
+    "Sempre solicitar V3R e V4R no STEMI inferior para avaliar envolvimento de VD",
+    "Tr\u00edade do IAM de VD: hipotens\u00e3o + turg\u00eancia jugular + pulm\u00e3o limpo",
+    "Nitratos e diur\u00e9ticos s\u00e3o CONTRAINDICADOS no IAM de VD (reduzem pr\u00e9-carga)",
+    "A coron\u00e1ria direita irriga o n\u00f3 sinusal e o n\u00f3 AV \u2014 bradicardia e BAV s\u00e3o complica\u00e7\u00f5es frequentes do IAM inferior",
+    "Tempo \u00e9 mioc\u00e1rdio: porta-bal\u00e3o < 90 min ou porta-agulha < 30 min se ICP n\u00e3o dispon\u00edvel"
+  ],
+  "linked_skills": ["st_segment", "coronary_territories", "reperfusion"],
+  "disclaimer": "Conte\u00fado exclusivamente educacional. Este caso cl\u00ednico \u00e9 fict\u00edcio e destina-se ao ensino de eletrocardiografia. N\u00e3o substitui avalia\u00e7\u00e3o cl\u00ednica profissional."
+}

@@ -1,0 +1,147 @@
+{
+  "quiz_id": "fundamentos-quiz",
+  "title": "Quiz — Fundamentos do ECG",
+  "linked_lessons": ["fundamentos", "derivacoes"],
+  "questions": [
+    {
+      "id": "basics_001",
+      "topic": "ECG Basics",
+      "difficulty": "easy",
+      "stem": "O que o eletrocardiograma (ECG) registra?",
+      "options": [
+        "A atividade elétrica do coração captada na superfície corporal",
+        "A contração mecânica dos ventrículos",
+        "O fluxo sanguíneo através das valvas cardíacas",
+        "A pressão intracavitária das câmaras cardíacas"
+      ],
+      "answer_index": 0,
+      "explanation": "O ECG registra as diferenças de potencial elétrico geradas pela despolarização e repolarização das células miocárdicas, captadas por eletrodos na superfície do corpo. Ele não mede contração mecânica, fluxo sanguíneo ou pressão intracavitária."
+    },
+    {
+      "id": "basics_002",
+      "topic": "ECG Basics",
+      "difficulty": "easy",
+      "stem": "A onda P no ECG representa:",
+      "options": [
+        "A despolarização atrial",
+        "A repolarização atrial",
+        "A despolarização ventricular",
+        "A repolarização ventricular"
+      ],
+      "answer_index": 0,
+      "explanation": "A onda P representa a despolarização dos átrios. A despolarização ventricular é representada pelo complexo QRS, e a repolarização ventricular pela onda T. A repolarização atrial normalmente fica oculta dentro do complexo QRS."
+    },
+    {
+      "id": "basics_003",
+      "topic": "ECG Basics",
+      "difficulty": "easy",
+      "stem": "No papel de ECG padrão (velocidade 25 mm/s), cada quadradinho (1 mm) equivale a:",
+      "options": [
+        "0,04 segundos (40 ms)",
+        "0,02 segundos (20 ms)",
+        "0,10 segundos (100 ms)",
+        "0,20 segundos (200 ms)"
+      ],
+      "answer_index": 0,
+      "explanation": "Na velocidade padrão de 25 mm/s, cada milímetro (quadradinho) representa 0,04 s (40 ms). Um quadrado grande (5 mm) equivale a 0,20 s (200 ms), e 5 quadrados grandes representam 1 segundo."
+    },
+    {
+      "id": "basics_004",
+      "topic": "Derivações",
+      "difficulty": "easy",
+      "stem": "As derivações DII, DIII e aVF avaliam preferencialmente qual parede do coração?",
+      "options": [
+        "Parede inferior",
+        "Parede anterior",
+        "Parede lateral",
+        "Parede septal"
+      ],
+      "answer_index": 0,
+      "explanation": "As derivações inferiores (DII, DIII e aVF) olham para a parede inferior do coração, irrigada predominantemente pela artéria coronária direita (em 85% dos casos). V1-V2 olham para o septo, V3-V4 para a parede anterior, e DI/aVL/V5-V6 para a parede lateral."
+    },
+    {
+      "id": "basics_005",
+      "topic": "Derivações",
+      "difficulty": "medium",
+      "stem": "O eletrodo V4 deve ser posicionado em qual localização anatômica?",
+      "options": [
+        "5° espaço intercostal, linha hemiclavicular esquerda",
+        "4° espaço intercostal, borda esternal esquerda",
+        "5° espaço intercostal, linha axilar anterior",
+        "4° espaço intercostal, borda esternal direita"
+      ],
+      "answer_index": 0,
+      "explanation": "V4 é posicionado no 5° espaço intercostal na linha hemiclavicular esquerda. V1 fica no 4° EIC na borda esternal direita, V2 no 4° EIC na borda esternal esquerda, e V5 no mesmo nível de V4 na linha axilar anterior."
+    },
+    {
+      "id": "basics_006",
+      "topic": "Derivações",
+      "difficulty": "medium",
+      "stem": "De acordo com a Lei de Einthoven, qual é a relação correta entre as derivações bipolares dos membros?",
+      "options": [
+        "DII = DI + DIII",
+        "DI = DII + DIII",
+        "DIII = DI + DII",
+        "DII = DI − DIII"
+      ],
+      "answer_index": 0,
+      "explanation": "A Lei de Einthoven estabelece que DII = DI + DIII. Esta relação matemática entre as derivações bipolares é útil para verificar a calibração do aparelho e o posicionamento correto dos eletrodos."
+    },
+    {
+      "id": "basics_007",
+      "topic": "ECG Basics",
+      "difficulty": "medium",
+      "stem": "Quando o vetor de despolarização se dirige em direção a um eletrodo, o ECG registra:",
+      "options": [
+        "Uma deflexão positiva",
+        "Uma deflexão negativa",
+        "Uma linha isoelétrica",
+        "Uma deflexão bifásica"
+      ],
+      "answer_index": 0,
+      "explanation": "Quando o vetor de despolarização se aproxima do eletrodo explorador, registra-se uma deflexão positiva. Quando se afasta, registra-se deflexão negativa. Quando é perpendicular ao eletrodo, o complexo é isoelétrico ou bifásico."
+    },
+    {
+      "id": "basics_008",
+      "topic": "ECG Basics",
+      "difficulty": "medium",
+      "stem": "Qual é o marca-passo fisiológico do coração e sua frequência intrínseca?",
+      "options": [
+        "Nó sinusal, 60–100 bpm",
+        "Nó atrioventricular, 40–60 bpm",
+        "Feixe de His, 30–40 bpm",
+        "Fibras de Purkinje, 20–40 bpm"
+      ],
+      "answer_index": 0,
+      "explanation": "O nó sinusal (sinoatrial) é o marca-passo fisiológico do coração, com frequência intrínseca de 60–100 bpm. Ele domina por supressão por overdrive — como dispara mais rápido, reseta os outros marca-passos antes que possam disparar."
+    },
+    {
+      "id": "basics_009",
+      "topic": "Derivações",
+      "difficulty": "hard",
+      "stem": "A progressão normal da onda R nas derivações precordiais é caracterizada por:",
+      "options": [
+        "Aumento gradual da amplitude de R de V1 a V6, com zona de transição em V3-V4",
+        "Onda R de grande amplitude constante de V1 a V6",
+        "Diminuição gradual da amplitude de R de V1 a V6",
+        "Onda R presente apenas em V1-V2 e ausente em V4-V6"
+      ],
+      "answer_index": 0,
+      "explanation": "Normalmente, a onda R cresce progressivamente de V1 (onde o QRS é predominantemente negativo, padrão rS) até V6 (onde é predominantemente positivo). A zona de transição, onde R e S têm amplitudes semelhantes, ocorre tipicamente em V3-V4."
+    },
+    {
+      "id": "basics_010",
+      "topic": "ECG Basics",
+      "difficulty": "hard",
+      "stem": "A repolarização ventricular (onda T) normalmente tem a mesma polaridade do QRS porque:",
+      "options": [
+        "A repolarização ocorre do epicárdio para o endocárdio, invertendo a direção esperada",
+        "A repolarização segue exatamente o mesmo caminho da despolarização",
+        "As fibras de Purkinje repolarizam antes do miocárdio contrátil",
+        "O nó AV controla a direção da repolarização ventricular"
+      ],
+      "answer_index": 0,
+      "explanation": "A despolarização ventricular ocorre do endocárdio para o epicárdio, mas a repolarização ocorre no sentido inverso — do epicárdio para o endocárdio. Como tanto a direção quanto a polaridade do processo se invertem, o resultado final é uma onda T com a mesma polaridade do QRS (concordância)."
+    }
+  ]
+}

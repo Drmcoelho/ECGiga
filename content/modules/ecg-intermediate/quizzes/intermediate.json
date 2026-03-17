@@ -1,0 +1,142 @@
+[
+  {
+    "id": "inter-0001",
+    "topic": "Bloqueio Atrioventricular",
+    "difficulty": "medium",
+    "stem": "Um paciente de 65 anos em uso de verapamil apresenta ECG com ritmo sinusal, PR de 280ms e toda onda P conduzindo para um QRS. Qual o diagn\u00f3stico?",
+    "options": [
+      "BAV de 2\u00ba grau Mobitz I",
+      "BAV de 1\u00ba grau",
+      "BAV de 3\u00ba grau",
+      "Ritmo sinusal normal"
+    ],
+    "answer_index": 1,
+    "explanation": "BAV de 1\u00ba grau \u00e9 definido por PR > 200ms com toda onda P conduzida para QRS. N\u00e3o h\u00e1 bloqueio de condu\u00e7\u00e3o propriamente dito (toda P conduz), apenas atraso. O verapamil (bloqueador de canal de c\u00e1lcio) \u00e9 uma causa comum de prolongamento do PR por atuar diretamente no n\u00f3 AV."
+  },
+  {
+    "id": "inter-0002",
+    "topic": "Fibrila\u00e7\u00e3o Atrial",
+    "difficulty": "medium",
+    "stem": "Qual \u00e9 a tr\u00edade eletrocardiogr\u00e1fica que define a fibrila\u00e7\u00e3o atrial?",
+    "options": [
+      "Ondas P invertidas, QRS estreito e ST elevado",
+      "Aus\u00eancia de ondas P, intervalos RR irregularmente irregulares e ondas f fibrilat\u00f3rias",
+      "Ondas P em 'dente de serra', RR regular e QRS estreito",
+      "Ondas P bif\u00e1sicas, PR prolongado e QRS alargado"
+    ],
+    "answer_index": 1,
+    "explanation": "A FA \u00e9 caracterizada por: (1) aus\u00eancia de ondas P organizadas (substitu\u00eddas por atividade fibrilat\u00f3ria ca\u00f3tica); (2) intervalos RR irregularmente irregulares (nenhum padr\u00e3o de regularidade); (3) ondas f na linha de base. A op\u00e7\u00e3o C descreve flutter atrial (ondas F em dente de serra com RR regular)."
+  },
+  {
+    "id": "inter-0003",
+    "topic": "STEMI",
+    "difficulty": "hard",
+    "stem": "Um ECG mostra supradesnivelamento de ST em DII, DIII e aVF com infradesnivelamento rec\u00edproco em DI e aVL. O supra \u00e9 maior em DIII do que em DII. Qual a art\u00e9ria culpada mais prov\u00e1vel?",
+    "options": [
+      "Arteria descendente anterior (DA)",
+      "Arteria circunflexa (Cx)",
+      "Arteria coron\u00e1ria direita (CD)",
+      "Tronco da coron\u00e1ria esquerda (TCE)"
+    ],
+    "answer_index": 2,
+    "explanation": "No STEMI inferior, o supra de ST maior em DIII do que em DII sugere coron\u00e1ria direita como art\u00e9ria culpada. Quando o supra \u00e9 maior em DII do que em DIII, a circunflexa \u00e9 mais prov\u00e1vel. O infra rec\u00edproco em DI e aVL (laterais altas) refor\u00e7a o diagn\u00f3stico de STEMI inferior e confere maior especificidade."
+  },
+  {
+    "id": "inter-0004",
+    "topic": "Hipercalemia",
+    "difficulty": "medium",
+    "stem": "Qual \u00e9 a altera\u00e7\u00e3o eletrocardiogr\u00e1fica MAIS PRECOCE da hipercalemia?",
+    "options": [
+      "Alargamento do QRS",
+      "Desaparecimento da onda P",
+      "Ondas T apiculadas (altas, estreitas e sim\u00e9tricas)",
+      "Padr\u00e3o sinusoidal"
+    ],
+    "answer_index": 2,
+    "explanation": "As ondas T apiculadas ('em tenda') s\u00e3o o sinal mais precoce de hipercalemia, aparecendo com K\u207a entre 5,5-6,5 mEq/L. A progress\u00e3o segue: T apiculada \u2192 achatamento de P e prolongamento de PR \u2192 alargamento do QRS \u2192 padr\u00e3o sinusoidal \u2192 FV/assistolia. O reconhecimento precoce das T apiculadas permite interven\u00e7\u00e3o antes de complica\u00e7\u00f5es graves."
+  },
+  {
+    "id": "inter-0005",
+    "topic": "Bloqueio de Ramo Direito",
+    "difficulty": "medium",
+    "stem": "Quais s\u00e3o os crit\u00e9rios eletrocardiogr\u00e1ficos do bloqueio de ramo direito (BRD) completo?",
+    "options": [
+      "QRS \u2265 120ms, padr\u00e3o rSR' em V1-V2 e onda S alargada em DI, V5-V6",
+      "QRS \u2265 120ms, onda R alargada e entalhada em V5-V6 e aus\u00eancia de Q em V5-V6",
+      "QRS \u2265 120ms, onda Q profunda em V1-V3 e supra de ST",
+      "QRS < 120ms, padr\u00e3o rSR' em V1 e eixo desviado \u00e0 esquerda"
+    ],
+    "answer_index": 0,
+    "explanation": "O BRD completo \u00e9 definido por: QRS \u2265 120ms, padr\u00e3o rSR' (ou rsR') em V1-V2 (\u2018orelhas de coelho\u2019) e onda S empastada (alargada) em DI, V5 e V6. A op\u00e7\u00e3o B descreve bloqueio de ramo esquerdo (BRE). Se o QRS for entre 110-119ms com mesmo padr\u00e3o, trata-se de BRD incompleto."
+  },
+  {
+    "id": "inter-0006",
+    "topic": "Bloqueio de Ramo Esquerdo",
+    "difficulty": "hard",
+    "stem": "Paciente com BRE completo chega ao PS com dor tor\u00e1cica. Qual crit\u00e9rio de Sgarbossa (modificado por Smith) sugere STEMI na presen\u00e7a de BRE?",
+    "options": [
+      "Infradesnivelamento de ST > 1mm em V1-V3",
+      "Supradesnivelamento de ST concordante \u2265 1mm com a polaridade do QRS",
+      "Ondas T invertidas em V5-V6",
+      "Supradesnivelamento de ST discordante > 5mm em qualquer deriva\u00e7\u00e3o"
+    ],
+    "answer_index": 1,
+    "explanation": "No BRE, as altera\u00e7\u00f5es de ST-T s\u00e3o secund\u00e1rias ao bloqueio (discordantes com o QRS). Os crit\u00e9rios de Sgarbossa identificam STEMI na presen\u00e7a de BRE: o mais espec\u00edfico \u00e9 o supra de ST CONCORDANTE com a polaridade do QRS (\u22651mm), pois essa concord\u00e2ncia \u00e9 inapropriada no BRE. A modifica\u00e7\u00e3o de Smith usa a raz\u00e3o ST/S (supra discordante/amplitude da onda S \u2265 0,25) no lugar do crit\u00e9rio de >5mm."
+  },
+  {
+    "id": "inter-0007",
+    "topic": "Hipercalemia \u2014 Tratamento",
+    "difficulty": "hard",
+    "stem": "Paciente com K\u207a = 7,8 mEq/L e QRS alargado no ECG. Qual a PRIMEIRA medida terap\u00eautica?",
+    "options": [
+      "Insulina regular 10 UI + glicose 50% IV",
+      "Gluconato de c\u00e1lcio 10% 10mL IV em 2-3 minutos",
+      "Nebuliza\u00e7\u00e3o com salbutamol 10mg",
+      "Resina de troca (poliestirenossulfonato de c\u00e1lcio) VO"
+    ],
+    "answer_index": 1,
+    "explanation": "Quando h\u00e1 altera\u00e7\u00f5es eletrocardiogr\u00e1ficas de hipercalemia (QRS alargado), a PRIMEIRA medida \u00e9 o gluconato de c\u00e1lcio IV. Ele estabiliza a membrana card\u00edaca em 1-3 minutos, protegendo contra arritmias fatais. Importante: ele N\u00c3O reduz o n\u00edvel de pot\u00e1ssio. Ap\u00f3s estabilizar o cora\u00e7\u00e3o, administrar insulina + glicose (onset 15-30 min, reduz K\u207a 0,5-1,2 mEq/L) e salbutamol nebulizado como adjuvante."
+  },
+  {
+    "id": "inter-0008",
+    "topic": "STEMI \u2014 Territ\u00f3rios",
+    "difficulty": "medium",
+    "stem": "Supradesnivelamento de ST em V1-V4 com ondas T hiperagudas indica STEMI em qual territ\u00f3rio e qual art\u00e9ria culpada?",
+    "options": [
+      "Parede inferior \u2014 coron\u00e1ria direita",
+      "Parede lateral \u2014 circunflexa",
+      "Parede anterosseptal \u2014 descendente anterior (DA)",
+      "Parede posterior \u2014 circunflexa ou coron\u00e1ria direita"
+    ],
+    "answer_index": 2,
+    "explanation": "V1-V2 filmam o septo interventricular e V3-V4 a parede anterior. O supra de ST nessas deriva\u00e7\u00f5es com T hiperagudas indica STEMI anterosseptal por oclus\u00e3o da arteria descendente anterior (DA). Se o supra se estender at\u00e9 V5-V6, DI e aVL, indica oclus\u00e3o proximal da DA ('widow maker'), com grande \u00e1rea de mioc\u00e1rdio em risco."
+  },
+  {
+    "id": "inter-0009",
+    "topic": "Fibrila\u00e7\u00e3o Atrial \u2014 Anticoagula\u00e7\u00e3o",
+    "difficulty": "hard",
+    "stem": "Paciente de 78 anos com FA, hipertens\u00e3o, diabetes e AVC isqu\u00eamico pr\u00e9vio. CHA\u2082DS\u2082-VASc = 6. Qual a melhor estrat\u00e9gia de anticoagula\u00e7\u00e3o se N\u00c3O houver valvopatia mitral reum\u00e1tica?",
+    "options": [
+      "AAS isolado",
+      "AAS + clopidogrel (dupla antiagrega\u00e7\u00e3o)",
+      "Varfarina com INR-alvo 2,0-3,0",
+      "Anticoagulante oral direto (DOAC) como apixabana ou rivaroxabana"
+    ],
+    "answer_index": 3,
+    "explanation": "Na FA n\u00e3o-valvar (sem estenose mitral reum\u00e1tica ou pr\u00f3tese valvar mec\u00e2nica), os DOACs (apixabana, rivaroxabana, dabigatrana, edoxabana) s\u00e3o prefer\u00edveis \u00e0 varfarina pelas diretrizes atuais, pois apresentam efic\u00e1cia semelhante com menor risco de sangramento intracraniano e n\u00e3o requerem monitoriza\u00e7\u00e3o de INR. AAS isolado n\u00e3o \u00e9 mais recomendado para preven\u00e7\u00e3o de AVC na FA."
+  },
+  {
+    "id": "inter-0010",
+    "topic": "Bloqueio Atrioventricular \u2014 Mobitz II",
+    "difficulty": "hard",
+    "stem": "Um ECG mostra ritmo sinusal com ondas P regulares (FC atrial 80 bpm), por\u00e9m algumas ondas P n\u00e3o s\u00e3o seguidas de QRS. O intervalo PR dos batimentos conduzidos \u00e9 constante (180ms) e o QRS \u00e9 alargado (140ms). Qual o diagn\u00f3stico e a conduta?",
+    "options": [
+      "BAV 2\u00ba grau Mobitz I (Wenckebach) \u2014 observa\u00e7\u00e3o cl\u00ednica",
+      "BAV 2\u00ba grau Mobitz II \u2014 indica\u00e7\u00e3o de marca-passo definitivo",
+      "BAV 1\u00ba grau \u2014 acompanhamento ambulatorial",
+      "BAV 3\u00ba grau \u2014 indica\u00e7\u00e3o de marca-passo de emerg\u00eancia"
+    ],
+    "answer_index": 1,
+    "explanation": "BAV 2\u00ba grau Mobitz II: PR constante nos batimentos conduzidos com P bloqueada s\u00fabita (sem fen\u00f4meno de Wenckebach). O QRS alargado indica bloqueio infranodal (His-Purkinje). Diferente do Mobitz I (PR se alonga progressivamente at\u00e9 bloquear), o Mobitz II tem alto risco de evolu\u00e7\u00e3o para BAV total e \u00e9 indica\u00e7\u00e3o de marca-passo definitivo (classe I), mesmo em pacientes assintom\u00e1ticos."
+  }
+]

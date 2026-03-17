@@ -1,0 +1,41 @@
+{
+  "id": "caso-02-bav1",
+  "title": "BAV de 1\u00ba Grau \u2014 Achado Incidental",
+  "difficulty": "medium",
+  "context": "Paciente de 68 anos, masculino, hipertenso em uso de atenolol 50mg/dia. ECG de rotina.",
+  "phases": [
+    {
+      "step": 1,
+      "instruction": "Analise o ritmo. \u00c9 sinusal?",
+      "expected": "Sim, ritmo sinusal regular com onda P antes de cada QRS",
+      "hints": ["P positiva em DII", "Toda P conduz para QRS"]
+    },
+    {
+      "step": 2,
+      "instruction": "Me\u00e7a o intervalo PR. Est\u00e1 normal?",
+      "expected": "PR = 240ms \u2014 prolongado (normal: 120-200ms)",
+      "hints": ["In\u00edcio da P at\u00e9 in\u00edcio do QRS", "Normal at\u00e9 200ms"]
+    },
+    {
+      "step": 3,
+      "instruction": "Qual o diagn\u00f3stico e poss\u00edveis causas?",
+      "expected": "BAV de 1\u00ba grau. Causas: uso de betabloqueador (atenolol), doen\u00e7a degenerativa do sistema de condu\u00e7\u00e3o, vagotonia",
+      "hints": ["O atenolol pode prolongar PR", "BAV1 geralmente \u00e9 benigno"]
+    },
+    {
+      "step": 4,
+      "instruction": "Qual a conduta?",
+      "expected": "Geralmente n\u00e3o requer tratamento. Monitorar. Se PR > 300ms ou sintomas (s\u00edncope), considerar reavalia\u00e7\u00e3o do betabloqueador",
+      "hints": ["BAV1 isolado raramente requer marca-passo"]
+    }
+  ],
+  "final_interpretation": "ECG com ritmo sinusal e BAV de 1\u00ba grau (PR=240ms), provavelmente relacionado ao uso de betabloqueador.",
+  "learning_points": [
+    "BAV 1\u00ba grau = PR > 200ms com toda P conduzindo",
+    "Betabloqueadores e bloqueadores de canal de c\u00e1lcio s\u00e3o causas comuns",
+    "Geralmente benigno; investigar se PR muito prolongado (>300ms) ou sintom\u00e1tico",
+    "Diferente do BAV 2\u00ba grau onde h\u00e1 P bloqueada"
+  ],
+  "linked_skills": ["pr_interval", "conduction_blocks", "drug_effects"],
+  "disclaimer": "Conte\u00fado exclusivamente educacional. Este caso cl\u00ednico \u00e9 fict\u00edcio e destina-se ao ensino de eletrocardiografia. N\u00e3o substitui avalia\u00e7\u00e3o cl\u00ednica profissional."
+}

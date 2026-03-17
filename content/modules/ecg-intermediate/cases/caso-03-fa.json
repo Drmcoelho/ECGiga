@@ -1,0 +1,63 @@
+{
+  "id": "caso-03-fa",
+  "title": "Fibrilac\u0327a\u0303o Atrial \u2014 Taquicardia Irregular no Idoso",
+  "difficulty": "medium",
+  "context": "Paciente de 74 anos, feminina, hipertensa e diab\u00e9tica, procura o pronto-socorro com queixa de palpita\u00e7\u00f5es e falta de ar h\u00e1 3 horas. Em uso de losartana 50mg/dia e metformina 850mg 2x/dia. Hist\u00f3rico de estenose mitral leve. PA: 145/90 mmHg, FC: 138 bpm (irregular), SpO2: 95%.",
+  "phases": [
+    {
+      "step": 1,
+      "instruction": "Observe a linha de base e os intervalos RR. O ritmo \u00e9 regular?",
+      "expected": "N\u00e3o. Os intervalos RR s\u00e3o irregularmente irregulares. A linha de base n\u00e3o apresenta ondas P definidas, mas sim ondula\u00e7\u00f5es irregulares (ondas f fibrilat\u00f3rias).",
+      "hints": [
+        "Compare os intervalos RR consecutivos \u2014 nenhum \u00e9 igual ao outro",
+        "Procure ondas P antes de cada QRS \u2014 voc\u00ea consegue identific\u00e1-las?"
+      ]
+    },
+    {
+      "step": 2,
+      "instruction": "Com base nos achados, qual \u00e9 o ritmo card\u00edaco? Quais os 3 crit\u00e9rios diagn\u00f3sticos?",
+      "expected": "Fibrila\u00e7\u00e3o atrial (FA) com resposta ventricular r\u00e1pida. Crit\u00e9rios: (1) aus\u00eancia de ondas P organizadas, (2) intervalos RR irregularmente irregulares, (3) presen\u00e7a de ondas f fibrilat\u00f3rias na linha de base.",
+      "hints": [
+        "FA \u00e9 conhecida como arritmia 'irregularmente irregular'",
+        "FC > 100 bpm = resposta ventricular r\u00e1pida"
+      ]
+    },
+    {
+      "step": 3,
+      "instruction": "Calcule o escore CHA\u2082DS\u2082-VASc desta paciente. H\u00e1 indica\u00e7\u00e3o de anticoagula\u00e7\u00e3o?",
+      "expected": "CHA\u2082DS\u2082-VASc = 4 pontos: H (HAS) = 1, A (65-74 anos) = 1, D (DM) = 1, Sc (sexo feminino) = 1. Risco elevado de AVC \u2014 anticoagula\u00e7\u00e3o oral indicada. Em pacientes com valvopatia mitral reum\u00e1tica, preferir varfarina; caso contr\u00e1rio, DOACs (apixabana, rivaroxabana) s\u00e3o op\u00e7\u00e3o.",
+      "hints": [
+        "C = ICC, H = HAS, A\u2082 = \u226575 anos (2 pts), D = DM, S\u2082 = AVC pr\u00e9vio (2 pts), V = doen\u00e7a vascular, A = 65-74 anos (1 pt), Sc = sexo feminino (1 pt)",
+        "CHA\u2082DS\u2082-VASc \u2265 2 em mulheres = anticoagula\u00e7\u00e3o indicada"
+      ]
+    },
+    {
+      "step": 4,
+      "instruction": "Qual a estrat\u00e9gia inicial de tratamento? Controle de frequ\u00eancia ou controle de ritmo?",
+      "expected": "Controle de frequ\u00eancia como estrat\u00e9gia inicial: betabloqueador IV (metoprolol 5mg IV) ou diltiazem IV para reduzir FC para < 110 bpm. Se FA < 48h e paciente est\u00e1vel, pode-se considerar cardiovers\u00e3o ap\u00f3s controle inicial.",
+      "hints": [
+        "Paciente est\u00e1vel hemodinamicamente \u2014 n\u00e3o h\u00e1 necessidade de cardiovers\u00e3o de emerg\u00eancia",
+        "Alvo de FC: < 110 bpm (estrat\u00e9gia leniente) ou < 80 bpm (estrat\u00e9gia estrita)"
+      ]
+    },
+    {
+      "step": 5,
+      "instruction": "Quais fatores de risco desta paciente predispuseram \u00e0 FA?",
+      "expected": "Idade avan\u00e7ada (74 anos), hipertens\u00e3o arterial (causa hipertrofia VE e disfun\u00e7\u00e3o diast\u00f3lica), estenose mitral (causa dilata\u00e7\u00e3o do \u00e1trio esquerdo) e diabetes mellitus. Todos contribuem para remodelamento atrial el\u00e9trico e anat\u00f4mico.",
+      "hints": [
+        "A estenose mitral \u00e9 causa cl\u00e1ssica de FA por dilata\u00e7\u00e3o do \u00e1trio esquerdo",
+        "HAS e idade s\u00e3o os fatores de risco mais prevalentes na popula\u00e7\u00e3o geral"
+      ]
+    }
+  ],
+  "final_interpretation": "ECG com fibrila\u00e7\u00e3o atrial com resposta ventricular r\u00e1pida (FC ~138 bpm), QRS estreito, sem sinais de isquemia aguda. Paciente com m\u00faltiplos fatores de risco para FA e indica\u00e7\u00e3o de anticoagula\u00e7\u00e3o oral (CHA\u2082DS\u2082-VASc = 4).",
+  "learning_points": [
+    "FA = aus\u00eancia de ondas P + RR irregularmente irregular + ondas f fibrilat\u00f3rias",
+    "FA \u00e9 a arritmia sustentada mais comum, especialmente em idosos e portadores de valvopatia mitral",
+    "Sempre calcular CHA\u2082DS\u2082-VASc para estratificar risco tromboemb\u00f3lico e decidir anticoagula\u00e7\u00e3o",
+    "Controle de frequ\u00eancia \u00e9 a estrat\u00e9gia inicial na maioria dos pacientes est\u00e1veis com FA",
+    "FA com dura\u00e7\u00e3o > 48h sem anticoagula\u00e7\u00e3o pr\u00e9via requer eco transesof\u00e1gico antes de cardiovers\u00e3o para excluir trombo atrial"
+  ],
+  "linked_skills": ["rhythm_analysis", "atrial_fibrillation", "anticoagulation"],
+  "disclaimer": "Conte\u00fado exclusivamente educacional. Este caso cl\u00ednico \u00e9 fict\u00edcio e destina-se ao ensino de eletrocardiografia. N\u00e3o substitui avalia\u00e7\u00e3o cl\u00ednica profissional."
+}

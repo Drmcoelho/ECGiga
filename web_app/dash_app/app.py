@@ -1193,21 +1193,43 @@ def show_quiz_progress(n_clicks):
                 html.Td(f"{stats['accuracy']*100:.0f}%"),
             ]))
 
+        # Radar chart for competency profile
+        radar_chart = html.P("")
+        topic_data = dashboard.get("topic_breakdown", {})
+        if topic_data and len(topic_data) >= 3:
+            import plotly.graph_objects as go
+            topics = list(topic_data.keys())
+            accuracies = [topic_data[t]["accuracy"] * 100 for t in topics]
+            # Close the polygon
+            topics_closed = topics + [topics[0]]
+            acc_closed = accuracies + [accuracies[0]]
+            fig = go.Figure(data=go.Scatterpolar(
+                r=acc_closed, theta=topics_closed, fill='toself',
+                name='Acurácia (%)', line_color='#2196F3',
+            ))
+            fig.update_layout(
+                polar=dict(radialaxis=dict(visible=True, range=[0, 100])),
+                showlegend=False, title="Perfil de Competência",
+                height=350, margin=dict(t=40, b=20, l=40, r=40),
+            )
+            radar_chart = dcc.Graph(figure=fig, config={"displayModeBar": False})
+
         return html.Div([
             html.H4("Seu Progresso"),
             html.Div([
                 html.Span(f"Total: {dashboard['total_questions_answered']} | ", style={"fontWeight": "bold"}),
-                html.Span(f"Acur\u00e1cia: {dashboard['overall_accuracy']*100:.0f}% | "),
+                html.Span(f"Acurácia: {dashboard['overall_accuracy']*100:.0f}% | "),
                 html.Span(f"Streak: {dashboard['streak']} dias | "),
                 html.Span(f"Dominadas: {sr_stats['mastered']} | "),
                 html.Span(f"Aprendendo: {sr_stats['learning']} | "),
                 html.Span(f"Para revisar hoje: {sr_stats['due_today']}"),
             ], style={"marginBottom": "15px"}),
+            radar_chart,
             html.Div(badges_html, style={"marginBottom": "15px"}),
             html.Table([
-                html.Thead(html.Tr([html.Th("T\u00f3pico"), html.Th("Acertos"), html.Th("Acur\u00e1cia")])),
+                html.Thead(html.Tr([html.Th("Tópico"), html.Th("Acertos"), html.Th("Acurácia")])),
                 html.Tbody(topic_rows),
-            ], style={"width": "100%", "borderCollapse": "collapse"}) if topic_rows else html.P("Nenhuma sess\u00e3o registrada ainda. Gere um quiz para come\u00e7ar!"),
+            ], style={"width": "100%", "borderCollapse": "collapse"}) if topic_rows else html.P("Nenhuma sessão registrada ainda. Gere um quiz para começar!"),
         ])
     except Exception as e:
         return html.P(f"Erro ao carregar progresso: {e}")

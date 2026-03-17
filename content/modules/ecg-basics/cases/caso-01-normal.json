@@ -1,0 +1,78 @@
+{
+  "id": "caso-01-normal",
+  "title": "ECG Normal — Análise Sistemática",
+  "difficulty": "easy",
+  "context": "Paciente de 35 anos, masculino, assintomático, exame admissional.",
+  "phases": [
+    {
+      "step": 1,
+      "instruction": "Analise o ritmo. O que você observa?",
+      "expected": "Ritmo sinusal regular",
+      "hints": [
+        "Observe se há onda P antes de cada QRS",
+        "P positiva em DII?",
+        "A relação P:QRS é 1:1?",
+        "Os intervalos R-R são regulares?"
+      ]
+    },
+    {
+      "step": 2,
+      "instruction": "Calcule a frequência cardíaca.",
+      "expected": "FC = 75 bpm (RR = 800ms)",
+      "hints": [
+        "300 / número de quadrados grandes entre R-R",
+        "Ou 1500 / número de quadradinhos entre R-R",
+        "Ou 60.000 / RR em milissegundos"
+      ]
+    },
+    {
+      "step": 3,
+      "instruction": "Determine o eixo elétrico.",
+      "expected": "Eixo normal (~60°)",
+      "hints": [
+        "QRS positivo em I e aVF = eixo normal",
+        "QRS isoelétrico em aVL sugere eixo perpendicular a aVL = +60°",
+        "Eixo normal está entre -30° e +90°"
+      ]
+    },
+    {
+      "step": 4,
+      "instruction": "Avalie os intervalos PR, QRS e QT.",
+      "expected": "PR=160ms, QRS=80ms, QT=360ms, QTc=414ms — todos normais",
+      "hints": [
+        "PR normal: 120-200ms",
+        "QRS normal: <120ms",
+        "QTc (Bazett) = QT / √RR",
+        "QTc normal: <440ms (homens), <460ms (mulheres)"
+      ]
+    },
+    {
+      "step": 5,
+      "instruction": "Avalie a morfologia das ondas P, QRS e T.",
+      "expected": "Onda P positiva em DII com morfologia normal. QRS com progressão normal da onda R nas precordiais. Ondas T concordantes com QRS, sem inversões patológicas.",
+      "hints": [
+        "P deve ser positiva em DII e negativa em aVR",
+        "R deve crescer progressivamente de V1 a V6",
+        "T normalmente tem a mesma polaridade do QRS"
+      ]
+    },
+    {
+      "step": 6,
+      "instruction": "Avalie o segmento ST e formule a conclusão final.",
+      "expected": "Segmento ST isoelétrico em todas as derivações, sem supra ou infradesnivelamento. Conclusão: ECG dentro dos limites da normalidade.",
+      "hints": [
+        "Compare o segmento ST com a linha de base (segmento TP)",
+        "Desvios ≥ 1mm são potencialmente significativos",
+        "Lembre-se: ECG normal não exclui doença cardíaca"
+      ]
+    }
+  ],
+  "final_interpretation": "ECG normal. Ritmo sinusal, FC 75bpm, eixo normal (~60°), intervalos normais (PR 160ms, QRS 80ms, QTc 414ms), progressão normal da onda R, sem alterações de ST-T.",
+  "learning_points": [
+    "A análise sistemática garante que nada seja esquecido",
+    "Um ECG normal não exclui doença cardíaca",
+    "Sempre correlacionar com clínica",
+    "O método de leitura (ritmo → FC → eixo → intervalos → morfologia → ST) deve ser aplicado em todo ECG",
+    "Conhecer os valores normais é essencial para identificar alterações"
+  ]
+}
