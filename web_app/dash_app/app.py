@@ -8,6 +8,7 @@ from io import BytesIO
 
 app = dash.Dash(__name__, suppress_callback_exceptions=True)
 app.title = "ECGiga — Plataforma Educacional de ECG"
+server = app.server  # expose Flask server for gunicorn
 
 def synth_wave(phase=0.0, n=2000):
     t = np.linspace(0, 1, n)
