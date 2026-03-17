@@ -51,10 +51,16 @@ def to_html(md_text: str) -> str:
     # conversão mínima: troca cabeçalhos/itálicos/inline code, preserva blocos de código
     import re
     html_text = md_text
-    html_text = re.sub(r'^# (.*)$', r'<h1>\\1</h1>', html_text, flags=re.MULTILINE)
-    html_text = re.sub(r'^## (.*)$', r'<h2>\\1</h2>', html_text, flags=re.MULTILINE)
-    html_text = re.sub(r'\\*\\*(.*?)\\*\\*', r'<strong>\\1</strong>', html_text)
-    html_text = re.sub(r'`([^`]+)`', r'<code>\\1</code>', html_text)
+    html_text = re.sub(
+        r"```(\w+)?\n(.*?)```",
+        lambda m: f"<pre><code class='language-{m.group(1) or 'text'}'>{html.escape(m.group(2))}</code></pre>",
+        html_text,
+        flags=re.DOTALL,
+    )
+    html_text = re.sub(r'^# (.*)$', r'<h1>\1</h1>', html_text, flags=re.MULTILINE)
+    html_text = re.sub(r'^## (.*)$', r'<h2>\1</h2>', html_text, flags=re.MULTILINE)
+    html_text = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', html_text)
+    html_text = re.sub(r'`([^`]+)`', r'<code>\1</code>', html_text)
     html_text = html_text.replace("\n", "<br/>\n")
     return f"<!doctype html><meta charset='utf-8'><style>body{{font-family:system-ui, -apple-system, Segoe UI, sans-serif; max-width: 920px; margin: 2rem auto; line-height:1.5}}</style>{html_text}"
 

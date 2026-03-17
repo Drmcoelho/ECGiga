@@ -26,15 +26,27 @@ def load_schema() -> dict:
 def validate_item(item: dict, schema: dict):
     Draft202012Validator(schema).validate(item)
 
+def _require_positive(value, label: str) -> float:
+    numeric = float(value)
+    if numeric <= 0:
+        typer.echo(f"{label} deve ser > 0.", err=True)
+        raise typer.Exit(code=2)
+    return numeric
+
 def ask_item(item: dict) -> tuple[bool, int]:
     print(Panel.fit(f"[bold cyan]{item['topic']}[/] — dificuldade: {item['difficulty']}"))
     print(f"[bold]Q:[/] {item['stem']}\n")
     for i, opt in enumerate(item["options"]):
         print(f"  [bold]{chr(65+i)}[/]) {opt}")
-    ans = input("\nSua resposta (A/B/C/D... ou 'q' para sair): ").strip().upper()
-    if ans == 'Q':
-        return None, None
-    idx = ord(ans) - 65
+    while True:
+        ans = input("\nSua resposta (A/B/C/D... ou 'q' para sair): ").strip().upper()
+        if ans == 'Q':
+            return None, None
+        if len(ans) == 1:
+            idx = ord(ans) - 65
+            if 0 <= idx < len(item["options"]):
+                break
+        print("[bold yellow]Resposta inválida. Use A/B/C/D... ou q.[/]")
     correct = idx == item["answer_index"]
     if correct:
         print(Panel.fit("[bold green]Correto![/]"))
@@ -180,11 +192,11 @@ def analyze_values(
     if "qt" not in data:
         typer.echo("Informe QT (ms) para cálculo de QTc.", err=True); raise typer.Exit(code=2)
 
-    rr_ms = float(data["rr"]) if "rr" in data else 60000.0/float(data["fc"])
+    rr_ms = _require_positive(data["rr"], "RR (ms)") if "rr" in data else 60000.0/_require_positive(data["fc"], "FC (bpm)")
     fc_bpm = 60000.0/rr_ms
-    qt_ms = float(data["qt"])
-    pr_ms = float(data.get("pr")) if data.get("pr") is not None else None
-    qrs_ms = float(data.get("qrs")) if data.get("qrs") is not None else None
+    qt_ms = _require_positive(data["qt"], "QT (ms)")
+    pr_ms = _require_positive(data["pr"], "PR (ms)") if data.get("pr") is not None else None
+    qrs_ms = _require_positive(data["qrs"], "QRS (ms)") if data.get("qrs") is not None else None
 
     qtcb = qt_ms / ( (rr_ms/1000.0) ** 0.5 )
     qtcfr = qt_ms / ( (rr_ms/1000.0) ** (1.0/3.0) )
@@ -355,31 +367,49 @@ def ingest_image(
                 from cv.lead_ocr import choose_layout
                 layout_det = choose_layout(gray, {"3x4": [d["bbox"] for d in seg_leads]})
                 lead_labels = layout_det.get("labels")
-            if rpeaks_lead:
+            _lab2box = {d["lead"]: d["bbox"] for d in seg_leads}
+            if rpeaks_lead or axis_flag:
                 from cv.rpeaks_from_image import extract_trace_centerline, smooth_signal, detect_rpeaks_from_trace, estimate_px_per_sec
-                _lab2box = {d["lead"]: d["bbox"] for d in seg_leads}
-                if rpeaks_lead in _lab2box:
-                    _x0, _y0, _x1, _y1 = _lab2box[rpeaks_lead]
+                _pxmm = (grid.get("px_small_x") if grid else None) or (grid.get("px_small_y") if grid else None)
+                _pxsec = estimate_px_per_sec(_pxmm, 25.0) or 250.0
+
+                def _detect_peaks_for_box(_box):
+                    _x0, _y0, _x1, _y1 = _box
                     _crop = gray[_y0:_y1, _x0:_x1]
                     _trace = smooth_signal(extract_trace_centerline(_crop, band=0.8), win=11)
-                    _pxmm = (grid.get("px_small_x") if grid else None) or (grid.get("px_small_y") if grid else None)
-                    _pxsec = estimate_px_per_sec(_pxmm, 25.0) or 250.0
-                    rpeaks_out = detect_rpeaks_from_trace(_trace, px_per_sec=_pxsec, zthr=2.0)
-                    if intervals_refined_flag:
-                        from cv.intervals_refined import intervals_refined_from_trace
-                        intervals_refined_out = intervals_refined_from_trace(_trace, rpeaks_out.get('peaks_idx') or [], _pxsec)
-                    if axis_flag:
-                        from cv.axis import frontal_axis_from_image
-                        _buf.seek(0)
-                        axis_out = frontal_axis_from_image(_np.asarray(Image.open(_buf).convert('L')), {lab: _lab2box.get(lab) for lab in ['I', 'aVF']}, {rpeaks_lead: rpeaks_out.get('peaks_idx', [])}, {rpeaks_lead: _pxsec})
                     if rpeaks_robust:
                         from cv.rpeaks_robust import pan_tompkins_like
                         _rob = pan_tompkins_like(_trace, _pxsec)
-                        rpeaks_out = {"peaks_idx": _rob["peaks_idx"], "method": "pan_tompkins_like"}
+                        return _trace, {"peaks_idx": _rob["peaks_idx"], "method": "pan_tompkins_like"}
+                    _det = detect_rpeaks_from_trace(_trace, px_per_sec=_pxsec, zthr=2.0)
+                    _det["method"] = "zscore_localmax"
+                    return _trace, _det
+
+                if rpeaks_lead in _lab2box:
+                    _trace, rpeaks_out = _detect_peaks_for_box(_lab2box[rpeaks_lead])
+                    if intervals_refined_flag:
+                        from cv.intervals_refined import intervals_refined_from_trace
+                        intervals_refined_out = intervals_refined_from_trace(_trace, rpeaks_out.get('peaks_idx') or [], _pxsec)
                     if intervals:
                         from cv.intervals import intervals_from_trace
                         intervals_out = intervals_from_trace(_trace, rpeaks_out.get("peaks_idx") or [], _pxsec)
                     rpeaks_out["lead_used"] = rpeaks_lead
+
+                if axis_flag and all(lab in _lab2box for lab in ("I", "aVF")):
+                    from cv.axis import frontal_axis_from_image
+                    axis_rpeaks = {}
+                    axis_fs = {}
+                    for lab in ("I", "aVF"):
+                        _, _axis_det = _detect_peaks_for_box(_lab2box[lab])
+                        axis_rpeaks[lab] = _axis_det.get("peaks_idx", [])
+                        axis_fs[lab] = _pxsec
+                    _buf.seek(0)
+                    axis_out = frontal_axis_from_image(
+                        _np.asarray(Image.open(_buf).convert('L')),
+                        {lab: _lab2box.get(lab) for lab in ['I', 'aVF']},
+                        axis_rpeaks,
+                        axis_fs,
+                    )
         except Exception as e:
             typer.echo(f"Auto-grid falhou: {e}", err=True)
     

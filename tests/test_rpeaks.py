@@ -59,3 +59,12 @@ def test_pan_tompkins_like():
     assert "signals" in result
     assert "params" in result
     assert len(result["peaks_idx"]) >= 2
+
+
+def test_pan_tompkins_like_ignores_boundary_artifact():
+    trace = np.zeros(500)
+    trace[0] = 500.0
+    trace[200] = 40.0
+    trace[350] = 40.0
+    result = pan_tompkins_like(trace, px_per_sec=250.0)
+    assert 0 not in result["peaks_idx"]

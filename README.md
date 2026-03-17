@@ -51,6 +51,19 @@ uvicorn mcp_server:app --reload
 pytest
 ```
 
+## Bootstrap local
+
+```bash
+./scripts/bootstrap.sh
+```
+
+Depois:
+
+```bash
+./scripts/run-web.sh
+./scripts/test.sh
+```
+
 ## Deploy em 1 clique
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Drmcoelho/ECGiga)

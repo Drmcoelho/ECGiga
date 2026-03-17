@@ -31,9 +31,6 @@ def test_net_qrs_amplitude():
 
 
 def test_axis_labels():
-    """Test axis label logic for different quadrants."""
-    from cv.axis import frontal_axis_from_image
-
     # Create a minimal gray image
     gray = np.full((200, 400), 200, dtype=np.uint8)
 
@@ -43,4 +40,6 @@ def test_axis_labels():
     fs_map = {"I": 250.0, "aVF": 250.0}
 
     result = frontal_axis_from_image(gray, boxes, rpeaks, fs_map)
-    assert result["label"] in ["Normal", "Desvio para a esquerda", "Desvio para a direita", "Desvio extremo (noroeste)"]
+    assert result["angle_deg"] is None
+    assert result["label"] == "Indeterminado"
+    assert result["reason"] == "insufficient_signal"

@@ -1624,14 +1624,24 @@ def process(n, nrrob, nintv, naxis, nrhythm, content, filename, meta_text, ops, 
         from cv.axis import frontal_axis_from_image
         if 'I' in lab2box and 'aVF' in lab2box:
             arrL = np.asarray(img.convert('L'))
-            ref_lead = lead_sel if lead_sel in lab2box else 'II'
-            x0,y0,x1,y1 = lab2box.get(ref_lead, list(lab2box.values())[0])
-            crop = arrL[y0:y1, x0:x1]
-            trace = smooth_signal(extract_trace_centerline(crop), win=11)
             pxsec = _get_pxsec()
-            rdet = pan_tompkins_like(trace, pxsec)
-            axis = frontal_axis_from_image(arrL, {'I': lab2box['I'], 'aVF': lab2box['aVF']}, {'I': rdet['peaks_idx'], 'aVF': rdet['peaks_idx']}, {'I': pxsec, 'aVF': pxsec})
-            summary.append(f"Eixo: {axis.get('angle_deg',0):.1f}° — {axis.get('label','?')}")
+            axis_rpeaks = {}
+            for axis_lead in ('I', 'aVF'):
+                x0,y0,x1,y1 = lab2box[axis_lead]
+                crop = arrL[y0:y1, x0:x1]
+                trace = smooth_signal(extract_trace_centerline(crop), win=11)
+                axis_rpeaks[axis_lead] = pan_tompkins_like(trace, pxsec).get('peaks_idx', [])
+            axis = frontal_axis_from_image(
+                arrL,
+                {'I': lab2box['I'], 'aVF': lab2box['aVF']},
+                axis_rpeaks,
+                {'I': pxsec, 'aVF': pxsec},
+            )
+            angle = axis.get('angle_deg')
+            if angle is None:
+                summary.append(f"Eixo: {axis.get('label','Indeterminado')}")
+            else:
+                summary.append(f"Eixo: {angle:.1f}° — {axis.get('label','?')}")
 
     # Ritmo
     if triggered == 'btn-rhythm':

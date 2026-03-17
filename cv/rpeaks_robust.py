@@ -66,10 +66,18 @@ def pan_tompkins_like(y_px: np.ndarray, px_per_sec: float,
     thr_spki = float(np.percentile(base, 95))
     THR1 = thr_npki + 0.25*(thr_spki - thr_npki)
 
-    for i in range(len(yi)):
+    if len(yi) < 3:
+        return {
+            "peaks_idx": peaks,
+            "fs_px": fs,
+            "signals": {"yb": yb, "dy": dy, "sq": sq, "yi": yi},
+            "params": {"lo_win": lo_win, "hi_win": hi_win, "d_win": d_win, "i_win": i_win, "rp": rp}
+        }
+
+    for i in range(1, len(yi)-1):
         if yi[i] > THR1 and (i - last_peak) >= rp:
             # candidato a R: pico local
-            if yi[i] >= yi[i-1] and yi[i] >= yi[min(i+1, len(yi)-1)]:
+            if yi[i] >= yi[i-1] and yi[i] >= yi[i+1]:
                 peaks.append(i)
                 last_peak = i
                 # atualiza níveis

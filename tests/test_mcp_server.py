@@ -88,6 +88,14 @@ def test_analyze_intervals_prolonged_qtc(client):
     assert any("QTc" in f and "prolongado" in f for f in data["flags"])
 
 
+def test_analyze_intervals_rejects_nonpositive_rr(client):
+    resp = client.post(
+        "/analyze_intervals",
+        json={"pr_ms": 160, "qrs_ms": 90, "qt_ms": 380, "rr_ms": 0},
+    )
+    assert resp.status_code == 422
+
+
 def test_quiz_validate_valid_file(client, sample_quiz_path):
     resp = client.post("/quiz_validate", json={"path": sample_quiz_path})
     assert resp.status_code == 200
@@ -102,3 +110,18 @@ def test_quiz_validate_nonexistent(client):
     data = resp.json()
     assert data["valid"] is False
     assert len(data["errors"]) > 0
+
+
+def test_quiz_validate_rejects_localhost_url(client):
+    resp = client.post("/quiz_validate", json={"path": "http://127.0.0.1/test.json"})
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["valid"] is False
+    assert any("not allowed" in err for err in data["errors"])
+
+
+def test_ecg_image_process_rejects_localhost_url(client):
+    resp = client.post("/ecg_image_process", json={"image_url": "http://localhost/ecg.png", "ops": ["grid"]})
+    assert resp.status_code == 200
+    data = resp.json()
+    assert any("not allowed" in flag for flag in data["report"]["flags"])

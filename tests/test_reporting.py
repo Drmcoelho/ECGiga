@@ -19,6 +19,9 @@ def test_to_html(sample_report):
     html = to_html(md)
     assert isinstance(html, str)
     assert "<!doctype html>" in html
+    assert "<h1>Laudo ECG" in html
+    assert "<strong>Resolução</strong>" in html
+    assert "<pre><code class='language-json'>" in html
 
 
 def test_export_files(tmp_path, sample_report):

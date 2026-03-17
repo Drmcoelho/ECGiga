@@ -19,7 +19,7 @@ com os módulos de CV (cv/), patologia (pathology/), processamento
 de sinal (signal_processing/) e IA offline (ai/).
 """
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI
 from fastapi.responses import StreamingResponse, JSONResponse
 from pydantic import BaseModel, Field
 from typing import AsyncGenerator, Dict, List, Any, Optional
@@ -32,6 +32,9 @@ import os
 import math
 import requests
 import jsonschema
+import socket
+import ipaddress
+from urllib.parse import urlparse
 from jsonschema import ValidationError
 
 # Configuração de logging
@@ -49,6 +52,36 @@ app = FastAPI(
 
 # Tempo de início para health check
 _START_TIME = time.time()
+REQUEST_TIMEOUT_SEC = 10
+
+
+def _assert_public_ip(addr: ipaddress._BaseAddress) -> None:
+    if addr.is_private or addr.is_loopback or addr.is_link_local or addr.is_reserved or addr.is_multicast:
+        raise ValueError("private or loopback addresses are not allowed")
+
+
+def validate_remote_url(raw_url: str) -> str:
+    parsed = urlparse(raw_url)
+    if parsed.scheme not in {"http", "https"}:
+        raise ValueError("only http/https URLs are allowed")
+    if not parsed.hostname:
+        raise ValueError("URL host is required")
+    host = parsed.hostname
+    if host.lower() == "localhost":
+        raise ValueError("localhost URLs are not allowed")
+    try:
+        direct_ip = ipaddress.ip_address(host)
+    except ValueError:
+        direct_ip = None
+    if direct_ip is not None:
+        _assert_public_ip(direct_ip)
+        return raw_url
+    try:
+        for *_, sockaddr in socket.getaddrinfo(host, None):
+            _assert_public_ip(ipaddress.ip_address(sockaddr[0]))
+    except socket.gaierror as exc:
+        raise ValueError(f"host could not be resolved: {host}") from exc
+    return raw_url
 
 
 def sse_event(event: str, data: Any) -> str:
@@ -143,7 +176,8 @@ async def quiz_validate(data: QuizValidateInput) -> QuizValidateOutput:
     try:
         # Carrega conteúdo JSON de arquivo ou URL
         if data.path.startswith("http://") or data.path.startswith("https://"):
-            resp = requests.get(data.path)
+            remote_url = validate_remote_url(data.path)
+            resp = requests.get(remote_url, timeout=REQUEST_TIMEOUT_SEC)
             resp.raise_for_status()
             content = resp.text
         else:
@@ -181,10 +215,10 @@ async def quiz_validate(data: QuizValidateInput) -> QuizValidateOutput:
 class AnalyzeIntervalsInput(BaseModel):
     """Schema de entrada para a ferramenta analyze_intervals."""
 
-    pr_ms: float = Field(..., description="PR interval (ms)")
-    qrs_ms: float = Field(..., description="QRS duration (ms)")
-    qt_ms: float = Field(..., description="QT interval (ms)")
-    rr_ms: float = Field(..., description="RR interval (ms)")
+    pr_ms: float = Field(..., gt=0, description="PR interval (ms)")
+    qrs_ms: float = Field(..., gt=0, description="QRS duration (ms)")
+    qt_ms: float = Field(..., gt=0, description="QT interval (ms)")
+    rr_ms: float = Field(..., gt=0, description="RR interval (ms)")
 
 
 class AnalyzeIntervalsOutput(BaseModel):
@@ -302,7 +336,8 @@ async def ecg_image_process(data: ECGImageProcessInput) -> ECGImageProcessOutput
     }
 
     try:
-        resp = requests.get(data.image_url, timeout=30)
+        image_url = validate_remote_url(data.image_url)
+        resp = requests.get(image_url, timeout=REQUEST_TIMEOUT_SEC)
         resp.raise_for_status()
         img = Image.open(io.BytesIO(resp.content)).convert("RGB")
         ops_lower = [op.lower() for op in data.ops]
@@ -353,13 +388,18 @@ async def ecg_image_process(data: ECGImageProcessInput) -> ECGImageProcessOutput
             from cv.rpeaks_robust import pan_tompkins_like
             lab2box = {d["lead"]: d["bbox"] for d in seg_leads}
             lead = "II" if "II" in lab2box else next(iter(lab2box.keys()))
-            x0, y0, x1, y1 = lab2box[lead]
-            crop = gray[y0:y1, x0:x1]
-            trace = smooth_signal(extract_trace_centerline(crop), win=11)
             pxmm = (grid_info.get("px_small_x") or grid_info.get("px_small_y") or 10.0) if grid_info else 10.0
             pxsec = estimate_px_per_sec(pxmm, 25.0) or 250.0
-            rpeaks_result = pan_tompkins_like(trace, pxsec)
-            peaks = rpeaks_result.get("peaks_idx", [])
+
+            def _lead_trace_and_peaks(lead_name: str):
+                lx0, ly0, lx1, ly1 = lab2box[lead_name]
+                lead_crop = gray[ly0:ly1, lx0:lx1]
+                lead_trace = smooth_signal(extract_trace_centerline(lead_crop), win=11)
+                lead_peaks = pan_tompkins_like(lead_trace, pxsec).get("peaks_idx", [])
+                return lead_trace, lead_peaks
+
+            trace, peaks = _lead_trace_and_peaks(lead)
+            rpeaks_result = {"peaks_idx": peaks, "method": "pan_tompkins_like"}
             report["capabilities"].append("rpeaks")
             report["measures"]["rpeaks_lead"] = lead
             report["measures"]["rpeaks_count"] = len(peaks)
@@ -384,12 +424,17 @@ async def ecg_image_process(data: ECGImageProcessInput) -> ECGImageProcessOutput
             from cv.axis import frontal_axis_from_image
             lab2box = {d["lead"]: d["bbox"] for d in seg_leads}
             if "I" in lab2box and "aVF" in lab2box:
-                peaks = rpeaks_result.get("peaks_idx", [])
+                axis_rpeaks = {}
+                axis_fs = {}
+                for axis_lead in ("I", "aVF"):
+                    _, axis_peaks = _lead_trace_and_peaks(axis_lead)
+                    axis_rpeaks[axis_lead] = axis_peaks
+                    axis_fs[axis_lead] = pxsec
                 axis = frontal_axis_from_image(
                     gray,
                     {"I": lab2box["I"], "aVF": lab2box["aVF"]},
-                    {"I": peaks, "aVF": peaks},
-                    {"I": pxsec, "aVF": pxsec},
+                    axis_rpeaks,
+                    axis_fs,
                 )
                 report["capabilities"].append("axis")
                 report["measures"]["axis"] = {

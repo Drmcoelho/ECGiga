@@ -32,15 +32,19 @@ def frontal_axis_from_image(gray: np.ndarray,
     for lead in ["I","aVF"]:
         box = boxes.get(lead)
         rlist = rpeaks.get(lead, [])
-        if box is None: continue
+        if box is None:
+            amps[lead] = None
+            continue
         x0,y0,x1,y1 = box
         crop = gray[y0:y1, x0:x1]
         sig = _centerline(crop)
         fs = fs_map.get(lead, 250.0)
-        vals = [net_qrs_amplitude(sig, r, fs) for r in rlist] if rlist else [float(sig.max()+sig.min())]
+        vals = [net_qrs_amplitude(sig, r, fs) for r in rlist if 0 <= r < len(sig)]
         vals = [v for v in vals if abs(v) > 1e-6]
-        amps[lead] = float(np.median(vals)) if vals else 0.0
-    I = amps.get("I", 0.0); aVF = amps.get("aVF", 0.0)
+        amps[lead] = float(np.median(vals)) if vals else None
+    I = amps.get("I"); aVF = amps.get("aVF")
+    if I is None or aVF is None:
+        return {"angle_deg": None, "label": "Indeterminado", "amps": amps, "reason": "insufficient_signal"}
     angle = float(np.degrees(np.arctan2(aVF, I)))
     if angle > 180: angle -= 360.0
     if angle <= -180: angle += 360.0
