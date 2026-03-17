@@ -36,7 +36,7 @@ dependencies = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["cli_app*", "cv*", "reporting*", "web_app*"]
+include = ["cli_app*", "cv*", "reporting*", "web_app*", "education*", "quiz*", "llm*", "agents*", "training*"]
 
 [project.scripts]
 ecgcourse = "cli_app.ecgcourse.cli:app"
