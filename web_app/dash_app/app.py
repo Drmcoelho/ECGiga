@@ -68,6 +68,7 @@ app.layout = html.Div([
         dcc.Tab(label="Simulador", value="tab-simulador"),
         dcc.Tab(label="Interpretação IA", value="tab-ia"),
         dcc.Tab(label="Eletrólitos & ECG", value="tab-electrolytes"),
+        dcc.Tab(label="Eletrofisiologia", value="tab-ephys"),
     ]),
     html.Div(id="tab-content"),
 ])
@@ -683,6 +684,350 @@ def _layout_electrolytes():
     ])
 
 
+def _layout_electrophysiology():
+    """Layout da aba de eletrofisiologia cardíaca — potencial de ação, fases 0-4, refratariedade."""
+    return html.Div([
+        html.H3("Eletrofisiologia Cardíaca — O Potencial de Ação e o ECG"),
+        html.P(
+            "Entenda como cada fase do potencial de ação gera os componentes do ECG, "
+            "a fisiologia do automatismo sinusal e os períodos refratários."
+        ),
+
+        # --- SEÇÃO 1: Visão geral ---
+        html.Div([
+            html.H4("O Potencial de Ação como 'Roteiro' do Filme Cardíaco"),
+            html.P([
+                "Cada célula cardíaca segue um ",
+                html.B("potencial de ação (PA)"),
+                " de ~250-350 ms (5 fases). O ECG é o que as câmeras (derivações) "
+                "registram de milhões de PAs simultâneos.",
+            ]),
+            html.Table([
+                html.Thead(html.Tr([
+                    html.Th("Fase"), html.Th("Evento"), html.Th("Corrente"), html.Th("ECG"), html.Th("Voltagem"),
+                ])),
+                html.Tbody([
+                    html.Tr([html.Td("0"), html.Td("Despolarização rápida"), html.Td("INa (Nav1.5)"), html.Td("QRS"), html.Td("-90 → +20 mV")]),
+                    html.Tr([html.Td("1"), html.Td("Repol. precoce (notch)"), html.Td("Ito"), html.Td("Ponto J"), html.Td("+20 → +5 mV")]),
+                    html.Tr([html.Td("2"), html.Td("Platô"), html.Td("ICa,L vs IKr/IKs"), html.Td("Segmento ST"), html.Td("~0 mV, 200 ms")]),
+                    html.Tr([html.Td("3"), html.Td("Repolarização"), html.Td("IKr + IKs + IK1"), html.Td("Onda T"), html.Td("0 → -90 mV")]),
+                    html.Tr([html.Td("4"), html.Td("Repouso"), html.Td("IK1 + Na/K-ATPase"), html.Td("Linha isoelétrica (T-P)"), html.Td("-90 mV")]),
+                ]),
+            ], style={"width": "100%", "borderCollapse": "collapse", "fontSize": "0.9em", "marginTop": "10px"}),
+        ], className="card", style={"maxWidth": "850px"}),
+
+        # --- SEÇÃO 2: Figura interativa do PA contrátil ---
+        html.Div([
+            html.H4("Potencial de Ação — Cardiomiócito Contrátil vs ECG"),
+            html.P("Selecione uma fase para destacar e ver detalhes:"),
+            dcc.Dropdown(
+                id="ephys-phase-select",
+                options=[
+                    {"label": "Todas as fases", "value": "all"},
+                    {"label": "Fase 0 — Despolarização rápida (INa → QRS)", "value": "0"},
+                    {"label": "Fase 1 — Repolarização precoce (Ito → Ponto J)", "value": "1"},
+                    {"label": "Fase 2 — Platô (ICa,L ↔ IK → Segmento ST)", "value": "2"},
+                    {"label": "Fase 3 — Repolarização (IKr+IKs → Onda T)", "value": "3"},
+                    {"label": "Fase 4 — Repouso (IK1 → T-P isoelétrico)", "value": "4"},
+                ],
+                value="all",
+                clearable=False,
+                style={"width": "500px"},
+            ),
+            dcc.Graph(id="ephys-contractile-graph"),
+            html.Div(id="ephys-phase-details", style={"marginTop": "8px"}),
+        ], className="card", style={"maxWidth": "850px", "marginTop": "16px"}),
+
+        # --- SEÇÃO 3: Detalhes de cada fase ---
+        html.Div([
+            html.H4("Detalhes de Cada Fase"),
+            # Fase 0
+            html.Div([
+                html.H5("Fase 0 — Despolarização Rápida", style={"color": "#e74c3c"}),
+                html.P([
+                    html.B("Corrente: "), "INa (Nav1.5). ", html.B("Voltagem: "), "-90 → +20 mV em 1-2 ms.",
+                ]),
+                html.P(
+                    "Milhares de canais de Na+ abrem simultaneamente → entrada massiva de Na+ → "
+                    "upstroke ultra-rápido (200-400 V/s). No ECG: complexo QRS."
+                ),
+                html.P([
+                    html.B("Velocidade de condução depende da INa: "),
+                    "Purkinje (2-4 m/s) > miócitos (0.3-1 m/s) > nó AV (0.02-0.05 m/s, usa ICa,L).",
+                ]),
+                html.P([
+                    html.B("Clínica: "),
+                    "INa bloqueada (hipercalemia, classe I) → upstroke lento → QRS alargado.",
+                ], style={"fontStyle": "italic"}),
+            ], style={"borderLeft": "4px solid #e74c3c", "paddingLeft": "12px", "marginBottom": "16px"}),
+            # Fase 1
+            html.Div([
+                html.H5("Fase 1 — Repolarização Precoce (Notch)", style={"color": "#f39c12"}),
+                html.P([
+                    html.B("Corrente: "), "Ito (Kv4.3). ", html.B("Voltagem: "), "+20 → +5 mV.",
+                ]),
+                html.P(
+                    "Canais Ito abrem brevemente → K+ sai → entalhe (notch) entre fase 0 e platô. "
+                    "Mais proeminente no EPICÁRDIO."
+                ),
+                html.P([
+                    html.B("Clínica: "),
+                    "Ito exagerada no epicárdio → colapso do platô → Síndrome de Brugada. "
+                    "No ECG: ponto J (junção QRS-ST).",
+                ], style={"fontStyle": "italic"}),
+            ], style={"borderLeft": "4px solid #f39c12", "paddingLeft": "12px", "marginBottom": "16px"}),
+            # Fase 2
+            html.Div([
+                html.H5("Fase 2 — Platô (O Grande Ato do Cálcio)", style={"color": "#2ecc71"}),
+                html.P([
+                    html.B("Correntes: "), "ICa,L (entrada Ca²+) vs IKr/IKs (saída K+). ",
+                    html.B("Voltagem: "), "~0 mV por ~200 ms.",
+                ]),
+                html.P(
+                    "O platô é EXCLUSIVO do coração. Equilíbrio entre Ca²+ entrando e K+ saindo. "
+                    "Ca²+ desencadeia CICR → contração mecânica."
+                ),
+                html.P([
+                    html.B("Por que é essencial: "),
+                    "1) Contração mecânica (Ca²+ = gatilho). "
+                    "2) Período refratário (impede tetania). "
+                    "3) Coordenação (toda massa despolariza antes de repolarizar).",
+                ]),
+                html.P([
+                    html.B("Clínica: "),
+                    "Ca²+ alto → ICa,L inativa rápido → platô curto → QT curto. "
+                    "Ca²+ baixo → platô longo → QT longo. No ECG: segmento ST.",
+                ], style={"fontStyle": "italic"}),
+            ], style={"borderLeft": "4px solid #2ecc71", "paddingLeft": "12px", "marginBottom": "16px"}),
+            # Fase 3
+            html.Div([
+                html.H5("Fase 3 — Repolarização", style={"color": "#3498db"}),
+                html.P([
+                    html.B("Correntes: "), "IKr (hERG) + IKs + IK1. ",
+                    html.B("Voltagem: "), "0 → -90 mV em ~100-150 ms.",
+                ]),
+                html.P(
+                    "Quando ICa,L inativa, K+ predomina → repolarização. "
+                    "IKr age primeiro, IKs é reserva, IK1 finaliza."
+                ),
+                html.P([
+                    html.B("Por que T é positiva: "),
+                    "Epicárdio repolariza ANTES do endocárdio (PA epicárdico mais curto). "
+                    "Vetor de repolarização = mesma direção do de despolarização → T concordante com QRS.",
+                ]),
+                html.P([
+                    html.B("Clínica: "),
+                    "K+ alto → fase 3 acelerada → T apiculada. "
+                    "K+ baixo → fase 3 lenta → T achatada. "
+                    "Classe III (sotalol) bloqueia IKr → fase 3 lenta → QT longo.",
+                ], style={"fontStyle": "italic"}),
+            ], style={"borderLeft": "4px solid #3498db", "paddingLeft": "12px", "marginBottom": "16px"}),
+            # Fase 4
+            html.Div([
+                html.H5("Fase 4 — Repouso / Diástole Elétrica", style={"color": "#9b59b6"}),
+                html.P([
+                    html.B("Corrente: "), "IK1 (Kir2.1) + bomba Na+/K+-ATPase. ",
+                    html.B("Voltagem: "), "-90 mV (estável no contrátil).",
+                ]),
+                html.P(
+                    "No cardiomiócito contrátil: fase 4 ESTÁVEL (não dispara sozinha). "
+                    "No nó sinusal: fase 4 INSTÁVEL (automatismo — If + ICaT)."
+                ),
+                html.P([
+                    html.B("Clínica: "),
+                    "Digitálicos inibem Na/K-ATPase → acúmulo Na+ → troca Na/Ca reversa → "
+                    "mais Ca²+ → inotropismo positivo (mas risco de intoxicação → arritmias). "
+                    "No ECG: intervalo T-P (linha isoelétrica).",
+                ], style={"fontStyle": "italic"}),
+            ], style={"borderLeft": "4px solid #9b59b6", "paddingLeft": "12px", "marginBottom": "16px"}),
+        ], className="card", style={"maxWidth": "850px", "marginTop": "16px"}),
+
+        # --- SEÇÃO 4: Nó Sinusal ---
+        html.Div([
+            html.H4("Automatismo do Nó Sinusal — O Marcapasso Natural"),
+            html.P([
+                "O nó sinusal tem ", html.B("fase 4 INSTÁVEL"), " — se despolariza sozinho. "
+                "Três correntes formam o 'relógio de membrana':",
+            ]),
+            html.Ul([
+                html.Li([html.B("1. If (funny current / HCN4): "), "inicia a despolarização diastólica. "
+                         "Ativada por HIPERPOLARIZAÇÃO (peculiar!). Alvo da IVABRADINA."]),
+                html.Li([html.B("2. ICa,T (Ca²+ tipo T): "), "'empurrão' intermediário (~-50 mV)."]),
+                html.Li([html.B("3. ICa,L (Ca²+ tipo L): "), "produz a fase 0 LENTA (upstroke dependente de Ca²+, "
+                         "não Na+). Limiar: ~-40 mV."]),
+            ]),
+            dcc.Graph(id="ephys-pacemaker-graph"),
+            html.Div([
+                html.H5("Controle Autonômico da FC"),
+                html.Div([
+                    html.Div([
+                        html.P([html.B("SIMPÁTICO (↑ FC):")]),
+                        html.Ul([
+                            html.Li("Noradrenalina → β1 → ↑ AMPc"),
+                            html.Li("↑ AMPc → mais If + mais ICa,L"),
+                            html.Li("Fase 4 mais rápida → FC aumenta"),
+                        ]),
+                    ], style={"flex": "1"}),
+                    html.Div([
+                        html.P([html.B("PARASSIMPÁTICO (↓ FC):")]),
+                        html.Ul([
+                            html.Li("Acetilcolina → M2 → ↓ AMPc + ativa IKACh"),
+                            html.Li("Menos If + hiperpolarização"),
+                            html.Li("Fase 4 mais lenta e partindo de mais negativo → FC cai"),
+                        ]),
+                    ], style={"flex": "1"}),
+                ], style={"display": "flex", "gap": "16px"}),
+            ]),
+            html.Div([
+                html.H5("Hierarquia dos Marcapassos"),
+                html.Table([
+                    html.Thead(html.Tr([html.Th("Localização"), html.Th("FC intrínseca"), html.Th("Ritmo de escape")])),
+                    html.Tbody([
+                        html.Tr([html.Td("Nó sinusal"), html.Td("60-100 bpm"), html.Td("Ritmo sinusal (comanda)")]),
+                        html.Tr([html.Td("Nó AV"), html.Td("40-60 bpm"), html.Td("Juncional (QRS estreito, P retrógrada)")]),
+                        html.Tr([html.Td("His-Purkinje"), html.Td("20-40 bpm"), html.Td("Escape ventricular (QRS largo)")]),
+                    ]),
+                ], style={"width": "100%", "borderCollapse": "collapse", "fontSize": "0.9em"}),
+            ], style={"marginTop": "12px"}),
+        ], className="card", style={"maxWidth": "850px", "marginTop": "16px"}),
+
+        # --- SEÇÃO 5: Comparação PA contrátil vs pacemaker ---
+        html.Div([
+            html.H4("Comparação: PA Contrátil vs Pacemaker"),
+            dcc.Graph(id="ephys-comparison-graph"),
+            html.Table([
+                html.Thead(html.Tr([html.Th("Característica"), html.Th("Contrátil"), html.Th("Nó Sinusal")])),
+                html.Tbody([
+                    html.Tr([html.Td("Repouso"), html.Td("-90 mV (estável)"), html.Td("-60 mV (instável)")]),
+                    html.Tr([html.Td("Fase 0"), html.Td("INa (rápido, 200-400 V/s)"), html.Td("ICa,L (lento, 1-10 V/s)")]),
+                    html.Tr([html.Td("Fase 1"), html.Td("Ito (notch)"), html.Td("Ausente")]),
+                    html.Tr([html.Td("Fase 2"), html.Td("Platô proeminente"), html.Td("Ausente/mínimo")]),
+                    html.Tr([html.Td("Fase 3"), html.Td("IKr + IKs + IK1"), html.Td("IKr + IKs")]),
+                    html.Tr([html.Td("Fase 4"), html.Td("Estável (IK1)"), html.Td("Automatismo (If)")]),
+                    html.Tr([html.Td("Automatismo"), html.Td("NÃO"), html.Td("SIM")]),
+                ]),
+            ], style={"width": "100%", "borderCollapse": "collapse", "fontSize": "0.9em", "marginTop": "10px"}),
+        ], className="card", style={"maxWidth": "850px", "marginTop": "16px"}),
+
+        # --- SEÇÃO 6: Períodos refratários ---
+        html.Div([
+            html.H4("Períodos Refratários — A Defesa Contra Arritmias"),
+            html.Div([
+                html.Div([
+                    html.H5("Período Refratário Absoluto (PRA)", style={"color": "#e74c3c"}),
+                    html.P([html.B("Fases 0, 1, 2 + início da 3"), " (~250 ms)"]),
+                    html.P(
+                        "NENHUM estímulo, por mais forte, gera novo PA. "
+                        "Canais Na+ no estado INATIVADO (porta h fechada). "
+                        "Precisam voltar a < -60 mV para recuperar."
+                    ),
+                    html.P([
+                        html.B("ECG: "), "do início do QRS até ~pico da onda T.",
+                    ]),
+                ], style={"borderLeft": "4px solid #e74c3c", "paddingLeft": "12px", "marginBottom": "16px"}),
+                html.Div([
+                    html.H5("Período Refratário Relativo (PRR)", style={"color": "#3498db"}),
+                    html.P([html.B("Final da fase 3"), " (~50 ms)"]),
+                    html.P(
+                        "Estímulo MAIS FORTE que o normal pode gerar PA anormal: "
+                        "amplitude menor, upstroke lento, condução lenta."
+                    ),
+                    html.P([
+                        html.B("ECG: "), "parte DESCENDENTE da onda T.",
+                    ]),
+                    html.P([
+                        html.B("JANELA VULNERÁVEL! "),
+                        "R sobre T aqui → PA anormal → bloqueio unidirecional → reentrada → TV/FV!",
+                    ], style={"color": "#c0392b", "fontWeight": "bold"}),
+                ], style={"borderLeft": "4px solid #3498db", "paddingLeft": "12px", "marginBottom": "16px"}),
+                html.Div([
+                    html.H5("Período Refratário Efetivo (PRE)"),
+                    html.P("PRE = PRA + parte do PRR onde PA é fraco demais para se propagar."),
+                    html.P([
+                        html.B("Clinicamente: "),
+                        "classe III (amiodarona, sotalol) aumenta PRE → antiarrítmico. "
+                        "Hipercalemia diminui PRE → pró-arrítmico.",
+                    ]),
+                ], style={"borderLeft": "4px solid #95a5a6", "paddingLeft": "12px", "marginBottom": "16px"}),
+            ]),
+            html.Div([
+                html.H5("Mapa dos Períodos Refratários no ECG"),
+                html.Pre(
+                    "  QRS ──── ST ──── T(↑) ──── T(↓) ──── T-P\n"
+                    "  │←── PRA (ABSOLUTO) ──────→│← PRR →│← resp.→│\n"
+                    "  │ Na+ INATIVADOS           │parcial│ pronto │\n"
+                    "  │ Nenhum PA possível        │R/T!   │PA norm.│",
+                    style={"background": "#f8f9fa", "padding": "12px", "fontSize": "0.85em",
+                           "fontFamily": "monospace", "borderRadius": "6px"},
+                ),
+            ]),
+        ], className="card", style={"maxWidth": "850px", "marginTop": "16px"}),
+
+        # --- SEÇÃO 7: O que altera os períodos refratários ---
+        html.Div([
+            html.H4("O Que Altera os Períodos Refratários?"),
+            html.Div([
+                html.Div([
+                    html.H5("AUMENTAM PRE (antiarrítmico)", style={"color": "#27ae60"}),
+                    html.Ul([
+                        html.Li("Classe III (amiodarona, sotalol): bloqueia IKr → fase 3 lenta → PA longo"),
+                        html.Li("Hipocalemia: repolarização lenta → PRE↑ (mas dispersão pode ser pró-arrítmica!)"),
+                        html.Li("FC baixa: PA mais longo → PRE mais longo"),
+                    ]),
+                ], style={"flex": "1"}),
+                html.Div([
+                    html.H5("DIMINUEM PRE (pró-arrítmico)", style={"color": "#c0392b"}),
+                    html.Ul([
+                        html.Li("Hipercalemia: fase 3 acelerada → PA curto → PRE curto"),
+                        html.Li("Catecolaminas (adrenalina): encurtam o PA"),
+                        html.Li("FC muito alta: PA encurta → PRE diminui"),
+                        html.Li("Isquemia: encurta PA nas zonas afetadas → dispersão → reentrada"),
+                    ]),
+                ], style={"flex": "1"}),
+            ], style={"display": "flex", "gap": "16px"}),
+        ], className="card", style={"maxWidth": "850px", "marginTop": "16px"}),
+
+        # --- SEÇÃO 8: Quiz ---
+        html.Div([
+            html.H4("Quiz — Eletrofisiologia Cardíaca"),
+            html.P("Questões sobre potencial de ação, correntes iônicas, automatismo e refratariedade."),
+            html.Div([
+                html.Label("Tipo:"),
+                dcc.Dropdown(
+                    id="ephys-quiz-type",
+                    options=[
+                        {"label": "Todas as questões", "value": "all"},
+                        {"label": "Com figura do PA", "value": "figure"},
+                        {"label": "Apenas texto", "value": "text"},
+                    ],
+                    value="all", clearable=False, style={"width": "250px"},
+                ),
+                html.Label("Nº:", style={"marginLeft": "10px"}),
+                dcc.Input(id="ephys-quiz-n", type="number", value=5, min=1, max=25, step=1),
+                html.Button("Gerar Quiz", id="btn-ephys-quiz", n_clicks=0, style={"marginLeft": "10px"}),
+            ], style={"display": "flex", "gap": "8px", "alignItems": "center", "flexWrap": "wrap"}),
+            html.Div(id="ephys-quiz-content", style={"marginTop": "20px"}),
+        ], className="card", style={"maxWidth": "850px", "marginTop": "16px"}),
+
+        # --- SEÇÃO 9: Genes e Síndromes ---
+        html.Div([
+            html.H4("Canais Iônicos: Genes e Síndromes"),
+            html.Table([
+                html.Thead(html.Tr([html.Th("Canal"), html.Th("Gene"), html.Th("Corrente"), html.Th("Síndrome (mutação)")])),
+                html.Tbody([
+                    html.Tr([html.Td("Nav1.5"), html.Td("SCN5A"), html.Td("INa (fase 0)"), html.Td("Brugada, LQT3")]),
+                    html.Tr([html.Td("Cav1.2"), html.Td("CACNA1C"), html.Td("ICa,L (fase 2)"), html.Td("Timothy, Brugada tipo 3")]),
+                    html.Tr([html.Td("Kv11.1 (hERG)"), html.Td("KCNH2"), html.Td("IKr (fase 3)"), html.Td("LQT2")]),
+                    html.Tr([html.Td("Kv7.1 (KvLQT1)"), html.Td("KCNQ1"), html.Td("IKs (fase 3)"), html.Td("LQT1")]),
+                    html.Tr([html.Td("Kv4.3"), html.Td("KCND3"), html.Td("Ito (fase 1)"), html.Td("Brugada")]),
+                    html.Tr([html.Td("Kir2.1"), html.Td("KCNJ2"), html.Td("IK1 (fase 4)"), html.Td("Andersen-Tawil")]),
+                    html.Tr([html.Td("HCN4"), html.Td("HCN4"), html.Td("If (automatismo)"), html.Td("Doença do nó sinusal")]),
+                ]),
+            ], style={"width": "100%", "borderCollapse": "collapse", "fontSize": "0.9em"}),
+        ], className="card", style={"maxWidth": "850px", "marginTop": "16px"}),
+    ])
+
+
 def _layout_ia():
     """Layout da aba de interpretação com IA offline — regras clínicas."""
     return html.Div([
@@ -733,6 +1078,8 @@ def render_tab(tab):
         return _layout_ia()
     elif tab == "tab-electrolytes":
         return _layout_electrolytes()
+    elif tab == "tab-ephys":
+        return _layout_electrophysiology()
     return html.Div("Aba não encontrada")
 
 
@@ -799,6 +1146,126 @@ def generate_quiz(n_clicks, n_questions):
                 html.H4(f"Questão {i+1}: {q.get('prompt', '')}"),
                 html.Ul(choices),
             ], className="card", style={"marginBottom": "10px"}))
+        return elements
+    except Exception as e:
+        return html.P(f"Erro ao gerar quiz: {e}")
+
+
+# ---------------------------------------------------------------------------
+# Callbacks da aba de eletrofisiologia
+# ---------------------------------------------------------------------------
+
+@app.callback(
+    Output("ephys-contractile-graph", "figure"),
+    Output("ephys-phase-details", "children"),
+    Input("ephys-phase-select", "value"),
+)
+def update_contractile_ap(phase_val):
+    phase_details = {
+        "0": "Fase 0 — INa: a 'explosão' de Na+ que gera o QRS. Upstroke 200-400 V/s em 1-2 ms.",
+        "1": "Fase 1 — Ito: o 'entalhe' epicárdico. Gera o ponto J. Ito exagerada → Brugada.",
+        "2": "Fase 2 — ICa,L vs IKr/IKs: o platô (~200 ms). Ca²+ entra → contração. Gera o segmento ST.",
+        "3": "Fase 3 — IKr+IKs+IK1: repolarização → onda T. Epicárdio primeiro → T positiva concordante com QRS.",
+        "4": "Fase 4 — IK1: repouso a -90 mV. Estável no contrátil. Gera a linha isoelétrica T-P.",
+        "all": "Todas as fases visíveis. Selecione uma fase para destacar e ver detalhes.",
+    }
+    try:
+        from education.electrophysiology import create_action_potential_figure
+        highlight = int(phase_val) if phase_val != "all" else None
+        fig = create_action_potential_figure("contractile", highlight)
+        return fig, phase_details.get(phase_val, "")
+    except Exception as exc:
+        fig = go.Figure()
+        fig.update_layout(title=f"Erro: {exc}")
+        return fig, f"Erro: {exc}"
+
+
+@app.callback(
+    Output("ephys-pacemaker-graph", "figure"),
+    Input("tabs-main", "value"),
+)
+def update_pacemaker_ap(tab):
+    if tab != "tab-ephys":
+        import dash
+        raise dash.exceptions.PreventUpdate
+    try:
+        from education.electrophysiology import create_action_potential_figure
+        return create_action_potential_figure("pacemaker")
+    except Exception as exc:
+        fig = go.Figure()
+        fig.update_layout(title=f"Erro: {exc}")
+        return fig
+
+
+@app.callback(
+    Output("ephys-comparison-graph", "figure"),
+    Input("tabs-main", "value"),
+)
+def update_comparison_ap(tab):
+    if tab != "tab-ephys":
+        import dash
+        raise dash.exceptions.PreventUpdate
+    try:
+        from education.electrophysiology import create_phase_comparison_figure
+        return create_phase_comparison_figure()
+    except Exception as exc:
+        fig = go.Figure()
+        fig.update_layout(title=f"Erro: {exc}")
+        return fig
+
+
+@app.callback(
+    Output("ephys-quiz-content", "children"),
+    Input("btn-ephys-quiz", "n_clicks"),
+    State("ephys-quiz-type", "value"),
+    State("ephys-quiz-n", "value"),
+    prevent_initial_call=True,
+)
+def generate_ephys_quiz(n_clicks, quiz_type, n_questions):
+    import random as _rnd
+    _rnd.seed(n_clicks)
+    n_questions = n_questions or 5
+    try:
+        from quiz.electrophysiology_questions import (
+            ALL_QUESTIONS, get_figure_questions, get_text_questions,
+        )
+        if quiz_type == "figure":
+            pool = get_figure_questions()
+        elif quiz_type == "text":
+            pool = get_text_questions()
+        else:
+            pool = list(ALL_QUESTIONS)
+        _rnd.shuffle(pool)
+        selected = pool[:n_questions]
+        elements = []
+        for i, q in enumerate(selected):
+            q_elements = [html.H5(f"Questão {i+1} [{q['difficulty']}] — {q['topic']}")]
+            # Generate figure if question has one
+            if q.get("image_figure"):
+                try:
+                    from education.electrophysiology import (
+                        create_action_potential_figure, create_phase_comparison_figure,
+                    )
+                    fig_type = q["image_figure"]
+                    if fig_type == "comparison":
+                        fig = create_phase_comparison_figure()
+                    else:
+                        fig = create_action_potential_figure(fig_type)
+                    fig.update_layout(height=400, width=700)
+                    q_elements.append(dcc.Graph(figure=fig, style={"marginBottom": "8px"}))
+                except Exception:
+                    q_elements.append(html.P("[Figura não pôde ser gerada]", style={"color": "gray"}))
+            q_elements.append(html.P(q["stem"], style={"fontWeight": "bold"}))
+            choices = []
+            for j, opt in enumerate(q["options"]):
+                marker = "✓" if j == q["answer_index"] else "✗"
+                choices.append(html.Li(f"[{marker}] {opt}"))
+            q_elements.append(html.Ul(choices))
+            q_elements.append(html.Details([
+                html.Summary("Ver explicação"),
+                html.P(q["explanation"], style={"marginTop": "6px", "color": "#2c3e50"}),
+            ]))
+            elements.append(html.Div(q_elements, className="card", style={"marginBottom": "12px"}))
         return elements
     except Exception as e:
         return html.P(f"Erro ao gerar quiz: {e}")
