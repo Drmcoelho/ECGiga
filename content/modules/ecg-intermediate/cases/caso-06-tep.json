@@ -1,0 +1,64 @@
+{
+  "id": "caso-06-tep",
+  "title": "Tromboembolismo Pulmonar — Dispneia Súbita Pós-Cirúrgica",
+  "difficulty": "hard",
+  "context": "Paciente de 45 anos, feminina, 5° dia pós-operatório de histerectomia abdominal total. Obesidade grau I (IMC 32), em uso de anticoncepcional oral até 1 mês antes da cirurgia. Apresenta dispneia súbita de início há 30 minutos, dor torácica pleurítica à direita e sensação de morte iminente. Sinais vitais: PA 100/70 mmHg, FC 125 bpm, FR 28 irpm, SpO2 88% em ar ambiente, temperatura 37,8°C. Ao exame: taquicárdica, taquidispneica, turgência jugular discreta, ausculta pulmonar com MV reduzido em base direita, sem estertores. MMII: empastamento de panturrilha esquerda com sinal de Homans positivo.",
+  "phases": [
+    {
+      "step": 1,
+      "instruction": "Analise o ritmo e a frequência cardíaca. Qual o achado mais comum de TEP no ECG?",
+      "expected": "Taquicardia sinusal a 125 bpm. Este é o achado MAIS COMUM de TEP no ECG (presente em ~40% dos casos). Ondas P sinusais presentes antes de cada QRS, com PR normal. A taquicardia sinusal isolada pode ser o ÚNICO achado eletrocardiográfico no TEP — um ECG 'normal' com taquicardia NÃO exclui TEP.",
+      "hints": [
+        "O achado mais frequente de TEP no ECG é a taquicardia sinusal — mais comum que S1Q3T3",
+        "ECG pode ser completamente normal em até 25% dos casos de TEP"
+      ]
+    },
+    {
+      "step": 2,
+      "instruction": "Observe DI, DIII e as derivações precordiais direitas (V1-V3). Identifique o padrão S1Q3T3 e descreva o que cada componente representa.",
+      "expected": "Padrão S1Q3T3: onda S profunda em DI + onda Q em DIII + onda T invertida em DIII. Este padrão reflete a sobrecarga aguda do ventrículo direito. A câmera DI (a 0°) vê o vetor se desviar para a direita e para baixo (S profunda — o vetor foge de DI). A câmera DIII (a +120°) vê um vetor anômalo chegando na direção inferior-direita (Q + T invertida por strain).",
+      "hints": [
+        "S1Q3T3 ocorre em apenas 10-20% dos TEPs, mas é um padrão clássico de prova",
+        "A câmera DI vê o vetor se afastando para a direita (S profunda)"
+      ]
+    },
+    {
+      "step": 3,
+      "instruction": "Analise as derivações V1-V3. Há sinais de sobrecarga aguda de ventrículo direito? Como diferenciá-los de isquemia coronariana?",
+      "expected": "T invertida em V1-V3 (padrão de strain de VD), podendo haver BRD novo incompleto ou completo. O eixo QRS está desviado para a direita (> +90°). Esses achados refletem a dilatação aguda do VD pela hipertensão pulmonar súbita. Diferenciação de isquemia: no TEP, os achados são PREDOMINANTEMENTE em derivações DIREITAS (V1-V3) com contexto clínico de dispneia/hipoxemia; na SCA, o padrão segue território coronariano com dor torácica típica.",
+      "hints": [
+        "T invertida em V1-V3 no TEP = strain de VD, não isquemia coronariana primária",
+        "BRD novo no contexto de dispneia súbita deve levantar suspeita de TEP"
+      ]
+    },
+    {
+      "step": 4,
+      "instruction": "O ECG pode excluir TEP? Quais são os diagnósticos diferenciais eletrocardiográficos?",
+      "expected": "NÃO — o ECG tem baixa sensibilidade para TEP. Pode ser completamente normal em ~25% dos casos. O ECG serve mais para EXCLUIR outros diagnósticos: (1) STEMI (supra territorial com recíproco); (2) Pericardite/tamponamento (supra côncavo difuso + depressão PR); (3) Pneumotórax (baixa voltagem, desvio de eixo). No TEP, solicitar D-dímero (se baixa probabilidade) ou angioTC de tórax (se probabilidade intermediária/alta).",
+      "hints": [
+        "O principal papel do ECG no TEP é excluir outras causas de dor torácica e dispneia",
+        "Combine ECG + escore de Wells/Geneva + D-dímero para a decisão clínica"
+      ]
+    },
+    {
+      "step": 5,
+      "instruction": "Qual a conduta imediata para esta paciente? Há indicação de trombólise?",
+      "expected": "Paciente com TEP de risco intermediário-alto (hipoxemia significativa, taquicardia, turgência jugular, sinais de sobrecarga de VD no ECG). Conduta: (1) Oxigênio suplementar para SpO2 > 90%; (2) Anticoagulação plena imediata com heparina não fracionada IV (preferível se instabilidade) ou HBPM; (3) AngioTC de tórax para confirmação diagnóstica; (4) Ecocardiograma beira-leito para avaliar disfunção de VD; (5) Trombólise (alteplase) indicada se TEP MACIÇO com instabilidade hemodinâmica (PAS < 90 mmHg persistente). Esta paciente ainda não tem critério para trombólise (PA 100/70), mas deve ser monitorada de perto — se deterioração hemodinâmica → trombólise sistêmica.",
+      "hints": [
+        "Anticoagulação é o pilar do tratamento — não esperar confirmação para iniciar se alta suspeita",
+        "Trombólise reservada para TEP maciço com instabilidade hemodinâmica (PAS < 90)"
+      ]
+    }
+  ],
+  "final_interpretation": "ECG com taquicardia sinusal (FC 125 bpm), padrão S1Q3T3, T invertida em V1-V3, desvio do eixo para a direita e BRD incompleto — achados compatíveis com sobrecarga aguda de ventrículo direito por tromboembolismo pulmonar. Contexto clínico de alto risco: pós-operatório, obesidade, uso prévio de ACO, TVP clínica em MIE.",
+  "learning_points": [
+    "Taquicardia sinusal é o achado MAIS COMUM de TEP no ECG — S1Q3T3 é clássico mas pouco sensível (~10-20%)",
+    "S1Q3T3 reflete sobrecarga aguda de VD: DI vê o vetor fugir para a direita (S), DIII vê o vetor anômalo chegando (Q e T invertida)",
+    "T invertida em V1-V3 no contexto de dispneia súbita = strain de VD, não isquemia coronariana",
+    "ECG NORMAL não exclui TEP — sensibilidade do ECG para TEP é baixa",
+    "O ECG no TEP serve mais para excluir diferenciais (STEMI, pericardite, pneumotórax)",
+    "Anticoagulação é a base do tratamento; trombólise reservada para TEP maciço com instabilidade hemodinâmica"
+  ],
+  "linked_skills": ["right_heart_strain", "differential_diagnosis", "s1q3t3_pattern"],
+  "disclaimer": "Conteúdo exclusivamente educacional. Este caso clínico é fictício e destina-se ao ensino de eletrocardiografia. Não substitui avaliação clínica profissional."
+}

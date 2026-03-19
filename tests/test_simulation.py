@@ -310,12 +310,12 @@ def test_add_noise_changes_signal():
 
 
 def test_ecg_to_plotly_figure_returns_valid_figure():
-    """ecg_to_plotly_figure should return a Plotly Figure with 12 traces."""
+    """ecg_to_plotly_figure should return a Plotly Figure with 12 leads + rhythm strip."""
     ecg = generate_ecg(duration_s=3, fs=250)
     fig = ecg_to_plotly_figure(ecg, layout="3x4")
     assert hasattr(fig, "data")
     assert hasattr(fig, "layout")
-    assert len(fig.data) == 12
+    assert len(fig.data) == 13  # 12 leads + rhythm strip (lead II)
 
 
 def test_ecg_to_plotly_figure_6x2():

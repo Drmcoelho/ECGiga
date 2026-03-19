@@ -1,0 +1,55 @@
+{
+  "id": "caso-09-wellens",
+  "title": "Síndrome de Wellens — A Armadilha do Paciente Assintomático",
+  "difficulty": "hard",
+  "context": "Paciente de 55 anos, feminina, hipertensa e dislipidêmica, procurou PS ontem à noite com dor precordial típica (aperto retroesternal irradiando para braço esquerdo) de moderada intensidade, que durou ~40 minutos e resolveu espontaneamente. Recebeu AAS e nitrato sublingual no PS, com melhora. Troponina seriada (0h e 3h): NEGATIVA. ECG de admissão ontem à noite durante a dor: taquicardia sinusal, sem supra de ST. Agora, na manhã seguinte, está ASSINTOMÁTICA, confortável, com sinais vitais normais (PA 130/85, FC 72, SpO2 98%). O residente solicita novo ECG e planeja alta com teste ergométrico ambulatorial.",
+  "phases": [
+    {
+      "step": 1,
+      "instruction": "Analise as derivações V2 e V3 no ECG da manhã. Descreva a morfologia das ondas T e do segmento ST.",
+      "expected": "V2 e V3 mostram ondas T INVERTIDAS, PROFUNDAS e SIMÉTRICAS (tipo A de Wellens). A inversão de T pode ter > 5 mm de profundidade. O segmento ST está ISOELÉTRICO (na linha de base — sem supra e sem infra). Não há ondas Q. Este padrão pode se estender para V1, V4 ou V5, mas V2-V3 são as derivações mais afetadas. Tipo B (menos comum, ~25%): T bifásica com componente positivo seguido de negativo em V2-V3.",
+      "hints": [
+        "Preste atenção: T invertida profunda e SIMÉTRICA com ST ISOELÉTRICO — esse é o padrão de Wellens tipo A",
+        "Compare com inversão de T de sobrecarga (assimétrica) ou de BRE (discordante ao QRS)"
+      ]
+    },
+    {
+      "step": 2,
+      "instruction": "Qual o significado clínico deste padrão? O que está acontecendo na coronária?",
+      "expected": "A Síndrome de Wellens indica ESTENOSE CRÍTICA (geralmente > 90%) da Descendente Anterior (DA) proximal. As câmeras V2-V3 estão filmando a parede anterior/septal — território da DA. A T invertida profunda e simétrica é a 'memória elétrica' de uma isquemia transmural recente que reperfundiu espontaneamente: o miocárdio sofreu isquemia grave (daí a dor), depois reperfundiu (daí a resolução da dor), mas a repolarização ficou alterada (T invertida). O miocárdio está viável mas em risco EXTREMO de oclusão total iminente.",
+      "hints": [
+        "Wellens = estenose CRÍTICA da DA proximal — a artéria está quase fechando",
+        "A T invertida é a 'memória' da isquemia que passou — como uma cicatriz elétrica temporária"
+      ]
+    },
+    {
+      "step": 3,
+      "instruction": "A troponina é negativa e o paciente está assintomático. Por que isso é uma ARMADILHA? Qual o risco de dar alta?",
+      "expected": "A grande armadilha: paciente ASSINTOMÁTICO + troponina NEGATIVA + ST ISOELÉTRICO = parece 'benigno'. Mas Wellens indica DA criticamente estenosada. Sem cateterismo, 75% dos pacientes evoluem para IAM anterior extenso em dias a semanas. A troponina pode ser negativa porque a isquemia foi transitória e não causou necrose significativa (ou porque a necrose foi mínima). DAR ALTA É PERIGOSO — o paciente precisa de cateterismo, não de alta.",
+      "hints": [
+        "A armadilha é a falsa sensação de segurança: assintomático + troponina negativa NÃO significa baixo risco",
+        "75% evoluem para IAM anterior extenso sem intervenção — a DA está 'para fechar'"
+      ]
+    },
+    {
+      "step": 4,
+      "instruction": "O residente planejou alta com teste ergométrico. Por que essa conduta é PERIGOSA? Qual a conduta correta?",
+      "expected": "Teste ergométrico é CONTRAINDICADO na Síndrome de Wellens. O esforço pode precipitar a oclusão total da DA criticamente estenosada, causando IAM anterior extenso ou parada cardiorrespiratória. Conduta correta: (1) INTERNAR em unidade coronariana; (2) Antitrombóticos (AAS + inibidor P2Y12 + anticoagulação); (3) CATETERISMO CARDÍACO (sem teste funcional antes); (4) Provável ICP/angioplastia com stent na DA ou revascularização cirúrgica, dependendo da anatomia. O paciente deve ir direto para o cateterismo.",
+      "hints": [
+        "NUNCA fazer teste de esforço em Wellens — pode precipitar oclusão total e IAM/morte súbita",
+        "A conduta é CATETERISMO DIRETO, sem passar por teste funcional"
+      ]
+    }
+  ],
+  "final_interpretation": "ECG com ritmo sinusal, FC 72 bpm, ondas T invertidas profundas e simétricas em V2-V3 (padrão de Wellens tipo A), segmento ST isoelétrico, sem ondas Q. Em paciente com história de dor precordial típica recente que resolveu espontaneamente e troponina negativa. Diagnóstico: Síndrome de Wellens — estenose crítica da DA proximal com alto risco de IAM anterior extenso iminente.",
+  "learning_points": [
+    "Wellens tipo A: T invertida profunda simétrica em V2-V3; tipo B: T bifásica (+/-) em V2-V3. Ambas indicam estenose crítica da DA",
+    "Critérios: T invertida/bifásica em V2-V3 + ST isoelétrico + sem Q + troponina normal/mínima + dor recente que resolveu",
+    "As câmeras V2-V3 filmam o território da DA — a T invertida profunda é a 'memória' da isquemia recente",
+    "A ARMADILHA: paciente assintomático + troponina negativa parece benigno, mas 75% evoluem para IAM sem intervenção",
+    "Teste ergométrico é CONTRAINDICADO — risco de provocar oclusão total da DA durante esforço",
+    "Conduta: internação + cateterismo direto (sem teste funcional antes)"
+  ],
+  "linked_skills": ["t_wave_morphology", "critical_lad_stenosis", "risk_stratification"],
+  "disclaimer": "Conteúdo exclusivamente educacional. Este caso clínico é fictício e destina-se ao ensino de eletrocardiografia. Não substitui avaliação clínica profissional."
+}

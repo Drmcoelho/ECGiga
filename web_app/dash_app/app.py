@@ -61,17 +61,39 @@ def axis_label_from(I, aVF):
     return "Desvio extremo (noroeste)"
 
 app.layout = html.Div([
-    html.H2("ECGiga — Plataforma Educacional de ECG", style={"textAlign": "center", "color": "#1a5276"}),
-    dcc.Tabs(id="tabs-main", value="tab-analise", children=[
-        dcc.Tab(label="Análise de ECG", value="tab-analise"),
-        dcc.Tab(label="Educação", value="tab-educacao"),
-        dcc.Tab(label="Quiz", value="tab-quiz"),
-        dcc.Tab(label="Simulador", value="tab-simulador"),
-        dcc.Tab(label="Interpretação IA", value="tab-ia"),
-        dcc.Tab(label="Eletrólitos & ECG", value="tab-electrolytes"),
-        dcc.Tab(label="Eletrofisiologia", value="tab-ephys"),
+    # ── Brand header ──
+    html.Div([
+        html.Div([
+            html.Span("ECG", className="ecgiga-logo-ecg"),
+            html.Span("iga", className="ecgiga-logo-iga"),
+            html.Span(" — Plataforma Educacional de ECG", className="ecgiga-logo-subtitle"),
+        ], className="ecgiga-logo"),
+    ], className="ecgiga-header"),
+
+    # ── Session store ──
+    dcc.Store(id="session-store", storage_type="local", data={}),
+
+    # ── Tabs ──
+    dcc.Tabs(id="tabs-main", value="tab-simulador", className="tab-container", children=[
+        dcc.Tab(label="Simulador", value="tab-simulador", className="tab"),
+        dcc.Tab(label="Educação", value="tab-educacao", className="tab"),
+        dcc.Tab(label="Quiz", value="tab-quiz", className="tab"),
+        dcc.Tab(label="Eletrólitos", value="tab-electrolytes", className="tab"),
+        dcc.Tab(label="Eletrofisiologia", value="tab-ephys", className="tab"),
+        dcc.Tab(label="Análise CV", value="tab-analise", className="tab"),
+        dcc.Tab(label="Interpretação IA", value="tab-ia", className="tab"),
     ]),
-    html.Div(id="tab-content"),
+    html.Div(id="tab-content", style={"padding": "16px", "maxWidth": "1200px", "margin": "0 auto"}),
+
+    # ── Footer ──
+    html.Div([
+        html.P([
+            "ECGiga — Plataforma educacional. ",
+            html.B("NÃO substitui avaliação médica profissional. "),
+            "Uso exclusivo para fins didáticos.",
+        ], style={"textAlign": "center", "color": "#999", "fontSize": "0.8rem", "padding": "16px 0",
+                  "borderTop": "1px solid #eee", "marginTop": "32px"}),
+    ]),
 ])
 
 
@@ -438,40 +460,62 @@ def _layout_quiz():
 
 
 def _layout_simulador():
-    """Layout da aba de simulador de ECG — geração de sinais sintéticos."""
+    """Layout da aba de simulador de ECG — geração de sinais sintéticos com 12 derivações."""
     return html.Div([
-        html.H3("Simulador de ECG"),
-        html.P(
-            "Gere sinais de ECG sintéticos com diferentes patologias para estudo. "
-            "O simulador modela ondas P-QRS-T com parâmetros ajustáveis, permitindo "
-            "visualizar como alterações de frequência e patologias afetam o traçado."
-        ),
+        html.Div([
+            html.Div("🫀", className="section-icon"),
+            html.Div([
+                html.H3("Simulador de ECG 12 Derivações", style={"marginBottom": "0"}),
+                html.P("Grade 3×4 padrão clínico com faixa de ritmo contínua", style={"color": "#888", "fontSize": "0.85rem", "margin": "0"}),
+            ]),
+        ], className="section-header"),
+        html.Div([
+            html.P(
+                "Gere ECGs sintéticos realistas com variabilidade batimento-a-batimento (HRV), "
+                "arritmia sinusal respiratória e 21 patologias diferentes. "
+                "O grid segue o formato padrão clínico 3×4 com derivação II contínua.",
+                style={"color": "#666"},
+            ),
+        ], className="callout callout-info"),
         html.Div([
             html.Label("FC (bpm):"),
             dcc.Input(id="sim-hr", type="number", value=75, min=30, max=250, step=1),
             html.Label("Duração (s):"),
-            dcc.Input(id="sim-duration", type="number", value=5, min=1, max=30, step=1),
+            dcc.Input(id="sim-duration", type="number", value=10, min=1, max=30, step=1),
             html.Label("Patologia:"),
             dcc.Dropdown(
                 id="sim-pathology",
                 options=[
-                    {"label": "Normal (sinusal)", "value": "normal"},
+                    {"label": "── Normal ──", "value": "normal", "disabled": False},
+                    {"label": "Normal (sinusal com HRV)", "value": "normal"},
+                    {"label": "── Isquemia / Infarto ──", "value": "_isch", "disabled": True},
                     {"label": "STEMI anterior (V1-V4)", "value": "stemi_anterior"},
                     {"label": "STEMI inferior (II,III,aVF)", "value": "stemi_inferior"},
-                    {"label": "BRE (QRS alargado)", "value": "lbbb"},
+                    {"label": "STEMI lateral (I,aVL,V5-V6)", "value": "stemi_lateral"},
+                    {"label": "── Bloqueios ──", "value": "_blk", "disabled": True},
+                    {"label": "BRE (QRS alargado, QS em V1)", "value": "lbbb"},
                     {"label": "BRD (RSR' em V1)", "value": "rbbb"},
-                    {"label": "Fibrilação atrial", "value": "af"},
+                    {"label": "BAV 1° grau (PR > 200ms)", "value": "first_degree_avb"},
+                    {"label": "── Arritmias ──", "value": "_arr", "disabled": True},
+                    {"label": "Fibrilação atrial (RR irregular)", "value": "af"},
                     {"label": "WPW (PR curto, onda delta)", "value": "wpw"},
+                    {"label": "── Eletrólitos ──", "value": "_elec", "disabled": True},
                     {"label": "Hipercalemia leve (T apiculadas)", "value": "hyperkalemia"},
                     {"label": "Hipercalemia grave (sine wave)", "value": "hyperkalemia_severe"},
                     {"label": "Hipocalemia (T achata, onda U)", "value": "hypokalemia"},
                     {"label": "Hipercalcemia (QT curto)", "value": "hypercalcemia"},
-                    {"label": "Hipocalcemia (QT longo, ST longo)", "value": "hypocalcemia"},
+                    {"label": "Hipocalcemia (QT longo)", "value": "hypocalcemia"},
+                    {"label": "── Síndromes / Outros ──", "value": "_syn", "disabled": True},
                     {"label": "QT longo", "value": "long_qt"},
+                    {"label": "Brugada tipo 1 (coved V1-V2)", "value": "brugada_type1"},
+                    {"label": "Pericardite aguda (supra difuso)", "value": "pericarditis"},
+                    {"label": "TEP (S1Q3T3, taquicardia)", "value": "pe_pattern"},
+                    {"label": "HVE com strain (R alto, T invertida)", "value": "lvh_strain"},
+                    {"label": "Repolarização precoce (benigno)", "value": "early_repolarization"},
                 ],
                 value="normal",
                 clearable=False,
-                style={"width": "300px"},
+                style={"width": "400px"},
             ),
             html.Button("Simular", id="btn-simulate", n_clicks=0),
         ], style={"display": "flex", "gap": "10px", "alignItems": "center", "flexWrap": "wrap"}),
@@ -1506,35 +1550,18 @@ def generate_electrolyte_quiz(n_clicks, quiz_type, n_questions):
               prevent_initial_call=True)
 def simulate_ecg(n_clicks, hr, duration, pathology):
     hr = hr or 75
-    duration = duration or 5
+    duration = duration or 10
     pathology = pathology or "normal"
     try:
-        from simulation.ecg_generator import generate_ecg, generate_pathological_ecg
+        from simulation.ecg_generator import generate_ecg, generate_pathological_ecg, ecg_to_plotly_figure
 
         if pathology == "normal":
             result = generate_ecg(hr_bpm=hr, duration_s=duration)
         else:
             result = generate_pathological_ecg(pathology)
 
-        leads_data = result.get("leads", {})
-        desc = result.get("pathology_description_pt", pathology)
-        actual_hr = result.get("params", {}).get("hr_bpm", hr)
-
-        fig = go.Figure()
-        for lead_name in ["II", "V1", "V5"]:
-            if lead_name in leads_data:
-                sig = leads_data[lead_name]
-                fig.add_trace(go.Scatter(
-                    y=sig.tolist() if hasattr(sig, 'tolist') else sig,
-                    mode="lines", name=lead_name,
-                ))
-
-        title = f"ECG Simulado — {desc} ({actual_hr} bpm)"
-        fig.update_layout(
-            title=title,
-            xaxis_title="Amostras", yaxis_title="mV",
-            legend=dict(orientation="h"),
-        )
+        # Use proper 12-lead 3x4 grid with rhythm strip
+        fig = ecg_to_plotly_figure(result, layout="3x4", rhythm_strip=True)
         return fig
     except Exception as exc:
         fig = go.Figure()

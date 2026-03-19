@@ -1,0 +1,482 @@
+[
+  {
+    "id": "cr_001",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "STEMI Anterior",
+    "difficulty": "hard",
+    "stem": "Homem de 58 anos chega ao PS com dor torácica intensa há 2 horas. ECG mostra supradesnivelamento de ST em V1-V4 com infradesnivelamento recíproco em DII, DIII e aVF. Qual a artéria culpada e a conduta imediata?",
+    "options": [
+      "Descendente Anterior (DA) — ICP primária com porta-balão < 90 min",
+      "Coronária Direita (CD) — ICP primária com porta-balão < 90 min",
+      "Descendente Anterior (DA) — fibrinolítico e observação clínica",
+      "Circunflexa (Cx) — trombólise e alta hospitalar"
+    ],
+    "answer_index": 0,
+    "explanation": "Supra de ST em V1-V4 indica território ANTERIOR, irrigado pela artéria Descendente Anterior (DA). As câmeras precordiais V1-V4 estão filmando diretamente a lesão transmural da parede anterior, enquanto as câmeras inferiores (DII, DIII, aVF) veem a 'sombra' do evento (infra recíproco — imagem em espelho). STEMI = ICP primária em até 90 minutos (porta-balão) ou fibrinolítico em até 30 min se ICP não disponível. A opção C está incorreta porque fibrinolítico sem encaminhamento para hemodinâmica não é a melhor estratégia quando há ICP disponível.",
+    "tag": "iam_anterior"
+  },
+  {
+    "id": "cr_002",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "STEMI Anterior",
+    "difficulty": "hard",
+    "stem": "Paciente de 65 anos com STEMI anterior extenso (supra V1-V6, DI, aVL). Durante a internação evolui com dispneia súbita e estertores crepitantes bilaterais. Qual a complicação mais provável e por quê?",
+    "options": [
+      "Edema agudo de pulmão por disfunção sistólica do VE — grande área de miocárdio anterior comprometida pela DA",
+      "Tamponamento cardíaco por ruptura de parede livre do VD",
+      "Pneumotórax hipertensivo pelo acesso venoso central",
+      "TEP por TVP de membros inferiores"
+    ],
+    "answer_index": 0,
+    "explanation": "STEMI anterior extenso (supra de V1 a V6 + DI e aVL) indica oclusão proximal da DA, que irriga a maior parte da parede anterior e o septo. Quanto mais câmeras mostram supra, maior a área de miocárdio em risco. A perda de contratilidade de uma grande porção do VE leva a disfunção sistólica aguda, aumento da pressão de enchimento e congestão pulmonar (edema agudo de pulmão). É a principal causa de choque cardiogênico no IAM.",
+    "tag": "iam_anterior_complicacao"
+  },
+  {
+    "id": "cr_003",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "STEMI Inferior",
+    "difficulty": "hard",
+    "stem": "Mulher de 70 anos com dor epigástrica, náuseas, sudorese e hipotensão (PA 80/50). ECG: supra de ST em DII, DIII, aVF (DIII > DII), infra recíproco em DI e aVL. FC 45 bpm. Qual a artéria culpada e qual medicação é CONTRAINDICADA?",
+    "options": [
+      "Coronária Direita — nitratos são contraindicados (risco de IAM de VD associado)",
+      "Descendente Anterior — betabloqueador é contraindicado",
+      "Circunflexa — IECA é contraindicado na fase aguda",
+      "Coronária Direita — AAS é contraindicado na bradicardia"
+    ],
+    "answer_index": 0,
+    "explanation": "As câmeras inferiores (DII, DIII, aVF) filmam diretamente a parede inferior. Supra em DIII > DII aponta para a Coronária Direita (CD) como culpada. A CD irriga o nó sinusal (~60%) e o nó AV (~85%), explicando a bradicardia. Hipotensão + bradicardia + pulmão limpo = pensar em IAM de VD associado (solicitar V3R/V4R). No IAM de VD, nitratos e diuréticos são CONTRAINDICADOS porque reduzem a pré-carga, da qual o VD comprometido depende para manter o débito cardíaco.",
+    "tag": "iam_inferior"
+  },
+  {
+    "id": "cr_004",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "STEMI Inferior",
+    "difficulty": "medium",
+    "stem": "Paciente com STEMI inferior (supra em DII, DIII, aVF). Você solicita derivações direitas. V4R mostra supra de ST ≥ 1 mm. O que isso confirma e qual a implicação terapêutica?",
+    "options": [
+      "IAM de ventrículo direito — expansão volêmica com SF 0,9% e evitar nitratos",
+      "IAM de ventrículo direito — diurético IV de urgência",
+      "Extensão lateral do IAM — dobrar dose de nitrato",
+      "Pericardite associada — iniciar AINE"
+    ],
+    "answer_index": 0,
+    "explanation": "V4R é a câmera que filma o ventrículo direito. Supra de ST ≥ 1 mm em V4R confirma IAM de VD associado ao STEMI inferior. O VD infartado tem complacência reduzida e depende criticamente da pré-carga para manter débito. Conduta: expansão volêmica cuidadosa com SF 0,9% (250-500 mL) e EVITAR nitratos e diuréticos. A tríade clássica é hipotensão + turgência jugular + pulmão limpo.",
+    "tag": "iam_vd"
+  },
+  {
+    "id": "cr_005",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "STEMI Lateral",
+    "difficulty": "hard",
+    "stem": "Homem de 52 anos com dor torácica aguda. ECG mostra supra de ST em DI, aVL, V5 e V6 com infra recíproco em DIII e aVF. Qual o território e a artéria mais provável?",
+    "options": [
+      "Lateral — Circunflexa (Cx) ou ramo diagonal da DA",
+      "Anterior — Descendente Anterior (DA) proximal",
+      "Inferior — Coronária Direita (CD)",
+      "Posterior — Coronária Direita (CD)"
+    ],
+    "answer_index": 0,
+    "explanation": "As câmeras laterais são DI, aVL (lateral alta) e V5, V6 (lateral baixa). Quando todas mostram supra, o território afetado é a parede lateral, irrigada pela Circunflexa (Cx) ou por ramos diagonais da DA. As câmeras inferiores (DIII, aVF) mostram o espelho (infra recíproco). Lembre: cada câmera filma a parede que está na sua direção — DI e aVL olham para a esquerda e para cima, V5-V6 olham para a esquerda.",
+    "tag": "iam_lateral"
+  },
+  {
+    "id": "cr_006",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "NSTEMI vs Angina Instável",
+    "difficulty": "medium",
+    "stem": "Mulher de 68 anos com dor torácica típica em repouso há 30 minutos. ECG mostra infra de ST ≥ 1 mm em V4-V6. Troponina inicial é negativa. Qual o diagnóstico mais provável e qual a diferença para NSTEMI?",
+    "options": [
+      "Angina instável — diferencia-se do NSTEMI pela ausência de elevação de troponina",
+      "STEMI subendocárdico — deve ir direto para cateterismo de emergência",
+      "Espasmo coronariano — não precisa de internação",
+      "Pericardite — o infra é difuso e benigno"
+    ],
+    "answer_index": 0,
+    "explanation": "Dor torácica típica em repouso + infra de ST ≥ 1 mm configura Síndrome Coronariana Aguda sem Supra (SCA-SSST). A diferença entre angina instável e NSTEMI é a troponina: negativa = angina instável, positiva = NSTEMI. Ambos compartilham o mesmo espectro e tratamento inicial (antitrombóticos + estratificação de risco). Não há supra de ST, então não é STEMI. O infra em V4-V6 (câmeras laterais baixas) indica isquemia subendocárdica no território lateral.",
+    "tag": "nstemi_angina"
+  },
+  {
+    "id": "cr_007",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "NSTEMI vs Angina Instável",
+    "difficulty": "hard",
+    "stem": "Paciente com SCA-SSST (infra de ST difuso + troponina positiva). GRACE score = 155 (alto risco). Qual a estratégia e o timing ideal?",
+    "options": [
+      "Estratégia invasiva precoce — cateterismo em até 24 horas",
+      "Estratégia conservadora — cateterismo apenas se isquemia refratária",
+      "Cateterismo de emergência em até 90 minutos (como STEMI)",
+      "Alta hospitalar com teste ergométrico ambulatorial"
+    ],
+    "answer_index": 0,
+    "explanation": "NSTEMI de alto risco (GRACE > 140) tem indicação de estratégia invasiva precoce com cateterismo em até 24 horas. Diferente do STEMI (que é emergência com porta-balão < 90 min), o NSTEMI permite uma janela para estabilização clínica antes da cineangiocoronariografia. Critérios para cateterismo imediato (< 2h) no NSTEMI: instabilidade hemodinâmica, arritmias malignas, dor refratária, insuficiência cardíaca aguda.",
+    "tag": "nstemi_conduta"
+  },
+  {
+    "id": "cr_008",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "BRE Novo",
+    "difficulty": "hard",
+    "stem": "Homem de 60 anos com dor torácica típica há 1 hora. ECG mostra BRE completo (QRS ≥ 120 ms, RsR' em V6, QS em V1). Ele não tinha ECG prévio. Qual a conduta mais adequada?",
+    "options": [
+      "Tratar como equivalente de STEMI se BRE for presumivelmente novo — ativar protocolo de reperfusão",
+      "BRE impede qualquer análise de isquemia — dar alta com acompanhamento ambulatorial",
+      "Aguardar troponina seriada antes de qualquer decisão",
+      "Realizar teste ergométrico para avaliar isquemia"
+    ],
+    "answer_index": 0,
+    "explanation": "BRE novo ou presumivelmente novo em paciente com dor torácica típica é tratado como EQUIVALENTE DE STEMI pelas diretrizes. O BRE altera a repolarização (o ST e T ficam discordantes do QRS), dificultando a análise de isquemia. Os critérios de Sgarbossa podem ajudar: (1) supra concordante ≥ 1 mm (5 pontos), (2) infra de ST ≥ 1 mm em V1-V3 (3 pontos), (3) supra discordante ≥ 5 mm (2 pontos). Score ≥ 3 = alta especificidade para IAM. Na dúvida com BRE novo + clínica, ativar cateterismo.",
+    "tag": "bre_stemi"
+  },
+  {
+    "id": "cr_009",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "Sgarbossa",
+    "difficulty": "hard",
+    "stem": "Paciente com BRE conhecido e dor torácica. ECG mostra: supra de ST concordante de 2 mm em DII e DIII (QRS negativo nessas derivações com ST para cima). Qual o significado e a conduta?",
+    "options": [
+      "Critério de Sgarbossa positivo (supra concordante) — altamente específico para IAM, ativar cateterismo",
+      "Alteração esperada do BRE — ST discordante é normal no bloqueio",
+      "Pericardite associada ao BRE — iniciar anti-inflamatório",
+      "Artefato — repetir ECG em 30 minutos"
+    ],
+    "answer_index": 0,
+    "explanation": "No BRE, a regra normal é a discordância: o ST vai para o lado oposto do QRS (QRS negativo → ST positivo é esperado). Quando o ST vai para o MESMO LADO do QRS (concordância), isso é anormal e sugere isquemia. O critério de Sgarbossa mais específico é o supra de ST concordante ≥ 1 mm (5 pontos) — sensibilidade baixa, mas especificidade > 90% para IAM. A regra de Smith modificada (razão ST/S ≤ -0.25) melhora a sensibilidade. Neste caso, supra concordante em DII/DIII com QRS negativo é altamente sugestivo de STEMI inferior em contexto de BRE.",
+    "tag": "sgarbossa"
+  },
+  {
+    "id": "cr_010",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "TEP",
+    "difficulty": "hard",
+    "stem": "Mulher de 45 anos, pós-operatório de artroplastia de quadril, apresenta dispneia súbita e taquicardia. ECG mostra: taquicardia sinusal (FC 120), S profunda em DI, Q em DIII, T invertida em DIII (S1Q3T3), T invertida em V1-V3, desvio do eixo para a direita. Qual o diagnóstico mais provável?",
+    "options": [
+      "Tromboembolismo pulmonar (TEP) — padrão S1Q3T3 com sinais de sobrecarga aguda de VD",
+      "STEMI inferior — supra em DII, DIII, aVF",
+      "Pericardite aguda — supra côncavo difuso",
+      "Pneumotórax espontâneo — alteração difusa de ST"
+    ],
+    "answer_index": 0,
+    "explanation": "O cenário clássico de TEP: pós-operatório (fator de risco) + dispneia súbita + taquicardia. O ECG mostra o padrão S1Q3T3 (S em DI, Q em DIII, T invertida em DIII), que reflete a sobrecarga aguda do VD. A câmera DI vê o vetor se afastando (S profunda), enquanto DIII vê o vetor chegando de forma anômala (Q). T invertida em V1-V3 indica strain de VD. Eixo desviado à direita confirma sobrecarga direita. ATENÇÃO: o achado mais comum de TEP no ECG é taquicardia sinusal isolada — S1Q3T3 ocorre em apenas 10-20% dos casos.",
+    "tag": "tep"
+  },
+  {
+    "id": "cr_011",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "TEP",
+    "difficulty": "medium",
+    "stem": "Paciente com suspeita de TEP. ECG mostra apenas taquicardia sinusal a 110 bpm sem outras alterações. Isso exclui TEP?",
+    "options": [
+      "Não — taquicardia sinusal isolada é o achado MAIS COMUM de TEP no ECG, que pode até ser normal",
+      "Sim — sem S1Q3T3 não há TEP",
+      "Sim — TEP sempre mostra sobrecarga de VD no ECG",
+      "Depende — só exclui se a D-dímero for normal"
+    ],
+    "answer_index": 0,
+    "explanation": "O ECG tem baixa sensibilidade e especificidade para TEP. O achado mais frequente é taquicardia sinusal (presente em ~40% dos casos). S1Q3T3 é clássico mas pouco sensível (~10-20%). O ECG pode ser completamente NORMAL em TEP. Outros achados possíveis: T invertida em V1-V4 (strain VD), BRD novo, desvio de eixo à direita, P pulmonale. O ECG serve mais para excluir diagnósticos diferenciais (IAM, pericardite) do que para confirmar TEP.",
+    "tag": "tep_ecg_normal"
+  },
+  {
+    "id": "cr_012",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "Pericardite vs STEMI",
+    "difficulty": "hard",
+    "stem": "Homem de 28 anos com dor torácica pleurítica que piora com decúbito e melhora sentado inclinado para frente. ECG: supra de ST côncavo difuso (em múltiplas derivações sem território definido), depressão do segmento PR em derivações inferiores e laterais, infra de ST em aVR. Qual o diagnóstico?",
+    "options": [
+      "Pericardite aguda — supra côncavo difuso + depressão de PR + infra em aVR",
+      "STEMI multivascular — supra em múltiplos territórios",
+      "Repolarização precoce — variante benigna do normal",
+      "Síndrome de Takotsubo — disfunção apical transitória"
+    ],
+    "answer_index": 0,
+    "explanation": "Os 4 pilares que diferenciam pericardite de STEMI: (1) ST côncavo ('sorriso') na pericardite vs convexo ('triste') no STEMI; (2) Distribuição DIFUSA (sem respeitar território coronariano) vs TERRITORIAL no STEMI; (3) Depressão do segmento PR — achado altamente sugestivo de pericardite; (4) aVR mostra o espelho: infra de ST + supra de PR. No STEMI, o supra é territorial (segue uma artéria) e tem alterações recíprocas nas câmeras opostas. Na pericardite, TODAS as câmeras veem a inflamação porque o pericárdio envolve todo o coração.",
+    "tag": "pericardite_vs_stemi"
+  },
+  {
+    "id": "cr_013",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "Pericardite vs STEMI",
+    "difficulty": "medium",
+    "stem": "Qual achado eletrocardiográfico é mais ESPECÍFICO para pericardite aguda e raramente encontrado no STEMI?",
+    "options": [
+      "Depressão difusa do segmento PR",
+      "Supradesnivelamento de ST",
+      "Inversão de onda T",
+      "Taquicardia sinusal"
+    ],
+    "answer_index": 0,
+    "explanation": "A depressão do segmento PR é o achado mais específico de pericardite, refletindo a corrente de lesão atrial pela inflamação pericárdica. Está presente em até 80% dos casos e NÃO ocorre no STEMI. Supra de ST, inversão de T e taquicardia podem ocorrer em ambas as condições. Dica: a câmera aVR mostra o espelho completo da pericardite — supra de PR + infra de ST (oposto ao que se vê nas demais derivações).",
+    "tag": "pericardite_pr"
+  },
+  {
+    "id": "cr_014",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "WPW",
+    "difficulty": "hard",
+    "stem": "Jovem de 22 anos com palpitações. ECG basal: PR curto (< 120 ms), onda delta na porção inicial do QRS, QRS alargado. Agora chega ao PS em fibrilação atrial com FC > 200 bpm e QRS largo irregular. Qual medicação é CONTRAINDICADA?",
+    "options": [
+      "Adenosina e bloqueadores do nó AV (verapamil, diltiazem, digoxina) — podem causar FV",
+      "Procainamida — antiarrítmico de classe IA",
+      "Amiodarona — se paciente estável",
+      "Cardioversão elétrica — se instabilidade hemodinâmica"
+    ],
+    "answer_index": 0,
+    "explanation": "WPW (Wolff-Parkinson-White) = via acessória que conduz impulsos diretamente do átrio ao ventrículo, bypassing o nó AV. O ECG basal mostra a tríade: PR curto + onda delta + QRS largo. Na FA com WPW, os impulsos fibrilatórios chegam ao ventrículo pela via acessória SEM o freio do nó AV. Drogas que bloqueiam o nó AV (adenosina, verapamil, diltiazem, digoxina, betabloqueadores IV) são LETAIS porque desviam TODA a condução para a via acessória, podendo degenerar em FV. Tratamento: procainamida IV (bloqueia a via acessória) ou cardioversão elétrica sincronizada se instável.",
+    "tag": "wpw_fa"
+  },
+  {
+    "id": "cr_015",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "WPW",
+    "difficulty": "medium",
+    "stem": "O que é a onda delta no ECG e qual seu significado fisiopatológico?",
+    "options": [
+      "Deflexão lenta na porção inicial do QRS — pré-excitação ventricular pela via acessória antes da condução pelo nó AV",
+      "Onda tardia após o QRS — condução retrógrada atrial",
+      "Entalhe no final do QRS — atraso de condução no ramo direito",
+      "Onda pequena antes da onda P — despolarização juncional"
+    ],
+    "answer_index": 0,
+    "explanation": "A onda delta é a 'rampa' lenta no início do QRS causada pela pré-excitação ventricular. No WPW, o impulso atrial chega ao ventrículo por DOIS caminhos: (1) via acessória (mais rápida, sem delay) e (2) nó AV (com delay fisiológico). A via acessória despolariza uma pequena parte do ventrículo ANTES da ativação normal — isso cria a onda delta. O PR é curto porque o impulso não espera o atraso do nó AV. O QRS é largo porque a despolarização inicia fora do sistema de condução normal.",
+    "tag": "wpw_delta"
+  },
+  {
+    "id": "cr_016",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "QT Longo",
+    "difficulty": "hard",
+    "stem": "Mulher de 35 anos em uso de sotalol apresenta síncope. ECG mostra QTc = 580 ms e taquicardia ventricular polimórfica com QRS que 'gira' ao redor da linha de base. Qual o diagnóstico e a conduta de emergência?",
+    "options": [
+      "Torsades de Pointes — sulfato de magnésio IV 2g e suspensão do sotalol",
+      "TV monomórfica sustentada — amiodarona IV",
+      "Fibrilação ventricular — desfibrilação imediata não sincronizada",
+      "Flutter ventricular — cardioversão sincronizada"
+    ],
+    "answer_index": 0,
+    "explanation": "Torsades de Pointes (TdP) é uma TV polimórfica que ocorre no contexto de QT longo. Caracteriza-se pelo QRS que 'torce' ao redor da linha de base, com amplitude que cresce e decresce (fusiforme). É diferente de outras TVs polimórficas porque depende do QT longo. O sotalol (betabloqueador + classe III) prolonga o QT e é causa frequente de TdP iatrogênica. Conduta: (1) Magnésio IV 2g em 1-2 min (primeira linha, mesmo com Mg sérico normal); (2) Suspender a droga causadora; (3) Isoproterenol ou overdrive pacing para aumentar FC e encurtar QT; (4) Se instável → desfibrilação.",
+    "tag": "qt_longo_torsades"
+  },
+  {
+    "id": "cr_017",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "QT Longo",
+    "difficulty": "medium",
+    "stem": "Quais classes de medicamentos mais frequentemente prolongam o intervalo QT e predispõem a Torsades de Pointes?",
+    "options": [
+      "Antiarrítmicos classe III (sotalol, amiodarona), antipsicóticos, macrolídeos, antieméticos (ondansetrona)",
+      "Betabloqueadores, IECA, diuréticos tiazídicos",
+      "AINEs, paracetamol, dipirona",
+      "Insulina, metformina, sulfonilureias"
+    ],
+    "answer_index": 0,
+    "explanation": "Principais causas de QT longo adquirido: (1) Antiarrítmicos classe III: sotalol, dofetilida, ibutilida (bloqueiam canais de K+); (2) Antibióticos: macrolídeos (azitromicina, eritromicina), fluoroquinolonas; (3) Antipsicóticos: haloperidol, clorpromazina, quetiapina; (4) Antieméticos: ondansetrona, metoclopramida; (5) Antidepressivos tricíclicos. Fatores de risco associados: hipocalemia, hipomagnesemia, bradicardia, sexo feminino. Amiodarona, apesar de ser classe III, causa TdP com menor frequência do que sotalol (paradoxo da amiodarona).",
+    "tag": "qt_longo_drogas"
+  },
+  {
+    "id": "cr_018",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "Brugada",
+    "difficulty": "hard",
+    "stem": "Homem de 32 anos com síncope durante febre alta (39,5°C). História familiar de morte súbita (irmão faleceu dormindo aos 28 anos). ECG mostra: elevação de ST em 'coved type' (convexa, descendente) ≥ 2 mm em V1-V2 seguida de T negativa. Qual o diagnóstico e por que a febre é relevante?",
+    "options": [
+      "Síndrome de Brugada tipo 1 — febre desmasca o padrão por reduzir a corrente de Na+ (canal SCN5A já deficiente)",
+      "STEMI anterior — supra convexo em V1-V2 indica oclusão da DA",
+      "Pericardite — supra difuso com febre sugere inflamação",
+      "BRD incompleto — variante normal em jovens"
+    ],
+    "answer_index": 0,
+    "explanation": "Brugada tipo 1 ('coved pattern'): supra de ST ≥ 2 mm em V1-V2 com morfologia convexa descendente seguida de T negativa. A síndrome de Brugada é uma canalopatia genética (mutação SCN5A — canal de sódio) que predispõe a TV/FV e morte súbita, especialmente durante sono ou febre. A febre é um gatilho reconhecido: o aumento da temperatura reduz ainda mais a corrente de Na+ já deficiente, desmascarando ou acentuando o padrão tipo 1. O ECG pode ser intermitente — febre, cocaína e antiarrítmicos classe I (flecainida, procainamida) podem revelar o padrão.",
+    "tag": "brugada"
+  },
+  {
+    "id": "cr_019",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "Brugada",
+    "difficulty": "hard",
+    "stem": "Paciente com diagnóstico confirmado de Síndrome de Brugada tipo 1 e história de síncope. Qual o tratamento definitivo para prevenção de morte súbita?",
+    "options": [
+      "Cardiodesfibrilador implantável (CDI) — único tratamento comprovado para reduzir mortalidade",
+      "Amiodarona profilática em dose baixa",
+      "Betabloqueador em altas doses",
+      "Ablação por cateter da via acessória"
+    ],
+    "answer_index": 0,
+    "explanation": "Na Síndrome de Brugada, o CDI (cardiodesfibrilador implantável) é o ÚNICO tratamento que comprovadamente reduz a mortalidade. Indicação classe I: Brugada tipo 1 + sintomas (síncope, PCR recuperada). Não há antiarrítmico eficaz para prevenção primária. A quinidina pode ser usada como terapia adjunta (aumenta corrente de Na+ e K+) em pacientes com choques recorrentes do CDI, mas não substitui o dispositivo. Orientações gerais: evitar febre (antitérmico agressivo), evitar drogas que bloqueiam canal de Na+ (www.brugadadrugs.org), evitar refeições copiosas.",
+    "tag": "brugada_tratamento"
+  },
+  {
+    "id": "cr_020",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "Hipercalemia",
+    "difficulty": "hard",
+    "stem": "Paciente de 72 anos com DRC estágio 5, K+ = 7,8 mEq/L. ECG mostra: ausência de ondas P, QRS alargado (180 ms) com padrão sinusoidal. Qual a PRIMEIRA medida terapêutica e por quê?",
+    "options": [
+      "Gluconato de cálcio 10% IV — estabiliza a membrana cardíaca (não reduz K+, mas previne arritmia fatal)",
+      "Insulina regular 10 UI + glicose 50% — para reduzir K+ sérico rapidamente",
+      "Salbutamol nebulizado 10 mg — desloca K+ para intracelular",
+      "Hemodiálise de urgência — remoção definitiva do K+"
+    ],
+    "answer_index": 0,
+    "explanation": "Com K+ = 7,8 e padrão sinusoidal no ECG (pré-parada), a PRIMEIRA medida é gluconato de cálcio 10% (10-20 mL IV em 2-3 min). O cálcio NÃO reduz o potássio — ele antagoniza o efeito do K+ na membrana cardíaca, estabilizando o potencial de repouso. Efeito em 1-3 minutos, duração de 30-60 min. A sequência evolutiva no ECG: T apiculadas → P achatada/ausente + QRS alargado → padrão sinusoidal → FV/assistolia. DEPOIS do cálcio: insulina + glicose, salbutamol, e finalmente diálise para remoção definitiva.",
+    "tag": "hipercalemia_emergencia"
+  },
+  {
+    "id": "cr_021",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "Hipercalemia",
+    "difficulty": "medium",
+    "stem": "Qual é a sequência correta das alterações eletrocardiográficas da hipercalemia conforme o K+ se eleva?",
+    "options": [
+      "T apiculadas → PR prolongado + P achatada → QRS alargado → padrão sinusoidal → FV/assistolia",
+      "P apiculadas → QRS estreitado → T achatadas → bradicardia sinusal",
+      "Infra de ST difuso → BRE → taquicardia ventricular → FV",
+      "Supra de ST em V1-V2 → ondas delta → QT longo → Torsades"
+    ],
+    "answer_index": 0,
+    "explanation": "A hipercalemia afeta progressivamente a condução cardíaca: (1) K+ 5,5-6,5: ondas T apiculadas (em tenda, simétricas, estreitas) — é o sinal mais precoce; (2) K+ 6,5-7,0: intervalo PR prolonga, ondas P achatam e podem desaparecer; (3) K+ 7,0-7,5: QRS se alarga progressivamente; (4) K+ 7,5-8,0: QRS funde com T formando onda sinusoidal (padrão pré-parada); (5) K+ > 8,0: FV ou assistolia. As câmeras precordiais (V2-V4) são as mais sensíveis para detectar T apiculadas precocemente.",
+    "tag": "hipercalemia_progressao"
+  },
+  {
+    "id": "cr_022",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "BAV",
+    "difficulty": "medium",
+    "stem": "ECG mostra PR fixo de 280 ms com todas as ondas P seguidas de QRS. QRS estreito. Qual o tipo de BAV e a conduta?",
+    "options": [
+      "BAV de 1° grau — geralmente benigno, observação e monitorização; investigar se sintomático",
+      "BAV de 2° grau Mobitz I — marcapasso profilático",
+      "BAV de 2° grau Mobitz II — marcapasso de urgência",
+      "BAV de 3° grau — marcapasso permanente imediato"
+    ],
+    "answer_index": 0,
+    "explanation": "BAV de 1° grau: TODOS os impulsos P são conduzidos (cada P é seguida de QRS), mas com atraso fixo (PR > 200 ms). É o tipo mais benigno, geralmente assintomático e não requer tratamento. Pode ser causado por aumento do tônus vagal (atletas), drogas (betabloqueadores, digitálicos, BCC) ou doença do nó AV. Conduta: investigar causa reversível (medicamento), monitorizar se PR muito longo (> 300 ms pode causar sintomas por dissociação AV funcional). Marcapasso só é indicado se PR > 300 ms com sintomas hemodinâmicos.",
+    "tag": "bav_1grau"
+  },
+  {
+    "id": "cr_023",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "BAV",
+    "difficulty": "hard",
+    "stem": "ECG mostra: ondas P a 80 bpm, QRS a 35 bpm, sem relação fixa entre P e QRS, QRS largo (150 ms). Paciente com síncope. Qual o diagnóstico e o nível do bloqueio?",
+    "options": [
+      "BAV de 3° grau (completo) com escape ventricular — bloqueio infranodal; indicação de marcapasso permanente",
+      "BAV de 2° grau Mobitz I — bloqueio nodal; observação",
+      "BAV de 1° grau — PR longo; benigno",
+      "Ritmo juncional acelerado — benigno"
+    ],
+    "answer_index": 0,
+    "explanation": "BAV de 3° grau (completo): NENHUM impulso atrial chega aos ventrículos — há dissociação AV total. P e QRS são independentes, cada um com sua frequência. O QRS largo (150 ms) e FC ventricular de 35 bpm indicam escape ventricular (His-Purkinje), localizando o bloqueio como INFRANODAL — pior prognóstico que bloqueio nodal (escape juncional teria QRS estreito e FC 40-60). Marcapasso permanente é indicação classe I para BAV 3° grau sintomático. Na emergência: atropina (pode não funcionar em bloqueio infranodal), marca-passo transcutâneo e/ou dopamina/isoproterenol como ponte.",
+    "tag": "bav_3grau"
+  },
+  {
+    "id": "cr_024",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "TV vs TSV com Aberrância",
+    "difficulty": "hard",
+    "stem": "Paciente de 65 anos, cardiopata, chega com taquicardia de QRS largo (160 ms), regular, FC 180 bpm. Qual a abordagem mais segura e por quê?",
+    "options": [
+      "Tratar como TV até prova em contrário — em cardiopata, taquicardia de QRS largo é TV em > 80% dos casos",
+      "Administrar verapamil IV para diferenciar TV de TSV",
+      "Adenosina em bolus rápido — se converter, é TSV",
+      "Aguardar ECG de 12 derivações antes de qualquer tratamento"
+    ],
+    "answer_index": 0,
+    "explanation": "Regra de ouro: taquicardia de QRS largo em paciente com cardiopatia estrutural é TV até prova em contrário (acurácia > 80%). Critérios que favorecem TV: dissociação AV, batimentos de fusão/captura, concordância de QRS nas precordiais, eixo noroeste, ausência de padrão típico de BRE/BRD. VERAPAMIL É CONTRAINDICADO em taquicardia de QRS largo de origem incerta — se for TV, pode causar colapso hemodinâmico e morte. Conduta: se instável → cardioversão elétrica sincronizada; se estável → amiodarona IV ou procainamida IV.",
+    "tag": "tv_vs_tsv"
+  },
+  {
+    "id": "cr_025",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "TV vs TSV com Aberrância",
+    "difficulty": "hard",
+    "stem": "Na taquicardia de QRS largo, qual achado é PATOGNOMÔNICO de taquicardia ventricular?",
+    "options": [
+      "Batimentos de captura e fusão — provam que os átrios e ventrículos estão dissociados",
+      "FC > 200 bpm — muito rápida para ser TSV",
+      "QRS > 200 ms — muito largo para ser aberrância",
+      "Onda P retrógrada após cada QRS — confirma condução VA"
+    ],
+    "answer_index": 0,
+    "explanation": "Batimentos de captura (um QRS estreito 'normal' no meio da taquicardia = o nó sinusal consegue capturar os ventrículos momentaneamente) e batimentos de fusão (QRS com morfologia intermediária entre o batimento sinusal e o ventricular) são PATOGNOMÔNICOS de TV. Ambos provam que os átrios estão se despolarizando independentemente dos ventrículos (dissociação AV), o que só ocorre na TV. A dissociação AV está presente em ~50% das TVs, mas quando identificada, é diagnóstica.",
+    "tag": "tv_captura_fusao"
+  },
+  {
+    "id": "cr_026",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "Intoxicação Digitálica",
+    "difficulty": "hard",
+    "stem": "Mulher de 78 anos em uso de digoxina apresenta náuseas, visão amarelada e palpitações. ECG: ritmo juncional acelerado (FC 85 bpm), cubeta digitálica em derivações laterais, bigeminismo ventricular. Qual o diagnóstico e a primeira medida?",
+    "options": [
+      "Intoxicação digitálica — suspender digoxina, dosar nível sérico, corrigir K+ (hipocalemia potencializa toxicidade)",
+      "Flutter atrial com condução 2:1 — aumentar dose de digoxina para controlar FC",
+      "TV sustentada — cardioversão elétrica imediata",
+      "IAM lateral — ativar cateterismo de urgência"
+    ],
+    "answer_index": 0,
+    "explanation": "Tríade da intoxicação digitálica: (1) Sintomas GI (náuseas, vômitos), (2) Visuais (xantopsia — visão amarelada), (3) Arritmias. O ECG da intoxicação mostra: cubeta digitálica (concavidade do ST — NÃO é sinal de toxicidade por si só, mas sim de impregnação), MAIS arritmias paradoxais — ritmo juncional acelerado, bigeminismo ventricular, TAM (taquicardia atrial multifocal), BAV. A combinação de aumento do automatismo (extrassístoles, taquicardias) + depressão da condução (BAV) é característica. Conduta: suspender digoxina, dosar digoxinemia, corrigir K+ (hipocalemia potencializa toxicidade), considerar anticorpo antidigoxina (Digibind) se arritmia grave.",
+    "tag": "intoxicacao_digital"
+  },
+  {
+    "id": "cr_027",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "Intoxicação Digitálica",
+    "difficulty": "medium",
+    "stem": "A 'cubeta digitálica' no ECG indica necessariamente intoxicação por digoxina?",
+    "options": [
+      "Não — a cubeta indica IMPREGNAÇÃO (efeito terapêutico), não toxicidade. Intoxicação é diagnosticada por arritmias + sintomas",
+      "Sim — toda cubeta digitálica significa toxicidade e deve-se suspender a droga",
+      "Sim — a cubeta é patognomônica de nível sérico > 2 ng/mL",
+      "Não — a cubeta é um artefato sem significado clínico"
+    ],
+    "answer_index": 0,
+    "explanation": "A cubeta digitálica (depressão côncava do ST com aspecto de 'colher' ou 'bigode de Salvador Dalí') é um sinal de IMPREGNAÇÃO digitálica, ou seja, indica que a digoxina está atuando no miocárdio. Aparece com níveis terapêuticos e NÃO significa toxicidade. A intoxicação é diagnosticada pela presença de arritmias (bigeminismo ventricular, ritmo juncional acelerado, BAV, TAM) + sintomas clínicos (GI, visuais, neurológicos). A cubeta sem arritmia é achado esperado e benigno em pacientes em uso regular de digoxina.",
+    "tag": "cubeta_digitalica"
+  },
+  {
+    "id": "cr_028",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "Repolarização Precoce vs STEMI",
+    "difficulty": "hard",
+    "stem": "Homem de 25 anos, assintomático, ECG de rotina mostra: supra de ST de 2 mm em V2-V4 com concavidade superior, entalhe no ponto J (fishhook), ondas T amplas e positivas. Qual o diagnóstico mais provável e como diferenciar de STEMI?",
+    "options": [
+      "Repolarização precoce benigna — supra côncavo, entalhe no ponto J, T concordante ampla, paciente jovem assintomático",
+      "STEMI anterior — supra em V2-V4 indica oclusão de DA",
+      "Brugada tipo 2 — supra em V1-V2 com padrão em sela",
+      "Pericardite subaguda — supra difuso"
+    ],
+    "answer_index": 0,
+    "explanation": "Repolarização precoce: variante benigna comum em jovens (prevalência ~5%), especialmente homens e atletas. Características que a diferenciam de STEMI: (1) ST côncavo ('sorriso') vs convexo no STEMI; (2) Entalhe ou empastamento no ponto J ('fishhook'); (3) T concordante (positiva e ampla) vs T invertida no STEMI evolutivo; (4) Razão ST/T < 0.25 (no STEMI, o supra é proporcionalmente maior); (5) Paciente jovem, assintomático, sem fatores de risco; (6) Padrão estável em ECGs seriados (no STEMI, evolui). ATENÇÃO: repolarização precoce em derivações inferiores em pacientes com síncope pode estar associada a risco de FV (entidade diferente, rara).",
+    "tag": "repolarizacao_precoce"
+  },
+  {
+    "id": "cr_029",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "Wellens",
+    "difficulty": "hard",
+    "stem": "Mulher de 55 anos veio ao PS ontem com dor precordial típica que resolveu espontaneamente. Troponina normal. ECG hoje (assintomática): T invertida profunda e simétrica em V2-V3, ST isoelétrico, sem ondas Q. O residente quer dar alta com teste ergométrico. Qual o diagnóstico e por que essa conduta é PERIGOSA?",
+    "options": [
+      "Síndrome de Wellens tipo A — estenose crítica da DA; teste ergométrico é CONTRAINDICADO (risco de IAM/PCR durante esforço)",
+      "Alteração inespecífica de T — pode fazer teste ergométrico normalmente",
+      "Pericardite em resolução — T se normalizando após supra prévio",
+      "Sobrecarga ventricular esquerda — achado crônico sem gravidade"
+    ],
+    "answer_index": 0,
+    "explanation": "Síndrome de Wellens: T invertida profunda e simétrica em V2-V3 (tipo A) ou T bifásica +/- em V2-V3 (tipo B) em paciente com história recente de dor torácica, agora assintomático, com troponina normal ou minimamente elevada e ST ISOELÉTRICO. Indica estenose CRÍTICA (> 90%) da DA proximal. A armadilha: paciente assintomático + troponina normal = parece 'benigno'. Mas o teste ergométrico é CONTRAINDICADO — pode provocar oclusão total da DA e IAM anterior extenso/PCR. Conduta: internação + cateterismo (sem teste funcional antes). As câmeras V2-V3 estão filmando a parede anterior, território da DA — a T invertida profunda é a 'memória' da isquemia recente.",
+    "tag": "wellens"
+  },
+  {
+    "id": "cr_030",
+    "topic": "Raciocínio Clínico",
+    "subtopic": "Wellens",
+    "difficulty": "medium",
+    "stem": "Quais são os critérios diagnósticos da Síndrome de Wellens?",
+    "options": [
+      "T invertida profunda simétrica ou bifásica em V2-V3, ST isoelétrico, sem ondas Q, troponina normal/mínima, história de dor que resolveu",
+      "Supra de ST > 2 mm em V1-V4 com ondas Q e troponina muito elevada",
+      "Infra de ST difuso com T invertida em todas as derivações e troponina elevada",
+      "BRE novo com T concordante em V1-V3"
+    ],
+    "answer_index": 0,
+    "explanation": "Critérios de Wellens: (1) T invertida profunda e simétrica em V2-V3 (tipo A, mais comum ~75%) OU T bifásica (+/-) em V2-V3 (tipo B, ~25%); (2) Segmento ST ISOELÉTRICO (sem supra); (3) Ausência de ondas Q (miocárdio ainda viável!); (4) Troponina normal ou minimamente elevada; (5) História de dor precordial recente que RESOLVEU. O padrão reflete reperfusão espontânea após isquemia crítica — a DA está criticamente estenosada mas ainda aberta. Sem intervenção, 75% evoluem para IAM anterior extenso em dias a semanas.",
+    "tag": "wellens_criterios"
+  }
+]

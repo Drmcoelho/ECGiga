@@ -85,8 +85,11 @@ class DatasetBuilder:
         for fpath in json_files:
             try:
                 data = json.loads(fpath.read_text(encoding="utf-8"))
-                examples = self._quiz_to_examples(data, source=str(fpath))
-                new_examples.extend(examples)
+                # Handle both list-of-questions and single-question formats
+                items = data if isinstance(data, list) else [data]
+                for item in items:
+                    examples = self._quiz_to_examples(item, source=str(fpath))
+                    new_examples.extend(examples)
             except (json.JSONDecodeError, KeyError, IndexError) as exc:
                 logger.warning("Erro ao processar %s: %s", fpath, exc)
                 continue

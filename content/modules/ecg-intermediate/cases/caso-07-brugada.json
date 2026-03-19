@@ -1,0 +1,55 @@
+{
+  "id": "caso-07-brugada",
+  "title": "Síndrome de Brugada — Síncope durante Febre em Jovem",
+  "difficulty": "hard",
+  "context": "Paciente de 32 anos, masculino, sem comorbidades conhecidas, trazido ao PS pela esposa após episódio de síncope durante quadro gripal com febre de 39,5°C. A esposa relata que ele perdeu a consciência por ~15 segundos enquanto estava deitado no sofá, com recuperação espontânea e completa. Nega uso de drogas. Importante: irmão faleceu aos 28 anos durante o sono (causa indeterminada) e tio paterno teve morte súbita aos 35 anos. Sinais vitais: PA 120/80 mmHg, FC 78 bpm, FR 16 irpm, SpO2 98%, Temp 39,2°C. Exame físico sem alterações. Exames laboratoriais normais, troponina negativa.",
+  "phases": [
+    {
+      "step": 1,
+      "instruction": "Observe as derivações V1 e V2. Descreva a morfologia do segmento ST e da onda T. Esse padrão é compatível com alguma síndrome específica?",
+      "expected": "V1 e V2 mostram elevação do segmento ST ≥ 2 mm com morfologia 'coved' (tipo 1): ST começa elevado no ponto J e desce de forma convexa, seguido diretamente de onda T NEGATIVA. Não há um retorno à linha de base entre o ST e a T — a curva é contínua, lembrando uma 'barbatana de tubarão'. Esse é o padrão tipo 1 da Síndrome de Brugada (padrão diagnóstico). Diferente do tipo 2 ('saddleback' — sela): ST sobe, desce parcialmente, sobe de novo e T pode ser positiva.",
+      "hints": [
+        "O padrão tipo 1 (coved) é o ÚNICO padrão diagnóstico de Brugada — o tipo 2 (sela) é sugestivo mas não diagnóstico",
+        "Observe se o ST desce continuamente para a T negativa (coved) ou se há um 'vale' entre ST e T (saddleback)"
+      ]
+    },
+    {
+      "step": 2,
+      "instruction": "O paciente está febril (39,2°C). Qual a relação entre febre e Síndrome de Brugada? Por que isso é clinicamente importante?",
+      "expected": "A febre é um gatilho reconhecido para desmascarar ou acentuar o padrão de Brugada e precipitar arritmias (TV/FV). A Síndrome de Brugada é causada por mutação no gene SCN5A (canal de sódio). A febre reduz a função dos canais de sódio já defeituosos — a corrente de Na+ diminui com o aumento da temperatura. Isso pode: (1) Revelar o padrão tipo 1 em pacientes com ECG basal normal ou tipo 2; (2) Precipitar FV/morte súbita. Conduta imediata: antipiréticos agressivos (dipirona/paracetamol IV) para reduzir temperatura. Todo paciente com Brugada deve ser orientado a tratar febre precocemente.",
+      "hints": [
+        "Febre reduz a corrente de Na+ no canal SCN5A já defeituoso — 'desmascara' o padrão",
+        "Casos de morte súbita em Brugada durante febre estão bem documentados na literatura"
+      ]
+    },
+    {
+      "step": 3,
+      "instruction": "Analise os fatores de risco deste paciente. Qual é a estratificação de risco para morte súbita na Síndrome de Brugada?",
+      "expected": "Fatores de alto risco neste paciente: (1) Síncope — sugere arritmia ventricular transitória com recuperação espontânea; (2) Padrão tipo 1 espontâneo (não induzido por drogas); (3) História familiar FORTE de morte súbita (irmão e tio). Estratificação: ALTO RISCO = PCR recuperada, síncope com padrão tipo 1, TV sustentada documentada. RISCO INTERMEDIÁRIO = padrão tipo 1 assintomático com história familiar positiva. BAIXO RISCO = padrão tipo 1 assintomático sem história familiar. O estudo eletrofisiológico (EEF) pode ser considerado para indução de arritmias em casos duvidosos.",
+      "hints": [
+        "Síncope em Brugada = arritmia ventricular até prova em contrário — é um red flag",
+        "História familiar de morte súbita em jovens (< 45 anos) durante o sono é altamente sugestiva"
+      ]
+    },
+    {
+      "step": 4,
+      "instruction": "Qual o tratamento definitivo para este paciente? Há medicamentos que devem ser evitados?",
+      "expected": "CDI (cardiodesfibrilador implantável) — é o ÚNICO tratamento com evidência de reduzir mortalidade na Síndrome de Brugada. Indicação classe I: Brugada tipo 1 + síncope ou PCR recuperada. Este paciente tem indicação clara (tipo 1 + síncope + HF positiva). Quinidina pode ser usada como adjuvante em pacientes com choques recorrentes do CDI ou como alternativa quando CDI não é viável. MEDICAMENTOS A EVITAR (lista em www.brugadadrugs.org): antiarrítmicos classe IC (flecainida, propafenona), bloqueadores de canal de Na+, cocaína, álcool em excesso, antidepressivos tricíclicos, lítio. Orientações: evitar febre (tratar agressivamente), evitar refeições copiosas (ativação vagal), evitar álcool em excesso.",
+      "hints": [
+        "CDI é o único tratamento que comprovadamente reduz mortalidade — nenhum antiarrítmico substitui",
+        "www.brugadadrugs.org lista todos os medicamentos a evitar em Brugada"
+      ]
+    }
+  ],
+  "final_interpretation": "ECG com ritmo sinusal, FC 78 bpm, padrão de Brugada tipo 1 (coved) em V1-V2: elevação de ST ≥ 2 mm com morfologia convexa descendente seguida de T negativa, desmascarado/acentuado por febre. Paciente com síncope e forte história familiar de morte súbita — alto risco, indicação de CDI.",
+  "learning_points": [
+    "Brugada tipo 1 (coved): supra ≥ 2 mm em V1-V2 com ST convexo descendente contínuo para T negativa — ÚNICO padrão diagnóstico",
+    "Febre é um gatilho reconhecido: reduz a corrente de Na+ no canal SCN5A defeituoso e pode desmascarar o padrão ou precipitar FV",
+    "A Síndrome de Brugada é a principal causa de morte súbita em jovens com coração estruturalmente normal, especialmente durante o sono",
+    "CDI é o único tratamento com evidência para prevenção de morte súbita em Brugada",
+    "Medicamentos que bloqueiam canal de Na+ (classe IC, tricíclicos, cocaína) são CONTRAINDICADOS",
+    "Todo paciente com Brugada deve tratar febre agressivamente e consultar www.brugadadrugs.org antes de usar qualquer medicamento"
+  ],
+  "linked_skills": ["channelopathies", "sudden_cardiac_death", "sodium_channel"],
+  "disclaimer": "Conteúdo exclusivamente educacional. Este caso clínico é fictício e destina-se ao ensino de eletrocardiografia. Não substitui avaliação clínica profissional."
+}

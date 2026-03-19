@@ -1,0 +1,64 @@
+{
+  "id": "caso-08-pericardite",
+  "title": "Pericardite Aguda — Dor Torácica Pleurítica em Jovem",
+  "difficulty": "medium",
+  "context": "Paciente de 28 anos, masculino, previamente hígido, procura PS com dor torácica há 12 horas. A dor é ventilatório-dependente (piora com inspiração profunda), piora com decúbito dorsal e MELHORA quando sentado inclinado para frente. Relata quadro gripal há 1 semana (febre baixa, mialgia, coriza) que havia melhorado. Nega tabagismo, uso de drogas ou história familiar de doença cardíaca. Sinais vitais: PA 120/75 mmHg, FC 95 bpm, FR 18 irpm, SpO2 99%, Temp 37,8°C. Ao exame: atrito pericárdico audível em borda esternal esquerda (som de 'raspar couro'). Troponina discreta elevação (miopericardite), PCR 8,5 mg/dL (elevada).",
+  "phases": [
+    {
+      "step": 1,
+      "instruction": "Observe o segmento ST em todas as derivações. Qual o padrão de distribuição e a morfologia do supra? Como isso difere do STEMI?",
+      "expected": "Supra de ST DIFUSO, presente em múltiplas derivações que NÃO respeitam território coronariano: DI, DII, DIII, aVF, V2-V6 — praticamente todas as câmeras veem supra. A morfologia é CÔNCAVA (concavidade para cima, 'sorriso'). Diferenças do STEMI: (1) No STEMI, o supra é TERRITORIAL (segue uma artéria) — na pericardite é DIFUSO (pericárdio envolve todo o coração, TODAS as câmeras filmam a inflamação); (2) ST côncavo na pericardite vs convexo no STEMI; (3) Na pericardite NÃO há alterações recíprocas verdadeiras (exceto aVR).",
+      "hints": [
+        "Pericardite = inflamação do pericárdio inteiro = supra DIFUSO sem respeitar território coronariano",
+        "Pense nas câmeras: TODAS veem a inflamação porque o pericárdio envolve todo o coração"
+      ]
+    },
+    {
+      "step": 2,
+      "instruction": "Analise o segmento PR. Há alguma alteração? Qual a especificidade deste achado?",
+      "expected": "Depressão difusa do segmento PR (infradesnivelamento do PR) nas mesmas derivações que mostram supra de ST. Este é o achado MAIS ESPECÍFICO de pericardite e raramente ocorre em outras condições. A depressão de PR reflete a corrente de lesão ATRIAL causada pela inflamação pericárdica que afeta o miocárdio atrial fino. Presente em até 80% dos casos de pericardite aguda. A combinação de supra côncavo difuso + depressão de PR é virtualmente diagnóstica de pericardite.",
+      "hints": [
+        "Depressão de PR é o achado mais ESPECÍFICO de pericardite — não ocorre no STEMI",
+        "Reflita: o pericárdio inflamado afeta os átrios (finos) causando corrente de lesão atrial = PR deprimido"
+      ]
+    },
+    {
+      "step": 3,
+      "instruction": "Observe a derivação aVR. O que ela mostra e por que é o 'espelho' da pericardite?",
+      "expected": "aVR mostra o padrão INVERSO: infra de ST + elevação de PR (supra de PR). Enquanto todas as outras câmeras filmam a inflamação 'de frente' (supra de ST + depressão de PR), aVR está posicionada a -150° — olhando 'de cima e de dentro', do lado oposto a todas as outras. É a câmera espelho: tudo o que as demais registram como positivo, aVR registra como negativo. No STEMI, aVR pode mostrar supra (oclusão de tronco de CE) — na pericardite, aVR SEMPRE mostra infra de ST.",
+      "hints": [
+        "aVR é a câmera que está 'de costas' para quase todo o coração — vê tudo invertido",
+        "Supra em aVR com infra difuso = pensar em oclusão de tronco ou isquemia subendocárdica difusa, NÃO pericardite"
+      ]
+    },
+    {
+      "step": 4,
+      "instruction": "Monte a tabela comparativa: quais critérios diferenciam Pericardite de STEMI no ECG?",
+      "expected": "Diferenciação Pericardite vs STEMI: (1) MORFOLOGIA DO ST: côncavo (pericardite) vs convexo (STEMI); (2) DISTRIBUIÇÃO: difusa sem território (pericardite) vs territorial com artéria culpada (STEMI); (3) ALTERAÇÕES RECÍPROCAS: ausentes na pericardite (exceto aVR) vs presentes no STEMI; (4) DEPRESSÃO DE PR: presente na pericardite, ausente no STEMI; (5) aVR: infra de ST na pericardite, supra no STEMI por oclusão de tronco; (6) EVOLUÇÃO: pericardite evolui em 4 estágios (semanas), STEMI evolui em horas (supra → Q → inversão T).",
+      "hints": [
+        "Mnemônico dos 4 pontos: ST côncavo, Difuso, sem Recíproco, PR deprimido = Pericardite",
+        "Na dúvida entre pericardite e STEMI, errar para o lado do STEMI é mais seguro (ativar cate)"
+      ]
+    },
+    {
+      "step": 5,
+      "instruction": "Qual a conduta terapêutica para pericardite aguda? Há indicação de cateterismo?",
+      "expected": "Pericardite viral/idiopática (causa mais comum em jovens): (1) AINE em dose anti-inflamatória — ibuprofeno 600 mg 8/8h ou AAS 750-1000 mg 8/8h por 1-2 semanas com desmame; (2) Colchicina 0,5 mg 12/12h por 3 meses — REDUZ recorrência em 50% (evidência forte); (3) Repouso relativo; (4) Gastroproteção com IBP. NÃO há indicação de cateterismo (não é SCA). Corticoide deve ser EVITADO na primeira linha (aumenta recorrência). Indicações de internação: febre alta, derrame pericárdico volumoso, troponina muito elevada (miopericardite extensa), refratariedade a AINE, suspeita de causa específica (TB, neoplasia, autoimune).",
+      "hints": [
+        "Colchicina + AINE é o tratamento padrão — colchicina reduz recorrência pela metade",
+        "Corticoide na pericardite aumenta recorrência — só usar se contraindicação a AINE e colchicina"
+      ]
+    }
+  ],
+  "final_interpretation": "ECG com taquicardia sinusal (FC 95 bpm), supradesnivelamento de ST DIFUSO com morfologia côncava ('sorriso'), depressão difusa do segmento PR, e infra de ST em aVR com supra de PR em aVR. Padrão clássico de pericardite aguda (estágio I). Contexto clínico: dor pleurítica posicional + pródromo viral + atrito pericárdico + PCR elevada — diagnóstico de pericardite aguda viral/idiopática com miopericardite leve (troponina discretamente elevada).",
+  "learning_points": [
+    "Pericardite = supra DIFUSO (não respeita território) porque o pericárdio envolve todo o coração — TODAS as câmeras filmam a inflamação",
+    "Depressão do segmento PR é o achado mais ESPECÍFICO de pericardite — reflete corrente de lesão atrial",
+    "aVR é o espelho: infra de ST + supra de PR (oposto ao resto). Se aVR mostra supra de ST, pensar em oclusão de tronco, NÃO pericardite",
+    "Diferencial com STEMI: ST côncavo vs convexo, difuso vs territorial, sem recíproco vs com recíproco, PR deprimido vs normal",
+    "Tratamento: AINE + colchicina (reduz recorrência em 50%). Evitar corticoide na primeira linha",
+    "Dor que melhora sentado inclinado para frente + atrito pericárdico = pericardite até prova em contrário"
+  ],
+  "linked_skills": ["st_segment_differential", "pericardial_disease", "anti_inflammatory_therapy"],
+  "disclaimer": "Conteúdo exclusivamente educacional. Este caso clínico é fictício e destina-se ao ensino de eletrocardiografia. Não substitui avaliação clínica profissional."
+}

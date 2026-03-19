@@ -1,0 +1,242 @@
+[
+  {
+    "id": "cam_001",
+    "topic": "Analogia das Câmeras",
+    "subtopic": "Vetor e Câmera Alinhados",
+    "difficulty": "easy",
+    "stem": "Se o vetor QRS aponta para +60° e a câmera DII está posicionada a +60°, o que essa derivação registra?",
+    "options": [
+      "Complexo QRS com onda R alta (deflexão positiva máxima) — vetor vem direto para a câmera",
+      "Complexo QRS bifásico (R = S) — vetor perpendicular à câmera",
+      "Complexo QRS com onda S profunda (deflexão negativa) — vetor se afasta da câmera",
+      "Linha isoelétrica sem deflexão — câmera não capta nenhum sinal"
+    ],
+    "answer_index": 0,
+    "explanation": "Quando o vetor elétrico aponta DIRETAMENTE para uma câmera (derivação), essa câmera registra a deflexão POSITIVA máxima. É como olhar um carro vindo na sua direção — você vê ele se aproximar (positivo). DII está a +60° e o vetor QRS também está a +60° = alinhamento perfeito = R máxima. Essa é a base do cálculo do eixo cardíaco.",
+    "tag": "analogia_vetor_camera"
+  },
+  {
+    "id": "cam_002",
+    "topic": "Analogia das Câmeras",
+    "subtopic": "Vetor Perpendicular",
+    "difficulty": "easy",
+    "stem": "Uma câmera (derivação) está posicionada perpendicularmente ao vetor QRS. O que ela registra?",
+    "options": [
+      "Complexo bifásico — R e S de amplitude semelhante, ou complexo isoelétrico",
+      "Onda R pura sem onda S",
+      "Onda S pura sem onda R",
+      "Onda T invertida profunda"
+    ],
+    "answer_index": 0,
+    "explanation": "Quando a câmera está a 90° do vetor, ela não vê o vetor se aproximar NEM se afastar — vê ele 'passar de lado'. Resultado: o componente positivo e negativo se cancelam, gerando um complexo bifásico (R ≈ S) ou quase isoelétrico. Analogia: imagine um carro cruzando perpendicularmente à sua frente — ele nem vem em sua direção nem se afasta, apenas cruza. Esse princípio é usado para calcular o eixo: a derivação com complexo mais bifásico é perpendicular ao eixo.",
+    "tag": "analogia_perpendicular"
+  },
+  {
+    "id": "cam_003",
+    "topic": "Analogia das Câmeras",
+    "subtopic": "Vetor se Afasta",
+    "difficulty": "easy",
+    "stem": "Se o vetor QRS aponta para +120° e a câmera aVL está a -30°, o que aVL registra?",
+    "options": [
+      "Deflexão predominantemente negativa (onda S profunda) — o vetor se afasta da câmera aVL",
+      "Deflexão positiva máxima — o vetor se aproxima de aVL",
+      "Complexo bifásico — perpendiculares entre si",
+      "QRS ausente — a câmera não consegue registrar"
+    ],
+    "answer_index": 0,
+    "explanation": "O vetor a +120° se afasta da câmera aVL (que está a -30°). A diferença angular é de 150° — quase opostos! Quando o vetor foge da câmera, ela registra deflexão negativa (onda S profunda ou complexo predominantemente negativo). Analogia: é como filmar um carro que se afasta de você — no vídeo, ele fica cada vez menor (negativo). A câmera só registra positivo quando o vetor vem NA DIREÇÃO dela.",
+    "tag": "analogia_afasta"
+  },
+  {
+    "id": "cam_004",
+    "topic": "Analogia das Câmeras",
+    "subtopic": "Necrose Anterior",
+    "difficulty": "medium",
+    "stem": "Na necrose da parede anterior (IAM anterior antigo), por que as derivações V1-V4 mostram ondas Q patológicas?",
+    "options": [
+      "A parede anterior morta virou uma 'janela elétrica' — V1-V4 filmam através dela e registram o vetor de despolarização se afastando (onda Q)",
+      "As câmeras V1-V4 estão defeituosas e registram artefato",
+      "A necrose gera um vetor extra que aponta para V1-V4",
+      "A onda Q é causada por repolarização precoce na área infartada"
+    ],
+    "answer_index": 0,
+    "explanation": "Quando o miocárdio anterior morre (necrose transmural), ele perde atividade elétrica. As câmeras V1-V4 ficam posicionadas sobre uma 'janela elétrica' — não há mais vetor vindo em sua direção (a parede anterior não despolariza mais). O que elas enxergam é o vetor da parede POSTERIOR se afastando. Vetor se afastando = deflexão negativa = onda Q. É como filmar através de uma janela de vidro: a câmera vê o que está DO OUTRO LADO (a parede posterior despolarizando na direção oposta). Onda Q patológica = cicatriz de necrose.",
+    "tag": "analogia_janela_eletrica"
+  },
+  {
+    "id": "cam_005",
+    "topic": "Analogia das Câmeras",
+    "subtopic": "Câmeras Recíprocas",
+    "difficulty": "medium",
+    "stem": "No STEMI inferior (supra em DII, DIII, aVF), por que DI e aVL mostram infra de ST? O que significa 'alteração recíproca'?",
+    "options": [
+      "DI e aVL são câmeras opostas às inferiores — veem o mesmo evento 'pelo avesso' (imagem em espelho da corrente de lesão)",
+      "DI e aVL têm isquemia própria em outro território coronariano",
+      "O infra em DI e aVL é artefato por má colocação dos eletrodos",
+      "DI e aVL estão registrando repolarização precoce fisiológica"
+    ],
+    "answer_index": 0,
+    "explanation": "Alteração recíproca = imagem em espelho. As câmeras inferiores (DII, DIII, aVF) estão de frente para a lesão e filmam supra de ST. As câmeras laterais altas (DI, aVL) estão do lado OPOSTO e filmam o mesmo evento pelo avesso — infra de ST. É como dois fotógrafos em lados opostos de um objeto: um vê a frente (supra), o outro vê as costas (infra). No ECG, as alterações recíprocas AUMENTAM a especificidade para STEMI — pericardite, por exemplo, não produz recíproco porque a inflamação é difusa (todas as câmeras veem a mesma coisa).",
+    "tag": "analogia_reciproco"
+  },
+  {
+    "id": "cam_006",
+    "topic": "Analogia das Câmeras",
+    "subtopic": "Progressão de R nas Precordiais",
+    "difficulty": "medium",
+    "stem": "Por que normalmente a onda R cresce de V1 a V6 (progressão normal de R)?",
+    "options": [
+      "As câmeras V1→V6 vão gradualmente se posicionando mais de frente para o vetor de despolarização do VE (que vai para a esquerda e posterior)",
+      "O VE vai ficando mais espesso de V1 a V6",
+      "V6 está mais perto do coração que V1",
+      "A condução pelo ramo esquerdo é mais rápida que pelo direito"
+    ],
+    "answer_index": 0,
+    "explanation": "O vetor principal de despolarização ventricular aponta para a esquerda e posteroinferior (dominância do VE). V1 está à direita do esterno — o vetor SE AFASTA dela (S profunda, R pequena). V6 está no ápice lateral esquerdo — o vetor SE APROXIMA dela (R alta, S pequena). As câmeras intermediárias (V2→V5) veem o vetor em ângulos progressivamente mais favoráveis, gerando R cada vez maiores. É como uma série de câmeras filmando um carro que passa da direita para a esquerda: a primeira vê ele se afastando, a última vê ele chegando.",
+    "tag": "analogia_progressao_r"
+  },
+  {
+    "id": "cam_007",
+    "topic": "Analogia das Câmeras",
+    "subtopic": "Território Coronariano",
+    "difficulty": "medium",
+    "stem": "Por que no STEMI, o supra de ST respeita um 'território' (grupo de derivações adjacentes) e na pericardite é difuso?",
+    "options": [
+      "No STEMI, a isquemia é de UMA artéria — só as câmeras que filmam aquele território veem supra. Na pericardite, a inflamação é do pericárdio inteiro — TODAS as câmeras veem",
+      "O STEMI é mais grave que a pericardite, por isso afeta menos derivações",
+      "Na pericardite, os eletrodos captam interferência elétrica difusa",
+      "O supra do STEMI é mais alto e por isso parece territorial"
+    ],
+    "answer_index": 0,
+    "explanation": "Imagine 12 câmeras filmando o coração de diferentes ângulos. No STEMI, UMA artéria está ocluída → UMA parede sofre lesão transmural → apenas as câmeras posicionadas DE FRENTE para aquela parede veem supra de ST (V1-V4 para parede anterior/DA, DII-DIII-aVF para inferior/CD). As câmeras opostas veem o espelho (infra recíproco). Na pericardite, o pericárdio inteiro está inflamado → TODAS as câmeras veem corrente de lesão → supra DIFUSO, sem território, sem recíproco. Exceção na pericardite: aVR mostra infra de ST (câmera que olha de dentro para fora).",
+    "tag": "analogia_territorial"
+  },
+  {
+    "id": "cam_008",
+    "topic": "Analogia das Câmeras",
+    "subtopic": "aVR como Espelho",
+    "difficulty": "medium",
+    "stem": "A derivação aVR geralmente mostra deflexões opostas às demais derivações (QRS negativo, T negativa). Por quê?",
+    "options": [
+      "aVR é a câmera que olha o coração 'de cima e da direita' — praticamente todos os vetores se afastam dela, gerando deflexões negativas",
+      "aVR está conectada ao eletrodo de referência (terra) e inverte o sinal",
+      "O fio de aVR é mais longo e causa atenuação do sinal",
+      "aVR não registra atividade cardíaca real, apenas ruído"
+    ],
+    "answer_index": 0,
+    "explanation": "aVR está posicionada a -150° (braço direito, olhando de cima e da direita). O vetor de despolarização ventricular aponta para +60° (inferior e esquerdo) — OPOSTO a aVR. Como o vetor foge da câmera, tudo em aVR é predominantemente negativo. Por isso, aVR é o 'espelho' do coração: (1) Na pericardite: todas as câmeras mostram supra, aVR mostra infra; (2) Na oclusão de tronco de coronária esquerda: supra em aVR (o vetor de lesão VAI na direção de aVR). Se aVR mostra positividade quando normalmente é negativa, preste atenção!",
+    "tag": "analogia_avr"
+  },
+  {
+    "id": "cam_009",
+    "topic": "Analogia das Câmeras",
+    "subtopic": "Zona de Transição",
+    "difficulty": "easy",
+    "stem": "A zona de transição nas derivações precordiais é o ponto onde R = S (complexo bifásico). Normalmente ocorre entre V3-V4. O que isso significa na analogia das câmeras?",
+    "options": [
+      "É o ponto onde a câmera está exatamente PERPENDICULAR ao vetor — não vê ele se aproximar nem se afastar",
+      "É onde o eletrodo está exatamente sobre o septo interventricular",
+      "É o ponto de menor voltagem do coração",
+      "É onde o ramo direito e o ramo esquerdo se encontram"
+    ],
+    "answer_index": 0,
+    "explanation": "Na zona de transição, a câmera precordial está a ~90° do vetor QRS principal. Como vimos, câmera perpendicular = complexo bifásico (R ≈ S). As câmeras à direita da transição (V1-V2) veem o vetor se afastar (S > R). As câmeras à esquerda (V5-V6) veem o vetor chegar (R > S). A transição normal é entre V3-V4. Transição precoce (V1-V2): rotação horária ou hipertrofia de VD. Transição tardia (V5-V6): rotação anti-horária ou hipertrofia de VE.",
+    "tag": "analogia_transicao"
+  },
+  {
+    "id": "cam_010",
+    "topic": "Analogia das Câmeras",
+    "subtopic": "Derivações como Ângulos",
+    "difficulty": "easy",
+    "stem": "As 6 derivações do plano frontal (DI, DII, DIII, aVR, aVL, aVF) formam um sistema de câmeras a cada 30°. Qual derivação está a 0° e qual está a +90°?",
+    "options": [
+      "DI está a 0° (olha para a esquerda) e aVF está a +90° (olha para baixo)",
+      "aVR está a 0° e DII está a +90°",
+      "aVL está a 0° e DIII está a +90°",
+      "DII está a 0° e DI está a +90°"
+    ],
+    "answer_index": 0,
+    "explanation": "O sistema hexaxial de Einthoven: DI = 0° (horizontal, olha para a esquerda), DII = +60° (inferior-esquerdo), DIII = +120° (inferior-direito), aVR = -150° (superior-direito), aVL = -30° (superior-esquerdo), aVF = +90° (para baixo, inferior). Cada câmera está separada por 30° da vizinha. Saber a posição de cada câmera é essencial para calcular o eixo e entender territórios. O eixo normal do QRS fica entre -30° e +90° — ou seja, entre aVL e aVF.",
+    "tag": "analogia_plano_frontal"
+  },
+  {
+    "id": "cam_011",
+    "topic": "Analogia das Câmeras",
+    "subtopic": "Hipertrofia de VE",
+    "difficulty": "medium",
+    "stem": "Na hipertrofia ventricular esquerda, V1 mostra S muito profunda e V5-V6 mostram R muito alta. Como a analogia das câmeras explica isso?",
+    "options": [
+      "O vetor de despolarização do VE hipertrofiado é mais potente e aponta mais para a esquerda — V1 vê ele fugir (S profunda) e V5-V6 veem ele chegar com força (R alta)",
+      "O VE hipertrofiado comprime V1 e empurra o sinal para V5-V6",
+      "Os eletrodos V5-V6 ficam mais próximos quando o coração cresce",
+      "A hipertrofia altera a impedância do tórax de forma assimétrica"
+    ],
+    "answer_index": 0,
+    "explanation": "Na HVE, a massa do VE é maior, gerando um vetor de despolarização mais potente e mais desviado para a esquerda. As câmeras V5-V6 (laterais) estão de frente para esse vetor aumentado → registram ondas R gigantes (mais altas que o normal). V1 (direita) vê esse mesmo vetor potente SE AFASTANDO → registra S muito profunda. É o mesmo princípio normal, mas amplificado. Por isso os critérios de voltagem para HVE usam a soma: S de V1 + R de V5 ou V6 ≥ 35 mm (Sokolow-Lyon).",
+    "tag": "analogia_hve"
+  },
+  {
+    "id": "cam_012",
+    "topic": "Analogia das Câmeras",
+    "subtopic": "BRE e Câmeras",
+    "difficulty": "hard",
+    "stem": "No BRE (bloqueio de ramo esquerdo), V1 mostra QS ou rS e V6 mostra R alargado sem Q. Por que o BRE inverte o padrão esperado de despolarização?",
+    "options": [
+      "Sem ramo esquerdo, a despolarização do VE ocorre de forma lenta e anômala (via miocárdio, não Purkinje) — o vetor vai para a esquerda de forma mais lenta, prolongando o que V1 e V6 filmam",
+      "O BRE inverte a posição anatômica dos ventrículos",
+      "V1 e V6 trocam de polaridade no BRE",
+      "O BRE bloqueia apenas as câmeras precordiais"
+    ],
+    "answer_index": 0,
+    "explanation": "Normalmente, o septo despolariza da esquerda para a direita (gerando a onda r em V1 e q em V6). No BRE, o septo despolariza da DIREITA para a esquerda (invertido), eliminando a r inicial de V1 e a q septal de V6. O VE é despolarizado lentamente via miocárdio (não pelo sistema de Purkinje normal), gerando um QRS alargado (≥ 120 ms). V1 (câmera direita) vê TODA a despolarização se afastar → QS profundo. V6 (câmera esquerda) vê TODA a despolarização chegar lentamente → R alargado, em platô, sem q septal. O BRE também altera a repolarização (ST e T discordantes ao QRS).",
+    "tag": "analogia_bre"
+  },
+  {
+    "id": "cam_013",
+    "topic": "Analogia das Câmeras",
+    "subtopic": "IAM Posterior",
+    "difficulty": "hard",
+    "stem": "No IAM posterior, nenhuma das 12 derivações padrão filma diretamente a parede posterior. Como identificamos o infarto posterior no ECG convencional?",
+    "options": [
+      "Olhando as câmeras ANTERIORES (V1-V3) que mostram as alterações em ESPELHO: R alta (espelho de Q), infra de ST (espelho de supra) e T positiva (espelho de T invertida)",
+      "O IAM posterior não pode ser diagnosticado pelo ECG de 12 derivações",
+      "Aparece como supra de ST em V1-V3 diretamente",
+      "Só aparece como alteração em aVR"
+    ],
+    "answer_index": 0,
+    "explanation": "A parede posterior não tem câmeras dedicadas no ECG de 12 derivações padrão. Mas V1-V3 estão OPOSTAS à parede posterior — então filmam o ESPELHO do infarto. O que seria Q posterior vira R anterior (R alta em V1). O que seria supra de ST posterior vira infra em V1-V3. O que seria T invertida posterior vira T positiva em V1-V3. Dica: pegue o ECG e vire V1-V3 de cabeça para baixo (espelho) — se parecer um STEMI, é IAM posterior! Derivações posteriores (V7-V9) confirmam: supra ≥ 0,5 mm. Geralmente acompanha STEMI inferior (CD ou Cx).",
+    "tag": "analogia_iam_posterior"
+  },
+  {
+    "id": "cam_014",
+    "topic": "Analogia das Câmeras",
+    "subtopic": "Eixo e Derivação Perpendicular",
+    "difficulty": "medium",
+    "stem": "Para calcular o eixo cardíaco rapidamente, você procura a derivação com QRS mais BIFÁSICO (R ≈ S). Se aVF mostra QRS bifásico, qual é o eixo aproximado?",
+    "options": [
+      "0° — porque aVF está a +90° e a derivação perpendicular ao eixo é bifásica, logo o eixo está a 90° de aVF = 0°",
+      "+90° — o eixo é igual ao ângulo de aVF",
+      "+60° — eixo normal padrão",
+      "-90° — eixo desviado para a direita"
+    ],
+    "answer_index": 0,
+    "explanation": "Método rápido para o eixo: (1) Encontre a derivação com QRS mais bifásico; (2) O eixo é PERPENDICULAR a ela (±90°); (3) Verifique em qual dos dois sentidos perpendiculares o eixo aponta olhando uma derivação adjacente. aVF está a +90° → perpendicular = 0° ou 180°. Se DI é positiva, o eixo vai para a esquerda = 0° (confirmado). Se DI fosse negativa, seria 180° (desvio extremo à direita). A câmera bifásica é a que está 'de lado' para o vetor — como a perpendicular de um carro passando.",
+    "tag": "analogia_eixo_calculo"
+  },
+  {
+    "id": "cam_015",
+    "topic": "Analogia das Câmeras",
+    "subtopic": "Corrente de Lesão",
+    "difficulty": "hard",
+    "stem": "No STEMI, por que a câmera (derivação) que filma a zona de lesão transmural registra supra de ST? Qual é o mecanismo elétrico?",
+    "options": [
+      "O miocárdio isquêmico gera um vetor de 'corrente de lesão' que aponta da zona sã para a zona lesada — a câmera sobre a lesão vê esse vetor chegando (supra)",
+      "O supra é causado por artefato dos eletrodos sobre área edemaciada",
+      "O coração lesado gera mais voltagem que o normal",
+      "O supra ocorre por aumento da velocidade de condução na zona isquêmica"
+    ],
+    "answer_index": 0,
+    "explanation": "A corrente de lesão: na isquemia transmural, a zona lesada mantém um potencial de repouso menos negativo que a zona sã (parcialmente despolarizada). Isso cria uma corrente que flui do miocárdio são para o lesado. O resultado: durante o segmento ST (quando todo o ventrículo deveria estar uniformemente despolarizado), a diferença de potencial gera um VETOR DE CORRENTE DE LESÃO que aponta em direção à zona lesada. A câmera sobre a lesão vê esse vetor CHEGANDO = supra de ST. As câmeras opostas veem ele SE AFASTANDO = infra recíproco. O modelo diastólico-sistólico explica: há depressão de TQ (baseline) que aparece como supra de ST relativo.",
+    "tag": "analogia_corrente_lesao"
+  }
+]

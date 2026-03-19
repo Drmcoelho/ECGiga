@@ -1,0 +1,55 @@
+{
+  "id": "caso-10-intoxicacao-digital",
+  "title": "Intoxicação Digitálica — Arritmias Paradoxais e Cubeta",
+  "difficulty": "hard",
+  "context": "Paciente de 78 anos, feminina, portadora de insuficiência cardíaca com fração de ejeção reduzida (FEVE 30%), fibrilação atrial crônica e doença renal crônica estágio 3 (TFG 38 mL/min). Em uso de digoxina 0,25 mg/dia, furosemida 40 mg/dia, carvedilol 12,5 mg 2x/dia, enalapril 10 mg 2x/dia. Procura PS com náuseas persistentes há 3 dias, vômitos, inapetência e visão 'amarelada' (xantopsia). Refere palpitações irregulares e tontura. Sinais vitais: PA 100/60 mmHg, FC 50 bpm (irregular), FR 16 irpm, SpO2 96%. Ao exame: bradicárdica, irregular, com pausas. Laboratório: K+ = 3,1 mEq/L, Cr = 2,1 mg/dL, digoxinemia = 3,2 ng/mL (terapêutico: 0,5-2,0 ng/mL).",
+  "phases": [
+    {
+      "step": 1,
+      "instruction": "Observe a morfologia do segmento ST nas derivações laterais (DI, aVL, V5, V6). Identifique o padrão de 'cubeta digitálica'. Isso indica toxicidade?",
+      "expected": "As derivações laterais mostram a 'cubeta digitálica' (Salvador Dalí sign): depressão do segmento ST com concavidade para cima, lembrando uma colher invertida ou o bigode de Salvador Dalí. O ST desce, faz uma curva convexa para baixo e sobe para a onda T. IMPORTANTE: a cubeta NÃO indica toxicidade — indica IMPREGNAÇÃO (efeito terapêutico). A cubeta aparece com níveis terapêuticos de digoxina e é esperada. A intoxicação é diagnosticada por ARRITMIAS + sintomas clínicos, não pela cubeta isoladamente.",
+      "hints": [
+        "Cubeta digitálica = impregnação (efeito da droga), NÃO toxicidade",
+        "A cubeta sem arritmia é achado normal em paciente usando digoxina — não alarme"
+      ]
+    },
+    {
+      "step": 2,
+      "instruction": "Analise o ritmo. Quais arritmias você identifica? Por que são chamadas de 'paradoxais'?",
+      "expected": "O ECG mostra: (1) Ritmo juncional acelerado (FC juncional ~50-70 bpm, substituindo a FA de base); (2) Bigeminismo ventricular (extrassístoles ventriculares alternando com batimentos juncionals). As arritmias da intoxicação digitálica são chamadas de 'paradoxais' porque a digoxina causa SIMULTANEAMENTE: aumento do automatismo (extrassístoles, taquicardias ectópicas) + depressão da condução (bradicardia, BAV). Essa combinação de 'acelera + freia' é característica. Arritmias típicas: TAM com BAV, ritmo juncional acelerado, bigeminismo/trigeminismo ventricular, TV bidirecional (patognomônica).",
+      "hints": [
+        "A combinação de automatismo aumentado + condução deprimida é a marca da intoxicação digitálica",
+        "TV bidirecional (QRS alternando entre dois eixos) é patognomônica de toxicidade digitálica"
+      ]
+    },
+    {
+      "step": 3,
+      "instruction": "O potássio está baixo (K+ = 3,1). Qual a relação entre hipocalemia e intoxicação digitálica? Por que a furosemida é relevante?",
+      "expected": "A digoxina e o potássio competem pelo MESMO sítio na bomba Na+/K+ ATPase. A hipocalemia POTENCIALIZA a toxicidade da digoxina — com menos K+ competindo, mais digoxina se liga à bomba, aumentando seu efeito tóxico MESMO com níveis séricos de digoxina normais. A furosemida (diurético de alça) causa perda renal de K+ e Mg²+, sendo a principal causa de hipocalemia nesta paciente. A DRC reduz a excreção renal de digoxina (eliminação ~70% renal), elevando os níveis séricos. Fatores que contribuíram: DRC (↑ digoxinemia) + furosemida (↓ K+) + desidratação por vômitos (↓ TFG agudamente).",
+      "hints": [
+        "Hipocalemia é o principal fator precipitante de intoxicação digitálica — K+ e digoxina competem pelo mesmo receptor",
+        "A tríade perigosa: DRC (acumula digoxina) + diurético de alça (perde K+) + desidratação (piora DRC)"
+      ]
+    },
+    {
+      "step": 4,
+      "instruction": "Qual a conduta terapêutica? Em qual situação está indicado o anticorpo antidigoxina (Digibind/DigiFab)?",
+      "expected": "Conduta: (1) SUSPENDER digoxina imediatamente; (2) Monitorização contínua em UTI; (3) CORRIGIR K+ — repor potássio IV para K+ alvo 4,0-5,0 mEq/L (K+ alto inibe a ligação da digoxina à bomba Na+/K+); (4) Corrigir Mg²+ (frequentemente depletado junto com K+); (5) Tratar bradicardia: atropina se sintomática (cuidado: pode precipitar TV em contexto de toxicidade digitálica); (6) Anticorpo antidigoxina (Digibind/DigiFab): indicado em arritmias com instabilidade hemodinâmica, K+ > 5,0 (hipercalemia pela toxicidade grave), ingestão maciça intencional, bradicardia refratária. CONTRAINDICADO na intoxicação digitálica: cardioversão elétrica (pode precipitar FV refratária) — use somente se FV/TV sem pulso como último recurso.",
+      "hints": [
+        "Corrigir K+ é prioridade — a reposição de potássio compete com a digoxina pelo receptor",
+        "Cardioversão elétrica é perigosa na intoxicação digitálica — pode causar FV refratária"
+      ]
+    }
+  ],
+  "final_interpretation": "ECG com ritmo juncional acelerado (substituindo FA de base), cubeta digitálica em derivações laterais, bigeminismo ventricular, FC média de 50 bpm. Diagnóstico: intoxicação digitálica com arritmias paradoxais (automatismo aumentado + condução deprimida), precipitada por DRC (acúmulo de digoxina), hipocalemia (furosemida) e provável desidratação. Digoxinemia = 3,2 ng/mL (tóxica).",
+  "learning_points": [
+    "Cubeta digitálica = IMPREGNAÇÃO, não toxicidade. Intoxicação é diagnosticada por ARRITMIAS + sintomas, não pela cubeta isolada",
+    "Arritmias 'paradoxais' da intoxicação: automatismo aumentado (EV, TV, taquicardias ectópicas) + condução deprimida (bradicardia, BAV) simultaneamente",
+    "TV bidirecional (QRS alternando entre 2 eixos) é PATOGNOMÔNICA de intoxicação digitálica",
+    "Hipocalemia POTENCIALIZA toxicidade digitálica — K+ e digoxina competem pelo mesmo sítio na Na+/K+ ATPase",
+    "A tríade perigosa: DRC (acumula digoxina) + diurético de alça (perde K+) + desidratação",
+    "Cardioversão elétrica é PERIGOSA na intoxicação digitálica — pode precipitar FV refratária. Usar anticorpo antidigoxina (Digibind) se arritmia grave"
+  ],
+  "linked_skills": ["drug_effects_ecg", "electrolyte_arrhythmia", "cardiac_glycosides"],
+  "disclaimer": "Conteúdo exclusivamente educacional. Este caso clínico é fictício e destina-se ao ensino de eletrocardiografia. Não substitui avaliação clínica profissional."
+}

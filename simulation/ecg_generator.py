@@ -146,6 +146,54 @@ def _generate_precordial(beat_ii: np.ndarray, lead_name: str) -> np.ndarray:
     return result
 
 
+def _generate_rr_intervals(
+    hr_bpm: float, n_beats: int, mode: str = "sinus",
+    rsa_amplitude: float = 0.03, rsa_freq: float = 0.2,
+) -> np.ndarray:
+    """Generate physiologically realistic RR intervals with HRV.
+
+    Parameters
+    ----------
+    hr_bpm : float
+        Mean heart rate in BPM.
+    n_beats : int
+        Number of beats to generate.
+    mode : str
+        "sinus" — normal sinus rhythm with respiratory sinus arrhythmia (RSA)
+        "af" — atrial fibrillation (irregularly irregular)
+        "regular" — perfectly regular (pacemaker-like)
+    rsa_amplitude : float
+        Amplitude of RSA modulation (fraction of RR, default 3%).
+    rsa_freq : float
+        Respiratory rate in Hz (default 0.2 Hz = 12 breaths/min).
+
+    Returns
+    -------
+    np.ndarray
+        Array of RR intervals in seconds.
+    """
+    rr_mean = 60.0 / hr_bpm
+
+    if mode == "regular":
+        return np.full(n_beats, rr_mean)
+
+    if mode == "af":
+        # Irregularly irregular: exponential distribution clipped to reasonable range
+        rr_intervals = np.random.exponential(rr_mean * 0.85, n_beats)
+        rr_intervals = np.clip(rr_intervals, 0.35, 1.8)
+        return rr_intervals
+
+    # Normal sinus: HRV with RSA + small random jitter
+    beat_times = np.arange(n_beats) * rr_mean
+    # Respiratory sinus arrhythmia (RSA)
+    rsa = rr_mean * rsa_amplitude * np.sin(2 * np.pi * rsa_freq * beat_times)
+    # Random beat-to-beat jitter (SDNN ~30-50ms for normal)
+    jitter = np.random.normal(0, rr_mean * 0.025, n_beats)  # 2.5% CV
+    rr_intervals = rr_mean + rsa + jitter
+    rr_intervals = np.clip(rr_intervals, rr_mean * 0.7, rr_mean * 1.3)
+    return rr_intervals
+
+
 def generate_ecg(
     hr_bpm: float = 72,
     pr_ms: float = 160,
@@ -155,8 +203,9 @@ def generate_ecg(
     noise: float = 0.02,
     duration_s: float = 10,
     fs: int = 500,
+    hrv_mode: str = "sinus",
 ) -> dict[str, Any]:
-    """Generate a synthetic 12-lead ECG.
+    """Generate a synthetic 12-lead ECG with realistic beat-to-beat variability.
 
     Parameters
     ----------
@@ -176,6 +225,8 @@ def generate_ecg(
         Total ECG duration in seconds.
     fs : int
         Sampling frequency (Hz).
+    hrv_mode : str
+        HRV mode: "sinus" (default), "af", or "regular".
 
     Returns
     -------
@@ -185,33 +236,70 @@ def generate_ecg(
     n_total = int(duration_s * fs)
     t = np.linspace(0, duration_s, n_total, endpoint=False)
 
-    # Beat-to-beat interval
-    rr_s = 60.0 / hr_bpm
-    beat_samples = int(rr_s * fs)
-    if beat_samples < 10:
-        beat_samples = 10
+    # Estimate number of beats needed
+    rr_mean = 60.0 / hr_bpm
+    n_beats_est = int(np.ceil(duration_s / rr_mean)) + 2
+    rr_intervals = _generate_rr_intervals(hr_bpm, n_beats_est, mode=hrv_mode)
 
-    # Generate single beat template
-    beat_template = _single_beat(rr_s, fs, pr_ms, qrs_ms, qt_ms)
+    # Build signal beat-by-beat with individual RR intervals and morphology variation
+    signal_ii = np.zeros(n_total)
+    sample_pos = 0
+    beat_boundaries: list[int] = []
 
-    # Tile beats to fill duration
-    n_beats = int(np.ceil(n_total / beat_samples)) + 1
-    tiled = np.tile(beat_template, n_beats)[:n_total]
+    for beat_idx in range(n_beats_est):
+        rr_s = float(rr_intervals[beat_idx])
+        beat_samples = int(rr_s * fs)
+        if beat_samples < 10:
+            beat_samples = 10
+        if sample_pos >= n_total:
+            break
+
+        # Generate this beat with slight morphology variation
+        p_amp_var = 1.0 + np.random.uniform(-0.10, 0.10)   # ±10% P amplitude
+        t_amp_var = 1.0 + np.random.uniform(-0.05, 0.05)   # ±5% T amplitude
+        r_amp_var = 1.0 + np.random.uniform(-0.03, 0.03)   # ±3% R amplitude
+
+        beat = _single_beat(rr_s, fs, pr_ms, qrs_ms, qt_ms)
+
+        # Apply morphology variation (P is first 15%, R is center, T is last 30%)
+        n_beat = len(beat)
+        p_end = int(n_beat * 0.15)
+        qrs_start = int(n_beat * 0.15)
+        qrs_end = int(n_beat * 0.35)
+        t_start = int(n_beat * 0.45)
+
+        beat[:p_end] *= p_amp_var
+        beat[qrs_start:qrs_end] *= r_amp_var
+        beat[t_start:] *= t_amp_var
+
+        # Place beat in signal
+        end_pos = min(sample_pos + n_beat, n_total)
+        actual_len = end_pos - sample_pos
+        signal_ii[sample_pos:end_pos] = beat[:actual_len]
+        beat_boundaries.append(sample_pos)
+        sample_pos += n_beat
 
     # Generate all 12 leads
     leads: dict[str, np.ndarray] = {}
 
     for lead_name in LEAD_NAMES:
         if lead_name in LEAD_AXES:
-            lead_signal = _project_frontal(tiled, axis_deg, lead_name)
+            lead_signal = _project_frontal(signal_ii, axis_deg, lead_name)
         else:
-            lead_signal = _generate_precordial(tiled, lead_name)
+            lead_signal = _generate_precordial(signal_ii, lead_name)
 
-        # Add baseline wander (low-frequency sinusoid)
-        wander = 0.05 * np.sin(2 * np.pi * 0.15 * t + np.random.uniform(0, 2 * np.pi))
+        # Add baseline wander (respiratory + low-frequency drift)
+        phase = np.random.uniform(0, 2 * np.pi)
+        wander = 0.04 * np.sin(2 * np.pi * 0.15 * t + phase)
+        wander += 0.02 * np.sin(2 * np.pi * 0.05 * t + phase * 0.7)  # slow drift
 
-        # Add noise
-        lead_noise = np.random.normal(0, noise, n_total) if noise > 0 else np.zeros(n_total)
+        # Add EMG-like noise (higher frequency component)
+        lead_noise = np.zeros(n_total)
+        if noise > 0:
+            lead_noise = np.random.normal(0, noise, n_total)
+            # Add occasional 50/60Hz powerline artifact (very subtle)
+            powerline = 0.005 * np.sin(2 * np.pi * 60 * t + np.random.uniform(0, 2 * np.pi))
+            lead_noise += powerline
 
         leads[lead_name] = lead_signal + wander + lead_noise
 
@@ -227,7 +315,9 @@ def generate_ecg(
             "noise": noise,
             "duration_s": duration_s,
             "fs": fs,
+            "hrv_mode": hrv_mode,
         },
+        "beat_boundaries": beat_boundaries,
     }
 
 
@@ -243,6 +333,9 @@ _PATHOLOGY_CONFIGS: dict[str, dict[str, Any]] = {
     "stemi_inferior": {
         "description_pt": "STEMI inferior — supradesnivelamento de ST em II, III, aVF",
     },
+    "stemi_lateral": {
+        "description_pt": "STEMI lateral — supradesnivelamento de ST em I, aVL, V5-V6",
+    },
     "lbbb": {
         "qrs_ms": 150,
         "description_pt": "Bloqueio de ramo esquerdo — QRS > 120 ms, padrão QS em V1",
@@ -252,6 +345,7 @@ _PATHOLOGY_CONFIGS: dict[str, dict[str, Any]] = {
         "description_pt": "Bloqueio de ramo direito — QRS > 120 ms, RSR' em V1",
     },
     "af": {
+        "hrv_mode": "af",
         "description_pt": "Fibrilação atrial — ritmo irregularmente irregular, sem onda P",
     },
     "wpw": {
@@ -279,6 +373,27 @@ _PATHOLOGY_CONFIGS: dict[str, dict[str, Any]] = {
     "long_qt": {
         "qt_ms": 520,
         "description_pt": "QT longo — risco de Torsades de Pointes",
+    },
+    "brugada_type1": {
+        "description_pt": "Brugada tipo 1 — ST coved em V1-V2, T negativa",
+    },
+    "pericarditis": {
+        "description_pt": "Pericardite aguda — supra ST côncavo difuso, depressão PR, infra aVR",
+    },
+    "pe_pattern": {
+        "hr_bpm": 110,
+        "axis_deg": 105,
+        "description_pt": "Padrão de TEP — S1Q3T3, taquicardia sinusal, eixo à direita",
+    },
+    "lvh_strain": {
+        "description_pt": "HVE com strain — R alto em V5-V6, infra ST + T invertida lateral",
+    },
+    "first_degree_avb": {
+        "pr_ms": 240,
+        "description_pt": "BAV 1° grau — PR prolongado (> 200 ms)",
+    },
+    "early_repolarization": {
+        "description_pt": "Repolarização precoce — supra ST côncavo com entalhe J, benigno",
     },
 }
 
@@ -312,6 +427,7 @@ def generate_pathological_ecg(pathology: str = "stemi_anterior") -> dict[str, An
     qrs = config.get("qrs_ms", 90)
     qt = config.get("qt_ms", 380)
     axis = config.get("axis_deg", 60)
+    hrv_mode = config.get("hrv_mode", "sinus")
 
     ecg_data = generate_ecg(
         hr_bpm=hr,
@@ -322,6 +438,7 @@ def generate_pathological_ecg(pathology: str = "stemi_anterior") -> dict[str, An
         noise=0.02,
         duration_s=10,
         fs=500,
+        hrv_mode=hrv_mode,
     )
 
     # Apply pathology-specific modifications
@@ -590,6 +707,201 @@ def generate_pathological_ecg(pathology: str = "stemi_anterior") -> dict[str, An
     elif pathology == "long_qt":
         pass  # QT already set to 520 ms via config
 
+    elif pathology == "stemi_lateral":
+        rr_samples = int(500 * 60.0 / hr)
+        for lead in ("I", "aVL", "V5", "V6"):
+            signal = ecg_data["leads"][lead]
+            n = len(signal)
+            for beat_start in range(0, n, rr_samples):
+                st_start = beat_start + int(rr_samples * 0.35)
+                st_end = beat_start + int(rr_samples * 0.55)
+                if st_end > n:
+                    break
+                seg_len = st_end - st_start
+                elevation = 0.25 * np.ones(seg_len)
+                ramp = min(10, seg_len)
+                elevation[:ramp] = np.linspace(0, 0.25, ramp)
+                elevation[-ramp:] = np.linspace(0.25, 0, ramp)
+                signal[st_start:st_end] += elevation
+        # Reciprocal in III, aVF
+        for lead in ("III", "aVF"):
+            signal = ecg_data["leads"][lead]
+            n = len(signal)
+            for beat_start in range(0, n, rr_samples):
+                st_start = beat_start + int(rr_samples * 0.35)
+                st_end = beat_start + int(rr_samples * 0.55)
+                if st_end > n:
+                    break
+                seg_len = st_end - st_start
+                depression = 0.1 * np.ones(seg_len)
+                ramp = min(10, seg_len)
+                depression[:ramp] = np.linspace(0, 0.1, ramp)
+                depression[-ramp:] = np.linspace(0.1, 0, ramp)
+                signal[st_start:st_end] -= depression
+
+    elif pathology == "brugada_type1":
+        # Coved ST elevation in V1-V2 with negative T wave
+        rr_samples = int(500 * 60.0 / hr)
+        for lead in ("V1", "V2"):
+            signal = ecg_data["leads"][lead]
+            n = len(signal)
+            for beat_start in range(0, n, rr_samples):
+                # Coved ST: sharp rise at J-point then downsloping
+                j_point = beat_start + int(rr_samples * 0.28)
+                st_end = beat_start + int(rr_samples * 0.55)
+                if st_end > n:
+                    break
+                seg_len = st_end - j_point
+                # Coved pattern: starts high, slopes down
+                coved = 0.25 * np.exp(-np.linspace(0, 3, seg_len))
+                signal[j_point:st_end] += coved
+                # Invert T wave
+                t_start = beat_start + int(rr_samples * 0.50)
+                t_end = beat_start + int(rr_samples * 0.70)
+                if t_end > n:
+                    break
+                signal[t_start:t_end] *= -0.8
+
+    elif pathology == "pericarditis":
+        # Diffuse concave-up ST elevation + PR depression + aVR ST depression
+        rr_samples = int(500 * 60.0 / hr)
+        diffuse_leads = ["I", "II", "III", "aVL", "aVF", "V2", "V3", "V4", "V5", "V6"]
+        for lead in diffuse_leads:
+            signal = ecg_data["leads"][lead]
+            n = len(signal)
+            for beat_start in range(0, n, rr_samples):
+                # Concave-up ST elevation (less than STEMI, more diffuse)
+                st_start = beat_start + int(rr_samples * 0.30)
+                st_end = beat_start + int(rr_samples * 0.55)
+                if st_end > n:
+                    break
+                seg_len = st_end - st_start
+                x = np.linspace(0, np.pi, seg_len)
+                concave_up = 0.12 * np.sin(x)  # concave up shape
+                signal[st_start:st_end] += concave_up
+                # PR depression
+                pr_start = beat_start + int(rr_samples * 0.12)
+                pr_end = beat_start + int(rr_samples * 0.20)
+                if pr_end > n:
+                    break
+                pr_seg = pr_end - pr_start
+                signal[pr_start:pr_end] -= 0.05 * np.ones(pr_seg)
+
+        # aVR: ST depression + PR elevation (mirror)
+        signal_avr = ecg_data["leads"]["aVR"]
+        n = len(signal_avr)
+        for beat_start in range(0, n, rr_samples):
+            st_start = beat_start + int(rr_samples * 0.30)
+            st_end = beat_start + int(rr_samples * 0.55)
+            if st_end > n:
+                break
+            seg_len = st_end - st_start
+            signal_avr[st_start:st_end] -= 0.15 * np.ones(seg_len)
+
+    elif pathology == "pe_pattern":
+        # S1Q3T3: deep S in I, Q in III, inverted T in III/V1-V3
+        rr_samples = int(500 * 60.0 / hr)
+        # Deep S in lead I
+        signal_i = ecg_data["leads"]["I"]
+        n = len(signal_i)
+        for beat_start in range(0, n, rr_samples):
+            s_center = beat_start + int(rr_samples * 0.25)
+            if s_center + 15 > n:
+                break
+            t_local = np.arange(30) - 15
+            s_deep = -0.35 * np.exp(-(t_local**2) / (2 * 6**2))
+            start = max(0, s_center - 15)
+            end = min(n, s_center + 15)
+            signal_i[start:end] += s_deep[:end - start]
+
+        # Q in III
+        signal_iii = ecg_data["leads"]["III"]
+        for beat_start in range(0, n, rr_samples):
+            q_center = beat_start + int(rr_samples * 0.19)
+            if q_center + 10 > n:
+                break
+            t_local = np.arange(20) - 10
+            q_wave = -0.25 * np.exp(-(t_local**2) / (2 * 4**2))
+            start = max(0, q_center - 10)
+            end = min(n, q_center + 10)
+            signal_iii[start:end] += q_wave[:end - start]
+
+        # Inverted T in III, V1-V3
+        for lead in ("III", "V1", "V2", "V3"):
+            signal = ecg_data["leads"][lead]
+            for beat_start in range(0, n, rr_samples):
+                t_start = beat_start + int(rr_samples * 0.50)
+                t_end = beat_start + int(rr_samples * 0.70)
+                if t_end > n:
+                    break
+                signal[t_start:t_end] *= -0.7
+
+    elif pathology == "lvh_strain":
+        # Tall R in V5-V6, deep S in V1-V2, ST depression + T inversion in laterals
+        rr_samples = int(500 * 60.0 / hr)
+        n = len(ecg_data["time"])
+        # Amplify R in V5-V6
+        for lead in ("V5", "V6"):
+            ecg_data["leads"][lead] *= 1.8
+        # Deep S in V1-V2
+        for lead in ("V1", "V2"):
+            signal = ecg_data["leads"][lead]
+            for beat_start in range(0, n, rr_samples):
+                # Deepen S wave region
+                s_start = beat_start + int(rr_samples * 0.22)
+                s_end = beat_start + int(rr_samples * 0.30)
+                if s_end > n:
+                    break
+                signal[s_start:s_end] -= 0.4
+
+        # Strain pattern in lateral leads: downsloping ST + asymmetric T inversion
+        for lead in ("I", "aVL", "V5", "V6"):
+            signal = ecg_data["leads"][lead]
+            for beat_start in range(0, n, rr_samples):
+                # Downsloping ST depression
+                st_start = beat_start + int(rr_samples * 0.32)
+                st_end = beat_start + int(rr_samples * 0.50)
+                if st_end > n:
+                    break
+                seg_len = st_end - st_start
+                downslopping = -np.linspace(0.05, 0.15, seg_len)
+                signal[st_start:st_end] += downslopping
+                # Asymmetric T inversion (slow descent, rapid return)
+                t_start = beat_start + int(rr_samples * 0.50)
+                t_end = beat_start + int(rr_samples * 0.70)
+                if t_end > n:
+                    break
+                signal[t_start:t_end] *= -0.6
+
+    elif pathology == "first_degree_avb":
+        pass  # PR already set to 240 ms via config
+
+    elif pathology == "early_repolarization":
+        # Concave-up ST elevation with J-point notch in inferior/lateral leads
+        rr_samples = int(500 * 60.0 / hr)
+        for lead in ("II", "III", "aVF", "V4", "V5", "V6"):
+            signal = ecg_data["leads"][lead]
+            n = len(signal)
+            for beat_start in range(0, n, rr_samples):
+                # J-point notch
+                j_point = beat_start + int(rr_samples * 0.27)
+                if j_point + 8 > n:
+                    break
+                t_local = np.arange(16) - 8
+                notch = 0.08 * np.exp(-(t_local**2) / (2 * 3**2))
+                start = max(0, j_point - 8)
+                end = min(n, j_point + 8)
+                signal[start:end] += notch[:end - start]
+                # Subtle concave-up ST elevation
+                st_start = beat_start + int(rr_samples * 0.30)
+                st_end = beat_start + int(rr_samples * 0.50)
+                if st_end > n:
+                    break
+                seg_len = st_end - st_start
+                x = np.linspace(0, np.pi, seg_len)
+                elevation = 0.08 * np.sin(x)
+                signal[st_start:st_end] += elevation
+
     ecg_data["pathology"] = pathology
     ecg_data["pathology_description_pt"] = config.get("description_pt", "ECG normal")
     return ecg_data
@@ -628,8 +940,9 @@ def add_noise(signal: np.ndarray, snr_db: float = 20) -> np.ndarray:
 # ---------------------------------------------------------------------------
 
 
-def ecg_to_plotly_figure(ecg_data: dict, layout: str = "3x4") -> "go.Figure":
-    """Convert ECG data to a Plotly figure.
+def ecg_to_plotly_figure(ecg_data: dict, layout: str = "3x4",
+                         rhythm_strip: bool = True) -> "go.Figure":
+    """Convert ECG data to a Plotly figure with standard clinical format.
 
     Parameters
     ----------
@@ -637,16 +950,13 @@ def ecg_to_plotly_figure(ecg_data: dict, layout: str = "3x4") -> "go.Figure":
         Output from ``generate_ecg`` or ``generate_pathological_ecg``.
     layout : str
         Layout format: "3x4" (standard), "6x2", or "12x1".
+    rhythm_strip : bool
+        If True and layout is "3x4", add a long rhythm strip (lead II) at bottom.
 
     Returns
     -------
     plotly.graph_objects.Figure
         A Plotly figure ready for display.
-
-    Raises
-    ------
-    ImportError
-        If plotly is not installed.
     """
     if not HAS_PLOTLY:
         raise ImportError("Plotly is required for ecg_to_plotly_figure. pip install plotly")
@@ -662,6 +972,8 @@ def ecg_to_plotly_figure(ecg_data: dict, layout: str = "3x4") -> "go.Figure":
             ["II", "aVL", "V2", "V5"],
             ["III", "aVF", "V3", "V6"],
         ]
+        if rhythm_strip:
+            rows = 4  # Extra row for rhythm strip
     elif layout == "6x2":
         rows, cols = 6, 2
         lead_order = [
@@ -672,24 +984,40 @@ def ecg_to_plotly_figure(ecg_data: dict, layout: str = "3x4") -> "go.Figure":
             ["aVL", "V5"],
             ["aVF", "V6"],
         ]
+        rhythm_strip = False
     elif layout == "12x1":
         rows, cols = 12, 1
         lead_order = [[name] for name in LEAD_NAMES]
+        rhythm_strip = False
     else:
         raise ValueError(f"Unknown layout '{layout}'. Use '3x4', '6x2', or '12x1'.")
 
     # Flatten for subplot titles
     flat_leads = [lead for row in lead_order for lead in row]
+    if rhythm_strip:
+        flat_leads.extend(["II (ritmo contínuo)"] + [""] * (cols - 1))
+
+    # Row heights: rhythm strip gets more space
+    row_heights = [1.0] * (rows - (1 if rhythm_strip else 0))
+    if rhythm_strip:
+        row_heights.append(0.6)
+
+    # Specs for rhythm strip spanning all columns
+    specs = [[{} for _ in range(cols)] for _ in range(rows)]
+    if rhythm_strip:
+        specs[-1] = [{"colspan": cols}] + [None] * (cols - 1)
 
     fig = make_subplots(
         rows=rows,
         cols=cols,
         subplot_titles=flat_leads,
-        vertical_spacing=0.03,
+        vertical_spacing=0.04,
         horizontal_spacing=0.03,
+        row_heights=row_heights,
+        specs=specs,
     )
 
-    # Show only 2.5 seconds per strip (standard)
+    # Show 2.5 seconds per strip (standard clinical)
     t_max = min(2.5, time_arr[-1])
     mask = time_arr <= t_max
 
@@ -701,15 +1029,35 @@ def ecg_to_plotly_figure(ecg_data: dict, layout: str = "3x4") -> "go.Figure":
                     x=time_arr[mask],
                     y=signal[mask],
                     mode="lines",
-                    line=dict(color="black", width=1),
+                    line=dict(color="#111111", width=1.2),
                     name=lead_name,
                     showlegend=False,
+                    hovertemplate=f"{lead_name}: %{{y:.2f}} mV<br>t=%{{x:.3f}}s",
                 ),
                 row=r_idx + 1,
                 col=c_idx + 1,
             )
 
-    # Style
+    # Rhythm strip: lead II, 10 seconds
+    if rhythm_strip:
+        signal_ii = leads_data.get("II", np.zeros_like(time_arr))
+        # Show full 10s rhythm strip
+        rhythm_mask = time_arr <= min(10.0, time_arr[-1])
+        fig.add_trace(
+            go.Scatter(
+                x=time_arr[rhythm_mask],
+                y=signal_ii[rhythm_mask],
+                mode="lines",
+                line=dict(color="#111111", width=1.2),
+                name="II (ritmo)",
+                showlegend=False,
+                hovertemplate="II: %{y:.2f} mV<br>t=%{x:.3f}s",
+            ),
+            row=rows,
+            col=1,
+        )
+
+    # Style — clinical ECG paper
     title = "ECG 12 Derivações"
     pathology = ecg_data.get("pathology")
     if pathology and pathology != "normal":
@@ -717,30 +1065,47 @@ def ecg_to_plotly_figure(ecg_data: dict, layout: str = "3x4") -> "go.Figure":
         title = f"ECG — {desc}"
 
     fig.update_layout(
-        title=title,
-        height=200 * rows,
+        title=dict(text=title, font=dict(size=14, family="Arial")),
+        height=180 * rows + 40,
         width=300 * cols,
         paper_bgcolor="#FFF5F5",
         plot_bgcolor="#FFF5F5",
-        font=dict(size=10),
-        margin=dict(l=40, r=20, t=60, b=20),
+        font=dict(size=9, family="Arial"),
+        margin=dict(l=35, r=15, t=50, b=15),
     )
 
-    # Grid lines to simulate ECG paper
-    for i in range(1, rows * cols + 1):
+    # ECG paper grid: major grid (5mm=0.2s/0.5mV) and styling
+    total_subplots = rows * cols
+    for i in range(1, total_subplots + 1):
+        r = (i - 1) // cols + 1
+        c = (i - 1) % cols + 1
+        # Skip None cells (colspan for rhythm strip)
+        if rhythm_strip and r == rows and c > 1:
+            continue
         fig.update_xaxes(
             showgrid=True,
-            gridcolor="rgba(255,150,150,0.4)",
+            gridcolor="rgba(220,100,100,0.35)",
             dtick=0.2,
-            row=(i - 1) // cols + 1,
-            col=(i - 1) % cols + 1,
+            minor=dict(dtick=0.04, showgrid=True, gridcolor="rgba(220,100,100,0.12)"),
+            showticklabels=False,
+            zeroline=False,
+            row=r, col=c,
         )
         fig.update_yaxes(
             showgrid=True,
-            gridcolor="rgba(255,150,150,0.4)",
+            gridcolor="rgba(220,100,100,0.35)",
             dtick=0.5,
-            row=(i - 1) // cols + 1,
-            col=(i - 1) % cols + 1,
+            minor=dict(dtick=0.1, showgrid=True, gridcolor="rgba(220,100,100,0.12)"),
+            showticklabels=False,
+            zeroline=False,
+            range=[-1.5, 1.5],
+            row=r, col=c,
         )
+
+    # Rhythm strip: show time labels
+    if rhythm_strip:
+        fig.update_xaxes(showticklabels=True, title_text="Tempo (s)",
+                         row=rows, col=1)
+        fig.update_yaxes(range=[-1.5, 1.5], row=rows, col=1)
 
     return fig
