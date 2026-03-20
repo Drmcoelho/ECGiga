@@ -1,0 +1,482 @@
+[
+  {
+    "id": "sinusal_001",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Taquicardia Sinusal — Reconhecimento ECG",
+    "difficulty": "easy",
+    "stem": "Paciente de 28 anos, febril (39,5°C), taquicárdico. ECG: FC 118 bpm, ondas P positivas em DII, negativas em aVR, PR 160 ms, QRS estreito. Qual o diagnóstico?",
+    "options": [
+      "Taquicardia sinusal — onda P sinusal, PR normal, FC > 100 bpm",
+      "Flutter atrial 2:1 — ondas serrilhadas com padrão regulatório",
+      "Taquicardia juncional — onda P ausente ou retrógrada",
+      "Taquicardia atrial — onda P diferente da sinusal, FC > 100 bpm"
+    ],
+    "answer_index": 0,
+    "explanation": "Taquicardia sinusal: FC > 100 bpm com onda P de morfologia sinusal (positiva em DII, negativa em aVR), PR normal (120–200 ms) e QRS estreito. A febre é causa fisiológica clássica — cada grau Celsius acima de 37°C aumenta a FC em ~10 bpm. Flutter 2:1 teria ondas F serrilhadas a ~300 bpm; taquicardia juncional teria P ausente ou retrógrada (negativa em DII); taquicardia atrial teria P de morfologia diferente.",
+    "tag": "taquicardia_sinusal_ecg"
+  },
+  {
+    "id": "sinusal_002",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Taquicardia Sinusal — Causas Fisiológicas",
+    "difficulty": "easy",
+    "stem": "Atleta de 22 anos apresenta FC 130 bpm durante corrida em esteira. ECG de esforço mostra P positiva em DII, PR 150 ms. Qual o mecanismo principal desta taquicardia?",
+    "options": [
+      "Aumento do tônus simpático e queda do tônus parassimpático com liberação de catecolaminas",
+      "Reentrada no nó AV deflagrada pelo aumento do retorno venoso",
+      "Bloqueio do canal If pelo aumento de adrenalina",
+      "Automaticidade anormal de foco atrial ectópico"
+    ],
+    "answer_index": 0,
+    "explanation": "Durante o exercício, o sistema nervoso simpático aumenta o disparo de noradrenalina e adrenalina, que atuam em receptores β1 do nó sinusal, acelerando a despolarização espontânea (corrente If). Simultaneamente, o tônus parassimpático (vagal) cai. Esse mecanismo dual explica a taquicardia sinusal fisiológica do exercício. A corrente If NÃO é bloqueada pela adrenalina — ela é ativada pelo cAMP; a ivabradina é que a bloqueia.",
+    "tag": "taquicardia_sinusal_fisiologica"
+  },
+  {
+    "id": "sinusal_003",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Taquicardia Sinusal — Causas Farmacológicas",
+    "difficulty": "medium",
+    "stem": "Paciente de 45 anos, asmático, em uso de teofilina e salbutamol, apresenta FC 122 bpm. Qual o mecanismo pelo qual esses fármacos causam taquicardia sinusal?",
+    "options": [
+      "Teofilina inibe a fosfodiesterase (aumenta cAMP) e salbutamol ativa receptores β2 (e β1 em altas doses), ambos elevando a automaticidade do nó sinusal",
+      "Teofilina bloqueia canais de K+ e salbutamol bloqueia canais de Na+",
+      "Ambos atuam bloqueando receptores muscarínicos M2 no nó sinusal",
+      "Teofilina aumenta o tônus vagal e salbutamol age diretamente no nó AV"
+    ],
+    "answer_index": 0,
+    "explanation": "Teofilina é antagonista da adenosina e inibidor da fosfodiesterase — inibe a degradação do cAMP, mantendo-o elevado, o que acelera a corrente If no nó sinusal. Salbutamol é β2-agonista broncodilatador, mas em doses maiores ou com alta FC de base, pode ativar receptores β1 cardíacos. Ambos são causas farmacológicas clássicas de taquicardia sinusal. A cafeína também atua como antagonista da adenosina. Atropina causa taquicardia por bloqueio muscarínico, não é o mecanismo aqui.",
+    "tag": "taquicardia_sinusal_farmacologica"
+  },
+  {
+    "id": "sinusal_004",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Taquicardia Sinusal — Causas Patológicas",
+    "difficulty": "hard",
+    "stem": "Paciente de 67 anos, imobilizado após cirurgia ortopédica, apresenta dispneia súbita, saturação de 88% e FC 124 bpm. ECG: taquicardia sinusal com padrão S1Q3T3. Qual a causa mais provável da taquicardia?",
+    "options": [
+      "Tromboembolismo pulmonar — hipoxemia e aumento da resistência vascular pulmonar ativam o simpático",
+      "Taquicardia sinusal inapropriada — disfunção autonômica primária",
+      "Fibrilação atrial paroxística oculta sob aparência sinusal",
+      "Efeito de anticoagulante profilático sobre o nó sinusal"
+    ],
+    "answer_index": 0,
+    "explanation": "O quadro é clássico de TEP: imobilização pós-cirúrgica (fator de risco para TVP), hipoxemia súbita, taquicardia sinusal e padrão S1Q3T3 (onda S em DI, onda Q em DIII, T invertida em DIII — sobrecarga aguda de VD). A taquicardia no TEP é reflexa: hipoxemia ativa quimiorreceptores e o sistema simpático; o aumento da pós-carga do VD e queda do débito cardíaco também estimulam taquicardia compensatória. A taquicardia sinusal NO TEP é um marcador de gravidade.",
+    "tag": "taquicardia_sinusal_TEP"
+  },
+  {
+    "id": "sinusal_005",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Taquicardia Sinusal — Causas Patológicas",
+    "difficulty": "hard",
+    "stem": "Paciente séptico em UTI: PA 80/50, lactato 4,2 mmol/L, FC 138 bpm, T 39,8°C. Por que a taquicardia sinusal é tão intensa nesse cenário?",
+    "options": [
+      "Hipovolemia relativa + vasodilatação sistêmica + mediadores inflamatórios (IL-6, TNF-α) + febre ativam reflexo barorreceptor e sistema simpático",
+      "Miocardite séptica destrói o nó AV, gerando ritmo de escape acelerado",
+      "Hiperlactatemia bloqueia canais de K+ no nó sinusal causando automaticidade aumentada",
+      "Vasopressores usados na sepse bloqueiam receptores β2 pulmonares"
+    ],
+    "answer_index": 0,
+    "explanation": "Na sepse, múltiplos mecanismos convergem para taquicardia sinusal: (1) queda da PA por vasodilatação → barorreceptores ativam simpático; (2) hipovolemia relativa por vazamento capilar → mesmo mecanismo; (3) febre aumenta a FC ~10 bpm/°C; (4) mediadores inflamatórios (IL-1β, IL-6, TNF-α) têm efeito cronotrópico positivo direto; (5) hipoxemia tecidual (lactato elevado) ativa quimiorreceptores. A taquicardia sinusal na sepse é um marcador de gravidade hemodinâmica.",
+    "tag": "taquicardia_sinusal_sepse"
+  },
+  {
+    "id": "sinusal_006",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Taquicardia Sinusal — Causas Hormonais",
+    "difficulty": "medium",
+    "stem": "Mulher de 32 anos, perda ponderal de 8 kg em 2 meses, nervosismo, exoftalmia, FC 118 bpm em repouso. Qual o mecanismo pelo qual a tireotoxicose causa taquicardia sinusal?",
+    "options": [
+      "T3/T4 aumentam a expressão de receptores β1 e potencializam a ação das catecolaminas no nó sinusal, acelerando a corrente If",
+      "Hormônio tireoidiano bloqueia o nó AV, fazendo o nó sinusal disparar mais rápido para compensar",
+      "T3 inibe a recaptação de noradrenalina na fenda sináptica cardíaca, causando excesso simpático",
+      "Tireotoxicose causa hipercalemia que despolariza o nó sinusal"
+    ],
+    "answer_index": 0,
+    "explanation": "Hormônios tireoidianos (principalmente T3) têm efeito inotrópico e cronotrópico positivo por múltiplos mecanismos: (1) upregulation de receptores β1 adrenérgicos no miocárdio — o coração fica hipersensível às catecolaminas; (2) T3 acelera diretamente a corrente funny (If) no nó sinusal; (3) aumenta a expressão de MHC-α (miosina mais rápida). O resultado é taquicardia sinusal em repouso, que pode evoluir para FA se não tratada. Betabloqueadores são usados para controle da FC na crise tireotóxica.",
+    "tag": "taquicardia_sinusal_tireotoxicose"
+  },
+  {
+    "id": "sinusal_007",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Taquicardia Sinusal — Causas Hormonais",
+    "difficulty": "hard",
+    "stem": "Homem de 40 anos com hipertensão paroxística, cefaleia pulsátil, sudorese e palpitações. Crise dura minutos. FC durante crise: 145 bpm. Exame urinário: metanefrinas elevadas. Qual o diagnóstico e mecanismo da taquicardia?",
+    "options": [
+      "Feocromocitoma — liberação episódica de adrenalina e noradrenalina ativa receptores β1 do nó sinusal causando taquicardia sinusal",
+      "Síndrome de Wolff-Parkinson-White — via acessória conduzt impulso rápido durante crises",
+      "Taquicardia ventricular em paciente com cardiomiopatia hipertensiva",
+      "Fibrilação atrial paroxística por hipertrofia atrial secundária à HAS"
+    ],
+    "answer_index": 0,
+    "explanation": "Feocromocitoma é tumor da medula adrenal que libera catecolaminas (adrenalina, noradrenalina e dopamina) de forma episódica. A adrenalina tem potente efeito β1 cronotrópico no nó sinusal → taquicardia sinusal. A noradrenalina causa vasoconstrição intensa (α1) → pico hipertensivo. A tríade clássica é HIPERTENSÃO PAROXÍSTICA + CEFALEIA + SUDORESE. Metanefrinas urinárias de 24h ou plasmáticas fracionadas são o exame de rastreio. Betabloqueadores isolados são CONTRAINDICADOS (risco de crise hipertensiva por bloqueio β sem bloqueio α).",
+    "tag": "taquicardia_sinusal_feocromocitoma"
+  },
+  {
+    "id": "sinusal_008",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Bradicardia Sinusal — Causas Fisiológicas",
+    "difficulty": "easy",
+    "stem": "Atleta de resistência de 26 anos, assintomático, FC 42 bpm em repouso. ECG: P positiva em DII, PR 180 ms, QRS estreito. Qual o mecanismo desta bradicardia?",
+    "options": [
+      "Aumento crônico do tônus vagal pelo treinamento aeróbico — maior inervação parassimpática e coração mais sensível à acetilcolina",
+      "Doença do nó sinusal por isquemia crônica do ramo sinoatrial",
+      "Uso inadvertido de betabloqueador em suplemento esportivo",
+      "Hipotireoidismo subclínico frequente em atletas de elite"
+    ],
+    "answer_index": 0,
+    "explanation": "O treinamento aeróbico de longa data promove adaptações autonômicas: aumento do tônus vagal (parassimpático) em repouso, com maior densidade de inervação colinérgica no nó sinusal. O coração treinado também tem maior volume sistólico (remodelamento fisiológico com dilatação do VE), então pode manter débito cardíaco adequado com FC mais baixa. Atletas de elite podem ter FC de repouso de 30–40 bpm sem qualquer patologia. O ECG é essencial para confirmar ritmo sinusal (P positiva DII) e afastar escape juncional.",
+    "tag": "bradicardia_sinusal_atleta"
+  },
+  {
+    "id": "sinusal_009",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Bradicardia Sinusal — Causas Farmacológicas",
+    "difficulty": "medium",
+    "stem": "Paciente de 58 anos, hipertenso, em uso de metoprolol 100 mg/dia e diltiazem 180 mg/dia, apresenta tontura e síncope. FC 38 bpm, PA 90/60. Qual o mecanismo da bradicardia grave?",
+    "options": [
+      "Efeito aditivo de betabloqueador (bloqueia receptores β1) e bloqueador de canal de Ca2+ não-DHP (reduz automaticidade do nó sinusal) — bradiarritmia por somatório farmacológico",
+      "Betabloqueador causa hipercalemia que despolariza o nó sinusal em excesso",
+      "Diltiazem bloqueia a condução no feixe de His causando ritmo de escape ventricular",
+      "Associação inibe a produção de aldosterona causando hipotensão por depleção volêmica"
+    ],
+    "answer_index": 0,
+    "explanation": "Betabloqueadores (metoprolol) e bloqueadores de canal de cálcio não-di-hidropiridínicos (diltiazem, verapamil) são ambos cronotrópicos negativos: betabloqueadores bloqueiam receptores β1 (diminuem cAMP → reduzem corrente If); diltiazem reduz a entrada de Ca2+ na fase 0/4 do nó sinusal, diminuindo sua automaticidade. A combinação tem efeito SINÉRGICO sobre bradicardia e bloqueio AV, e deve ser usada com extrema cautela. O tratamento inclui suspensão dos fármacos e, se necessário, atropina ou marcapasso temporário.",
+    "tag": "bradicardia_sinusal_farmacologica"
+  },
+  {
+    "id": "sinusal_010",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Bradicardia Sinusal — Causas Farmacológicas",
+    "difficulty": "medium",
+    "stem": "Paciente internado com IC descompensada recebe digoxina. Após 3 dias, FC 48 bpm e sinais de toxicidade digitálica. Qual o mecanismo pelo qual a digoxina causa bradicardia sinusal?",
+    "options": [
+      "Digoxina aumenta o tônus vagal (parassimpático) ao estimular os centros vagais e sensibilizar barorreceptores — reduz automaticidade do nó sinusal e condução AV",
+      "Digoxina bloqueia canais de Na+ do nó sinusal, reduzindo a fase 4 da despolarização espontânea",
+      "Digoxina inibe receptores β1 do nó sinusal de forma competitiva",
+      "Digoxina bloqueia a bomba Na+/K+-ATPase no nó AV, mas não no nó sinusal"
+    ],
+    "answer_index": 0,
+    "explanation": "O efeito cronótropo negativo da digoxina é INDIRETO: ela inibe a bomba Na+/K+-ATPase, o que aumenta o Ca2+ intracelular (via Na+/Ca2+ exchanger), mas seu efeito no nó sinusal ocorre principalmente por estimulação vagal. Digoxina sensitiza barorreceptores e aumenta o tônus parassimpático central, reduzindo a automaticidade do nó sinusal e retardando a condução AV. Na toxicidade digitálica, bradicardia sinusal, bloqueios AV e arritmias ventriculares (bigeminismo) são clássicos. A ivabradina age de forma diferente: bloqueia diretamente o canal If.",
+    "tag": "bradicardia_sinusal_digoxina"
+  },
+  {
+    "id": "sinusal_011",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Bradicardia Sinusal — Causas Patológicas",
+    "difficulty": "hard",
+    "stem": "Homem de 72 anos com IAM inferior (supra DII, DIII, aVF) apresenta FC 44 bpm, PA 95/60, tontura. Qual o mecanismo da bradicardia sinusal neste contexto?",
+    "options": [
+      "Isquemia da artéria do nó sinusal (ramo da CD em ~60% dos casos) + reflexo de Bezold-Jarisch (resposta vasovagal por estimulação de receptores cardíacos inferiores)",
+      "Oclusão da artéria descendente anterior comprometendo o feixe de His",
+      "Reperfusão miocárdica causa hipercalemia localizada no nó sinusal",
+      "Uso de morfina na dor anginosa bloqueia receptores opioides do nó AV"
+    ],
+    "answer_index": 0,
+    "explanation": "No IAM inferior (oclusão da Coronária Direita), dois mecanismos explicam a bradicardia sinusal: (1) A artéria do nó sinusal origina-se da CD em ~60% das pessoas — isquemia direta causa disfunção do nó sinusal; (2) Reflexo de Bezold-Jarisch: receptores de estiramento e químicos na parede inferior do VE/VD ativam reflexo vagal intenso (bradicardia + vasodilatação). O IAM inferior é a causa mais comum de bradicardia sinusal aguda no contexto isquêmico. O tratamento inclui atropina 0,5 mg IV e considerar marcapasso temporário se hemodinâmica comprometida.",
+    "tag": "bradicardia_sinusal_iam_inferior"
+  },
+  {
+    "id": "sinusal_012",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Bradicardia Sinusal — Causas Patológicas",
+    "difficulty": "medium",
+    "stem": "Mulher de 55 anos com ganho ponderal, intolerância ao frio, constipação, pele ressecada e FC 48 bpm. TSH 45 mUI/L, T4 livre 0,4 ng/dL. Qual o mecanismo da bradicardia no hipotireoidismo?",
+    "options": [
+      "Deficiência de hormônio tireoidiano reduz a expressão de receptores β1 e a corrente If no nó sinusal, diminuindo a automaticidade",
+      "Hipotireoidismo causa hipercalemia por redução da bomba Na+/K+, despolarizando cronicamente o nó sinusal",
+      "Mixedema pericárdico comprime o nó sinusal mecanicamente",
+      "Hipotireoidismo eleva o TSH, que tem efeito cronotrópico negativo direto no coração"
+    ],
+    "answer_index": 0,
+    "explanation": "Hormônios tireoidianos são essenciais para a expressão de receptores β1 adrenérgicos no miocárdio e para a regulação da corrente funny (If) no nó sinusal. Na deficiência, ocorre: (1) downregulation de receptores β1 — menor resposta às catecolaminas; (2) redução da corrente If — menor automaticidade do nó sinusal; (3) menor expressão de Ca-ATPase do retículo sarcoplasmático. O resultado é bradicardia sinusal, além de prolongamento do QT e pode haver derrame pericárdico (ECG de baixa voltagem). Tratamento: reposição de levotiroxina.",
+    "tag": "bradicardia_sinusal_hipotireoidismo"
+  },
+  {
+    "id": "sinusal_013",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Bradicardia Sinusal — Causas Colinérgicas",
+    "difficulty": "medium",
+    "stem": "Jovem de 22 anos, doa sangue, relata mal-estar, palidez, suor frio e síncope com recuperação espontânea em decúbito. ECG durante o episódio: FC 36 bpm. Diagnóstico mais provável?",
+    "options": [
+      "Síncope vasovagal — reflexo vagal intenso causa bradicardia sinusal e vasodilatação simultâneas",
+      "Síncope por taquicardia ventricular sustentada autolimitada",
+      "Síncope de origem cerebelar por hipoperfusão da artéria basilar",
+      "Hipoglicemia induzida pelo estresse do procedimento"
+    ],
+    "answer_index": 0,
+    "explanation": "A síncope vasovagal é a forma mais comum de síncope (40% de todos os casos). O gatilho (dor, ansiedade, posição ortostática, calor, coleta de sangue) ativa o reflexo de Bezold-Jarisch: estresse mecânico/emocional → descarga adrenérgica intensa → VE esvazia com força (sinal de Valsalva) → receptores C ventriculares disparam → ativação vagal reflexa → bradicardia + vasodilatação → hipoperfusão cerebral → síncope. O decúbito dorsal (retorno venoso) interrompe o ciclo. Prodrômicos (náusea, visão turva, suor frio) são característicos.",
+    "tag": "bradicardia_sinusal_vasovagal"
+  },
+  {
+    "id": "sinusal_014",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Bradicardia Sinusal — Reflexos Colinérgicos",
+    "difficulty": "medium",
+    "stem": "Paciente de 68 anos relata palpitações e bradicardia toda vez que engole alimentos sólidos. ECG durante refeição: FC 40 bpm com P sinusal. Qual síndrome e mecanismo?",
+    "options": [
+      "Síncope por deglutição — reflexo vagal deflagrado por receptores esofagianos ativados pela deglutição, com bradicardia sinusal e eventualmente bloqueio AV",
+      "Taquicardia supraventricular paroxística deflagrada pelo aumento do retorno venoso pós-prandial",
+      "Hipotensão pós-prandial por redistribuição do fluxo para o leito esplâncnico",
+      "Compressão do nervo frênico por hérnia de hiato causando disfunção do nó sinusal"
+    ],
+    "answer_index": 0,
+    "explanation": "A bradicardia/síncope por deglutição é uma forma incomum mas bem documentada de síncope reflexa. Receptores no esôfago (especialmente o distal) enviam aferências vagais ao núcleo do trato solitário, que ativa o núcleo dorsal do vago → resposta eferente parassimpática → bradicardia sinusal intensa ou bloqueio AV. É mais comum em idosos e pode ser desencadeada por alimentos frios, sólidos ou bolus grandes. O diagnóstico é clínico-eletrocardiográfico durante a deglutição. Marcapasso definitivo pode ser necessário em casos recorrentes e sintomáticos.",
+    "tag": "bradicardia_sinusal_degluticao"
+  },
+  {
+    "id": "sinusal_015",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Bradicardia Sinusal — Reflexo Oculocardíaco",
+    "difficulty": "hard",
+    "stem": "Criança de 8 anos em cirurgia de estrabismo sob anestesia geral apresenta queda súbita da FC de 95 para 38 bpm durante tração do músculo reto medial. Qual o reflexo e sua via neural?",
+    "options": [
+      "Reflexo oculocardíaco — tração do músculo ocular ativa o ramo oftálmico do trigêmeo (V1), que conecta ao núcleo do trato solitário e dispara eferência vagal ao nó sinusal",
+      "Reflexo de Cushing — aumento da pressão intraocular comprime o tronco cerebral causando bradicardia",
+      "Reflexo glossofaríngeo — nervo IX ativa o núcleo ambíguo causando vasodilatação e bradicardia",
+      "Reflexo barorreceptor aórtico — anestésicos inalatórios reduzem a PA causando bradicardia compensatória"
+    ],
+    "answer_index": 0,
+    "explanation": "O reflexo oculocardíaco (de Aschner) é o arco reflexo mais potente na clínica anestésica. Via aferente: tração da musculatura ou pressão ocular → nervo trigêmeo (ramo oftálmico, V1) → gânglio de Gasser → núcleo sensorial do tronco. Via eferente: núcleo dorsal do vago → nervo vago → nó sinusal → bradicardia. Pode causar assistolia. Prevenção: atropina IV profilática. Tratamento: parar a tração e, se necessário, atropina. É mais pronunciado em crianças e sob anestesia com halogenados.",
+    "tag": "bradicardia_sinusal_reflexo_oculocardíaco"
+  },
+  {
+    "id": "sinusal_016",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Bloqueio Sinoatrial — Diagnóstico",
+    "difficulty": "hard",
+    "stem": "ECG de paciente de 65 anos mostra ritmo sinusal regular a 72 bpm, com pausa súbita. O intervalo da pausa é exatamente o dobro do intervalo PP basal. Não há deformidade da onda P antecedente. Qual o diagnóstico?",
+    "options": [
+      "Bloqueio sinoatrial de 2° grau tipo II (Mobitz II) — o nó sinusal dispara, mas o impulso não conduz ao átrio; a pausa é múltiplo exato do ciclo PP basal",
+      "Pausa sinusal — o nó sinusal falha em disparar; a pausa não é múltiplo exato do PP",
+      "Bloqueio AV de 2° grau Mobitz II — a onda P está presente mas o QRS é bloqueado",
+      "Extrassístole atrial bloqueada — extra P deformando a onda T precede a pausa"
+    ],
+    "answer_index": 0,
+    "explanation": "O bloqueio sinoatrial (BSA) de 2° grau Mobitz II tem característica diagnóstica fundamental: a pausa é um MÚLTIPLO EXATO do intervalo PP basal (2x, 3x...). Isso ocorre porque o nó sinusal DISPARA normalmente, mas o impulso NÃO conduz ao átrio — não há onda P visível. Como o ciclo sinusal não é interrompido, a próxima onda P ocorre exatamente onde esperado no ciclo duplo/triplo. Na pausa sinusal verdadeira, o nó falha em disparar e a pausa NÃO é múltiplo do PP. Na extrassístole atrial bloqueada, uma P prematura (pode estar escondida na onda T anterior) bloqueia e gera pausa.",
+    "tag": "bloqueio_sinoatrial_diagnostico"
+  },
+  {
+    "id": "sinusal_017",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Bloqueio Sinoatrial — Diagnóstico Diferencial",
+    "difficulty": "hard",
+    "stem": "ECG mostra pausa de 2,1 segundos com PP basal de 0,83 s. A pausa não corresponde a múltiplo exato do PP. Não há onda P escondida na onda T precedente. Qual o diagnóstico mais provável?",
+    "options": [
+      "Pausa sinusal (falha de disparo do nó sinusal) — o nó simplesmente não gera impulso; a pausa não é múltiplo do PP basal",
+      "Bloqueio sinoatrial 2° grau Mobitz II — pausa sempre múltipla exata do PP",
+      "Bloqueio AV de 3° grau — P presente sem relação com QRS",
+      "Extrassístole atrial bloqueada — requer onda P prematura visível antes da pausa"
+    ],
+    "answer_index": 0,
+    "explanation": "Na pausa sinusal (arrest sinusal), o nó sinusal simplesmente deixa de disparar por um período variável. Como não há ciclo sinusal subjacente a ser continuado, a pausa tem duração variável e NÃO é múltiplo exato do PP basal. Isso a diferencia do bloqueio sinoatrial de 2° grau Mobitz II, onde o nó dispara mas falha em conduzir (pausa = múltiplo exato do PP). Pausas > 3 segundos são clinicamente significativas. Se a pausa é longa sem escape juncional, há disfunção tanto do nó sinusal quanto do nó AV — sinal de doença do nó sinusal grave.",
+    "tag": "pausa_sinusal_diagnostico"
+  },
+  {
+    "id": "sinusal_018",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Doença do Nó Sinusal — Síndrome Bradi-Taqui",
+    "difficulty": "hard",
+    "stem": "Paciente de 74 anos, com palpitações episódicas seguidas de tontura intensa. Holter de 24h: períodos de FA com FC 140 bpm alternando com pausas de 4–6 segundos após término espontâneo da FA. Qual a síndrome e a principal indicação terapêutica?",
+    "options": [
+      "Síndrome bradi-taqui (sick sinus syndrome) — indicação de marcapasso definitivo; após o implante, pode-se usar fármacos para controle da FA sem risco de bradicardia grave",
+      "FA paroxística isolada — cardioversão elétrica eletiva e anticoagulação crônica",
+      "Flutter atrial com bloqueio AV variável — ablação do istmo cavo-tricuspídeo",
+      "TVNS alternando com bradicardia sinusal — amiodarona é o tratamento de escolha"
+    ],
+    "answer_index": 0,
+    "explanation": "A síndrome bradi-taqui é a forma mais grave da doença do nó sinusal (sick sinus syndrome). O nó sinusal cronicamente doente apresenta automaticidade reduzida — está 'suprimido'. Durante episódios de taquicardia (FA, flutter, SVT), o nó sinusal é suprimido pelo overdrive. Quando a taquiarritmia termina, o nó sinusal (já doente) demora a 'acordar' — gerando pausas longas e sintomáticas (síncope, pré-síncope). O marcapasso definitivo é mandatório antes de qualquer fármaco que reduza a FC, pois betabloqueadores e antiarrítmicos piorariam a bradicardia. Após o MCP, pode-se tratar a FA com segurança.",
+    "tag": "sick_sinus_syndrome_bradi_taqui"
+  },
+  {
+    "id": "sinusal_019",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Doença do Nó Sinusal — Indicação de MCP",
+    "difficulty": "medium",
+    "stem": "Homem de 80 anos com síncopes recorrentes. Holter mostra pausas sinusais de 5 s durante o sono e FC média de 32 bpm. Qual a indicação terapêutica definitiva?",
+    "options": [
+      "Marcapasso definitivo — disfunção sintomática do nó sinusal com pausas > 3 s é indicação classe I para MCP segundo as diretrizes",
+      "Atropina crônica oral — suprime o tônus vagal e aumenta a automaticidade sinusal",
+      "Teofilina como cronotrópico — indicada em bradicardia crônica por doença do nó sinusal",
+      "Isoproterenol IV contínuo até resolução espontânea da fibrose do nó sinusal"
+    ],
+    "answer_index": 0,
+    "explanation": "A doença do nó sinusal com pausas > 3 segundos sintomáticas (síncope, pré-síncope, tontura) é indicação CLASSE I para implante de marcapasso definitivo pelas diretrizes ACC/AHA e SBC. Não existe terapia farmacológica crônica eficaz para doença do nó sinusal: atropina tem efeito muito curto e não é aprovada cronicamente; teofilina pode ser usada em casos selecionados como 'ponte', mas não é definitiva. O MCP de escolha é o DDDR (estimulação dupla câmara, sensoriada e responsiva à frequência) para minimizar fibrilação atrial a longo prazo.",
+    "tag": "sick_sinus_mcp_indicacao"
+  },
+  {
+    "id": "sinusal_020",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Doença do Nó Sinusal — Causas",
+    "difficulty": "medium",
+    "stem": "Mulher de 70 anos com disfunção progressiva do nó sinusal. Biópsia endomiocárdica: fibrose e depósito amiloide no nó sinusal. Qual a causa mais comum de doença do nó sinusal em idosos?",
+    "options": [
+      "Fibrose idiopática degenerativa do nó sinusal — processo de envelhecimento com substituição do tecido nodal por fibrose e gordura",
+      "Doença de Chagas — o Trypanosoma cruzi tem tropismo específico pelo nó sinusal",
+      "Sarcoidose cardíaca — granulomas no nó sinusal causam disfunção aguda",
+      "Miocardite viral por enterovírus — destruição aguda do nó sinusal"
+    ],
+    "answer_index": 0,
+    "explanation": "A causa mais comum de doença do nó sinusal (sick sinus syndrome) em idosos é a fibrose degenerativa idiopática — processo natural de envelhecimento com substituição progressiva das células P do nó sinusal por tecido fibroso e adiposo. Outras causas incluem: isquemia (artéria do nó sinusal), pós-cirurgia cardíaca (Fontan, correção de CIV), doença de Chagas (causa importante no Brasil), amiloidose, sarcoidose, hipotireoidismo, fármacos. A doença de Chagas é causa importante de disfunção do nó sinusal no Brasil, mas não é a mais comum globalmente.",
+    "tag": "sick_sinus_etiologia"
+  },
+  {
+    "id": "sinusal_021",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Arritmia Sinusal Respiratória",
+    "difficulty": "easy",
+    "stem": "Jovem de 18 anos em check-up. ECG mostra variação do intervalo RR entre 680 ms e 920 ms, sincronizada com a respiração (RR menor na inspiração, maior na expiração). Todos os QRS são precedidos por P sinusal. Diagnóstico?",
+    "options": [
+      "Arritmia sinusal respiratória — variação fisiológica benigna da FC com a respiração, mais proeminente em jovens e atletas",
+      "Fibrilação atrial com resposta ventricular irregular — deve-se investigar",
+      "Extrassístoles atriais frequentes alternando com batimentos sinusais",
+      "Doença do nó sinusal leve com variação patológica do intervalo PP"
+    ],
+    "answer_index": 0,
+    "explanation": "A arritmia sinusal respiratória (RSA — Respiratory Sinus Arrhythmia) é um fenômeno FISIOLÓGICO normal, mais pronunciado em jovens, crianças e atletas. Mecanismo: durante a inspiração, o volume pulmonar aumenta → estiramento dos receptores atriais → inibição do tônus vagal → FC aumenta. Na expiração, o inverso ocorre → FC diminui. Todos os QRS são precedidos por P sinusal (morfologia constante em DII), o que exclui FA (sem P discernível) e extrassístoles. A RSA é marcador de boa variabilidade da FC, associada à saúde cardiovascular. Não requer tratamento.",
+    "tag": "arritmia_sinusal_respiratoria"
+  },
+  {
+    "id": "sinusal_022",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Arritmia Sinusal Respiratória — Mecanismo",
+    "difficulty": "medium",
+    "stem": "Por que a arritmia sinusal respiratória é mais proeminente em jovens e atletas do que em idosos e diabéticos?",
+    "options": [
+      "Jovens e atletas têm maior tônus vagal de base e integridade do arco reflexo barorreceptor-vagal; idosos e diabéticos têm neuropatia autonômica com menor variabilidade da FC",
+      "A variação é causada por mudanças mecânicas na posição do coração durante a respiração, mais pronunciadas em corpos mais jovens",
+      "Idosos têm ritmo respiratório mais lento, o que paradoxalmente estabiliza a FC",
+      "Atletas têm FC de base mais alta, o que amplifica percentualmente as variações respiratórias"
+    ],
+    "answer_index": 0,
+    "explanation": "A arritmia sinusal respiratória é mediada pelo nervo vago: a cada ciclo respiratório, o tônus vagal oscila (menor na inspiração, maior na expiração). Jovens e atletas têm sistema nervoso autonômico mais responsivo e tônus vagal alto de base — oscilações maiores. Em idosos, há perda de fibras nervosas autonômicas (neuropatia do envelhecimento) e os barorreceptores ficam menos sensíveis. Em diabéticos, a neuropatia autonômica reduz a variabilidade da FC (HRV baixa), e a RSA diminuída é um marcador precoce de neuropatia cardíaca autonômica diabética — fator de risco independente para morte súbita.",
+    "tag": "arritmia_sinusal_respiratoria_mecanismo"
+  },
+  {
+    "id": "sinusal_023",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Taquicardia Sinusal — Diagnóstico Diferencial",
+    "difficulty": "medium",
+    "stem": "ECG com FC 150 bpm, RR regular, ondas P não claramente visíveis (escondidas em onda T). Como diferenciar taquicardia sinusal de flutter atrial 2:1?",
+    "options": [
+      "Massagem do seio carotídeo ou adenosina transitoriamente aumentam o bloqueio AV no flutter (revelando ondas F a ~300 bpm) mas apenas desaceleram e retornam à frequência base na taquicardia sinusal",
+      "Flutter atrial 2:1 tem QRS largo por bloqueio de ramo funcional; taquicardia sinusal tem QRS estreito",
+      "A única forma de diferenciar é por estudo eletrofisiológico invasivo",
+      "Na taquicardia sinusal, a FC é exatamente 150 bpm; no flutter a FC é sempre diferente de 150 bpm"
+    ],
+    "answer_index": 0,
+    "explanation": "Flutter 2:1 (ondas F a ~300 bpm com condução 2:1) e taquicardia sinusal a 150 bpm podem ser confundidos. A manobra de Valsalva ou massagem do seio carotídeo aumenta transitoriamente o grau de bloqueio AV: no flutter, 'desenmascarará' as ondas F serrilhadas a ~300 bpm (pausa AV com ondas F óbvias); na taquicardia sinusal, a FC diminui gradualmente e retorna à frequência base assim que a manobra para. A adenosina (6–12 mg IV) tem o mesmo efeito e é mais reprodutível. O flutter 2:1 NÃO necessariamente tem QRS largo — isso depende de bloqueio de ramo concomitante.",
+    "tag": "taquicardia_sinusal_diagnostico_diferencial"
+  },
+  {
+    "id": "sinusal_024",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Taquicardia Sinusal — Abordagem Clínica",
+    "difficulty": "medium",
+    "stem": "Mulher de 25 anos, recém-puérpera, com taquicardia sinusal persistente de 118 bpm. Hb 7,2 g/dL, plaquetas normais, reticulócitos elevados. Qual a causa mais provável e o tratamento correto?",
+    "options": [
+      "Anemia hemolítica pós-parto — taquicardia compensatória para manter débito cardíaco; tratar a causa (investigar etiologia hemolítica, transfundir se necessário)",
+      "Betabloqueador para controle sintomático da taquicardia sinusal como tratamento primário",
+      "Hipertireoidismo gestacional — dosar TSH e T4 livre, iniciar metimazol",
+      "Cardiomiopatia periparto — ecocardiograma urgente e furosemida"
+    ],
+    "answer_index": 0,
+    "explanation": "A taquicardia sinusal é SEMPRE uma resposta a algo — raramente é o problema primário. Neste caso, anemia com Hb 7,2 g/dL reduz a capacidade de transporte de oxigênio → o coração compensa com aumento da FC (e volume sistólico) para manter DO2 (oferta de oxigênio). Tratar a taquicardia com betabloqueador SEM tratar a anemia seria perigoso — retiraria o mecanismo compensatório. O princípio fundamental: IDENTIFICAR E TRATAR A CAUSA da taquicardia sinusal. Betabloqueador em taquicardia sinusal compensatória pode precipitar choque circulatório.",
+    "tag": "taquicardia_sinusal_anemia"
+  },
+  {
+    "id": "sinusal_025",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Taquicardia Sinusal Inapropriada",
+    "difficulty": "hard",
+    "stem": "Mulher de 30 anos, sem doença cardíaca estrutural, com FC 105 bpm em repouso e 140 bpm em atividades mínimas (escovar dentes). Holter 24h: FC média 95 bpm. Todos os exames etiológicos (TSH, hemograma, ecocardiograma) normais. Diagnóstico?",
+    "options": [
+      "Taquicardia sinusal inapropriada (TSI) — disfunção autonômica com hiperatividade simpática e/ou hipersensibilidade do nó sinusal às catecolaminas, sem causa identificável",
+      "Taquicardia atrial focal originada próximo ao nó sinusal com morfologia de P similar",
+      "Síndrome de taquicardia ortostática postural (POTS) — diagnóstico diferencial importante",
+      "Ansiedade generalizada com taquicardia funcional"
+    ],
+    "answer_index": 0,
+    "explanation": "A taquicardia sinusal inapropriada (TSI) é diagnóstico de exclusão: FC persistentemente elevada em repouso (> 100 bpm) e resposta desproporcional ao esforço mínimo, com onda P de morfologia sinusal, sem causa identificável (etiológico completo negativo). Mecanismos propostos: hiperatividade simpática intrínseca, hipersensibilidade do nó sinusal ao β1, anticorpos anti-receptor β, disfunção do reflexo barorreceptor. Diferente de POTS (FC aumenta ≥ 30 bpm ou > 120 bpm nos 10 min após ortostatismo). Tratamento: ivabradina (bloqueia If do nó sinusal) é a opção de escolha atual; betabloqueador é alternativa.",
+    "tag": "taquicardia_sinusal_inapropriada"
+  },
+  {
+    "id": "sinusal_026",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Bradicardia Sinusal — Hipertensão Intracraniana",
+    "difficulty": "hard",
+    "stem": "Paciente de 19 anos com TCE grave, GCS 6. Monitor mostra PA 195/110, FC 42 bpm, respiração irregular. Como se chama essa tríade e qual seu mecanismo?",
+    "options": [
+      "Reflexo de Cushing — hipertensão intracraniana comprime o tronco cerebral; a isquemia do centro vasomotor bulbar gera vasoconstrição intensa (HAS) e reflexo barorreceptor ativa o vago causando bradicardia",
+      "Síndrome de Horner — lesão do trato simpático cervical causa bradicardia e ptose",
+      "Choque neurogênico — lesão medular causa vasodilatação e bradicardia compensatória",
+      "Reflexo de Bezold-Jarisch — compressão ventricular pelo edema cerebral"
+    ],
+    "answer_index": 0,
+    "explanation": "A tríade de Cushing (HAS + bradicardia + alteração do padrão respiratório) é sinal de HERNIAÇÃO cerebral iminente. Mecanismo: aumento da pressão intracraniana (PIC) comprime o tronco cerebral e as artérias cerebrais → isquemia do centro vasomotor bulbar → resposta vasomotora de emergência: vasoconstrição sistêmica intensa → PA muito alta → barorreceptores carotídeos ativam o nervo vago → bradicardia reflexa. A bradicardia no TCE com PA alta é um sinal de ALARME — indica necessidade urgente de redução da PIC (hiperventilação, manitol, cirurgia). NÃO é bradicardia 'protetora' — é sinal de catástrofe.",
+    "tag": "bradicardia_sinusal_hipertensao_intracraniana"
+  },
+  {
+    "id": "sinusal_027",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Bradicardia Sinusal — Causas Farmacológicas",
+    "difficulty": "medium",
+    "stem": "Paciente com DPOC em uso de clonidina para hipertensão desenvolve FC 48 bpm. Qual o mecanismo pelo qual a clonidina causa bradicardia sinusal?",
+    "options": [
+      "Clonidina é agonista α2-adrenérgico central — atua no núcleo do trato solitário reduzindo o tônus simpático e aumentando o tônus parassimpático, com bradicardia resultante",
+      "Clonidina bloqueia diretamente receptores β1 do nó sinusal",
+      "Clonidina inibe a condução no nó AV por bloqueio de canais de Ca2+",
+      "Clonidina causa hipercalemia que reduz a automaticidade do nó sinusal"
+    ],
+    "answer_index": 0,
+    "explanation": "Clonidina é um agonista α2-adrenérgico de ação CENTRAL. Ao ativar receptores α2 pré-sinápticos no núcleo do trato solitário (NTS) e no locus ceruleus, inibe a liberação de noradrenalina no sistema nervoso simpático central → redução do tônus simpático periférico → diminuição da FC e da PA. O resultado é bradicardia sinusal por redução do estímulo simpático ao nó sinusal (sem bloqueio direto do receptor β1). Outros fármacos de mecanismo central: metildopa, guanfacina. Nota: a retirada abrupta de clonidina causa 'rebound' hipertensivo grave.",
+    "tag": "bradicardia_sinusal_clonidina"
+  },
+  {
+    "id": "sinusal_028",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Bradicardia Sinusal — Opioides",
+    "difficulty": "medium",
+    "stem": "Paciente em pós-operatório imediato de cirurgia abdominal, em analgesia com morfina EV, apresenta FC 44 bpm e sonolência. Qual o mecanismo da bradicardia por opioides?",
+    "options": [
+      "Opioides ativam receptores µ no sistema nervoso central aumentando o tônus vagal, e perifericamente podem reduzir diretamente a automaticidade do nó sinusal",
+      "Morfina bloqueia receptores β1 do nó sinusal de forma competitiva com as catecolaminas",
+      "Morfina inibe a bomba Na+/K+-ATPase no nó sinusal causando hiperpolarização",
+      "Opioides bloqueiam canais de Ca2+ tipo L no nó sinusal e AV"
+    ],
+    "answer_index": 0,
+    "explanation": "Opioides (morfina, fentanil, remifentanil) causam bradicardia por múltiplos mecanismos: (1) Ativação de receptores µ no núcleo do trato solitário e centros vagais bulbares → aumento do tônus parassimpático → bradicardia sinusal; (2) Efeito direto nos receptores µ e δ do nó sinusal, reduzindo a corrente If; (3) Morfina especificamente libera histamina (vasodilatação) que pode ativar reflexo barorreceptor. A bradicardia por opioide é dose-dependente e reversível com naloxona. Fentanil e remifentanil causam bradicardia intensa especialmente quando associados a betabloqueadores.",
+    "tag": "bradicardia_sinusal_opioide"
+  },
+  {
+    "id": "sinusal_029",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Doença do Nó Sinusal — Diagnóstico Diferencial",
+    "difficulty": "hard",
+    "stem": "Paciente com pausas sinusais de 4 s no Holter. Médico considera se são fisiológicas (vagais) ou patológicas (doença do nó sinusal). Qual característica clínica mais ajuda a diferenciar?",
+    "options": [
+      "Pausas fisiológicas ocorrem predominantemente durante o sono ou em atletas assintomáticos; pausas patológicas (doença do nó sinusal) causam síntomas (síncope, pré-síncope, fadiga) e persistem na vigília",
+      "Pausas > 3 s são sempre patológicas independentemente do contexto clínico",
+      "A resposta à atropina diferencia: pausas fisiológicas desaparecem com atropina, mas pausas patológicas persistem",
+      "O intervalo PP basal: pausas vagais têm PP basal mais longo; disfunção nodal tem PP normal"
+    ],
+    "answer_index": 0,
+    "explanation": "Em atletas treinados, pausas de até 3–4 s durante o sono são reconhecidas como fenômeno vagotônico fisiológico — não requerem intervenção se o indivíduo é assintomático e a frequência diurna é normal. A doença do nó sinusal produz sintomas: síncope, pré-síncope, tontura, fadiga inexplicável e intolerância ao exercício (incompetência cronotrópica). A ATROPINA pode ajudar no diagnóstico: pausas vagais geralmente respondem (desaparecem); doença intrínseca do nó sinusal responde pouco ou não responde à atropina. O contexto clínico (sintomas, escore de risco) é fundamental para a indicação do MCP.",
+    "tag": "sick_sinus_diagnostico_diferencial"
+  },
+  {
+    "id": "sinusal_030",
+    "topic": "Ritmo Sinusal",
+    "subtopic": "Bradicardia Sinusal — Abordagem Aguda",
+    "difficulty": "medium",
+    "stem": "Paciente de 78 anos com bradicardia sinusal sintomática (FC 32 bpm, PA 80/50, alteração do nível de consciência). Qual a sequência correta de tratamento imediato?",
+    "options": [
+      "Atropina 0,5 mg IV (pode repetir até 3 mg total) → se refratária: marcapasso transcutâneo ou dopamina/adrenalina IV → marcapasso transvenoso temporário",
+      "Digoxina IV para estabilizar o ritmo → amiodarona para prevenir taquicardia de reperfusão → MCP definitivo eletivo",
+      "Betabloqueador oral para estabilizar o ritmo sinusal lento e prevenir taquicardia de escape",
+      "Adenosina 6 mg IV para diagnosticar o nível do bloqueio antes de qualquer tratamento"
+    ],
+    "answer_index": 0,
+    "explanation": "O protocolo ACLS para bradicardia sintomática hemodinamicamente instável: (1) ATROPINA 0,5 mg IV — antagonista muscarínico, acelera o nó sinusal e melhora a condução AV; dose mínima 0,5 mg (doses menores podem paradoxalmente piorar por bloqueio periférico); repetir a cada 3–5 min, máximo 3 mg. (2) Se refratária: MARCAPASSO TRANSCUTÂNEO (imediato, não invasivo) ou drogas vasoativas: DOPAMINA 2–20 mcg/kg/min ou ADRENALINA 2–10 mcg/min. (3) Marcapasso transvenoso temporário se refratário. NUNCA usar digoxina, amiodarona ou betabloqueador em bradicardia sintomática. Adenosina é contraindicada e pioraria a bradicardia.",
+    "tag": "bradicardia_sinusal_tratamento_agudo"
+  }
+]

@@ -1,0 +1,377 @@
+[
+  {
+    "id": "tx_001",
+    "topic": "Terapêutica de Arritmias — Atropina",
+    "difficulty": "easy",
+    "stem": "Uma paciente de 72 anos chega ao pronto-socorro com síncope e ECG mostrando bradicardia sinusal com FC de 38 bpm, hipotensão e sudorese. Qual o mecanismo de ação da atropina que justifica seu uso nesta situação?",
+    "options": [
+      "Bloqueio dos receptores beta-1 adrenérgicos no nó SA, reduzindo a frequência de disparo",
+      "Bloqueio competitivo dos receptores M2 muscarínicos no nó SA e AV, removendo o tônus vagal e aumentando a frequência cardíaca",
+      "Ativação dos receptores beta-2 adrenérgicos na musculatura lisa vascular, causando vasodilatação reflexa",
+      "Inibição dos canais de potássio IKr no nó AV, prolongando a refratariedade"
+    ],
+    "answer_index": 1,
+    "explanation": "A atropina é um antagonista muscarínico competitivo que bloqueia os receptores M2 no nó SA e AV. Em condições normais, o nervo vago libera acetilcolina que ativa receptores M2, abrindo canais de K+ (IKACh) e hiperpolarizando as células, reduzindo a FC. Ao bloquear esses receptores, a atropina remove o freio vagal, permitindo que o automatismo intrínseco do nó SA se expresse em frequências maiores. Não age em receptores beta nem em canais IKr (alvo da amiodarona/sotalol).",
+    "tag": "atropina_mecanismo"
+  },
+  {
+    "id": "tx_002",
+    "topic": "Terapêutica de Arritmias — Atropina",
+    "difficulty": "medium",
+    "stem": "Paciente com BAV de 2º grau Mobitz II (P-P regulares, PR constante, QRS ocasionalmente bloqueados de forma súbita, QRS largo) e FC de 32 bpm. É iniciada atropina 0,5 mg IV. Qual é o resultado esperado e por quê?",
+    "options": [
+      "Melhora imediata da FC para 70-80 bpm, pois a atropina desbloqueia a condução infranodal",
+      "Resposta inconsistente ou ausência de resposta, pois o bloqueio Mobitz II é infranodal (feixe de His/ramos) e independe do tônus vagal",
+      "Piora paradoxal com aumento do bloqueio, pois a atropina potencializa o efeito do simpático no nó AV",
+      "Conversão imediata para ritmo sinusal normal, pois a atropina age em todos os níveis do sistema de condução"
+    ],
+    "answer_index": 1,
+    "explanation": "ARMADILHA CLÍNICA: A atropina é eficaz apenas em bloqueios nodais (onde há inervação vagal). O Mobitz II ocorre no feixe de His ou nos ramos (infranodal), região que tem pouca ou nenhuma inervação parassimpática. Assim, remover o tônus vagal não melhora o bloqueio — pode até paradoxalmente piorar (ao acelerar o nó SA, mais impulsos 'batem' no bloqueio infranodal e mais são bloqueados). Mobitz II exige marcapasso transcutâneo imediato, não atropina. A atropina é útil no BAV 1° e no Mobitz I (Wenckebach), que são nodais.",
+    "tag": "atropina_indicacoes"
+  },
+  {
+    "id": "tx_003",
+    "topic": "Terapêutica de Arritmias — Atropina",
+    "difficulty": "easy",
+    "stem": "Qual é o esquema de dose correto para atropina no tratamento de bradicardia sintomática no adulto?",
+    "options": [
+      "1 mg IV em bolus único, sem possibilidade de repetição",
+      "0,5 mg IV, repetível a cada 3-5 minutos, dose máxima total de 3 mg",
+      "0,1 mg/kg IV em infusão lenta ao longo de 30 minutos",
+      "2 mg IV imediatos seguidos de infusão contínua de 0,5 mg/h"
+    ],
+    "answer_index": 1,
+    "explanation": "Conforme o ACLS (AHA), a dose padrão de atropina para bradicardia sintomática é 0,5 mg IV em bolus rápido. Pode ser repetida a cada 3-5 minutos até a dose máxima total de 3 mg (o que corresponde a 6 doses de 0,5 mg). Doses abaixo de 0,5 mg podem paradoxalmente piorar a bradicardia por efeito pré-sináptico (estimulação de autorreceptores M1 que diminuem liberação de noradrenalina). Doses acima de 3 mg causam bloqueio vagal completo sem benefício adicional.",
+    "tag": "atropina_dose"
+  },
+  {
+    "id": "tx_004",
+    "topic": "Terapêutica de Arritmias — Atropina",
+    "difficulty": "medium",
+    "stem": "Homem de 65 anos com hiperplasia prostática benigna grave, glaucoma de ângulo fechado e taquicardia sinusal (FC 110 bpm) desenvolve bradicardia sintomática após vaso-vagal. Qual a principal preocupação ao usar atropina?",
+    "options": [
+      "A atropina está absolutamente contraindicada em pacientes com FC prévia > 100 bpm — risco de fibrilação ventricular",
+      "Glaucoma de ângulo fechado e retenção urinária são contraindicações relativas: a midríase pode fechar o ângulo e o relaxamento vesical piorar a retenção; na emergência com instabilidade, o risco-benefício favorece o uso",
+      "A atropina é segura em todas as situações porque é rapidamente metabolizada em menos de 1 minuto",
+      "A atropina está contraindicada em > 60 anos pelo risco de delirium anticolinérgico irreversível"
+    ],
+    "answer_index": 1,
+    "explanation": "A atropina bloqueia todos os receptores muscarínicos, não apenas cardíacos. No olho, a midríase pode precipitar glaucoma de ângulo fechado ao bloquear a drenagem do humor aquoso. No trato urinário, o relaxamento do detrusor e contração do esfíncter vesical agravam a retenção urinária em pacientes com HPB. No contexto de emergência com instabilidade hemodinâmica, o risco imediato de baixo débito cardíaco supera esses riscos, mas o médico deve estar ciente e monitorar. A FC prévia não é contraindicação per se — a situação clínica (instabilidade vs. assintomático) guia a decisão.",
+    "tag": "atropina_contraindicacoes"
+  },
+  {
+    "id": "tx_005",
+    "topic": "Terapêutica de Arritmias — Isoproterenol",
+    "difficulty": "hard",
+    "stem": "Paciente em BAV total com ritmo de escape juncional de 28 bpm aguarda marcapasso transvenoso. O cardiologista solicita isoproterenol IV em infusão contínua enquanto o procedimento é preparado. Qual é o perigo desta estratégia?",
+    "options": [
+      "O isoproterenol causa bloqueio beta-1 e pode piorar o BAV total",
+      "Por ser agonista beta-1 e beta-2 puro sem atividade alfa, o isoproterenol aumenta FC e contratilidade mas causa vasodilatação periférica, podendo agravar a hipotensão; além disso, aumenta o consumo miocárdico de O2 e tem pró-arritimia (risco de TV/FV)",
+      "O isoproterenol é contraindicado em BAV total pois não age abaixo do nó AV",
+      "O principal risco é bradicardia reflexa pela vasoconstrição periférica causada pelo fármaco"
+    ],
+    "answer_index": 1,
+    "explanation": "O isoproterenol é um agonista beta-1 e beta-2 puro (sem atividade alfa). O efeito beta-1 aumenta o automatismo do escape ventricular/juncional e a FC, o que é benéfico no BAV. Porém, o efeito beta-2 causa vasodilatação periférica intensa, podendo piorar a hipotensão em paciente já instável. Adicionalmente, o aumento do consumo miocárdico de O2 (taquicardia + inotrópico) pode expandir isquemia. O principal uso atual é em Torsades de Pointes refratário ao magnésio (aumenta FC, encurta QT) ou BAV quando MCP não está imediatamente disponível. Não é agente de primeira escolha.",
+    "tag": "isoproterenol"
+  },
+  {
+    "id": "tx_006",
+    "topic": "Terapêutica de Arritmias — Adenosina",
+    "difficulty": "easy",
+    "stem": "Paciente de 34 anos com palpitações súbitas e ECG mostrando taquicardia regular de QRS estreito a 180 bpm. Após manobras vagais sem sucesso, é administrada adenosina 6 mg IV rápido. Qual o mecanismo de ação?",
+    "options": [
+      "Bloqueio dos canais de sódio fase 0 (INa), alargando o QRS e terminando o circuito de reentrada",
+      "Ativação dos receptores A1 de adenosina no nó AV, abrindo canais IKAdo (K+), hiperpolarizando e bloqueando temporariamente a condução AV",
+      "Bloqueio dos receptores beta-1, reduzindo a velocidade de condução pelo nó AV por diminuição do AMPc",
+      "Inibição dos canais de cálcio L (ICaL) no nó AV, semelhante ao verapamil, com meia-vida mais curta"
+    ],
+    "answer_index": 1,
+    "explanation": "A adenosina age via receptores A1 acoplados a proteína Gi. Quando ativados no nó AV (e nó SA), abrem canais de K+ específicos (IKAdo/IKACh), hiperpolarizando a célula e tornando-a temporariamente inexcitável. Isso cria um bloqueio AV transitório de alta grau (frequentemente BAV completo por 3-10 segundos). Em taquicardias por reentrada que DEPENDEM do nó AV para completar o circuito (AVNRT, AVRT), esse bloqueio interrompe o circuito e converte para sinusal. A meia-vida é de apenas 10 segundos pois a adenosina é captada e metabolizada pelas hemácias e células endoteliais.",
+    "tag": "adenosina_mecanismo"
+  },
+  {
+    "id": "tx_007",
+    "topic": "Terapêutica de Arritmias — Adenosina",
+    "difficulty": "medium",
+    "stem": "Um paciente com WPW conhecido (síndrome de pré-excitação com via acessória) desenvolve FA com resposta ventricular muito rápida (~220 bpm), QRS largo e irregular (condução anterógrada pela via acessória). Por que a adenosina está CONTRAINDICADA nesta situação?",
+    "options": [
+      "A adenosina é contraindicada no WPW porque causa hipertensão grave via receptores A2",
+      "A adenosina bloqueia o nó AV mas não a via acessória; ao bloquear o nó AV, todo o impulso atrial da FA conduz exclusivamente pela via acessória com frequência ventricular potencialmente fatal (>300 bpm), podendo degenerar em FV",
+      "A adenosina é contraindicada porque a sua meia-vida curta não permite tratamento sustentado do WPW",
+      "A adenosina é contraindicada porque pode converter FA em flutter com condução 1:1 pela via acessória"
+    ],
+    "answer_index": 1,
+    "explanation": "ARMADILHA FATAL: Na FA com WPW e condução anterógrada pela via acessória, o nó AV e a via acessória estão competindo para conduzir os impulsos fibrilatórios atriais. O nó AV, por ter refratariedade maior, funciona como 'filtro protetor'. Ao bloquear o nó AV com adenosina (ou digoxina, verapamil, diltiazem — todos contraindicados), todos os impulsos atriais (>400/min na FA) passam exclusivamente pela via acessória sem proteção, podendo causar FC ventricular >300 bpm e degeneração em FV. O tratamento da FA com WPW instável é CVE; se estável, procainamida IV ou ibutilida.",
+    "tag": "adenosina_contraindicacoes"
+  },
+  {
+    "id": "tx_008",
+    "topic": "Terapêutica de Arritmias — Adenosina",
+    "difficulty": "medium",
+    "stem": "Paciente asmático em crise leve recebe teofilina para broncodilatação e desenvolve taquicardia de QRS estreito regular a 190 bpm. A equipe pensa em adenosina. Quais as duas principais preocupações?",
+    "options": [
+      "A asma grave é contraindicação pois a adenosina causa broncoespasmo via receptores A2B; a teofilina é antagonista do receptor de adenosina e cancela seu efeito terapêutico",
+      "A adenosina é contraindicada no asma por causar vasodilatação pulmonar e a teofilina aumenta seu efeito",
+      "A asma é contraindicação por broncodilatação paradoxal e a teofilina potencializa o bloqueio AV",
+      "Não há interação entre adenosina e teofilina; o único risco é hipotensão transitória"
+    ],
+    "answer_index": 0,
+    "explanation": "Dois problemas distintos: (1) A adenosina estimula receptores A2B nos mastócitos e musculatura brônquica, causando broncoespasmo — contraindicada em asma grave/broncoespasmo ativo (em asma leve, a janela é estreita mas pode ser usada com cautela). (2) A teofilina (metilxantina) é um antagonista competitivo dos receptores de adenosina — bloqueia os mesmos receptores A1 no nó AV que a adenosina precisa ativar para fazer seu efeito. Pacientes usando teofilina/cafeína exigem doses maiores (até 12-18 mg) ou a droga pode ser ineficaz. O oposto também é verdadeiro: dipiridamol potencializa adenosina (inibe recaptação).",
+    "tag": "adenosina_interacoes"
+  },
+  {
+    "id": "tx_009",
+    "topic": "Terapêutica de Arritmias — Adenosina",
+    "difficulty": "hard",
+    "stem": "Paciente com taquicardia regular de QRS largo (>120ms) a 170 bpm. Após adenosina 6 mg IV rápido, não ocorre conversão mas revela-se bloqueio AV transitório com ondas P dissociadas dos QRS, confirmando TV. Qual o uso correto da adenosina neste contexto?",
+    "options": [
+      "Terapêutico: a adenosina termina a TV por bloquear canais de sódio na musculatura ventricular",
+      "Diagnóstico: em TV, a adenosina não converte mas ao bloquear o nó AV pode revelar a atividade atrial independente (dissociação AV), distinguindo TV de TSV com aberrância; exceção são TVs sensíveis à adenosina (TVSVD em coração estruturalmente normal)",
+      "Contraindicado: adenosina em taquicardia de QRS largo sempre causa FV",
+      "Terapêutico e seguro: a adenosina converte qualquer taquicardia independente do mecanismo"
+    ],
+    "answer_index": 1,
+    "explanation": "Em taquicardia de QRS largo de diagnóstico incerto, a adenosina tem valor diagnóstico: (1) Se TSV com aberrância dependente do nó AV → converte. (2) Se TV → não converte, mas o bloqueio AV transitório 'desmasca' a atividade atrial, podendo revelar dissociação AV (diagnóstico de certeza de TV). EXCEÇÃO IMPORTANTE: TV fascicular esquerda e TV do trato de saída do VD (TVSVD) em coração estruturalmente normal são sensíveis à adenosina e podem converter — são chamadas 'TV adenosina-sensíveis'. Estas são TVs idiopáticas de bom prognóstico. Em TV com instabilidade hemodinâmica, a CVE é a prioridade.",
+    "tag": "adenosina_diagnostica"
+  },
+  {
+    "id": "tx_010",
+    "topic": "Terapêutica de Arritmias — Adenosina",
+    "difficulty": "easy",
+    "stem": "Paciente com AVNRT confirmada (TSV por reentrada nodal) que falhou às manobras vagais recebe adenosina. Qual é o esquema de doses correto e por que o bolus deve ser administrado rapidamente?",
+    "options": [
+      "6 mg IV lento em 2 minutos → avaliar → 12 mg lento → 12 mg lento; a velocidade não importa",
+      "6 mg IV rápido (bolus em 1-3 segundos) seguido de flush de 20 mL de SF → 12 mg se sem resposta → 12 mg novamente; a rapidez é essencial pois a meia-vida é de ~10 segundos e a droga é inativada antes de chegar ao coração se injetada lentamente",
+      "3 mg IV lento → 6 mg → 12 mg; doses menores são mais seguras em TSV",
+      "12 mg IV rápido de início para maximizar eficácia; doses menores são ineficazes"
+    ],
+    "answer_index": 1,
+    "explanation": "A meia-vida da adenosina é de apenas 10 segundos — é captada ativamente pelas hemácias (transportador de nucleosídeos) e deaminada pelo endotélio vascular para inosina. Por isso, se injetada lentamente, é destruída antes de chegar ao nó AV em concentração eficaz. O protocolo correto: 6 mg em bolus rápido (1-3 seg) + flush imediato de 20 mL de SF para 'empurrar' a droga para a circulação central. Deve ser administrada em veia antecubital ou acesso central. Se sem efeito após 2 min → 12 mg; se ainda sem efeito → 12 mg. Dose máxima total recomendada: 30 mg.",
+    "tag": "adenosina_dose"
+  },
+  {
+    "id": "tx_011",
+    "topic": "Terapêutica de Arritmias — Betabloqueadores IV",
+    "difficulty": "medium",
+    "stem": "Paciente com FA de início recente com FC 155 bpm, PA 120/80 mmHg, sem sinais de congestão, sem broncoespasmo. O cardiologista opta por metoprolol IV para controle de FC. Qual é o esquema correto e o mecanismo?",
+    "options": [
+      "Metoprolol 50 mg VO imediato; IV não é recomendado no pronto-socorro",
+      "Metoprolol 5 mg IV lento (em 5 min), podendo repetir a cada 5 min, até 3 doses (15 mg total); o bloqueio beta-1 no nó AV reduz a velocidade de condução AV, controlando a resposta ventricular na FA",
+      "Metoprolol 25 mg IV rápido em bolus único para efeito imediato",
+      "Metoprolol 0,15 mg/kg IV em infusão de 30 minutos; bolus são contraindicados por hipotensão"
+    ],
+    "answer_index": 1,
+    "explanation": "O metoprolol IV é cardioseletivo (beta-1 > beta-2). No controle de FC na FA, o bloqueio beta-1 no nó AV reduz a responsividade às catecolaminas e à estimulação simpática, diminuindo a velocidade de condução AV — mais impulsos fibrilatórios são bloqueados no nó, resultando em menor FC ventricular. Dose: 5 mg IV lento (injetar ao longo de 5 minutos para evitar hipotensão), repetível 2-3 vezes. O esmolol é alternativa com meia-vida ultracurta (~9 min) em infusão contínua — útil quando há incerteza sobre tolerabilidade ou necessidade de controle fino.",
+    "tag": "betabloqueador_iv"
+  },
+  {
+    "id": "tx_012",
+    "topic": "Terapêutica de Arritmias — Betabloqueadores IV",
+    "difficulty": "medium",
+    "stem": "Quais são as contraindicações absolutas para uso de betabloqueadores IV em paciente com FA e resposta ventricular rápida?",
+    "options": [
+      "Idade > 70 anos, creatinina > 1,5 mg/dL e uso prévio de AAS",
+      "Insuficiência cardíaca descompensada com congestão ativa, broncoespasmo/asma grave, BAV de 2° grau Mobitz II ou BAV total sem marcapasso, e hipotensão (PA sistólica < 90 mmHg)",
+      "Hipertireoidismo, diabetes mellitus tipo 2 e tabagismo ativo",
+      "Uso concomitante de estatinas, IECA e diuréticos tiazídicos"
+    ],
+    "answer_index": 1,
+    "explanation": "Os betabloqueadores podem precipitar: (1) IC descompensada — o suporte simpático é necessário para manter débito cardíaco em IC aguda; bloqueá-lo pode causar colapso circulatório. (2) Broncoespasmo — beta-2 nos brônquios medeia broncodilatação; mesmo betabloqueadores cardioseletivos têm algum grau de beta-2 com doses mais altas. (3) BAV — adicionam bloqueio ao nó AV já comprometido, podendo causar assistolia. (4) Hipotensão — efeito inotrópico negativo em paciente já hipotensivo. Hipertireoidismo e diabetes NÃO são contraindicações absolutas (o BB pode ser muito útil em tempestade tireoidiana).",
+    "tag": "betabloqueador_contraindicacoes"
+  },
+  {
+    "id": "tx_013",
+    "topic": "Terapêutica de Arritmias — Bisoprolol",
+    "difficulty": "medium",
+    "stem": "Paciente de 58 anos com IC com fração de ejeção reduzida (FEr, FEVE 35%), FA crônica e HAS. O cardiologista introduz bisoprolol (Concor). Qual das afirmações sobre este fármaco está CORRETA?",
+    "options": [
+      "O bisoprolol é administrado por via intravenosa e é reservado para situações de emergência",
+      "O bisoprolol é altamente cardioseletivo (beta-1 >> beta-2), sem atividade simpaticomimética intrínseca, meia-vida de 10-12 horas (1 tomada/dia), com mortalidade reduzida na IC crônica provada pelo estudo CIBIS-II",
+      "O bisoprolol tem atividade simpaticomimética intrínseca, o que o torna mais seguro na DPOC",
+      "O bisoprolol é o único betabloqueador contraindicado na insuficiência cardíaca devido ao efeito inotrópico negativo"
+    ],
+    "answer_index": 1,
+    "explanation": "O bisoprolol é um betabloqueador de segunda geração com altíssima cardioseletividade beta-1 (razão beta-1:beta-2 de ~75:1, a maior dentre os betabloqueadores disponíveis). NÃO tem atividade simpaticomimética intrínseca (ASI) — o que é desejável na IC pois ASI atenua os benefícios. Meia-vida de 10-12h permite uma tomada diária, melhorando adesão. O CIBIS-II (1999) mostrou redução de 34% na mortalidade total em ICFEr. Ao lado de carvedilol e succinato de metoprolol, é um dos três BB com evidência de redução de mortalidade na IC sistólica.",
+    "tag": "bisoprolol"
+  },
+  {
+    "id": "tx_014",
+    "topic": "Terapêutica de Arritmias — Amiodarona",
+    "difficulty": "easy",
+    "stem": "Na parada cardiorrespiratória por FV/TV sem pulso refratária a dois choques, qual o papel da amiodarona e qual a dose?",
+    "options": [
+      "Amiodarona 150 mg IV lento em 10 minutos, após o terceiro choque, para controle de FC",
+      "Amiodarona 300 mg IV em bolus rápido após o terceiro choque, podendo ser repetida com 150 mg em caso de FV/TV recorrente",
+      "Amiodarona 1 g IV em infusão de 1 hora, iniciada antes do primeiro choque",
+      "Amiodarona é contraindicada em PCR pois prolonga o QT e piora a FV"
+    ],
+    "answer_index": 1,
+    "explanation": "No algoritmo ACLS para FV/TV sem pulso, após 3 choques sem sucesso e adrenalina, a amiodarona 300 mg IV em bolus (diluída em 20 mL de SG 5%) é o antiarrítmico de escolha. Uma dose adicional de 150 mg pode ser administrada se FV/TV persistir ou recorrer. Na TV estável com pulso (hemodinamicamente estável), a dose é 150 mg IV em 10 minutos (infusão lenta) seguida de manutenção. A amiodarona tem múltiplos mecanismos: bloqueia IKr (principal — classe III), INa (classe I), ICaL (classe IV) e tem efeito betabloqueador (classe II) e bloqueia receptores alfa.",
+    "tag": "amiodarona_pcr"
+  },
+  {
+    "id": "tx_015",
+    "topic": "Terapêutica de Arritmias — Amiodarona",
+    "difficulty": "hard",
+    "stem": "Paciente em uso crônico de amiodarona há 3 anos por FA recorrente apresenta TSH suprimido (<0,01 mUI/L) com T4 livre elevado e T3 livre elevado, com taquicardia sinusal e perda de peso. Qual o mecanismo da toxicidade e a conduta?",
+    "options": [
+      "Hipotireoidismo induzido por amiodarona; iniciar levotiroxina e manter a amiodarona",
+      "Hipertireoidismo induzido por amiodarona (AIT), que pode ser tipo 1 (excesso de iodo em tireoide doente, tratar com tionamidas) ou tipo 2 (tireoidite destrutiva, tratar com corticosteroides); considerar suspensão da amiodarona",
+      "Toxicidade hepática da amiodarona causando síndrome hipermetabólica; suspender imediatamente e iniciar N-acetilcisteína",
+      "Neuropatia óptica por amiodarona causando distúrbio autonômico com taquicardia reflexa"
+    ],
+    "answer_index": 1,
+    "explanation": "A amiodarona contém 37% de seu peso em iodo (cada comprimido de 200 mg libera ~6 mg de iodo/dia; necessidade diária é 150 mcg). A toxicidade tireoidiana ocorre em ~37% dos pacientes a longo prazo. O hipertireoidismo induzido (AIT — Amiodarone-Induced Thyrotoxicosis) tem dois tipos: Tipo 1 — excesso de iodo em tireoide previamente doente (nódulos, Graves latente) → trata com tionamidas (metimazol/propiltiouracil). Tipo 2 — tireoidite destrutiva em tireoide normal → trata com corticosteroides (prednisona). Distinguir pelos mecanismos e Doppler tireoidiano. Hipotireoidismo também é comum (iodo bloqueia síntese por efeito Wolff-Chaikoff).",
+    "tag": "amiodarona_toxicidade_tireoide"
+  },
+  {
+    "id": "tx_016",
+    "topic": "Terapêutica de Arritmias — Amiodarona",
+    "difficulty": "hard",
+    "stem": "Paciente em amiodarona há 5 anos apresenta dispneia progressiva, tosse seca e infiltrado pulmonar difuso bilateral na TC de tórax. Qual o diagnóstico mais provável e conduta?",
+    "options": [
+      "Pneumonia bacteriana comunitária; prescrever amoxicilina-clavulanato e manter a amiodarona",
+      "Pneumonite por amiodarona (toxicidade pulmonar); suspender amiodarona, iniciar corticosteroides sistêmicos e considerar lavagem broncoalveolar para exclusão de infecção",
+      "TEP bilateral; iniciar anticoagulação e manter a amiodarona pois não há relação",
+      "Edema pulmonar por toxicidade cardíaca da amiodarona; iniciar diuréticos e manter a droga"
+    ],
+    "answer_index": 1,
+    "explanation": "A toxicidade pulmonar da amiodarona (pneumonite/fibrose) ocorre em 5-15% dos pacientes a longo prazo. Mecanismo: lesão direta por fosfolipidose (acúmulo de fosfolipídeos nos pneumócitos) e resposta imune mediada por células T. Apresentação: dispneia insidiosa, tosse seca, febre baixa, infiltrados intersticiais/alveolares difusos (às vezes unilaterais). Diagnóstico de exclusão após afastar infecção (lavado broncoalveolar mostra macrófagos espumosos — achado sugestivo mas não patognomônico). Conduta: suspender amiodarona (meia-vida de 40 dias — efeitos persistem meses!) + corticosteroides por 6-12 meses. Monitorização anual com radiografia de tórax e DLCO é recomendada.",
+    "tag": "amiodarona_toxicidade_pulmonar"
+  },
+  {
+    "id": "tx_017",
+    "topic": "Terapêutica de Arritmias — Amiodarona",
+    "difficulty": "medium",
+    "stem": "Sobre a farmacocinética da amiodarona, qual afirmação está CORRETA?",
+    "options": [
+      "A meia-vida da amiodarona é de aproximadamente 6 horas, permitindo ajustes rápidos de dose",
+      "A meia-vida da amiodarona é de ~40 dias (variando de 26 a 107 dias), pois se acumula extensamente nos tecidos adiposos e órgãos parenquimatosos; isso implica que toxicidades persistem muito após a suspensão e que o estado de equilíbrio demora semanas/meses",
+      "A amiodarona não é metabolizada pelo fígado e é excretada inalterada pelos rins",
+      "A meia-vida curta da amiodarona exige dosagem 3x ao dia para manter efeito antiarrítmico"
+    ],
+    "answer_index": 1,
+    "explanation": "A amiodarona tem uma das maiores meias-vidas entre todos os fármacos: ~40 dias em média (amplitude de 26 a 107 dias). Isso ocorre porque: (1) Altamente lipofílica — se deposita em tecido adiposo, fígado, pulmão, tireoide e pele. Volume de distribuição enorme (60 L/kg). (2) Concentrações teciduais são 10-100 vezes maiores que as plasmáticas. Consequências práticas: (a) Efeitos persistem meses após a suspensão; (b) Toxicidades (tireoidiana, pulmonar) continuam após parar o fármaco; (c) A dose de ataque (carga) é necessária pois o estado de equilíbrio sem carga demoraria meses; (d) Interações medicamentosas (potencializa varfarina, digoxina) persistem após suspensão.",
+    "tag": "amiodarona_farmacocinetica"
+  },
+  {
+    "id": "tx_018",
+    "topic": "Terapêutica de Arritmias — CVE",
+    "difficulty": "easy",
+    "stem": "Por que na cardioversão elétrica sincronizada (CVE) é fundamental sincronizar o choque com a onda R do ECG?",
+    "options": [
+      "Para garantir que o choque seja entregue durante a repolarização ventricular (onda T), que é o momento mais eficaz para reverter taquiarritmias",
+      "Para evitar que o choque caia no período vulnerável da repolarização ventricular (pico da onda T — fenômeno R sobre T), o que poderia induzir fibrilação ventricular em um coração que ainda não estava em FV",
+      "Para sincronizar o choque com a contração atrial e maximizar o débito cardíaco imediatamente após a cardioversão",
+      "A sincronização é desnecessária em cardioversão; é apenas uma preferência técnica do equipamento"
+    ],
+    "answer_index": 1,
+    "explanation": "O período vulnerável ventricular corresponde à porção ascendente e ao pico da onda T (fase 3 do potencial de ação — repolarização parcial). Neste momento, alguns miócitos estão refratários e outros já recuperados — uma corrente elétrica externa pode despolarizar os que já recuperaram de forma não homogênea, criando circuitos de micro-reentrada que degeneram em FV. A sincronização garante que o choque seja entregue imediatamente após o pico do QRS (no início da refratariedade absoluta), quando todos os miócitos estão igualmente refratários e não há risco de R-sobre-T. Na desfibrilação (FV/TV sem pulso), já há caos total — a sincronização não é possível nem necessária.",
+    "tag": "cve_sincronizacao"
+  },
+  {
+    "id": "tx_019",
+    "topic": "Terapêutica de Arritmias — CVE",
+    "difficulty": "medium",
+    "stem": "Paciente com FA em curso há 36 horas, estável hemodinamicamente, PA 130/85 mmHg, sem dispneia. O plantonista deseja realizar CVE eletiva para cardioversão. Qual a conduta correta em relação à anticoagulação?",
+    "options": [
+      "CVE pode ser realizada imediatamente pois FA com menos de 48 horas não tem risco de trombo atrial",
+      "FA com duração > 24h ou incerta exige anticoagulação plena por 3 semanas antes da CVE (ou ETE para excluir trombo no apêndice atrial esquerdo), seguida de anticoagulação por pelo menos 4 semanas após a CVE, pois o átono 'atordoado' pós-cardioversão tem risco de tromboembolismo mesmo após retorno ao ritmo sinusal",
+      "Basta heparinizar por 6 horas antes da CVE; anticoagulação prolongada não é necessária em FA de curta duração",
+      "A anticoagulação está contraindicada antes da CVE pois aumenta o risco de tamponamento pós-choque"
+    ],
+    "answer_index": 1,
+    "explanation": "O risco de tromboembolia pós-CVE na FA é real e bifásico: (1) Trombo pré-existente no apêndice atrial esquerdo (AAE) — formado durante a FA por estase — pode embolizar ao cardioverter. (2) Atordoamento mecânico atrial pós-CVE (stunning) — o átrio retorna ao ritmo sinusal elétrico mas permanece com contratilidade reduzida por dias/semanas, favorecendo formação de novo trombo. DIRETRIZ: FA > 48h (ou duração desconhecida): anticoagulação efetiva por ≥3 semanas antes + ≥4 semanas após. Alternativa: ETE para excluir trombo no AAE → CVE imediata → anticoagulação por 4 semanas. FA ≤ 48h em paciente sem fatores de risco: pode cardioverter com heparina sem esperar 3 semanas, mas anticoagulação pós-CVE por 4 semanas é sempre recomendada.",
+    "tag": "cve_anticoagulacao"
+  },
+  {
+    "id": "tx_020",
+    "topic": "Terapêutica de Arritmias — CVE",
+    "difficulty": "medium",
+    "stem": "Qual é a energia recomendada (bifásico) para cardioversão elétrica sincronizada nas diferentes arritmias?",
+    "options": [
+      "FA: 50 J; Flutter: 200 J; TV monomórfica: 360 J — sempre começar com energia baixa",
+      "FA: 120-200 J bifásico (iniciar com energia maior pois ondas fibrilatórias são mais caóticas); Flutter atrial: 50-100 J (muito sensível ao choque, energia baixa é eficaz); TV monomórfica com pulso: 100 J",
+      "Todas as arritmias: 200 J bifásico uniformemente, pois a diferenciação não mudaria o desfecho",
+      "FA: 360 J monofásico equivale a 100 J bifásico; sempre usar energia máxima disponível"
+    ],
+    "answer_index": 1,
+    "explanation": "A energia necessária varia com a organização da arritmia: (1) FA: 120-200 J bifásico — iniciar na faixa superior pois a FA é caótica e requer maior energia para sincronização. (2) Flutter atrial: 50-100 J — o flutter é um circuito macro-reentrada organizado com frente de onda coesa, muito sensível ao choque; frequentemente 50 J bastam. (3) TV monomórfica com pulso: 100 J bifásico — circuito organizado. (4) TV polimórfica/FV: desfibrilação não sincronizada 200 J bifásico. A proporção monofásico:bifásico é aproximadamente 2:1 em eficácia para a mesma energia, portanto bifásico é preferido. Sempre verificar sedação/analgesia antes da CVE eletiva.",
+    "tag": "cve_energia"
+  },
+  {
+    "id": "tx_021",
+    "topic": "Terapêutica de Arritmias — CVE",
+    "difficulty": "hard",
+    "stem": "Paciente com FA e instabilidade hemodinâmica (PA 70/40 mmHg, rebaixamento de consciência). Qual a conduta IMEDIATA?",
+    "options": [
+      "Amiodarona 300 mg IV bolus → aguardar 30 minutos → repetir com 150 mg → CVE se sem resposta",
+      "CVE sincronizada de emergência imediata (após sedação rápida com ketamina ou midazolam IV se consciente), sem aguardar anticoagulação pré-procedimento, pois o risco hemodinâmico supera o risco tromboembólico; iniciar anticoagulação logo após a CVE",
+      "Metoprolol 5 mg IV lento para controle de FC, repetir 3 vezes; CVE apenas se sem resposta em 30 minutos",
+      "Adenosina 6 mg IV rápido para diagnóstico diferencial e possível conversão da FA"
+    ],
+    "answer_index": 1,
+    "explanation": "FA instável (hipotensão grave, angina, sinais de baixo débito, alteração de consciência) é indicação de CVE DE EMERGÊNCIA. Não se perde tempo com fármacos antiarrítmicos — cada minuto de baixo débito piora o prognóstico. Se o paciente estiver consciente: sedação rápida (ketamina 1-2 mg/kg IV, midazolam 1-2 mg IV, ou propofol 0,5-1 mg/kg) + CVE sincronizada 120-200 J bifásico. A anticoagulação NÃO deve atrasar a CVE de emergência — o risco imediato de morte por baixo débito supera o risco tromboembólico. Iniciar anticoagulação o mais precocemente possível após estabilização.",
+    "tag": "cve_emergencia"
+  },
+  {
+    "id": "tx_022",
+    "topic": "Terapêutica de Arritmias — Amiodarona",
+    "difficulty": "medium",
+    "stem": "Sobre os efeitos cutâneos da amiodarona a longo prazo, qual afirmação está CORRETA?",
+    "options": [
+      "A amiodarona causa eritema solar intenso mas sem pigmentação permanente, reversível com protetor solar",
+      "Fotossensibilidade (eritema intenso com exposição solar, inclusive com vidros UVA) e pigmentação azulada/cinzenta da pele em áreas fotoexpostas (especialmente face) por depósito de lipofuscina-iodo são efeitos bem documentados; a pigmentação pode ser irreversível",
+      "A amiodarona causa urticária generalizada por mecanismo IgE-mediado em todos os pacientes",
+      "Efeitos cutâneos da amiodarona são raros (<1%) e não requerem orientação ao paciente"
+    ],
+    "answer_index": 1,
+    "explanation": "Dois efeitos cutâneos clássicos da amiodarona: (1) Fotossensibilidade precoce — presente em até 40-57% dos pacientes. A amiodarona (e seu metabólito desetilamiodarona) absorvem radiação UVA. Causa eritema, queimado e bolhas com mínima exposição solar. Protetor solar de amplo espectro (UVA/UVB) e roupas de proteção são obrigatórios. (2) Pigmentação azul-acinzentada — em uso >1 ano, exposição solar acumulada leva ao depósito de metabolitos de iodo e lipofuscina nos melanossomas. Afeta principalmente face, orelhas e áreas expostas. Tende a ser parcialmente reversível com a suspensão, mas pode ser permanente. Considerar na relação risco-benefício em pacientes jovens.",
+    "tag": "amiodarona_toxicidade_pele"
+  },
+  {
+    "id": "tx_023",
+    "topic": "Terapêutica de Arritmias — Adenosina",
+    "difficulty": "medium",
+    "stem": "Qual é a eficácia da adenosina em flutter atrial e fibrilação atrial?",
+    "options": [
+      "A adenosina converte flutter e FA com eficácia semelhante à AVNRT (>90%)",
+      "A adenosina é ineficaz em converter flutter e FA, pois estas arritmias não dependem do nó AV para serem mantidas; o bloqueio AV transitório pode 'desmascarar' as ondas de flutter (em dente de serra), mas o ritmo retorna ao flutter/FA quando o efeito passa",
+      "A adenosina converte FA mas não flutter, pois a FA depende do nó AV para sua manutenção",
+      "A adenosina está contraindicada em flutter pois pode converter para FA com resposta ventricular mais rápida"
+    ],
+    "answer_index": 1,
+    "explanation": "Flutter e FA são mantidos por circuitos de reentrada que NÃO dependem do nó AV para sua perpetuação: o flutter depende de macro-reentrada em torno do anel tricúspide/istmo cavo-tricuspídeo; a FA depende de múltiplos circuitos de micro-reentrada (ou atividade focal de veias pulmonares) nos átrios. O nó AV é apenas a 'porta de entrada' para os ventrículos. A adenosina bloqueia temporariamente o nó AV, revelando que os átrios continuam em flutter/FA (útil diagnosticamente quando há dúvida sobre a taquicardia), mas quando o bloqueio passa, o flutter/FA continua exatamente como estava. NÃO converte estas arritmias.",
+    "tag": "adenosina_ineficacia"
+  },
+  {
+    "id": "tx_024",
+    "topic": "Terapêutica de Arritmias — Amiodarona",
+    "difficulty": "medium",
+    "stem": "Paciente usando amiodarona há 2 anos queixa-se de visão turva. O oftalmologista encontra microdepósitos bilaterais na camada epitelial da córnea (vórtice corneal) ao exame com lâmpada de fenda. Qual a conduta?",
+    "options": [
+      "Suspender imediatamente a amiodarona e iniciar corticosteroides oculares, pois a neuropatia óptica exige tratamento urgente",
+      "Os microdepósitos corneais (córnea verticillata) são achados benignos presentes em quase todos os pacientes em amiodarona a longo prazo; não causam perda de visão significativa, não requerem suspensão do fármaco; apenas realizar acompanhamento oftalmológico anual para diferenciar de neuropatia óptica (rara, mas grave e que exige suspensão)",
+      "Trocar amiodarona por sotalol imediatamente, pois qualquer alteração ocular indica toxicidade irrecuperável",
+      "Os depósitos corneais são sinal de toxicidade hepática e exigem biópsia de fígado urgente"
+    ],
+    "answer_index": 1,
+    "explanation": "A amiodarona (e seus metabólitos lipofílicos) se depositam nas células epiteliais de quase todos os órgãos. Na córnea, formam microdepósitos bilaterais em vórtice (córnea verticillata) — achados quase universais (>90%) em uso > 6 meses. São geralmente assintomáticos ou causam halos ao redor de luzes (fotofobia leve). NÃO exigem suspensão do fármaco por si sós. A toxicidade ocular GRAVE e rara é a neuropatia óptica anterior isquêmica não-arterítica (NAION) — pode causar perda visual permanente e exige suspensão imediata. Diferenciar: NAION causa perda aguda de campo visual; depósitos corneais não causam perda de campo. Acompanhamento anual com oftalmologista é recomendado.",
+    "tag": "amiodarona_toxicidade_ocular"
+  },
+  {
+    "id": "tx_025",
+    "topic": "Terapêutica de Arritmias — Revisão Integrada",
+    "difficulty": "hard",
+    "stem": "Paciente de 68 anos, história de DPOC moderada, internado por FA com resposta ventricular rápida (FC 148 bpm), PA 95/65 mmHg, Sat O2 88%. ECG: FA, sem sinais de pré-excitação. Qual a sequência de manejo MAIS ADEQUADA?",
+    "options": [
+      "Adenosina 6 mg IV rápido → se sem resposta, metoprolol 5 mg IV → se persistir, amiodarona 150 mg IV",
+      "Dado que há instabilidade hemodinâmica relativa (PA limítrofe) e DPOC (contraindica beta-bloqueadores IV em dose alta), CVE sincronizada após sedação rápida é a abordagem mais segura; se optar por controle farmacológico da FC, amiodarona IV 150 mg em 10 min é preferível ao metoprolol (evita broncoespasmo) e ao diltiazem IV (depressor miocárdico)",
+      "Metoprolol 5 mg IV lento é seguro no DPOC moderado; aplicar 3 doses e aguardar resposta por 1 hora",
+      "Digoxina 0,5 mg IV é o fármaco de escolha no DPOC com FA rápida por não ter efeito broncoconstritor"
+    ],
+    "answer_index": 1,
+    "explanation": "Caso integrando múltiplas restrições: (1) Instabilidade hemodinâmica relativa (PA 95/65) — CVE seria a melhor opção para restaurar ritmo sinusal e estabilizar. (2) DPOC — betabloqueadores IV são de risco (broncoespasmo); mesmo cardioseletivos têm restrição em DPOC moderado-grave em situação aguda. (3) Amiodarona IV tem mínimo efeito broncoconstritor e controla a FC via bloqueio AV (propriedade classe III + II); dose de 150 mg IV em 10 min é razoável se optar por farmacologia. (4) Diltiazem/verapamil IV são depressores miocárdicos e inapropriados com PA limítrofe. (5) Adenosina é ineficaz em FA (não converte, apenas revela o ritmo momentaneamente). A CVE emergencial com sedação leve é a escolha mais segura e efetiva neste cenário.",
+    "tag": "terapeutica_integrada"
+  }
+]

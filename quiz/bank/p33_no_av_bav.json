@@ -1,0 +1,482 @@
+[
+  {
+    "id": "bav_001",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV 1° Grau — Diagnóstico",
+    "difficulty": "easy",
+    "stem": "ECG de paciente de 62 anos: ritmo sinusal, FC 68 bpm, PR medido em DII = 240 ms, QRS estreito, sem batidas bloqueadas. Diagnóstico?",
+    "options": [
+      "BAV de 1° grau — PR > 200 ms com condução 1:1 (todo P conduz para QRS), sem batidas bloqueadas",
+      "BAV de 2° grau Mobitz I — PR progressivamente longo com batida bloqueada eventual",
+      "BAV de 2° grau Mobitz II — PR fixo com bloqueio súbito de QRS",
+      "Intervalo PR normal — 240 ms está dentro dos limites de referência"
+    ],
+    "answer_index": 0,
+    "explanation": "BAV de 1° grau: PR > 200 ms (0,20 s) com condução AV preservada (toda P é seguida de QRS). O 'bloqueio' de 1° grau é um nome equivocado — não há bloqueio real, apenas retardo na condução pelo nó AV. O valor normal do PR é 120–200 ms. PR de 240 ms representa retardo de 40 ms além do limite. A localização mais comum é intranodal (nó AV). O BAV 1° grau é geralmente benigno e NÃO causa sintomas diretos (a FC é normal e todo batimento conduz).",
+    "tag": "bav_primeiro_grau_diagnostico"
+  },
+  {
+    "id": "bav_002",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV 1° Grau — Causas",
+    "difficulty": "medium",
+    "stem": "Jovem de 25 anos com PR 220 ms em ECG de triagem. Nega uso de medicamentos, sem cardiopatia conhecida. Laboratório: sorologia Borrelia burgdorferi IgM positiva, recentemente retornou de área endêmica de Lyme. Qual a causa mais provável?",
+    "options": [
+      "Doença de Lyme cardíaca — B. burgdorferi causa bloqueios AV de intensidade variável (1° a 3° grau), geralmente reversíveis com antibioticoterapia",
+      "Variante normal do PR — atletas jovens têm PR ligeiramente alargado por tônus vagal elevado",
+      "Fibrose degenerativa idiopática (doença de Lev-Lenègre) — causa mais comum em jovens",
+      "Síndrome de pré-excitação (WPW) com via acessória de condução lenta"
+    ],
+    "answer_index": 0,
+    "explanation": "A doença de Lyme (borreliose) é causa clássica de bloqueio AV em jovens, especialmente em regiões endêmicas (noreste dos EUA, Europa central). B. burgdorferi tem tropismo pelo sistema de condução, podendo causar BAV de 1° a 3° grau. O envolvimento cardíaco ocorre em ~5–10% dos casos não tratados. A característica distintiva: os bloqueios são REVERSÍVEIS com antibioticoterapia (doxiciclina ou amoxicilina). Marcapasso temporário pode ser necessário em BAV de alto grau, mas raramente é permanente. A sorologia IgM positiva sugere infecção recente.",
+    "tag": "bav_primeiro_grau_lyme"
+  },
+  {
+    "id": "bav_003",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV 1° Grau — Quando Tratar",
+    "difficulty": "medium",
+    "stem": "Paciente de 72 anos com BAV 1° grau (PR 280 ms), assintomático, sem cardiopatia. Médico assistente questiona: é necessário implantar marcapasso preventivo?",
+    "options": [
+      "Não — BAV 1° grau assintomático isolado não tem indicação de marcapasso; conduta é observação e investigação da causa",
+      "Sim — PR > 260 ms é indicação classe I de MCP pelas diretrizes",
+      "Sim — em idosos qualquer BAV requer MCP preventivo dada a progressão natural",
+      "Não — mas é necessário antiarrítmico profilático para evitar evolução para BAV total"
+    ],
+    "answer_index": 0,
+    "explanation": "BAV 1° grau assintomático isolado NÃO tem indicação de marcapasso. A conduta é: (1) investigar a causa (fármacos, isquemia, doença de Lyme, distúrbios eletrolíticos); (2) suspender fármacos que prolongam o PR se clinicamente possível; (3) monitoramento periódico. A exceção é PR muito prolongado (> 300 ms) com sintomas atribuíveis (síncope, pré-síncope) — pode ser investigado e eventualmente tratado. Em pacientes com indicação de MCP por outra razão, o BAV 1° grau com PR muito longo pode influenciar na programação do dispositivo (otimização do intervalo AV).",
+    "tag": "bav_primeiro_grau_tratamento"
+  },
+  {
+    "id": "bav_004",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV 2° Grau Mobitz I — Diagnóstico",
+    "difficulty": "medium",
+    "stem": "ECG: ritmo sinusal, FC de ondas P: 75 bpm. Sequência PR: 180 ms → 220 ms → 260 ms → P bloqueada (sem QRS) → reinicia em 180 ms. QRS estreito. Diagnóstico?",
+    "options": [
+      "BAV 2° grau Mobitz I (Wenckebach) — prolongamento progressivo do PR até que um P não conduz, com reinício do ciclo",
+      "BAV 2° grau Mobitz II — PR é fixo com bloqueio súbito e imprevisível de QRS",
+      "BAV de 1° grau com extrassístole atrial bloqueada ocasional",
+      "BAV de 3° grau com ritmo de escape juncional e dissociação AV"
+    ],
+    "answer_index": 0,
+    "explanation": "Wenckebach (Mobitz I): o PR se prolonga progressivamente a cada ciclo, até que uma onda P não é conduzida (QRS ausente). Após a pausa, o ciclo reinicia com o PR mais curto. Características adicionais: (1) o RR encurta progressivamente antes da pausa (apesar do PR aumentar — o incremento do PR diminui a cada batida); (2) a pausa é menor que 2x o RR mais curto. Localização: tipicamente no NÓ AV (intranodal). QRS geralmente estreito. É um fenômeno de 'fadiga' do nó AV: quanto mais frequente o estímulo, mais fatigado fica o nó, até o bloqueio; a pausa 'recupera' o nó.",
+    "tag": "bav_wenckebach_diagnostico"
+  },
+  {
+    "id": "bav_005",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV 2° Grau Mobitz I — Localização e Prognóstico",
+    "difficulty": "medium",
+    "stem": "Paciente com IAM inferior apresenta Wenckebach. O residente pergunta: 'Precisa de MCP definitivo?' Qual a resposta correta?",
+    "options": [
+      "Geralmente não — Wenckebach no contexto de IAM inferior é intranodal, geralmente transitório e reverte espontaneamente com a reperfusão; MCP temporário apenas se hemodinamicamente instável",
+      "Sim — qualquer BAV no contexto de IAM é indicação de MCP definitivo emergencial",
+      "Sim — Wenckebach no IAM evolui invariavelmente para BAV total em 48–72h",
+      "Não — mas requer ablação do nó AV para prevenir recorrências"
+    ],
+    "answer_index": 0,
+    "explanation": "Wenckebach no IAM inferior é geralmente por isquemia do nó AV (artéria do nó AV origina-se da CD em ~85% dos casos). Características: (1) é intranodal (QRS estreito); (2) é transitório — reverte em 1–2 semanas com reperfusão miocárdica; (3) ritmo de escape juncional (40–60 bpm) se houver BAV completo. MCP temporário é indicado se: bradicardia sintomática, FC < 40 bpm com hipotensão, BAV de alto grau hemodinamicamente instável. MCP DEFINITIVO geralmente NÃO é necessário após IAM inferior com Wenckebach, diferente do IAM anterior onde BAV indica extensa necrose septal e tem pior prognóstico.",
+    "tag": "bav_wenckebach_iam_inferior"
+  },
+  {
+    "id": "bav_006",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV 2° Grau Mobitz I — Atletas",
+    "difficulty": "easy",
+    "stem": "Ciclista profissional de 28 anos em check-up. Holter noturno: episódios de Wenckebach com PR progressivo e pausas de até 2,5 s durante sono profundo. Diurno: ritmo sinusal FC 52 bpm. Assintomático. Conduta?",
+    "options": [
+      "Observação — Wenckebach noturno em atletas treinados é variante fisiológica do alto tônus vagal; não requer tratamento",
+      "MCP definitivo — pausas > 2 s sempre requerem marcapasso em adultos",
+      "Restrição de atividade física até resolução espontânea do Wenckebach",
+      "Implante de Holter implantável para monitoramento contínuo por 3 anos"
+    ],
+    "answer_index": 0,
+    "explanation": "Atletas de resistência têm tônus vagal muito elevado, especialmente durante o sono. Wenckebach noturno em atletas é variante fisiológica bem documentada, relacionada ao alto tônus parassimpático que retarda a condução AV durante o repouso. Diferente do Wenckebach patológico: é exclusivamente noturno/durante o sono, desaparece com o exercício (que aumenta o tônus simpático), o atleta é completamente assintomático, e durante o dia o ritmo é sinusal normal. Restrição de atividades seria inapropriada. A distinção da doença do nó AV patológica se faz pelo contexto clínico e pelo comportamento dinâmico (responde ao esforço).",
+    "tag": "bav_wenckebach_atleta"
+  },
+  {
+    "id": "bav_007",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV 2° Grau Mobitz II — Diagnóstico",
+    "difficulty": "medium",
+    "stem": "ECG: ritmo sinusal, FC de P = 80 bpm. PR constante em 180 ms em todos os batimentos conduzidos. Subitamente, uma onda P não é seguida de QRS, sem PR prolongamento prévio. QRS nos batimentos conduzidos: 130 ms com morfologia de BRE. Diagnóstico?",
+    "options": [
+      "BAV 2° grau Mobitz II — PR fixo com bloqueio súbito e imprevisível; QRS largo indica localização infranodal (feixe de His/ramos)",
+      "BAV 2° grau Mobitz I (Wenckebach) — o PR pode parecer fixo quando o ciclo é curto",
+      "Extrassístole atrial bloqueada — onda P prematura não conduz",
+      "BAV de 1° grau com batida extra suprimida"
+    ],
+    "answer_index": 0,
+    "explanation": "BAV Mobitz II tem característica diagnóstica essencial: PR FIXO (constante) nos batimentos conduzidos, com bloqueio SÚBITO e IMPREVISÍVEL de uma onda P (sem QRS). Não há progressão prévia do PR — o bloqueio 'cai do céu'. A localização é INFRANODAL: no feixe de His ou nos ramos. Evidência desta localização: QRS alargado (130 ms, BRE) — indica bloqueio de ramo no sistema infranodal. Isso é criticamente importante: ramo de His/ramos têm escape muito lento (< 40 bpm, instável) ou ausente. Mobitz II tem ALTO RISCO de evolução para BAV completo e síncope/morte súbita → indicação de MCP definitivo.",
+    "tag": "bav_mobitz_ii_diagnostico"
+  },
+  {
+    "id": "bav_008",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV 2° Grau Mobitz II — Prognóstico e Tratamento",
+    "difficulty": "hard",
+    "stem": "Homem de 68 anos com síncope sem pródromos. ECG: BAV Mobitz II com QRS largo (BRD + BAFAE). Por que este padrão tem risco maior do que o Wenckebach?",
+    "options": [
+      "Mobitz II é infranodal — o escape ventricular (< 40 bpm) é instável e pode falhar; já o Wenckebach é intranodal com escape juncional confiável (40–60 bpm) e raramente progride para assistolia",
+      "Mobitz II ocorre em pacientes mais idosos, que têm menor reserva cardiovascular",
+      "Mobitz II causa mais FA paroxística associada, aumentando o risco tromboembólico",
+      "Wenckebach é mais arritmogênico porque o PR progressivo cria fenômenos de R-sobre-T"
+    ],
+    "answer_index": 0,
+    "explanation": "A diferença de prognóstico entre Mobitz I e II se deve à LOCALIZAÇÃO do bloqueio: Mobitz I (Wenckebach) é intranodal → escape juncional (QRS estreito, FC 40–60 bpm) é confiável e hemodinamicamente estável; raramente progride para BAV completo. Mobitz II é infranodal (His-Purkinje) → quando ocorre BAV completo, o escape é ventricular (QRS largo, FC < 40 bpm, instável) ou pode haver assistolia. BRD + BAFAE (hemiblock anterior) indica 'doença bifascicular' — o único fascículo restante (posterior) pode bloquear a qualquer momento causando BAV completo súbito. É indicação de MCP definitivo MESMO assintomático em alguns contextos.",
+    "tag": "bav_mobitz_ii_prognostico"
+  },
+  {
+    "id": "bav_009",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV 2° Grau Avançado — Padrão 2:1",
+    "difficulty": "hard",
+    "stem": "ECG mostra condução 2:1: cada segundo P é bloqueado, PR constante nos P conduzidos. QRS estreito (90 ms). Como diferenciar se este padrão 2:1 é Mobitz I ou Mobitz II?",
+    "options": [
+      "Com apenas 1 P conduzido seguido por 1 P bloqueado, não é possível observar progressão do PR — análise do QRS (estreito = provável Mobitz I intranodal; largo = Mobitz II infranodal) e resposta a atropina (Mobitz I melhora; Mobitz II piora ou não muda) ajudam na distinção",
+      "No padrão 2:1, sempre se trata como Mobitz II independentemente do QRS",
+      "2:1 é sempre Mobitz I pois o bloqueio é regular e previsível",
+      "O padrão 2:1 é patognomônico de flutter atrial com bloqueio fisiológico"
+    ],
+    "answer_index": 0,
+    "explanation": "O padrão 2:1 é 'ambíguo' porque com apenas um P conduzido por ciclo, não se pode observar progressão (necessária para diagnosticar Wenckebach) nem confirmar PR fixo com bloqueio súbito (Mobitz II). Pistas diagnósticas: (1) QRS ESTREITO → bloqueio provavelmente intranodal → mais compatível com Mobitz I; (2) QRS LARGO (BRE/BRD) → infranodal → mais compatível com Mobitz II; (3) Outros trechos do ECG ou Holter onde a condução é 3:2 ou 4:3 podem revelar Wenckebach; (4) Atropina: Mobitz I melhora (aumenta FC do nó sinusal e melhora razão de condução); Mobitz II pode piorar (mais P por unidade de tempo sobrecarregam o sistema His-Purkinje). Tratar 2:1 com QRS largo como Mobitz II (mais seguro).",
+    "tag": "bav_2_para_1_diferencial"
+  },
+  {
+    "id": "bav_010",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV Total — Diagnóstico",
+    "difficulty": "medium",
+    "stem": "ECG: FC de P = 80 bpm, FC de QRS = 38 bpm. Os intervalos PR variam aleatoriamente (sem relação fixa entre P e QRS). QRS estreito. Diagnóstico?",
+    "options": [
+      "BAV de 3° grau (total) com escape juncional — dissociação AV completa; QRS estreito indica ritmo de escape originado acima da bifurcação do feixe de His (juncional, 40–60 bpm)",
+      "BAV 2° grau Mobitz II com razão de condução variável",
+      "Dissociação AV por taquicardia juncional acelerada — não é bloqueio AV",
+      "Fibrilação atrial com resposta ventricular lenta"
+    ],
+    "answer_index": 0,
+    "explanation": "BAV de 3° grau (completo): NENHUM impulso sinusal/atrial conduz para os ventrículos. Critérios diagnósticos: (1) P e QRS independentes — nenhuma relação temporal fixa; (2) FC de P > FC de QRS; (3) escape ventricular. QRS ESTREITO indica escape juncional (feixe de His proximal à bifurcação) — mais estável, FC 40–60 bpm. QRS LARGO indica escape ventricular (abaixo da bifurcação) — menos confiável, FC 20–40 bpm, maior risco de assistolia. Na FA, não há ondas P identificáveis; aqui há P sinusais bem definidas que simplesmente não conduzem.",
+    "tag": "bav_terceiro_grau_diagnostico"
+  },
+  {
+    "id": "bav_011",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV Total — Hemodinâmica",
+    "difficulty": "hard",
+    "stem": "Paciente de 75 anos com BAV total (FC 32 bpm, QRS largo). PA 70/40. Sintomas: confusão mental, dispneia. Por que a hemodinâmica está tão comprometida?",
+    "options": [
+      "FC 32 bpm é insuficiente para manter débito cardíaco; o escape ventricular lento com QRS largo indica contração dyssíncrona (ineficiente); a dissincronia AV perde a 'carga atrial' (contribuição atrial para enchimento ventricular = 20–30% do DC)",
+      "O BAV total causa fibrilação ventricular secundária que compromete o débito cardíaco",
+      "QRS largo no escape ventricular indica infarto agudo simultâneo que causa a hipotensão",
+      "A bradicardia extrema desencadeia vasodilatação reflexa mediada por barorreceptores"
+    ],
+    "answer_index": 0,
+    "explanation": "No BAV total com escape ventricular, três fatores comprometem o DC: (1) BRADICARDIA SEVERA (32 bpm) — DC = FC × VS; FC baixa reduz DC mesmo com VS aumentado; (2) PERDA DA SINCRONIA AV — o átrio contrai independentemente do ventrículo; quando o átrio contrai sobre valva fechada, perde a 'carga atrial' (kick atrial = 20–30% do DC), há regurgitação A-V e ondas em canhão no pulso venoso; (3) CONTRAÇÃO DYSSÍNCRONA — QRS largo = ativação ventricular anormal, contração ineficiente (análogo ao BRE). Tratamento IMEDIATO: marcapasso transcutâneo → transvenoso temporário → MCP definitivo.",
+    "tag": "bav_terceiro_grau_hemodinamica"
+  },
+  {
+    "id": "bav_012",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV Total — Escape Juncional vs Ventricular",
+    "difficulty": "medium",
+    "stem": "Dois pacientes com BAV total: paciente A tem QRS estreito (90 ms), FC 48 bpm; paciente B tem QRS largo (160 ms), FC 28 bpm. Qual tem pior prognóstico imediato e por quê?",
+    "options": [
+      "Paciente B — escape ventricular (QRS largo, FC < 40 bpm) é menos estável, mais propenso à assistolia e produz hemodinâmica mais comprometida; escape juncional (A) é mais confiável",
+      "Paciente A — QRS estreito indica que o bloqueio é mais proximal e portanto mais extenso",
+      "Ambos têm prognóstico idêntico pois o grau de bloqueio é o mesmo (BAV total)",
+      "Paciente A — FC mais alta significa que o coração está trabalhando mais e consumindo mais oxigênio"
+    ],
+    "answer_index": 0,
+    "explanation": "A localização do escape determina o prognóstico: ESCAPE JUNCIONAL (A): originado no feixe de His acima da bifurcação → QRS estreito, FC 40–60 bpm, relativamente estável, responde parcialmente ao simpático e atropina. ESCAPE VENTRICULAR (B): originado nas fibras de Purkinje ventriculares → QRS largo (ativação retrógrada lenta), FC 20–40 bpm, extremamente instável, não responde à atropina, propenso à torsades de pointes (QT longo pela bradicardia) e fibrilação ventricular. Paciente B requer MCP IMEDIATO. Ambos necessitam de MCP, mas B é emergência absoluta. O QRS LARGO no BAV total é sinal de localização infranodal do bloqueio e pior prognóstico.",
+    "tag": "bav_terceiro_grau_escape"
+  },
+  {
+    "id": "bav_013",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV Total — Causas Reversíveis",
+    "difficulty": "hard",
+    "stem": "Paciente de 60 anos em diálise, com hipercalemia grave (K+ 7,8 mEq/L). ECG: ondas T apiculadas, alargamento de QRS, e dissociação AV (P lenta, escape ventricular lento). Qual o mecanismo do BAV?",
+    "options": [
+      "Hipercalemia reduz o potencial de repouso da membrana (menos negativo) → inativação dos canais de Na+ → redução da velocidade de condução no sistema His-Purkinje e nó AV → BAV progressivo até bloqueio completo",
+      "Hipercalemia causa vasoespasmo coronariano com isquemia aguda do nó AV",
+      "Hipercalemia estimula o sistema nervoso parassimpático causando bradicardia reflexa",
+      "O excesso de K+ bloqueia diretamente os receptores beta do nó sinusal"
+    ],
+    "answer_index": 0,
+    "explanation": "Hipercalemia afeta o potencial de membrana das células cardíacas de forma progressiva: K+ elevado reduz o gradiente de K+ transmembrana → potencial de repouso sobe de -90 mV para valores menos negativos (ex: -70 mV) → canais de Na+ ficam parcialmente inativados → condução lenta. Manifestações por nível de K+: 5,5–6,5 mEq/L: T apiculadas; 6,5–7,5: alargamento de QRS, PR longo; > 7,5: BAV avançado, QRS sinusoidal, risco de FV/assistolia. Tratamento: (1) gluconato de Ca2+ IV (estabiliza membrana); (2) bicarbonato/insulina/glicose (redistribuição); (3) hemodiálise. É causa REVERSÍVEL de BAV.",
+    "tag": "bav_hipercalemia"
+  },
+  {
+    "id": "bav_014",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV Total — Causas",
+    "difficulty": "medium",
+    "stem": "Mulher de 45 anos com dispneia, tosse seca, uveíte bilateral e adenopatia hilar bilateral na radiografia. ECG: BAV de 2° grau avançado (3:1). TC de tórax: linfonodomegalia mediastinal com padrão 'em asa de morcego'. Diagnóstico e causa do BAV?",
+    "options": [
+      "Sarcoidose cardíaca — granulomas sarcoidóticos infiltram o sistema de condução AV causando bloqueios de grau variável; pode progredir para BAV total e requer MCP",
+      "Tuberculose miliar com comprometimento cardíaco — micobactérias causam granulomas no nó AV",
+      "Linfoma de Hodgkin com compressão extrínseca do nó AV pela adenopatia mediastinal",
+      "Doença de Chagas — T. cruzi causa BAV em adultos jovens da América Latina"
+    ],
+    "answer_index": 0,
+    "explanation": "O quadro é clássico de sarcoidose sistêmica: uveíte, adenopatia hilar bilateral, infiltrado pulmonar. A sarcoidose cardíaca ocorre em 5–25% dos casos e pode se manifestar como: BAV (mais comum, qualquer grau), TV, IC por cardiomiopatia infiltrativa, morte súbita. Os granulomas sarcoidóticos afetam preferencialmente o sistema de condução basal: feixe de His, ramos e nó AV. O BAV pode ser de alto grau e requer MCP definitivo. Diagnóstico: PET-TC cardíaco (inflamação ativa), RM cardíaca, biópsia. O tratamento da sarcoidose (corticosteroides) pode reverter parcialmente o BAV se a inflamação for ativa.",
+    "tag": "bav_sarcoidose"
+  },
+  {
+    "id": "bav_015",
+    "topic": "Bloqueios AV",
+    "subtopic": "Dissociação AV — Conceito",
+    "difficulty": "hard",
+    "stem": "ECG mostra ritmo juncional acelerado a 78 bpm (QRS estreito, sem P) e ondas P sinusais a 65 bpm, sem relação com QRS. Isto é BAV total ou dissociação AV?",
+    "options": [
+      "Dissociação AV — o ritmo juncional acelerado SUPEROU a FC sinusal; o nó AV não está bloqueado (se a P sinusal chegasse em momento oportuno, conduziria normalmente)",
+      "BAV total — qualquer dissociação entre P e QRS é BAV de 3° grau",
+      "BAV 2° grau Mobitz II — bloqueio intermitente com PR fixo",
+      "FA de baixa amplitude com resposta ventricular lenta"
+    ],
+    "answer_index": 0,
+    "explanation": "DISTINÇÃO CRUCIAL: Dissociação AV vs BAV total. DISSOCIAÇÃO AV: os átrios e ventrículos batem de forma independente, mas o nó AV NÃO está bloqueado. Ocorre quando um ritmo ventricular ou juncional é mais rápido que o sinusal (overdrive). Se a onda P cai fora do período refratário do nó AV, ela pode conduzir (captura ventricular) — isso CONFIRMA que o nó AV está íntegro. No BAV total, NENHUMA P conduz, independentemente do timing. Na dissociação AV por ritmo juncional acelerado: o juncional está 'usurpando' o comando porque é mais rápido que o sinusal — se o sinusal acelerassem (atropina, exercício), a captura sinusal seria restaurada.",
+    "tag": "dissociacao_av_conceito"
+  },
+  {
+    "id": "bav_016",
+    "topic": "Bloqueios AV",
+    "subtopic": "Dissociação AV — Diagnóstico Diferencial com BAV Total",
+    "difficulty": "hard",
+    "stem": "Como confirmar no ECG que se trata de DISSOCIAÇÃO AV (e não BAV total)?",
+    "options": [
+      "Identificar 'captura ventricular' — quando a onda P cai em momento oportuno (fora do período refratário), o QRS é conduzido com PR normal, confirmando que o nó AV funciona",
+      "Na dissociação AV, a FC de P é sempre maior do que a de QRS",
+      "Na dissociação AV, o QRS é sempre estreito; no BAV total o QRS é sempre largo",
+      "Apenas o estudo eletrofisiológico diferencia com segurança as duas condições"
+    ],
+    "answer_index": 0,
+    "explanation": "A 'captura ventricular' é o sinal diagnóstico decisivo da dissociação AV: esporadicamente, uma onda P sinusal cai em período favorável (fora do período refratário do nó AV e dos ventrículos) → o impulso conduz normalmente pelo nó AV → QRS de morfologia normal com PR esperado. Essa captura prova que o nó AV está FUNCIONANDO. No BAV total, nenhuma captura ocorre jamais. A presença de 'batimentos de fusão' (QRS intermediário entre o escape e o conduzido) também é evidência de dissociação AV funcional. A FC de P pode ser menor ou maior que a de QRS na dissociação AV (variações contextuais), mas no BAV total a FC de P é sempre maior.",
+    "tag": "dissociacao_av_captura_ventricular"
+  },
+  {
+    "id": "bav_017",
+    "topic": "Bloqueios AV",
+    "subtopic": "Farmacologia do Nó AV — Betabloqueadores",
+    "difficulty": "medium",
+    "stem": "Paciente com FA com resposta ventricular rápida (FC 145 bpm) recebe metoprolol IV. A FC cai para 88 bpm. Qual o mecanismo pelo qual o betabloqueador controla a FC na FA?",
+    "options": [
+      "Bloqueia receptores β1 no nó AV → reduz a corrente If e ICaL → aumenta o período refratário efetivo do nó AV → menos impulsos atriais fibrilatórios conseguem atravessar o nó AV por unidade de tempo",
+      "Metoprolol converte a FA em ritmo sinusal ao bloquear os focos atriais ectópicos",
+      "Betabloqueador reduz a condução pelo feixe de His e ramos, causando QRS largo que mascara a FA",
+      "Metoprolol bloqueia receptores α1 nos átrios, reduzindo a frequência de descargas fibrilatórias atriais"
+    ],
+    "answer_index": 0,
+    "explanation": "Na FA, os átrios geram 350–600 impulsos/min. O NÓ AV funciona como um 'filtro' que limita quantos desses impulsos chegam aos ventrículos (período refratário efetivo). Betabloqueadores agem no nó AV: bloqueiam receptores β1 → diminuem a produção de cAMP → reduzem as correntes If e ICaL → PROLONGAM o período refratário efetivo do nó AV → menos impulsos atriais passam por unidade de tempo → FC ventricular diminui. Betabloqueadores NÃO cardiovertem a FA — apenas controlam a frequência. A cardioversão requer antiarrítmicos (amiodarona, propafenona) ou cardioversão elétrica.",
+    "tag": "farmacologia_no_av_betabloqueador"
+  },
+  {
+    "id": "bav_018",
+    "topic": "Bloqueios AV",
+    "subtopic": "Farmacologia do Nó AV — BCC não-DHP",
+    "difficulty": "medium",
+    "stem": "Por que verapamil e diltiazem controlam a FC na FA, mas amlodipina (di-hidropiridina) não tem esse efeito?",
+    "options": [
+      "Verapamil e diltiazem bloqueiam canais de Ca2+ tipo L no nó AV (que depende do Ca2+ para sua fase 0 e automaticidade), prolongando seu período refratário; amlodipina tem seletividade vascular e não penetra no nó AV significativamente",
+      "Amlodipina bloqueia apenas canais de Ca2+ tipo T, que não existem no nó AV",
+      "Verapamil e diltiazem têm efeito β-bloqueador adicional que controla a FC; amlodipina não tem",
+      "Amlodipina tem meia-vida muito curta para controlar cronicamente a FC"
+    ],
+    "answer_index": 0,
+    "explanation": "O nó AV (e sinusal) é tecido de RESPOSTA LENTA: sua despolarização (fase 0) é mediada por canais de Ca2+ tipo L (ICaL), não por canais de Na+ rápidos (como o miocárdio de trabalho). Verapamil e diltiazem têm alta afinidade pelo canal Ca-L do tecido nodal → prolongam a refratariedade e reduzem a condução AV → controle da FC na FA/flutter. Di-hidropiridinas (amlodipina, nifedipina, anlodipina) têm SELETIVIDADE VASCULAR: bloqueiam ICaL nos vasos (vasodilatação) mas têm fraca afinidade pelo tecido cardíaco nodal. São até contraindicadas na FA pois a vasodilatação/hipotensão pode ativar o simpático reflexamente, acelerando a FC.",
+    "tag": "farmacologia_no_av_bcc_nao_dhp"
+  },
+  {
+    "id": "bav_019",
+    "topic": "Bloqueios AV",
+    "subtopic": "Farmacologia do Nó AV — Digoxina",
+    "difficulty": "medium",
+    "stem": "Paciente com IC e FA usa digoxina para controle da FC. A FC em repouso é 75 bpm, mas durante exercício leve sobe para 148 bpm. Por que o controle da FC com digoxina é inadequado durante o esforço?",
+    "options": [
+      "Digoxina controla a FC principalmente por aumento do tônus vagal — no esforço o simpático domina e supera o efeito vagal, resultando em controle inadequado da FC com a atividade",
+      "A dose de digoxina é sempre insuficiente — deve-se dobrar a dose para controle adequado",
+      "Digoxina causa toxicidade cardíaca que paradoxalmente acelera a FC durante o exercício",
+      "Digoxina tem efeito seletivo apenas no nó sinusal, sem efeito sobre a condução AV"
+    ],
+    "answer_index": 0,
+    "explanation": "A digoxina controla a FC na FA principalmente por mecanismo VAGOTÔNICO (estimulação do tônus parassimpático central e sensibilização de barorreceptores → acetilcolina retarda a condução AV). Durante o exercício, o sistema simpático é fortemente ativado e SUPERA o efeito vagotônico da digoxina. Resultado: controle de FC excelente em repouso, mas inadequado durante atividade. Isso é clinicamente relevante em pacientes que fazem atividade física. Em pacientes com IC e FA, a digoxina é preferível em pacientes sedentários/repouso. Betabloqueadores e BCC não-DHP são mais eficazes para controle da FC em todas as situações (exercício incluso).",
+    "tag": "farmacologia_digoxina_controle_fc"
+  },
+  {
+    "id": "bav_020",
+    "topic": "Bloqueios AV",
+    "subtopic": "Farmacologia do Nó AV — Adenosina",
+    "difficulty": "hard",
+    "stem": "Paciente com TSVP (FC 178 bpm, QRS estreito, regular). Adenosina 6 mg IV em bolus rápido. Resposta: terminação abrupta da taquicardia → ritmo sinusal. Qual o mecanismo de ação da adenosina no nó AV?",
+    "options": [
+      "Adenosina ativa receptores A1 no nó AV → ativa canais de K+ (IKAdo) → hiperpolarização da membrana → bloqueio transitório e completo da condução AV → interrompe o circuito de reentrada nodal",
+      "Adenosina bloqueia canais de Na+ do nó AV causando bradicardia temporária",
+      "Adenosina aumenta o cAMP no nó AV causando hiperpolarização por mecanismo β2",
+      "Adenosina estimula receptores β1 causando extrassístole que termina a taquicardia"
+    ],
+    "answer_index": 0,
+    "explanation": "Adenosina é o antiarrítmico de eleição para TSVP (TSV paroxística). Mecanismo: adenosina endógena ou exógena se liga aos receptores A1 acoplados à proteína Gi no nó AV → ativação dos canais de K+ sensíveis à adenosina (IKAdo, canal GIRK) → saída de K+ → hiperpolarização da célula nodal → bloqueio TRANSITÓRIO e completo da condução AV (dura 10–15 s). Isso 'quebra' o circuito de reentrada que depende do nó AV (TRNAV ou TRAV). Se a taquicardia NÃO termina com adenosina (atrial ectópica, flutter), a pausa transitória revela as ondas P/F, ajudando no diagnóstico. Efeitos colaterais: rubor, opressão torácica, dispneia — muito breves.",
+    "tag": "farmacologia_adenosina_mecanismo"
+  },
+  {
+    "id": "bav_021",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV Total — IAM Anterior",
+    "difficulty": "hard",
+    "stem": "Paciente com STEMI anterior extenso (supra V1-V6) evolui para BAV total com QRS largo (150 ms) e escape ventricular a 28 bpm. Como este BAV difere do BAV no IAM inferior e qual o prognóstico?",
+    "options": [
+      "No IAM anterior, o BAV é por necrose extensa do septo interventricular (que contém o feixe de His e ramos) — é infranodal, irreversível, com escape ventricular instável e altíssima mortalidade; muito diferente do BAV inferior (intranodal, transitório)",
+      "O BAV no IAM anterior é mais benigno por ser mais proximal no sistema de condução",
+      "O IAM anterior raramente causa BAV; quando ocorre é sempre por broncoaspiração",
+      "Ambos os BAVs (anterior e inferior) têm o mesmo prognóstico quando tratados com MCP"
+    ],
+    "answer_index": 0,
+    "explanation": "O BAV no IAM ANTERIOR é catastrófico por natureza diferente do IAM inferior: (1) LOCALIZAÇÃO: a DA proximal irriga o septo e o feixe de His/ramos — necrose septal extensa destrói o sistema de condução; (2) É INFRANODAL e geralmente IRREVERSÍVEL — requer MCP definitivo; (3) Indica área de necrose ENORME (marcador de extenso comprometimento de VE); (4) O escape ventricular (QRS largo, FC < 30 bpm) é instável e frequentemente evolui para assistolia. Mortalidade hospitalar > 70% sem MCP urgente. No IAM INFERIOR, o BAV é intranodal, por isquemia reversível do nó AV + reflexo vagal → transitório, reverte com reperfusão, MCP definitivo raramente necessário.",
+    "tag": "bav_iam_anterior_vs_inferior"
+  },
+  {
+    "id": "bav_022",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV — Pós-Cirurgia Cardíaca",
+    "difficulty": "medium",
+    "stem": "Paciente no 3° dia pós-operatório de troca valvar aórtica apresenta BAV de 3° grau (QRS largo, FC 35 bpm). O cirurgião colocou fios de marcapasso epicárdico temporários. Qual a conduta em relação ao MCP definitivo?",
+    "options": [
+      "Aguardar 7–10 dias com marcapasso temporário — muitos BAVs pós-cirúrgicos são transitórios (edema, inflamação local) e resolvem espontaneamente; se persistir após 5–7 dias, indica MCP definitivo",
+      "MCP definitivo deve ser implantado no mesmo dia da cirurgia, pois BAV pós-cirúrgico nunca reverte",
+      "Suspender o marcapasso temporário no 2° dia e observar o ritmo de escape",
+      "Amiodarona IV para reverter o BAV antes de decidir sobre MCP definitivo"
+    ],
+    "answer_index": 0,
+    "explanation": "BAV pós-cirúrgico é causa REVERSÍVEL comum. A cirurgia da valva aórtica envolve manipulação próxima ao feixe de His e nó AV — edema, hematoma e inflamação local podem causar BAV transitório. A conduta padrão: (1) Manter MCP temporário (fios epicárdicos) no perioperatório; (2) Observar evolução por 5–10 dias; (3) Se o BAV resolver → alta sem MCP; (4) Se persistir após 7–10 dias → BAV provavelmente irreversível (lesão definitiva do sistema de condução) → MCP definitivo. Diretrizes ACC/AHA recomendam esperar no mínimo 5–7 dias antes do MCP definitivo pós-cirúrgico. Amiodarona não reverte BAV estrutural.",
+    "tag": "bav_pos_cirurgia_cardiaca"
+  },
+  {
+    "id": "bav_023",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV 1° Grau — Fibrose de Lev-Lenègre",
+    "difficulty": "hard",
+    "stem": "Idoso de 82 anos, assintomático, sem cardiopatia conhecida, sem uso de medicamentos, com PR 320 ms, BRD e BAFAE. ECG há 10 anos: PR 180 ms, QRS estreito. Qual a causa mais provável desta progressão?",
+    "options": [
+      "Doença de Lev-Lenègre — fibrose esclerodegenerativa idiopática progressiva do sistema de condução His-Purkinje, causa mais comum de BAV isolado em idosos sem cardiopatia estrutural",
+      "Doença de Chagas com comprometimento tardio do sistema de condução",
+      "Hipertensão arterial crônica causando hipertrofia septal que comprime mecanicamente o sistema de condução",
+      "Amiloidose senil com depósito progressivo no sistema de condução"
+    ],
+    "answer_index": 0,
+    "explanation": "A doença de Lev-Lenègre é a causa mais comum de bloqueio cardíaco adquirido isolado em idosos do mundo ocidental. É um processo fibrodegenerativo IDIOPÁTICO e PROGRESSIVO do sistema de condução: a fibrose substitui gradualmente as células especializadas do feixe de His e ramos. Características: (1) Progressão lenta ao longo de décadas; (2) Sem cardiopatia estrutural subjacente; (3) Padrão típico: PR longo + bloqueio de ramo (BRD, BRE, hemiblocks) → BAV avançado → BAV completo; (4) Mais comum em homens > 60 anos. Quando evolui para BAV completo sintomático, requer MCP definitivo. Diferente da doença de Chagas (endêmica no Brasil, com cardiopatia estrutural associada).",
+    "tag": "bav_lev_lenègre"
+  },
+  {
+    "id": "bav_024",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV Total — MCP Imediato",
+    "difficulty": "medium",
+    "stem": "Paciente com BAV total (FC 30 bpm, PA 60/40, confusão mental). Atropina 1 mg IV sem efeito. Próxima conduta?",
+    "options": [
+      "Marcapasso transcutâneo imediato — eletrodos externos no tórax com estimulação elétrica transcutânea; analgesia/sedação para tolerabilidade; preparar acesso transvenoso urgente",
+      "Segunda dose de atropina (3 mg total) e aguardar por 30 minutos antes de MCP",
+      "Adenosina 6 mg IV para diagnosticar o nível do bloqueio antes do MCP",
+      "Lidocaína IV para estabilizar o ritmo de escape ventricular e aumentar a FC"
+    ],
+    "answer_index": 0,
+    "explanation": "Quando atropina falha em BAV completo sintomático com instabilidade hemodinâmica, o próximo passo no ACLS é o MARCAPASSO TRANSCUTÂNEO: eletrodos adesivos colocados no tórax (posição anteroposterior ou anterolateral), com corrente crescente até captura ventricular (geralmente 60–100 mA). É doloroso — providenciar analgesia (morfina/fentanil) e sedação (midazolam). Simultaneamente, preparar acesso venoso central para MCP transvenoso temporário (mais confiável e definitivo no sentido imediato). A atropina é ineficaz em BAV infranodal (Mobitz II, BAV total com escape ventricular) pois o nó AV está 'bypassed'. Adenosina e lidocaína são contraindicados.",
+    "tag": "bav_terceiro_grau_mcp_imediato"
+  },
+  {
+    "id": "bav_025",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV — Fármacos como Causa Reversível",
+    "difficulty": "medium",
+    "stem": "Paciente de 70 anos em uso de metoprolol, verapamil e digoxina para controle de FA apresenta BAV de 3° grau. Qual a conduta inicial antes de considerar MCP definitivo?",
+    "options": [
+      "Suspender os fármacos bradicardizantes (metoprolol, verapamil, digoxina) — são causa potencialmente reversível de BAV; manter MCP temporário se necessário durante a retirada; reavaliar o ritmo após clearance dos fármacos",
+      "Implantar MCP definitivo imediatamente — o BAV de 3° grau tem indicação absoluta independentemente da causa",
+      "Aumentar a dose de digoxina para cardioverter a FA e restaurar o ritmo sinusal",
+      "Iniciar amiodarona IV para reverter o bloqueio e controlar a FA simultaneamente"
+    ],
+    "answer_index": 0,
+    "explanation": "Fármacos são causa REVERSÍVEL de BAV e devem ser excluídos ANTES do MCP definitivo: betabloqueadores, BCC não-DHP (verapamil, diltiazem), digoxina, amiodarona, sotalol — todos podem causar BAV de qualquer grau, especialmente em combinação. A conduta: (1) Suspender os agentes culpados; (2) MCP temporário se necessário para estabilidade hemodinâmica; (3) Monitorizar por 24–72h após clearance farmacológico (considerar meia-vida dos fármacos; digoxina: T½ ~36h; amiodarona: semanas!); (4) Se o BAV resolver → não indicar MCP definitivo; (5) Se persistir → BAV estrutural → avaliar MCP definitivo. Esta abordagem evita implantes desnecessários.",
+    "tag": "bav_causa_farmacologica_reversivel"
+  },
+  {
+    "id": "bav_026",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV 2° Grau — Localização por EEF",
+    "difficulty": "hard",
+    "stem": "No estudo eletrofisiológico (EEF), o intervalo AH representa a condução do átrio ao feixe de His, e o intervalo HV representa do feixe de His aos ventrículos. Mobitz I tem AH prolongado; Mobitz II tem HV prolongado. Qual a implicação clínica desta diferença?",
+    "options": [
+      "AH prolongado (Mobitz I) = bloqueio no nó AV (intranodal) — prognóstico benigno, escape juncional confiável; HV prolongado (Mobitz II) = bloqueio infranodal (His-Purkinje) — alto risco de BAV completo com escape ventricular instável, indicação de MCP",
+      "AH e HV prolongados têm o mesmo significado clínico — ambos indicam disfunção grave do sistema de condução",
+      "HV prolongado indica bloqueio no nó AV; AH prolongado indica bloqueio nos ramos",
+      "O EEF não tem valor diagnóstico nos BAVs pois os intervalos variam muito"
+    ],
+    "answer_index": 0,
+    "explanation": "O EEF mapeia com precisão a localização do bloqueio: INTERVALO AH (nó AV): normal 60–125 ms. AH prolongado ou com incremento progressivo = Wenckebach no nó AV → benigno. INTERVALO HV (His-Purkinje): normal 35–55 ms. HV prolongado (> 70–100 ms) ou com bloqueio = localização infranodal → mau prognóstico. HV > 100 ms tem indicação de MCP mesmo sem BAV sintomático. HV prolongado explica por que Mobitz II tem pior prognóstico: o sistema His-Purkinje está doente, conduz de forma intermitente e pode falhar completamente a qualquer momento. O EEF é indicado em casos duvidosos para guiar a decisão de MCP.",
+    "tag": "bav_eletrofisiologia_ah_hv"
+  },
+  {
+    "id": "bav_027",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV Total — Dissociação AV Completa — Ondas em Canhão",
+    "difficulty": "medium",
+    "stem": "Paciente com BAV total. Na avaliação clínica, o médico nota pulsos venosos jugulares com ondas 'a' gigantes intermitentes ('ondas em canhão'). Qual o mecanismo?",
+    "options": [
+      "O átrio contrai esporadicamente contra a valva tricúspide fechada (ventrículo em sístole) → a força da contração atrial é refletida retrogradamente nas veias jugulares como onda 'a' gigante (canhão)",
+      "As ondas em canhão são causadas pelo ritmo ventricular lento que gera pulso venoso irregular",
+      "As ondas gigantes representam regurgitação tricúspide por aumento da pressão do VD",
+      "As ondas em canhão são artefatos da ausculta cardíaca e não têm significado clínico"
+    ],
+    "answer_index": 0,
+    "explanation": "No BAV total, átrio e ventrículo contraem de forma independente. Quando o átrio contrai ENQUANTO a valva tricúspide está FECHADA (ventrículo em sístole ou ainda refratário), a pressão atrial não escoa para o ventrículo — é refletida retrogradamente para as veias jugulares como uma onda 'a' gigante ('onda em canhão'). A nomenclatura é justamente por sua natureza explosiva. É um sinal CLÍNICO valioso de dissociação AV. Também pode ocorrer na TV (se acontece dissociação AV), TSV com condução retrógrada, batimentos de escape juncional. A distinção: na TV, as ondas canhão são irregulares e intermitentes; na TRNAV, são regulares (cada batimento tem P retrógrada simultânea ao QRS).",
+    "tag": "bav_ondas_canhao"
+  },
+  {
+    "id": "bav_028",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV 1° Grau — IAM Inferior",
+    "difficulty": "medium",
+    "stem": "Paciente com STEMI inferior chega ao hemodinâmica. ECG inicial: PR 210 ms. Após a ICP primária com sucesso, novo ECG: PR 175 ms. O que explica a normalização do PR?",
+    "options": [
+      "A reperfusão da Coronária Direita restaurou o fluxo na artéria do nó AV → aliviou a isquemia do nó AV → normalização da condução AV (BAV 1° grau por isquemia é reversível com reperfusão)",
+      "A heparina usada durante a ICP tem efeito direto sobre os canais de Ca2+ do nó AV",
+      "O contraste iodado usado na coronariografia encurtou o PR por efeito hiperosmolar",
+      "O PR normal após ICP indica que o BAV 1° grau era causado por betabloqueador administrado antes do procedimento"
+    ],
+    "answer_index": 0,
+    "explanation": "No STEMI inferior, o BAV 1° grau (PR longo) é resultado da ISQUEMIA do nó AV: a artéria do nó AV origina-se da CD em ~85% das pessoas, que é a artéria culpada no STEMI inferior. Com a isquemia, o nó AV desacelera sua condução (PR longo). Com a reperfusão bem-sucedida pela ICP: o fluxo sanguíneo é restaurado → isquemia resolvida → condução AV normaliza. Isso confirma que o BAV era ISQUÊMICO e REVERSÍVEL. Este comportamento é específico do STEMI inferior — no STEMI anterior, o sistema de condução (His-Purkinje) pode ser destruído por necrose irreversível, e o BAV raramente reverte.",
+    "tag": "bav_primeiro_grau_iam_inferior_reversivel"
+  },
+  {
+    "id": "bav_029",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV — Síncope de Stokes-Adams",
+    "difficulty": "hard",
+    "stem": "Idoso de 78 anos relata episódios de síncope abruptos sem pródromo, com recuperação rápida e rubor facial pós-síncope. Holter: pausa de 8 s por BAV total transitório. Qual a síndrome e o mecanismo?",
+    "options": [
+      "Síndrome de Stokes-Adams — pausa cardíaca prolongada por BAV completo transitório causa síncope abrupta sem pródromo; o rubor facial pós-síncope é causado pela hiperemia reativa após restauração do fluxo cerebral",
+      "Síncope vasovagal — o rubor é típico da resposta vagal com vasodilatação cutânea",
+      "Síncope ortostática — a ausência de pródromo descarta qualquer causa cardiogênica",
+      "Epilepsia generalizada — a síncope abrupta sem pródromo sugere atividade convulsiva"
+    ],
+    "answer_index": 0,
+    "explanation": "A síndrome de Stokes-Adams (ou crise de Adams-Stokes) é a síncope por pausa cardíaca prolongada — classicamente por BAV completo transitório ou assistolia. Características CLÍNICAS CLÁSSICAS: (1) Síncope ABRUPTA, SEM PRÓDROMO (diferente da vasovagal que tem pródromo prodômico); (2) Perda de consciência durante a pausa (hipoperfusão cerebral); (3) Palidez extrema durante a pausa; (4) RUBOR FACIAL intenso logo após a retomada dos batimentos — hiperemia reativa por vasodilatação após a hiperativação simpática. Diagnóstico pelo Holter (pausa ≥ 3 s correlacionada com sintomas). Tratamento: MCP definitivo. A síncope cardiogênica por BAV é uma das emergências arrítmicas mais perigosas.",
+    "tag": "bav_stokes_adams"
+  },
+  {
+    "id": "bav_030",
+    "topic": "Bloqueios AV",
+    "subtopic": "BAV — Indicações de MCP Definitivo (Resumo)",
+    "difficulty": "hard",
+    "stem": "Qual das seguintes situações NÃO é indicação de marcapasso definitivo segundo as diretrizes?",
+    "options": [
+      "BAV 1° grau assintomático isolado com PR 240 ms em paciente de 70 anos sem cardiopatia",
+      "BAV de 3° grau sintomático (síncope) com escape ventricular a 32 bpm",
+      "BAV 2° grau Mobitz II assintomático com QRS largo (infranodal)",
+      "Síndrome de bradi-taqui com síncopes recorrentes e pausas pós-SVT de 5 s"
+    ],
+    "answer_index": 0,
+    "explanation": "ANÁLISE DAS INDICAÇÕES: (A) BAV 1° grau assintomático isolado → SEM indicação de MCP (conduta: observação, tratar causa). (B) BAV de 3° grau sintomático → INDICAÇÃO CLASSE I (mais forte) de MCP definitivo. (C) BAV Mobitz II com QRS largo → INDICAÇÃO CLASSE I mesmo assintomático, pois é infranodal com alto risco de progressão para BAV completo com assistolia. (D) Síndrome bradi-taqui sintomática → INDICAÇÃO CLASSE I de MCP. A questão pede a exceção: a resposta A é a única que NÃO tem indicação de MCP. O BAV 1° grau por si só nunca é indicação de MCP; requer apenas investigação e tratamento da causa subjacente.",
+    "tag": "bav_indicacoes_mcp_resumo"
+  }
+]

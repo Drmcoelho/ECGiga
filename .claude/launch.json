@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ecgiga-dash",
+      "runtimeExecutable": "uv",
+      "runtimeArgs": ["run", "python", "-m", "web_app.dash_app.app"],
+      "port": 8050
+    }
+  ]
+}

@@ -1,0 +1,402 @@
+[
+  {
+    "id": "anat_001",
+    "topic": "Anatomia — Sistema de Condução",
+    "subtopic": "Nó Sinoatrial",
+    "difficulty": "easy",
+    "stem": "Qual é o marcapasso fisiológico dominante do coração e onde está localizado anatomicamente?",
+    "options": [
+      "A) Nó sinoatrial (SA), localizado na junção do átrio direito com a veia cava superior",
+      "B) Nó atrioventricular (AV), localizado no assoalho do átrio direito",
+      "C) Feixe de His, localizado no septo membranoso",
+      "D) Fibras de Purkinje, distribuídas pelo subendocárdio ventricular"
+    ],
+    "answer_index": 0,
+    "explanation": "O nó SA fica na crista terminal do átrio direito, próximo à entrada da veia cava superior, e despolariza espontaneamente a 60–100 bpm — a frequência mais rápida do sistema de condução, o que lhe confere o comando. Sua descarga inicia o vetor atrial que percorre os átrios de cima para baixo e da direita para a esquerda, gerando a onda P positiva em DII e bifásica (positiva-negativa) em V1. Nós inferiores (AV: 40–60 bpm; His-Purkinje: 20–40 bpm) só assumem o comando quando o nó SA falha.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_002",
+    "topic": "Anatomia — Sistema de Condução",
+    "subtopic": "Nó Atrioventricular",
+    "difficulty": "easy",
+    "stem": "O retardo fisiológico da condução no nó atrioventricular (AV) tem importância funcional crítica. Qual intervalo do ECG reflete DIRETAMENTE esse retardo?",
+    "options": [
+      "A) Intervalo PR (início da onda P até início do QRS), normal entre 120–200 ms",
+      "B) Intervalo QT (início do QRS até fim da onda T), reflete a repolarização ventricular",
+      "C) Duração do QRS (início ao fim do complexo), reflete a condução intraventricular",
+      "D) Intervalo RR, reflete a frequência cardíaca"
+    ],
+    "answer_index": 0,
+    "explanation": "O nó AV fica no triângulo de Koch (assoalho do átrio direito) e conduz lentamente por possuir células de resposta lenta (dependentes de canais de cálcio), criando um atraso de ~100 ms. Esse retardo permite que os átrios esvaziem completamente antes da contração ventricular, otimizando o enchimento. No ECG, o segmento PR (porção isoelétrica dentro do intervalo PR) é o reflexo direto desse retardo no nó AV e na junção AV proximal. PR > 200 ms = bloqueio AV de 1.° grau.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_003",
+    "topic": "Anatomia — Sistema de Condução",
+    "subtopic": "Feixe de His e Ramos",
+    "difficulty": "easy",
+    "stem": "O feixe de His se divide em dois ramos principais. Qual é a relação anatômica entre ramo direito e ramo esquerdo e suas principais diferenças clínicas?",
+    "options": [
+      "A) O ramo direito é longo e fino (maior suscetibilidade a bloqueio); o ramo esquerdo é curto e bifurca-se em fascículo anterior e posterior",
+      "B) O ramo direito bifurca-se em dois fascículos; o ramo esquerdo é longo e fino",
+      "C) Ambos os ramos têm anatomia simétrica e praticamente idêntica",
+      "D) O ramo esquerdo percorre o septo direito até alcançar o ventrículo esquerdo"
+    ],
+    "answer_index": 0,
+    "explanation": "O ramo direito (RD) desce pelo lado direito do septo interventricular como um feixe único e delgado até a banda moderadora do VD — sua extensão o torna vulnerável a bloqueios por pequenas lesões septais. O ramo esquerdo (RE) emerge logo abaixo do feixe de His, é curto e amplo, dividindo-se em fascículo anterior esquerdo (FAE) e fascículo posterior esquerdo (FPE). O BRE completo é mais grave clinicamente porque implica lesão mais extensa no sistema de condução do VE.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_004",
+    "topic": "Anatomia — Sistema de Condução",
+    "subtopic": "Fibras de Purkinje",
+    "difficulty": "medium",
+    "stem": "As fibras de Purkinje permitem a despolarização ventricular quase simultânea. Qual consequência esse arranjo tem no ECG?",
+    "options": [
+      "A) QRS estreito (< 120 ms) porque a ativação ventricular ocorre rapidamente e de forma coordenada pelo subendocárdio",
+      "B) QRS alargado (> 120 ms) porque as fibras de Purkinje conduzem mais lentamente que o miocárdio comum",
+      "C) Onda T alta e pontiaguda porque a repolarização também é acelerada pelas fibras de Purkinje",
+      "D) Intervalo PR curto porque as fibras de Purkinje conduzem mais rápido que o nó AV"
+    ],
+    "answer_index": 0,
+    "explanation": "As fibras de Purkinje possuem velocidade de condução de 2–4 m/s (a mais rápida do coração), distribuindo o impulso pelo subendocárdio ventricular de forma quase instantânea. Isso gera uma ativação síncrona da maior parte do miocárdio ventricular, resultando em um QRS estreito (< 120 ms) no ECG normal. Quando esse sistema falha (bloqueio de ramo), a condução ocorre célula a célula pelo miocárdio comum (0,3–0,5 m/s), alargando o QRS para ≥ 120 ms e criando um padrão de bloqueio.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_005",
+    "topic": "Anatomia — Derivações e Câmeras",
+    "subtopic": "Derivações Periféricas",
+    "difficulty": "easy",
+    "stem": "Usando a analogia da câmera: DII está posicionada a +60°, olhando de baixo para cima (de perna esquerda para ombro direito). Em ritmo sinusal normal, a onda P em DII deve ser:",
+    "options": [
+      "A) Positiva — o vetor atrial parte do nó SA (alto e à direita) e se dirige para baixo e à esquerda, vindo em direção a DII",
+      "B) Negativa — o vetor atrial se afasta de DII",
+      "C) Bifásica (positivo-negativo) — DII está perpendicular ao vetor atrial",
+      "D) Ausente — DII não capta atividade atrial"
+    ],
+    "answer_index": 0,
+    "explanation": "O nó SA fica no átrio direito superior. O vetor de despolarização atrial vai de cima para baixo e da direita para a esquerda, em direção a +60° — exatamente onde a câmera DII aponta. Como o vetor vem em direção à câmera DII, a deflexão é positiva. DII é a melhor derivação para avaliar atividade atrial justamente porque fica alinhada ao eixo de despolarização atrial normal. P negativa em DII sugere ritmo juncional ou ectopia atrial baixa.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_006",
+    "topic": "Anatomia — Derivações e Câmeras",
+    "subtopic": "Derivações Precordiais",
+    "difficulty": "easy",
+    "stem": "As derivações precordiais V1–V6 estão posicionadas ao redor do tórax. Do ponto de vista da analogia da câmera, V1 e V2 'filmam' preferencialmente qual estrutura anatômica?",
+    "options": [
+      "A) Septo interventricular e parede anterior do ventrículo direito",
+      "B) Parede lateral do ventrículo esquerdo",
+      "C) Parede inferior do ventrículo esquerdo",
+      "D) Parede posterior do ventrículo esquerdo"
+    ],
+    "answer_index": 0,
+    "explanation": "V1 é colocada no 4.° espaço intercostal direito e V2 no 4.° espaço intercostal esquerdo, ambas adjacentes ao esterno — estão diretamente sobre o septo interventricular e a parede anterosseptal. A câmera V1 fica à direita, enquanto a massa ventricular esquerda fica à esquerda; portanto, o vetor septal inicial (da esquerda para a direita) se aproxima de V1, gerando pequena onda r inicial. O vetor ventricular principal (da direita para a esquerda, em direção à parede lateral) se afasta de V1, gerando a onda S profunda característica.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_007",
+    "topic": "Anatomia — Derivações e Câmeras",
+    "subtopic": "Derivações Precordiais",
+    "difficulty": "medium",
+    "stem": "Em condições normais, a amplitude da onda R nas derivações precordiais aumenta progressivamente de V1 a V5 (progressão normal da onda R). Qual fenômeno anatômico-elétrico explica esse aumento?",
+    "options": [
+      "A) À medida que as câmeras se movem para a esquerda (V1→V5), ficam progressivamente mais alinhadas ao vetor dominante do QRS (que aponta para a parede lateral esquerda), registrando deflexões positivas crescentes",
+      "B) A espessura do miocárdio ventricular diminui de V1 para V5, gerando ondas R menores",
+      "C) O vetor QRS gira no sentido horário de V1 para V6, afastando-se progressivamente das câmeras esquerdas",
+      "D) A progressão da onda R se deve ao aumento da frequência cardíaca da direita para a esquerda"
+    ],
+    "answer_index": 0,
+    "explanation": "As câmeras precordiais ficam dispostas em arco ao redor do coração. O vetor dominante do QRS aponta para a parede lateral esquerda (~30–40° no plano horizontal). Conforme avançamos de V1 (à direita do septo) para V5 (sobre a parede lateral), as câmeras ficam progressivamente mais alinhadas ao vetor dominante, vendo-o se aproximar — por isso a onda R cresce. Em V5–V6, o vetor começa a se afastar (a câmera ultrapassou o vetor), e a onda S volta a aparecer. Ausência de progressão normal da onda R pode indicar IAM anterior ou mal-posicionamento das eletrodos.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_008",
+    "topic": "Anatomia — Derivações e Câmeras",
+    "subtopic": "Zona de Transição",
+    "difficulty": "medium",
+    "stem": "A 'zona de transição' nas precordiais é definida como a derivação onde R = S (complexo bifásico ou isoelétrico). Em posição normal, a zona de transição ocorre em:",
+    "options": [
+      "A) V3 ou V4 — a câmera perpendicular ao vetor QRS no plano horizontal",
+      "B) V1 ou V2 — as câmeras mais próximas do nó SA",
+      "C) V5 ou V6 — as câmeras mais distantes do septo",
+      "D) aVL — a câmera perpendicular ao eixo médio frontal"
+    ],
+    "answer_index": 0,
+    "explanation": "A transição ocorre quando a câmera precordial está exatamente perpendicular ao vetor QRS no plano horizontal — ela vê o vetor 'passar de lado', sem aproximação nem afastamento líquido, resultando em R ≈ S. Normalmente isso ocorre em V3–V4. Transição precoce (R = S em V1–V2) sugere rotação anti-horária ou HVE; transição tardia (R = S em V5–V6) sugere rotação horária ou IAM anterior (onda R não cresce por perda de miocárdio viável).",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_009",
+    "topic": "Anatomia — Eixo Elétrico",
+    "subtopic": "Eixo Normal",
+    "difficulty": "easy",
+    "stem": "O eixo elétrico normal do QRS no plano frontal situa-se entre:",
+    "options": [
+      "A) -30° a +90° (o vetor QRS aponta predominantemente para baixo e à esquerda, em direção à massa ventricular esquerda)",
+      "B) -90° a -30° (desvio do eixo à esquerda patológico)",
+      "C) +90° a +180° (desvio do eixo à direita)",
+      "D) 0° a -90° (hemibloqueio anterior esquerdo)"
+    ],
+    "answer_index": 0,
+    "explanation": "A maior massa muscular cardíaca é o ventrículo esquerdo, localizado inferiormente, posteriormente e à esquerda. O vetor resultante do QRS aponta em direção à maior massa, ou seja, para baixo e à esquerda — entre -30° e +90°. Nesse intervalo, a câmera DII (a +60°) verá o vetor se aproximar e registrará uma onda R positiva dominante. Desvio para além de -30° (superior esquerdo) geralmente indica hemibloqueio anterior esquerdo (HBAE); além de +90° (inferior direito), sobrecarga ou bloqueio de ramo direito.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_010",
+    "topic": "Anatomia — Eixo Elétrico",
+    "subtopic": "Rotação Cardíaca",
+    "difficulty": "medium",
+    "stem": "Paciente com DPOC grave apresenta coração em posição vertical (rotação horária no plano horizontal). Qual achado nas precordiais é esperado?",
+    "options": [
+      "A) Transição tardia da onda R (padrão rS persistente até V5–V6), pois o vetor QRS gira com o coração e as câmeras esquerdas passam a ver o vetor se afastando",
+      "B) Progressão normal da onda R com transição em V3–V4",
+      "C) Transição precoce (R > S já em V1–V2) por rotação anti-horária",
+      "D) Onda R gigante em V1 por hipertrofia do ventrículo esquerdo"
+    ],
+    "answer_index": 0,
+    "explanation": "Na rotação horária (típica do coração 'vertical' da DPOC), o ventrículo direito desloca-se anteriormente e para a esquerda, enquanto o VE vai para trás. As câmeras precordiais esquerdas (V5–V6), que normalmente veriam o vetor do VE se aproximar, agora veem o vetor do VD se afastando — resultando em padrão rS persistente até V5–V6 (transição tardia). Esse padrão é chamado de 'rotação horária' e é um achado frequente em cor pulmonale, devendo ser diferenciado de IAM anterior antigo.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_011",
+    "topic": "Anatomia — Vetor Septal e Onda Q",
+    "subtopic": "Onda Q Septal Fisiológica",
+    "difficulty": "medium",
+    "stem": "Derivações laterais (DI, aVL, V5, V6) frequentemente mostram uma pequena onda Q inicial (< 40 ms, < 25% da onda R). Qual é a base anatômica dessa onda Q fisiológica?",
+    "options": [
+      "A) O septo interventricular se despolariza da esquerda para a direita (do endocárdio septal esquerdo para o direito); as câmeras laterais veem esse vetor se afastando, registrando uma pequena deflexão negativa inicial",
+      "B) O septo se despolariza da direita para a esquerda, gerando onda Q nas derivações esquerdas",
+      "C) A onda Q lateral reflete a despolarização do nó AV, que está mais próximo das câmeras esquerdas",
+      "D) A onda Q é gerada pela repolarização precoce do septo antes do QRS"
+    ],
+    "answer_index": 0,
+    "explanation": "O feixe de His distribui-se pelo septo interventricular, e as fibras de Purkinje iniciam a despolarização septal no lado esquerdo do septo (endocárdio). O vetor septal vai da esquerda para a direita, em direção a V1 (câmera que registra pequena onda r inicial) e se afastando das câmeras laterais esquerdas (DI, aVL, V5, V6), que registram a pequena onda q inicial. Quando esse vetor desaparece (p. ex., no BRE), a onda q lateral desaparece também — um sinal útil no diagnóstico diferencial com IAM lateral.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_012",
+    "topic": "Anatomia — Vetor Septal e Onda Q",
+    "subtopic": "Onda Q Patológica",
+    "difficulty": "hard",
+    "stem": "Homem de 62 anos com IAM anterior antigo. ECG mostra ondas Q em V1–V4 (duração ≥ 40 ms, amplitude ≥ 25% da onda R seguinte). Por que o IAM gera ondas Q nessas derivações?",
+    "options": [
+      "A) O tecido necrótico é eletricamente silencioso; as câmeras V1–V4 enxergam através da janela de necrose o vetor oposto (da parede posterior), que se afasta delas — gerando deflexão negativa (onda Q)",
+      "B) O IAM acelera a despolarização da parede anterior, gerando ondas Q por condução mais rápida",
+      "C) A necrose aumenta a resistência elétrica local, forçando o vetor a apontar ainda mais para V1–V4",
+      "D) As ondas Q refletem bloqueio do ramo direito associado ao IAM anterior"
+    ],
+    "answer_index": 0,
+    "explanation": "A parede infartada perde a capacidade de gerar potencial de ação; eletricamente, ela se comporta como uma 'janela'. As câmeras V1–V4, posicionadas sobre a parede anterior necrótica, 'enxergam' através dessa janela o vetor oposto — o da parede posterolateral do VE, que se afasta delas. Resultado: deflexão negativa inicial (onda Q patológica). A regra prática é Q ≥ 40 ms de duração OU ≥ 25% da amplitude do R seguinte em pelo menos duas derivações contíguas = evidência de IAM transmural (com ou sem elevação atual de ST).",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_013",
+    "topic": "Anatomia — Derivações e Territórios",
+    "subtopic": "Derivações Inferiores",
+    "difficulty": "easy",
+    "stem": "As derivações DII, DIII e aVF são chamadas de derivações 'inferiores'. Qual parede ventricular elas monitoram e qual artéria a irriga predominantemente?",
+    "options": [
+      "A) Parede inferior (diafragmática) do ventrículo esquerdo, irrigada pela artéria coronária direita (CD) em ~80% dos casos",
+      "B) Parede lateral alta do VE, irrigada pela artéria circunflexa",
+      "C) Parede anterior do VE, irrigada pela descendente anterior",
+      "D) Parede posterior do VE, irrigada pelo ramo OM da circunflexa"
+    ],
+    "answer_index": 0,
+    "explanation": "DII, DIII e aVF são câmeras posicionadas no plano frontal inferior (+60°, +120°, +90°, respectivamente). Elas filmam a face inferior (diafragmática) do VE, que repousa sobre o diafragma. Em 80% dos indivíduos (dominância direita), a CD irriga a parede inferior por meio da artéria descendente posterior (ADP). Por isso, supra de ST em DII, DIII, aVF = STEMI inferior → pensar em CD. Quando DIII > DII no supra, a culpada é quase sempre a CD proximal.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_014",
+    "topic": "Anatomia — Derivações e Territórios",
+    "subtopic": "Derivações Laterais",
+    "difficulty": "easy",
+    "stem": "Quais derivações formam o grupo 'lateral' e qual artéria costuma irrigar esse território?",
+    "options": [
+      "A) DI e aVL (lateral alta) + V5 e V6 (lateral baixa), irrigadas pela artéria circunflexa (Cx) e/ou diagonal da DA",
+      "B) V1 e V2 (anterosseptal), irrigadas pela DA proximal",
+      "C) DII, DIII e aVF (inferior), irrigadas pela CD",
+      "D) V3 e V4 (anterior), irrigadas pela DA média"
+    ],
+    "answer_index": 0,
+    "explanation": "A parede lateral do VE é 'filmada' por dois grupos de câmeras: a lateral alta (DI e aVL, no plano frontal a 0° e -30°) e a lateral baixa (V5 e V6, no plano horizontal). A artéria circunflexa (Cx) irriga principalmente a lateral baixa, enquanto ramos diagonais da DA podem irrigar a lateral alta. Supra simultâneo em DI, aVL, V5 e V6 indica oclusão da Cx ou diagonal proximal. Infra recíproco em DII, DIII, aVF durante STEMI lateral é o 'espelho' — confirma o evento no território oposto.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_015",
+    "topic": "Anatomia — Derivações e Territórios",
+    "subtopic": "Derivações Anterosseptais",
+    "difficulty": "medium",
+    "stem": "STEMI com supra em V1–V4 indica oclusão de qual artéria e em qual segmento? Qual a importância do envolvimento de aVL nesse cenário?",
+    "options": [
+      "A) Oclusão da DA; supra adicional em aVL sugere envolvimento de ramo diagonal (extensão lateral alta) ou oclusão proximal da DA antes da 1.ª diagonal",
+      "B) Oclusão da CD; aVL positivo confirma IAM inferior com imagem em espelho",
+      "C) Oclusão da Cx; extensão para V1–V4 indica dupla oclusão coronária",
+      "D) Oclusão do tronco da coronária esquerda; aVL negativo exclui o diagnóstico"
+    ],
+    "answer_index": 0,
+    "explanation": "V1–V4 são câmeras anterosseptais, filmando diretamente a parede anterior e o septo, território da DA. Se o supra se estende para aVL (câmera lateral alta, a -30°), significa que o vetor de lesão também está apontando para cima e à esquerda — o que ocorre quando a oclusão é proximal à saída da 1.ª diagonal ou quando a própria diagonal está comprometida. STEMI V1–V6 + DI + aVL ('anterior extenso') corresponde a oclusão proximal da DA e acarreta maior risco de disfunção sistólica grave, pois envolve a maior porção do VE.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_016",
+    "topic": "Anatomia — Onda P e Átrios",
+    "subtopic": "Morfologia Normal da Onda P",
+    "difficulty": "easy",
+    "stem": "A onda P normal tem duração ≤ 120 ms e amplitude ≤ 2,5 mm. Anatomicamente, o que cada metade da onda P representa?",
+    "options": [
+      "A) A primeira metade representa a despolarização do átrio direito (AD); a segunda metade representa a despolarização do átrio esquerdo (AE), que ocorre ligeiramente depois pois o impulso chega ao AE por vias de condução interatrial",
+      "B) A primeira metade representa a despolarização do átrio esquerdo; a segunda, a repolarização do átrio direito",
+      "C) Toda a onda P representa a despolarização simultânea de ambos os átrios",
+      "D) A primeira metade é gerada pelo nó AV; a segunda, pelas fibras de Bachmann"
+    ],
+    "answer_index": 0,
+    "explanation": "O nó SA fica no AD; portanto, o AD começa a se despolarizar primeiro (primeira metade da onda P). O impulso chega ao AE principalmente pelo feixe de Bachmann (feixe interatrial), causando despolarização do AE com leve atraso — segunda metade da onda P. Em V1, esse fenômeno é visível: componente positivo inicial (AD) + componente negativo tardio (AE). Quando o AE dilata, o componente negativo em V1 se aprofunda e alarga (> 1 mm × 40 ms = índice de Morris positivo), indicando sobrecarga atrial esquerda.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_017",
+    "topic": "Anatomia — Onda P e Átrios",
+    "subtopic": "Onda P em V1",
+    "difficulty": "medium",
+    "stem": "Por que a onda P em V1 é normalmente bifásica (positivo-negativo) em ritmo sinusal?",
+    "options": [
+      "A) V1 está à direita do septo: o vetor do AD (que se despolariza primeiro) vem em direção a V1 (positivo); o vetor do AE (que se despolariza depois) se afasta de V1 em direção ao AE posterior-esquerdo (negativo)",
+      "B) V1 capta primeiro o AE e depois o AD, por razões de posição anatômica",
+      "C) O componente negativo em V1 representa a repolarização atrial, que é visível nessa derivação",
+      "D) V1 fica perpendicular ao vetor atrial, gerando bifasismo por cancelamento de vetores"
+    ],
+    "answer_index": 0,
+    "explanation": "V1 fica à direita do esterno, próxima ao AD. O vetor inicial de despolarização atrial (AD, de cima para baixo e à direita) se aproxima de V1, gerando a deflexão positiva. Em seguida, o vetor do AE vai para baixo e para a esquerda (afastando-se de V1), gerando o componente negativo. Portanto, a morfologia bifásica P+/- em V1 é normal e fisiológica. Um componente negativo ≥ 1 mm de profundidade e ≥ 40 ms de duração (área ≥ 40 mm×ms) indica sobrecarga atrial esquerda.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_018",
+    "topic": "Anatomia — Componentes do ECG",
+    "subtopic": "Segmento ST",
+    "difficulty": "medium",
+    "stem": "O segmento ST corresponde ao platô do potencial de ação ventricular (fase 2). Por que normalmente é isoelétrico e o que significa seu desvio do ponto J?",
+    "options": [
+      "A) No platô, toda a massa ventricular está despolarizada ao mesmo potencial, sem diferença de potencial entre regiões — portanto, nenhuma corrente flui e o ECG de superfície é isoelétrico. Desvio indica gradiente de voltagem regional (isquemia, lesão ou pericardite)",
+      "B) O segmento ST é isoelétrico porque não há atividade elétrica cardíaca nesse período",
+      "C) O segmento ST representa a condução pelo nó AV, que não gera deflexão visível",
+      "D) O ST isoelétrico reflete o repouso elétrico das fibras de Purkinje após a despolarização"
+    ],
+    "answer_index": 0,
+    "explanation": "Durante a fase 2 (platô), os canais de cálcio mantêm a célula despolarizada de forma sustentada. Como toda a massa ventricular está no mesmo potencial, não há gradiente e nenhuma corrente flui — o registro de superfície é plano (isoelétrico). Isquemia subendocárdica encurta o platô naquela região, criando um gradiente de voltagem que empurra corrente para fora do subendocárdio (infradesnivelamento de ST). Isquemia transmural impede o platô completamente (lesão sistólica) gerando supradesnivelamento. Pericardite gera supra difuso por inflamação epicárdica.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_019",
+    "topic": "Anatomia — Componentes do ECG",
+    "subtopic": "Onda T",
+    "difficulty": "medium",
+    "stem": "A onda T reflete a repolarização ventricular. Por que ela é positiva nas mesmas derivações em que o QRS é positivo (apesar de a repolarização ser o fenômeno oposto à despolarização)?",
+    "options": [
+      "A) A repolarização ventricular ocorre em sentido inverso ao da despolarização (do epicárdio para o endocárdio), e esse vetor oposto de repolarização resulta em deflexão positiva nas mesmas derivações",
+      "B) A onda T é positiva porque a repolarização e a despolarização ocorrem simultaneamente na mesma direção",
+      "C) A onda T é positiva por coincidência anatômica e não tem relação com o sentido de propagação",
+      "D) A repolarização começa no endocárdio e vai para o epicárdio, no mesmo sentido do QRS, gerando T positiva"
+    ],
+    "answer_index": 0,
+    "explanation": "A despolarização ventricular vai do endocárdio ao epicárdio (seguindo as fibras de Purkinje). Se a repolarização fosse no mesmo sentido, a onda T seria negativa (fenômeno oposto). Mas o epicárdio, que tem potencial de ação mais curto e menor pressão, se repolariza ANTES do endocárdio — a repolarização ocorre do epicárdio para o endocárdio, no sentido oposto à despolarização, mas ambos os processos geram vetores apontando para a mesma direção (epicárdio em relação à câmera). Resultado: T positiva nas mesmas derivações com QRS positivo. Isquemia subepicárdica inverte esse gradiente → T invertida.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_020",
+    "topic": "Anatomia — Componentes do ECG",
+    "subtopic": "Intervalo QT",
+    "difficulty": "medium",
+    "stem": "O intervalo QT representa a duração total da sístole elétrica ventricular (despolarização + repolarização). Por que é necessário corrigir o QT pela frequência cardíaca (QTc)?",
+    "options": [
+      "A) O QT encurta naturalmente quando a frequência aumenta (o coração tem menos tempo entre batimentos e precisa repolarizar mais rápido); o QTc padroniza o QT para FC = 60 bpm, permitindo comparação entre diferentes frequências",
+      "B) O QTc é calculado para identificar bloqueios de ramo que alteram a duração do QRS",
+      "C) O QT aumenta com a frequência cardíaca, e a correção remove esse efeito da hiperatividade simpática",
+      "D) A correção pelo intervalo RR é necessária somente em pacientes com fibrilação atrial"
+    ],
+    "answer_index": 0,
+    "explanation": "Há uma relação inversa entre frequência cardíaca e duração do QT: em taquicardias, o QT se encurta; em bradicardias, se alonga. Sem correção, um QT de 440 ms em FC 100 bpm seria alarmante, enquanto o mesmo valor em FC 60 bpm seria normal. A fórmula de Bazett (QTc = QT ÷ √RR) corrige esse efeito. QTc > 450 ms em homens ou > 460 ms em mulheres é prolongado, aumentando o risco de torsades de pointes. A correção é especialmente importante ao monitorar efeitos de drogas que prolongam o QT (antiarrítmicos, antipsicóticos, antibióticos).",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_021",
+    "topic": "Anatomia — Eixo Elétrico",
+    "subtopic": "Hemibloqueio Anterior Esquerdo",
+    "difficulty": "hard",
+    "stem": "Paciente assintomático: DI positivo (onda R dominante), DIII negativo (onda S dominante), eixo calculado em -45°. QRS = 90 ms. Qual diagnóstico e qual base anatômica?",
+    "options": [
+      "A) Hemibloqueio anterior esquerdo (HBAE): bloqueio do fascículo anterior esquerdo desvia o eixo para cima e à esquerda (entre -30° e -90°) pois a ativação do VE ocorre apenas pelo fascículo posterior (de baixo para cima)",
+      "B) Bloqueio de ramo esquerdo completo (BRE): QRS alargado com desvio do eixo à esquerda",
+      "C) Hemibloqueio posterior esquerdo (HBPE): desvio do eixo à esquerda com eixo entre -30° e -90°",
+      "D) Ritmo juncional: QRS estreito com eixo superior por depolarização retrógrada"
+    ],
+    "answer_index": 0,
+    "explanation": "O fascículo anterior esquerdo (FAE) é delgado e longo, descendo pela via de saída do VE — mais vulnerável a danos. Quando bloqueado, o impulso alcança o VE apenas pelo fascículo posterior esquerdo (FPE), que ativa a parede inferior primeiro e depois a superior. O vetor resultante aponta para cima e à esquerda (eixo entre -30° e -90°), o que se manifesta como DI positivo + DII/DIII negativos (padrão 'S1Q3' ou 'QRS' com R alto em DI e S profunda em DIII). O QRS permanece estreito (< 120 ms) porque a via His-Purkinje ainda está ativa — diferencia de BRE.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_022",
+    "topic": "Anatomia — Eixo Elétrico",
+    "subtopic": "Hemibloqueio Posterior Esquerdo",
+    "difficulty": "hard",
+    "stem": "Hemibloqueio posterior esquerdo (HBPE) é MENOS comum que o HBAE. Qual a razão anatômica para essa menor incidência e qual é o padrão de eixo no HBPE?",
+    "options": [
+      "A) O fascículo posterior esquerdo é largo e curto, tem dupla irrigação (DA e CD) e menor pressão sobre ele — mais resistente a lesões; o HBPE causa desvio do eixo à DIREITA (entre +90° e +120°) em ausência de outras causas de desvio direito",
+      "B) O HBPE é raro porque o fascículo posterior está protegido pelo pericárdio visceral",
+      "C) O HBPE causa desvio do eixo à esquerda assim como o HBAE, diferindo apenas na morfologia do QRS",
+      "D) O fascículo posterior não participa da condução do impulso ventricular em condições normais"
+    ],
+    "answer_index": 0,
+    "explanation": "O fascículo posterior esquerdo (FPE) é anatomicamente robusto: é largo (resistente a lesões focais), curto e recebe suprimento duplo da DA e da CD. Por isso raramente é bloqueado isoladamente — quando ocorre, geralmente indica doença coronária grave e multivascular. O HBPE desvia o eixo para a direita (+90° a +120°) porque o impulso percorre apenas o fascículo anterior, ativando a parede superior primeiro e depois a inferior, gerando vetor resultante inferior-direito. Diagnóstico exige exclusão de outras causas de desvio direito (HVD, cor pulmonale, TEP).",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_023",
+    "topic": "Anatomia — Sistema de Condução",
+    "subtopic": "Hierarquia de Marcapassos",
+    "difficulty": "medium",
+    "stem": "Paciente com parada cardíaca. O ritmo de escape observado tem FC de 35 bpm e QRS largo (120 ms). Qual a origem anatômica desse ritmo e por que o QRS é alargado?",
+    "options": [
+      "A) Ritmo idioventricular: foco ectópico no miocárdio ventricular ou nas fibras de Purkinje distais, que conduz célula a célula (lento e desorganizado) sem usar o sistema His-Purkinje normal — por isso QRS largo",
+      "B) Ritmo juncional: foco no nó AV, que conduz pelos ventrículos normalmente — QRS deveria ser estreito",
+      "C) Ritmo sinusal lento: nó SA disparando a 35 bpm com bloqueio de ramo associado",
+      "D) Fibrilação atrial com resposta ventricular lenta — QRS largo por aberrância"
+    ],
+    "answer_index": 0,
+    "explanation": "A hierarquia de marcapassos é: nó SA (60–100 bpm) > junção AV/His (40–60 bpm) > ventrículos/Purkinje distais (20–40 bpm). Quando os marcapassos superiores falham, os ventrículos assumem com ritmo idioventricular de escape. Por não usar o feixe de His, a ativação ocorre de célula em célula pelo miocárdio comum (muito mais lenta), gerando QRS largo e bizarro. A frequência de 35 bpm é compatível com marcapasso ventricular. A presença desse ritmo de escape no ECG é clínicamente crítica — requer marcapasso transcutâneo de urgência enquanto se trata a causa.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_024",
+    "topic": "Anatomia — Derivações e Câmeras",
+    "subtopic": "Derivação aVR",
+    "difficulty": "hard",
+    "stem": "aVR é posicionada a -150° no plano frontal (olha do ombro direito para o coração). Em ritmo sinusal normal, praticamente todos os vetores cardíacos se afastam de aVR. Qual achado em aVR tem alto valor diagnóstico para oclusão do tronco da coronária esquerda (TCE) ou da DA proximal?",
+    "options": [
+      "A) Supradesnivelamento de ST em aVR ≥ 1 mm, especialmente se acompanhado de infradesnivelamento difuso em múltiplas derivações — indica isquemia global subendocárdica com o único vetor de lesão apontando para aVR",
+      "B) Infradesnivelamento de ST em aVR isolado indica oclusão da CD",
+      "C) Inversão de onda T em aVR é o único sinal de oclusão do TCE",
+      "D) QRS positivo em aVR (R > S) é o critério diagnóstico de oclusão do TCE"
+    ],
+    "answer_index": 0,
+    "explanation": "Na isquemia subendocárdica difusa (típica de oclusão do TCE ou DA proximal), o gradiente de lesão aponta do endocárdio para o epicárdio em múltiplas regiões — o vetor resultante de 'corrente de lesão' acaba apontando para cima e à direita, em direção a aVR. As câmeras que normalmente veem o coração (DII, V4–V6) mostram infra de ST difuso, enquanto aVR (que normalmente vê o coração se afastando) mostra supra de ST. Supra em aVR ≥ 1 mm com infra difuso ≥ 7 derivações é critério de cateterismo de urgência, com sensibilidade para TCE/DA proximal de ~80%.",
+    "tag": "anatomy"
+  },
+  {
+    "id": "anat_025",
+    "topic": "Anatomia — Derivações e Câmeras",
+    "subtopic": "Derivações Posteriores",
+    "difficulty": "hard",
+    "stem": "IAM posterior puro é frequentemente 'invisível' nas 12 derivações padrão. Qual é o achado indireto em V1–V2 e por que derivações V7–V9 são necessárias para confirmar?",
+    "options": [
+      "A) V1–V2 mostram infra de ST + onda R proeminente + onda T positiva tall (imagem em espelho do supra posterior); V7–V9 capturam diretamente o supra de ST na parede posterior, confirmando o diagnóstico",
+      "B) V1–V2 mostram supra de ST + onda Q profunda, e V7–V9 mostram infra recíproco",
+      "C) O IAM posterior se manifesta apenas com alterações em aVR; V7–V9 são usadas para avaliar o VD",
+      "D) V1–V2 mostram bloqueio de ramo direito novo; V7–V9 não acrescentam informação diagnóstica"
+    ],
+    "answer_index": 0,
+    "explanation": "A parede posterior do VE fica 'atrás' do coração, afastada das câmeras precordiais padrão. V1 e V2, posicionadas anteriormente, veem a parede posterior 'de frente ao espelho': o supra posterior (que seria positivo em V7–V9 por aproximação) aparece como infra em V1–V2 (vetor se afasta). Além disso, a onda Q posterior aparece como R alta (imagem espelhada da Q negativa). V7 (linha axilar posterior), V8 (ponta da escápula) e V9 (borda esquerda da coluna) capturam diretamente a parede posterior, revelando o supra de ST que confirma o STEMI posterior. A combinação infra em V1–V2 + R/S ≥ 1 em V1 deve sempre levantar a suspeita.",
+    "tag": "anatomy"
+  }
+]

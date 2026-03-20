@@ -395,6 +395,58 @@ _PATHOLOGY_CONFIGS: dict[str, dict[str, Any]] = {
     "early_repolarization": {
         "description_pt": "Repolarização precoce — supra ST côncavo com entalhe J, benigno",
     },
+    # ── Sobrecarga / Hipertrofia ──────────────────────────────────────────
+    "rae": {
+        "description_pt": "Sobrecarga Atrial Direita — P pulmonale: onda P apiculada ≥2.5 mm em DII/III/aVF",
+    },
+    "lae": {
+        "description_pt": "Sobrecarga Atrial Esquerda — P mitrale: onda P bífida em DII, componente negativo terminal em V1",
+    },
+    "rvh": {
+        "axis_deg": 110,
+        "description_pt": "Hipertrofia Ventricular Direita — R>S em V1, desvio do eixo direita, strain em V1-V2",
+    },
+    # ── Bloqueios AV de 2° e 3° grau ────────────────────────────────────
+    "bav_mobitz1": {
+        "pr_ms": 180,
+        "description_pt": "BAV 2° Grau Mobitz I (Wenckebach) — PR progressivamente longo até batida bloqueada",
+    },
+    "bav_mobitz2": {
+        "pr_ms": 180,
+        "description_pt": "BAV 2° Grau Mobitz II — PR fixo com bloqueio súbito, risco alto de BAV total",
+    },
+    "bav_complete": {
+        "hr_bpm": 40,
+        "pr_ms": 180,
+        "qrs_ms": 130,
+        "description_pt": "BAV Total (3° Grau) — dissociação AV completa, ritmo de escape ventricular ~40 bpm",
+    },
+    # ── Equivalentes de STEMI ────────────────────────────────────────────
+    "wellens_a": {
+        "description_pt": "Síndrome de Wellens tipo A — T bifásica em V2-V3: suboclusão proximal da DAE",
+    },
+    "wellens_b": {
+        "description_pt": "Síndrome de Wellens tipo B — T invertida profunda simétrica em V2-V3: suboclusão proximal da DAE",
+    },
+    "de_winter": {
+        "description_pt": "Padrão de De Winter — infradesnivelamento ST + onda T alta em V1-V4: oclusão proximal da DAE",
+    },
+    "stemi_posterior": {
+        "description_pt": "STEMI Posterior — infradesnivelamento ST V1-V4 (espelho do supra posterior); R dominante em V1-V2",
+    },
+    "stemi_avr": {
+        "description_pt": "Supra em aVR — doença de tronco ou coronária esquerda proximal: supra aVR + infra ST difuso",
+    },
+    # ── Bradicardia / Taquicardia sinusal ────────────────────────────────
+    "sinus_bradycardia": {
+        "hr_bpm": 45,
+        "description_pt": "Bradicardia Sinusal — FC <60 bpm, morfologia normal; atletas, vagotonia, beta-bloqueador",
+    },
+    "sinus_tachycardia": {
+        "hr_bpm": 120,
+        "qt_ms": 320,
+        "description_pt": "Taquicardia Sinusal — FC >100 bpm, onda P sinusal, PR normal; febre, dor, hipovolemia, TEP",
+    },
 }
 
 
@@ -875,6 +927,297 @@ def generate_pathological_ecg(pathology: str = "stemi_anterior") -> dict[str, An
 
     elif pathology == "first_degree_avb":
         pass  # PR already set to 240 ms via config
+
+    elif pathology == "rae":
+        # P pulmonale: peaked P ≥2.5 mm in II, III, aVF; narrow
+        rr_samples = int(500 * 60.0 / hr)
+        n = len(ecg_data["time"])
+        for lead in ("II", "III", "aVF"):
+            signal = ecg_data["leads"][lead]
+            for beat_start in range(0, n, rr_samples):
+                p_center = beat_start + int(rr_samples * 0.08)
+                if p_center + 20 > n:
+                    break
+                t_local = np.arange(40) - 20
+                # Tall, narrow, peaked P
+                peaked_p = 0.20 * np.exp(-(t_local**2) / (2 * 4**2))
+                start = max(0, p_center - 20)
+                end = min(n, p_center + 20)
+                signal[start:end] += peaked_p[:end - start]
+        # V1: biphasic P — positive first component
+        signal_v1 = ecg_data["leads"]["V1"]
+        for beat_start in range(0, n, rr_samples):
+            p_center = beat_start + int(rr_samples * 0.08)
+            if p_center + 20 > n:
+                break
+            t_local = np.arange(40) - 20
+            peaked_p = 0.15 * np.exp(-(t_local**2) / (2 * 4**2))
+            start = max(0, p_center - 20)
+            end = min(n, p_center + 20)
+            signal_v1[start:end] += peaked_p[:end - start]
+
+    elif pathology == "lae":
+        # P mitrale: notched/bifid P in II (duration ≥120 ms); deep negative terminal in V1
+        rr_samples = int(500 * 60.0 / hr)
+        n = len(ecg_data["time"])
+        for lead in ("I", "II", "aVL"):
+            signal = ecg_data["leads"][lead]
+            for beat_start in range(0, n, rr_samples):
+                p_start = beat_start + int(rr_samples * 0.04)
+                if p_start + 60 > n:
+                    break
+                t_local = np.arange(60)
+                # Two humps separated by slight dip → notched appearance
+                first_hump = 0.10 * np.exp(-((t_local - 15)**2) / (2 * 5**2))
+                second_hump = 0.08 * np.exp(-((t_local - 38)**2) / (2 * 5**2))
+                bifid_p = first_hump + second_hump
+                end = min(n, p_start + 60)
+                signal[p_start:end] += bifid_p[:end - p_start]
+        # V1: deep negative terminal component of P
+        signal_v1 = ecg_data["leads"]["V1"]
+        for beat_start in range(0, n, rr_samples):
+            p_center = beat_start + int(rr_samples * 0.09)
+            if p_center + 25 > n:
+                break
+            t_local = np.arange(50) - 25
+            neg_terminal = -0.12 * np.exp(-((t_local - 8)**2) / (2 * 5**2))
+            start = max(0, p_center - 25)
+            end = min(n, p_center + 25)
+            signal_v1[start:end] += neg_terminal[:end - start]
+
+    elif pathology == "rvh":
+        # R > S in V1, right axis (set via config), T inversion V1-V3 (strain)
+        rr_samples = int(500 * 60.0 / hr)
+        n = len(ecg_data["time"])
+        # Dominant R in V1
+        signal_v1 = ecg_data["leads"]["V1"]
+        for beat_start in range(0, n, rr_samples):
+            r_center = beat_start + int(rr_samples * 0.22)
+            if r_center + 20 > n:
+                break
+            t_local = np.arange(40) - 20
+            r_tall = 0.7 * np.exp(-(t_local**2) / (2 * 5**2))
+            start = max(0, r_center - 20)
+            end = min(n, r_center + 20)
+            signal_v1[start:end] += r_tall[:end - start]
+        # Strain: T inversion in V1-V3
+        for lead in ("V1", "V2", "V3"):
+            signal = ecg_data["leads"][lead]
+            for beat_start in range(0, n, rr_samples):
+                t_start = beat_start + int(rr_samples * 0.48)
+                t_end = beat_start + int(rr_samples * 0.68)
+                if t_end > n:
+                    break
+                signal[t_start:t_end] *= -0.7
+        # Deep S in V5-V6 (RVH hallmark)
+        for lead in ("V5", "V6"):
+            signal = ecg_data["leads"][lead]
+            for beat_start in range(0, n, rr_samples):
+                s_center = beat_start + int(rr_samples * 0.26)
+                if s_center + 15 > n:
+                    break
+                t_local = np.arange(30) - 15
+                s_deep = -0.35 * np.exp(-(t_local**2) / (2 * 6**2))
+                start = max(0, s_center - 15)
+                end = min(n, s_center + 15)
+                signal[start:end] += s_deep[:end - start]
+
+    elif pathology == "bav_mobitz1":
+        # Wenckebach: PR progressively lengthens over 3 beats then 1 dropped beat (4:3 pattern)
+        rr_samples = int(500 * 60.0 / hr)
+        n = len(ecg_data["time"])
+        wenckebach_pr_increments = [0, 30, 60]  # extra ms added per beat in cycle
+        cycle_len = 4  # 3 conducted + 1 dropped
+        beat_num = 0
+        for beat_start in range(0, n, rr_samples):
+            pos_in_cycle = beat_num % cycle_len
+            if pos_in_cycle == 3:
+                # Dropped beat: suppress QRS and T wave
+                qrs_start = beat_start + int(rr_samples * 0.20)
+                qrs_end = beat_start + int(rr_samples * 0.75)
+                if qrs_end > n:
+                    break
+                for lead_name in LEAD_NAMES:
+                    ecg_data["leads"][lead_name][qrs_start:qrs_end] *= 0.05
+            beat_num += 1
+
+    elif pathology == "bav_mobitz2":
+        # Fixed PR with sudden dropped beat every 3rd beat (3:2 pattern)
+        rr_samples = int(500 * 60.0 / hr)
+        n = len(ecg_data["time"])
+        cycle_len = 3  # 2 conducted + 1 dropped
+        beat_num = 0
+        for beat_start in range(0, n, rr_samples):
+            pos_in_cycle = beat_num % cycle_len
+            if pos_in_cycle == 2:
+                # Dropped beat: preserve P wave, suppress QRS+T
+                qrs_start = beat_start + int(rr_samples * 0.22)
+                qrs_end = beat_start + int(rr_samples * 0.75)
+                if qrs_end > n:
+                    break
+                for lead_name in LEAD_NAMES:
+                    ecg_data["leads"][lead_name][qrs_start:qrs_end] *= 0.04
+            beat_num += 1
+
+    elif pathology == "bav_complete":
+        # Complete AV block: P waves and QRS are independent (dissociated)
+        # The ecg is generated at escape rate ~40bpm; add extra P waves at atrial rate ~75bpm
+        rr_samples = int(500 * 60.0 / hr)  # ventricular escape: ~40bpm → large RR
+        n = len(ecg_data["time"])
+        atrial_rate_bpm = 80
+        p_rr = int(500 * 60.0 / atrial_rate_bpm)  # ~375 samples at 75bpm
+        # Superimpose independent P waves on the signal
+        for lead_name in LEAD_NAMES:
+            signal = ecg_data["leads"][lead_name]
+            p_amplitude = 0.12 if lead_name in ("II", "aVF", "I") else (-0.10 if lead_name == "aVR" else 0.06)
+            for p_start in range(0, n, p_rr):
+                p_center = p_start + int(p_rr * 0.5)
+                if p_center + 15 > n:
+                    break
+                t_local = np.arange(30) - 15
+                p_wave = p_amplitude * np.exp(-(t_local**2) / (2 * 5**2))
+                start = max(0, p_center - 15)
+                end = min(n, p_center + 15)
+                signal[start:end] += p_wave[:end - start]
+
+    elif pathology == "wellens_a":
+        # Wellens type A: biphasic T (positive→negative) in V2-V3
+        rr_samples = int(500 * 60.0 / hr)
+        n = len(ecg_data["time"])
+        for lead in ("V2", "V3"):
+            signal = ecg_data["leads"][lead]
+            for beat_start in range(0, n, rr_samples):
+                t_start = beat_start + int(rr_samples * 0.46)
+                t_mid = beat_start + int(rr_samples * 0.54)
+                t_end = beat_start + int(rr_samples * 0.68)
+                if t_end > n:
+                    break
+                # First half positive, second half negative
+                seg1 = t_mid - t_start
+                seg2 = t_end - t_mid
+                signal[t_start:t_mid] *= -0.4  # flatten existing T
+                signal[t_start:t_mid] += 0.08 * np.sin(np.linspace(0, np.pi, seg1))
+                signal[t_mid:t_end] = -0.12 * np.sin(np.linspace(0, np.pi, seg2))
+
+    elif pathology == "wellens_b":
+        # Wellens type B: deep symmetric T inversion in V2-V3 (± V1, V4)
+        rr_samples = int(500 * 60.0 / hr)
+        n = len(ecg_data["time"])
+        for lead in ("V1", "V2", "V3", "V4"):
+            signal = ecg_data["leads"][lead]
+            depth = {"V1": -0.25, "V2": -0.45, "V3": -0.40, "V4": -0.20}[lead]
+            for beat_start in range(0, n, rr_samples):
+                t_start = beat_start + int(rr_samples * 0.46)
+                t_end = beat_start + int(rr_samples * 0.70)
+                if t_end > n:
+                    break
+                seg_len = t_end - t_start
+                signal[t_start:t_end] *= 0.05  # suppress existing T
+                # Symmetric inverted T
+                x = np.linspace(0, np.pi, seg_len)
+                signal[t_start:t_end] += depth * np.sin(x)
+
+    elif pathology == "de_winter":
+        # De Winter: ST depression at J-point + tall upright T waves in V1-V4
+        rr_samples = int(500 * 60.0 / hr)
+        n = len(ecg_data["time"])
+        for lead in ("V1", "V2", "V3", "V4"):
+            signal = ecg_data["leads"][lead]
+            for beat_start in range(0, n, rr_samples):
+                # ST depression starting at J-point
+                st_start = beat_start + int(rr_samples * 0.28)
+                st_end = beat_start + int(rr_samples * 0.48)
+                if st_end > n:
+                    break
+                seg_len = st_end - st_start
+                depression = -np.linspace(0.1, 0.2, seg_len)
+                signal[st_start:st_end] += depression
+                # Tall, symmetric, upright T waves (taller than normal)
+                t_center = beat_start + int(rr_samples * 0.60)
+                if t_center + 30 > n:
+                    break
+                t_local = np.arange(60) - 30
+                tall_t = 0.5 * np.exp(-(t_local**2) / (2 * 10**2))
+                start = max(0, t_center - 30)
+                end = min(n, t_center + 30)
+                signal[start:end] += tall_t[:end - start]
+
+    elif pathology == "stemi_posterior":
+        # Posterior STEMI: mirror image → ST depression + tall R + upright T in V1-V4
+        rr_samples = int(500 * 60.0 / hr)
+        n = len(ecg_data["time"])
+        for lead in ("V1", "V2", "V3", "V4"):
+            signal = ecg_data["leads"][lead]
+            for beat_start in range(0, n, rr_samples):
+                # ST depression (mirror of posterior elevation)
+                st_start = beat_start + int(rr_samples * 0.32)
+                st_end = beat_start + int(rr_samples * 0.52)
+                if st_end > n:
+                    break
+                seg_len = st_end - st_start
+                depression = 0.20 * np.ones(seg_len)
+                ramp = min(10, seg_len)
+                depression[:ramp] = np.linspace(0, 0.20, ramp)
+                depression[-ramp:] = np.linspace(0.20, 0, ramp)
+                signal[st_start:st_end] -= depression
+                # Tall upright T (mirror of posterior T inversion)
+                t_center = beat_start + int(rr_samples * 0.58)
+                if t_center + 25 > n:
+                    break
+                t_local = np.arange(50) - 25
+                tall_t = 0.35 * np.exp(-(t_local**2) / (2 * 8**2))
+                start = max(0, t_center - 25)
+                end = min(n, t_center + 25)
+                signal[start:end] += tall_t[:end - start]
+        # Tall R (dominant) in V1-V2 → R/S ratio > 1
+        for lead in ("V1", "V2"):
+            signal = ecg_data["leads"][lead]
+            for beat_start in range(0, n, rr_samples):
+                r_center = beat_start + int(rr_samples * 0.22)
+                if r_center + 15 > n:
+                    break
+                t_local = np.arange(30) - 15
+                r_boost = 0.5 * np.exp(-(t_local**2) / (2 * 5**2))
+                start = max(0, r_center - 15)
+                end = min(n, r_center + 15)
+                signal[start:end] += r_boost[:end - start]
+
+    elif pathology == "stemi_avr":
+        # Left main / 3VD pattern: ST elevation in aVR + diffuse ST depression
+        rr_samples = int(500 * 60.0 / hr)
+        n = len(ecg_data["time"])
+        # ST elevation in aVR (and V1 as secondary)
+        for lead in ("aVR", "V1"):
+            signal = ecg_data["leads"][lead]
+            elev = 0.20 if lead == "aVR" else 0.10
+            for beat_start in range(0, n, rr_samples):
+                st_start = beat_start + int(rr_samples * 0.32)
+                st_end = beat_start + int(rr_samples * 0.52)
+                if st_end > n:
+                    break
+                seg_len = st_end - st_start
+                elevation = elev * np.ones(seg_len)
+                ramp = min(8, seg_len)
+                elevation[:ramp] = np.linspace(0, elev, ramp)
+                elevation[-ramp:] = np.linspace(elev, 0, ramp)
+                signal[st_start:st_end] += elevation
+        # Diffuse ST depression in all other leads
+        for lead in ("I", "II", "III", "aVL", "aVF", "V2", "V3", "V4", "V5", "V6"):
+            signal = ecg_data["leads"][lead]
+            for beat_start in range(0, n, rr_samples):
+                st_start = beat_start + int(rr_samples * 0.32)
+                st_end = beat_start + int(rr_samples * 0.52)
+                if st_end > n:
+                    break
+                seg_len = st_end - st_start
+                depression = 0.15 * np.ones(seg_len)
+                ramp = min(8, seg_len)
+                depression[:ramp] = np.linspace(0, 0.15, ramp)
+                depression[-ramp:] = np.linspace(0.15, 0, ramp)
+                signal[st_start:st_end] -= depression
+
+    elif pathology in ("sinus_bradycardia", "sinus_tachycardia"):
+        pass  # HR already set via config; normal morphology
 
     elif pathology == "early_repolarization":
         # Concave-up ST elevation with J-point notch in inferior/lateral leads

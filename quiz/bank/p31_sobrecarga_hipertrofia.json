@@ -1,0 +1,402 @@
+[
+  {
+    "id": "sob_001",
+    "topic": "Sobrecarga e Hipertrofia — HVE",
+    "subtopic": "Critério de Sokolow-Lyon",
+    "difficulty": "easy",
+    "stem": "Qual é o critério de Sokolow-Lyon para hipertrofia ventricular esquerda (HVE) e quais derivações são utilizadas?",
+    "options": [
+      "A) SV1 + RV5 ou RV6 ≥ 35 mm (em adultos > 35 anos); usa-se a câmera mais profunda em V1 somada à câmera mais alta em V5 ou V6",
+      "B) RV5 + SV6 ≥ 35 mm; usa-se a câmera lateral somada à anterosseptal",
+      "C) RaVL ≥ 11 mm como critério único para HVE",
+      "D) SV3 + RaVL ≥ 28 mm em homens (critério de Cornell)"
+    ],
+    "answer_index": 0,
+    "explanation": "O critério de Sokolow-Lyon baseia-se no princípio de que uma massa ventricular maior gera vetores elétricos de maior amplitude. V1, posicionada à direita do septo, 'vê' a maior parte do vetor do VE se afastando — registra a onda S mais profunda. V5 ou V6, posicionadas sobre a parede lateral, veem o vetor do VE se aproximando — registram a onda R mais alta. A soma dessas amplitudes ≥ 35 mm indica massa ventricular aumentada. A sensibilidade do critério é ~40–50%, mas a especificidade é alta (~90%), tornando-o útil como triagem, não exclusão.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_002",
+    "topic": "Sobrecarga e Hipertrofia — HVE",
+    "subtopic": "Critério de Cornell",
+    "difficulty": "easy",
+    "stem": "O critério de Cornell para HVE utiliza quais derivações e qual ponto de corte difere entre homens e mulheres?",
+    "options": [
+      "A) SV3 + RaVL ≥ 28 mm em homens e ≥ 20 mm em mulheres — mulheres têm tórax menor e paredes torácicas mais delgadas, com maior atenuação do sinal elétrico",
+      "B) SV1 + RV5 ≥ 35 mm em homens e ≥ 30 mm em mulheres",
+      "C) RV5 ≥ 26 mm em homens e ≥ 20 mm em mulheres",
+      "D) RaVL ≥ 13 mm em homens e ≥ 9 mm em mulheres"
+    ],
+    "answer_index": 0,
+    "explanation": "O critério de Cornell (SV3 + RaVL) combina uma câmera anterosseptal medial (V3, que capta a profundidade da onda S do septo espessado) com uma câmera lateral alta (aVL, que capta a altura da onda R da parede lateral hipertrofiada). O ponto de corte diferenciado reconhece que mulheres, em média, têm parede torácica mais fina e massa cardíaca menor — mas o espessamento do VE gera proporcionalmente mais sinal por mm de tecido. O Cornell tem maior sensibilidade que o Sokolow-Lyon, especialmente em pacientes obesos onde a atenuação pelo tecido subcutâneo reduz as amplitudes.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_003",
+    "topic": "Sobrecarga e Hipertrofia — HVE",
+    "subtopic": "Critério de Romhilt-Estes",
+    "difficulty": "medium",
+    "stem": "O escore de Romhilt-Estes pontua múltiplos critérios para HVE. Qual pontuação indica HVE definitiva e qual indica HVE provável?",
+    "options": [
+      "A) ≥ 5 pontos = HVE definitiva; 4 pontos = HVE provável. Os critérios incluem amplitude (3 pts), strain (3 pts), sobrecarga atrial esquerda (3 pts), BRE (3 pts), desvio do eixo esquerdo (2 pts) e QRS ≥ 90 ms (1 pt)",
+      "B) ≥ 3 pontos = HVE definitiva; 2 pontos = HVE provável",
+      "C) ≥ 7 pontos = HVE definitiva; 5–6 pontos = HVE provável",
+      "D) O escore é contínuo sem ponto de corte definido"
+    ],
+    "answer_index": 0,
+    "explanation": "O Romhilt-Estes é um sistema de pontos que integra vários achados do ECG, reconhecendo que nenhum critério isolado tem sensibilidade e especificidade adequadas. Os critérios de amplitude (R ou S ≥ 20 mm nas periféricas, ou S em V1/V2 ≥ 30 mm, ou R em V5/V6 ≥ 30 mm) valem 3 pontos por serem o achado mais específico. A sobrecarga atrial esquerda (índice de Morris positivo em V1) vale 3 pontos porque a HVE crônica eleva a pressão diastólica do VE, sobrecarregando o AE. Esse sistema multiparamétrico é mais sensível (~50%) que os critérios de amplitude isolados.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_004",
+    "topic": "Sobrecarga e Hipertrofia — HVE",
+    "subtopic": "Padrão Strain",
+    "difficulty": "medium",
+    "stem": "O padrão 'strain' na HVE consiste em infradesnivelamento de ST descendente com inversão assimétrica da onda T nas derivações com onda R predominante (V5, V6, DI, aVL). Qual é o mecanismo fisiopatológico?",
+    "options": [
+      "A) O miocárdio hipertrofiado sofre isquemia subendocárdica relativa (demanda > oferta) e repolarização anormal por espessamento excessivo — a camada subendocárdica repolariza mais tarde, invertendo o gradiente normal de repolarização e gerando T negativa assimétrica",
+      "B) O strain reflete bloqueio fascicular anterior associado à HVE, alterando a sequência de ativação ventricular",
+      "C) O strain é gerado por fibrose do septo que conduz mais lentamente, criando infra de ST nas câmeras laterais",
+      "D) O padrão strain indica necrose subepicárdica por doença coronária associada à HVE"
+    ],
+    "answer_index": 0,
+    "explanation": "Na HVE grave, o miocárdio subendocárdico hipertrofiado fica distante da microvasculatura coronária e sofre isquemia relativa crônica (coronárias normais mas demanda aumentada). Isso altera o potencial de ação subendocárdico, prolongando a repolarização local. O gradiente normal epicárdio→endocárdio é invertido em segmentos localizados, gerando T invertida assimétrica (ramo descendente lento, ramo ascendente rápido) nas derivações que 'filmam' a parede lateral espessada. O infra de ST descendente é a 'rampa' de subida para a T negativa. A assimetria diferencia o strain de isquemia aguda (T simétrica) e de BRE.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_005",
+    "topic": "Sobrecarga e Hipertrofia — HVE",
+    "subtopic": "Pressure Overload vs Volume Overload",
+    "difficulty": "medium",
+    "stem": "Qual a diferença entre sobrecarga pressórica (pressure overload) e sobrecarga volumétrica (volume overload) na HVE quanto ao padrão de ECG esperado?",
+    "options": [
+      "A) Pressure overload (HAS, estenose aórtica): HVE com padrão strain (ST infra + T invertida), pois a isquemia subendocárdica é frequente. Volume overload (regurgitação aórtica/mitral): HVE sem strain ou com strain tardio, ondas R altas e QRS alargado por dilatação",
+      "B) Pressure overload gera HVE com QRS alargado e sem strain; volume overload gera strain precoce",
+      "C) Ambas as sobrecargas geram exatamente o mesmo padrão de ECG — o ECG não diferencia os mecanismos",
+      "D) Volume overload gera apenas sobrecarga atrial esquerda; pressure overload não altera a onda P"
+    ],
+    "answer_index": 0,
+    "explanation": "Na sobrecarga pressórica crônica (HAS, estenose aórtica), o VE enfrenta pós-carga elevada e desenvolve hipertrofia concêntrica (paredes espessas, câmara normal ou pequena). O miocárdio subendocárdico sofre isquemia relativa precoce, gerando o padrão strain típico. Na sobrecarga volumétrica (insuficiência aórtica ou mitral), o VE dilata progressivamente com hipertrofia excêntrica (câmara grande, paredes proporcionalmente menos espessas). O ECG mostra ondas R altas e, em estágios avançados, QRS alargado por fibrose — mas o strain tende a aparecer mais tarde. O RaVL ≥ 11 mm é marcador sensível na sobrecarga pressórica.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_006",
+    "topic": "Sobrecarga e Hipertrofia — HVE",
+    "subtopic": "Diagnóstico Diferencial HVE vs BRE",
+    "difficulty": "hard",
+    "stem": "Paciente com QRS ≥ 120 ms, morfologia rsR' em V1, onda S larga em V6, e SV1 + RV5 = 42 mm. O padrão eletrocardiográfico é BRE ou HVE? Como diferenciar?",
+    "options": [
+      "A) O padrão descrito é BRD (rsR' em V1 + S larga em V6), não BRE. BRE mostraria QRS ≥ 120 ms com R entalhada e ampla em V5-V6 e DI, sem onda Q septal. HVE sem BRE tem QRS < 120 ms com R alta; o BRE torna os critérios de amplitude para HVE inválidos",
+      "B) BRE e HVE têm o mesmo padrão de rsR' em V1; a amplitude ≥ 35 mm confirma HVE concomitante",
+      "C) O padrão descrito é compatível com BRE + HVE; os critérios de Sokolow-Lyon permanecem válidos em BRE",
+      "D) rsR' em V1 com S larga em V6 indica HVE com rotação horária"
+    ],
+    "answer_index": 0,
+    "explanation": "A morfologia rsR' em V1 com S larga e empastada em V5–V6 é o padrão clássico de BRD (bloqueio de ramo direito), não BRE. O BRE se caracteriza por QRS ≥ 120 ms com onda R ampla e entalhada em V5, V6, DI e aVL, ausência de onda Q septal nessas derivações e deflexão inicial positiva em V1. Quando há BRE, os critérios de amplitude (Sokolow-Lyon, Cornell) para HVE tornam-se inválidos porque o próprio bloqueio aumenta artificialmente as amplitudes por condução aberrante. O diagnóstico de HVE em presença de BRE requer ecocardiograma; no ECG, apenas o padrão strain (quando presente) mantém valor diagnóstico.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_007",
+    "topic": "Sobrecarga e Hipertrofia — HVE",
+    "subtopic": "Pseudo-normalização do Strain",
+    "difficulty": "hard",
+    "stem": "Paciente com HVE grave e padrão strain crônico (T negativa em V5–V6). ECG de hoje mostra as ondas T em V5–V6 que se 'tornaram positivas'. O que essa mudança pode indicar?",
+    "options": [
+      "A) Pseudo-normalização: a isquemia aguda subepicárdica pode tornar a T positiva em derivações previamente com strain — o novo 'supra' de T representa isquemia aguda, não melhora da HVE. Deve-se correlacionar com clínica e troponina",
+      "B) Regressão da HVE por controle da pressão arterial, sem importância clínica aguda",
+      "C) Normalização genuína por hipertrofia revertida após tratamento com IECA",
+      "D) Artefato de posicionamento dos eletrodos; o ECG deve ser repetido"
+    ],
+    "answer_index": 0,
+    "explanation": "O padrão strain crônico é estável e representa o estado basal do paciente com HVE. Quando uma onda T previamente negativa (strain) se torna positiva ou isoelétrica subitamente, isso é chamado de 'pseudo-normalização'. O mecanismo é a superposição de isquemia aguda subepicárdica sobre o substrato de strain subendocárdico: a isquemia epicárdica inverte temporariamente o gradiente, fazendo a T 'parecer normal'. Esse achado, especialmente com sintomas e troponina elevada, pode ser o único sinal eletrocardiográfico de IAMSEST em pacientes com HVE grave. Compará-lo com ECGs anteriores é fundamental.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_008",
+    "topic": "Sobrecarga e Hipertrofia — HVD",
+    "subtopic": "Critérios de HVD",
+    "difficulty": "medium",
+    "stem": "Quais são os principais critérios eletrocardiográficos para hipertrofia ventricular direita (HVD)?",
+    "options": [
+      "A) R > S em V1 (relação R/S ≥ 1), desvio do eixo à direita (> +90°) e padrão strain em V1–V2 (ST infra + T negativa em derivações direitas)",
+      "B) S profunda em V1, desvio do eixo à esquerda e T invertida em V5–V6",
+      "C) QRS ≥ 120 ms com morfologia rSR' em V1 e R alta em V5",
+      "D) SV1 + RV5 ≥ 35 mm com desvio do eixo à direita"
+    ],
+    "answer_index": 0,
+    "explanation": "Normalmente V1, posicionada à direita, 'vê' o vetor dominante do VE (maior massa) se afastando — registra S predominante (R/S < 1). Na HVD, o VD hipertrofiado torna-se eletricamente dominante: seu vetor aponta para a direita e anteriormente, em direção a V1, gerando R predominante (R > S ou R/S ≥ 1). O desvio do eixo direita (> +90°) reflete o novo equilíbrio de forças com o VD dominando. O strain em V1–V2 (infra de ST + T negativa) reflete sobrecarga pressórica do VD, análogo ao strain do VE em V5–V6. Esses três critérios juntos têm alta especificidade para HVD.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_009",
+    "topic": "Sobrecarga e Hipertrofia — HVD",
+    "subtopic": "HVD na DPOC",
+    "difficulty": "medium",
+    "stem": "Paciente com DPOC grave e cor pulmonale. O ECG mostra: onda P apiculada ≥ 2,5 mm em DII, DIII, aVF; desvio do eixo à direita (+110°); padrão rS persistente em V5–V6; e S1S2S3. Qual o mecanismo que liga DPOC, hipertensão pulmonar e esses achados de ECG?",
+    "options": [
+      "A) Hipoxemia crônica → vasoconstricção e remodelamento da artéria pulmonar → hipertensão pulmonar → pós-carga elevada no VD → HVD + dilatação do AD (P pulmonale). Rotação horária do coração vertical empurra o VD anteriormente, gerando rS nas esquerdas e padrão S1S2S3",
+      "B) A DPOC causa hipercapnia direta que deprime o nó SA, gerando desvio de eixo à direita",
+      "C) O cor pulmonale dilata o VE, gerando HVE com padrão de strain que mimetiza HVD no ECG",
+      "D) O padrão S1S2S3 é específico de TEP agudo e exclui DPOC como diagnóstico"
+    ],
+    "answer_index": 0,
+    "explanation": "Na DPOC, a destruição alveolar e a hipoxemia crônica causam vasoconstricção pulmonar e remodelamento vascular (aumento da resistência vascular pulmonar). A hipertensão pulmonar resultante eleva cronicamente a pós-carga do VD, que hipertrofia (cor pulmonale). O ECG reflete esse processo: P pulmonale (AD sobrecarregado de alimentar o VD dilatado), desvio do eixo à direita (VD dominante), rotação horária (coração vertical na hiperinsuflação pulmonar) gerando transição tardia (rS em V5–V6) e padrão S em DI, DII e DIII. O padrão S1S2S3 pode ocorrer em TEP agudo e DPOC crônico — o contexto clínico e a ecografia diferenciam.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_010",
+    "topic": "Sobrecarga e Hipertrofia — HVD",
+    "subtopic": "HVD vs BRD",
+    "difficulty": "hard",
+    "stem": "Paciente com R > S em V1 e desvio do eixo à direita. Como diferenciar HVD de BRD nessa situação?",
+    "options": [
+      "A) No BRD, R > S em V1 tem morfologia rSR' (orelha de coelho) e o QRS é ≥ 120 ms com S larga em DI e V6; na HVD pura, o QRS é < 120 ms, a morfologia em V1 é R ou qR (sem R' secundário), e a S empastada em V6 é ausente ou discreta",
+      "B) HVD e BRD são sempre indistinguíveis no ECG — o ecocardiograma é obrigatório para diferenciação",
+      "C) No BRD, o eixo sempre é normal; desvio à direita com QRS largo indica HVD + BRE concomitante",
+      "D) A onda R em V1 > 7 mm é exclusiva de HVD e exclui BRD"
+    ],
+    "answer_index": 0,
+    "explanation": "A chave diferencial está na morfologia do QRS e na sua duração. No BRD completo, o QRS ≥ 120 ms com aspecto rSR' em V1 (duas ondas R positivas, a segunda — R' — maior e mais lenta, por ativação tardia do VD pelo miocárdio), acompanhado de S larga e empastada em DI e V6. Na HVD pura, o QRS é < 120 ms, com morfologia em V1 de qR ou R pura (o vetor do VD hipertrofiado domina todo o QRS sem criar deflexão secundária), e o desvio de eixo à direita é marcado (+90° a +180°). O BRD pode coexistir com HVD, tornando o ECG complexo — nesses casos o ecocardiograma é indispensável.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_011",
+    "topic": "Sobrecarga Atrial — SOE",
+    "subtopic": "P Mitrale",
+    "difficulty": "easy",
+    "stem": "Qual é o padrão de 'P mitrale' e em qual contexto clínico ele é encontrado?",
+    "options": [
+      "A) Onda P bífida (entalhada) em DII com duração ≥ 120 ms e componente negativo em V1 ≥ 1 mm × 40 ms (índice de Morris ≥ 0,04 mm·s); encontrado na estenose ou insuficiência mitral, HVE com elevação da pressão diastólica, e causas de dilatação do AE",
+      "B) Onda P apiculada ≥ 2,5 mm em DII com duração normal; encontrado na hipertensão pulmonar",
+      "C) Onda P negativa em DII com PR curto; encontrado no ritmo juncional",
+      "D) Onda P ausente com linha de base irregular; encontrado na fibrilação atrial"
+    ],
+    "answer_index": 0,
+    "explanation": "O átrio esquerdo dilata quando enfrenta pressão ou volume aumentados (estenose mitral que impede o esvaziamento, insuficiência mitral com volume de regurgitação, ou HVE que eleva a pressão diastólica do VE e retrogradamente do AE). Com o AE dilatado, a condução interatrial pelo feixe de Bachmann fica lentificada, alargando o componente esquerdo da onda P. O entalhe ('bífida') em DII resulta da separação dos componentes direito e esquerdo. O índice de Morris em V1 quantifica o componente esquerdo negativo: profundidade × duração do componente negativo ≥ 0,04 mm·s (= 1 mm × 40 ms) indica dilatação do AE.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_012",
+    "topic": "Sobrecarga Atrial — SOE",
+    "subtopic": "Índice de Morris",
+    "difficulty": "medium",
+    "stem": "Em V1, a porção negativa da onda P mede 1,5 mm de profundidade e 60 ms de duração. Qual o índice de Morris e o que ele indica?",
+    "options": [
+      "A) Índice = 1,5 mm × 60 ms = 90 mm·ms (ou 0,09 mm·s) — positivo (≥ 40 mm·ms); indica sobrecarga atrial esquerda significativa por dilatação ou aumento da pressão do AE",
+      "B) Índice = 1,5 + 60 = 61,5 mm·ms — é necessário somar, não multiplicar os valores",
+      "C) Índice = 60/1,5 = 40 mm·ms — é necessário dividir duração pela profundidade",
+      "D) O índice de Morris é calculado em DII, não em V1"
+    ],
+    "answer_index": 0,
+    "explanation": "O índice de Morris (ou PTF — P-terminal force em V1) é calculado como: profundidade (mm) × duração (ms) da porção negativa da onda P em V1. O ponto de corte ≥ 40 mm·ms indica dilatação do AE. No exemplo: 1,5 mm × 60 ms = 90 mm·ms — claramente positivo, indicando sobrecarga atrial esquerda significativa. O V1 é a derivação ideal para esse cálculo porque fica anatomicamente adjacente ao AE (que fica posterior e à esquerda do AD), capturando diretamente o vetor de despolarização atrial esquerda que se afasta de V1 (componente negativo).",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_013",
+    "topic": "Sobrecarga Atrial — SOD",
+    "subtopic": "P Pulmonale",
+    "difficulty": "easy",
+    "stem": "Qual é o padrão de 'P pulmonale' e em qual contexto clínico ele é encontrado?",
+    "options": [
+      "A) Onda P apiculada, simétrica, com amplitude ≥ 2,5 mm em DII, DIII e/ou aVF, com duração normal (< 120 ms); encontrado em DPOC, hipertensão pulmonar, estenose pulmonar e tricúspide — condições com sobrecarga do AD",
+      "B) Onda P bífida ≥ 120 ms em DII; encontrado na estenose mitral",
+      "C) Onda P apiculada ≥ 2,5 mm apenas em V1; encontrado em HVD",
+      "D) Onda P positiva em aVR com duração > 120 ms; encontrado na hipertrofia do AD"
+    ],
+    "answer_index": 0,
+    "explanation": "O AD hipertrofia e dilata em resposta à sobrecarga pressórica (hipertensão pulmonar, DPOC) ou volumétrica (insuficiência tricúspide). A massa atrial direita aumentada gera um vetor de despolarização mais amplo na direção das câmeras inferiores (DII, DIII, aVF), que ficam alinhadas ao vetor atrial normal. Como a ativação do AD é a primeira metade da onda P e o vetor está magnificado, a onda P fica alta (≥ 2,5 mm) e pontiaguda — não há alargamento porque o AD se despolariza mais rápido, não mais devagar. A assimetria com pico precoce difere da P mitrale (pico tardio com entalhe).",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_014",
+    "topic": "Sobrecarga Atrial — SOD",
+    "subtopic": "P Pulmonale vs P Mitrale",
+    "difficulty": "medium",
+    "stem": "Como diferenciar clinicamente a P pulmonale da P mitrale ao analisar o ECG?",
+    "options": [
+      "A) P pulmonale: onda P alta (≥ 2,5 mm), pontiaguda e com duração normal (< 120 ms) em DII — câmeras inferiores veem vetor do AD magnificado chegando. P mitrale: onda P bífida (≥ 120 ms), com entalhe, pequena em DII — câmeras inferiores veem o vetor do AE se afastando e alongando a onda P",
+      "B) P pulmonale: onda P negativa em DII; P mitrale: onda P positiva em DII",
+      "C) P pulmonale: onda P larga (≥ 120 ms); P mitrale: onda P alta (≥ 2,5 mm)",
+      "D) Ambas têm o mesmo padrão em DII; a diferenciação é feita apenas pela morfologia em V1"
+    ],
+    "answer_index": 0,
+    "explanation": "A distinção fundamental é amplitude vs. duração. P pulmonale = AD dilatado → componente positivo inicial maior → P ALTA e ESTREITA (amplitude ↑, duração normal). P mitrale = AE dilatado → componente negativo tardio prolongado → P LARGA e BÍFIDA (duração ↑, amplitude pode ser normal). Em V1, a P pulmonale mostra componente positivo alto e componente negativo pequeno; a P mitrale mostra componente negativo profundo e alargado (índice de Morris positivo). Na prática, os dois padrões podem coexistir em valvopatia mitral com hipertensão pulmonar secundária.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_015",
+    "topic": "Sobrecarga e Hipertrofia — HVE",
+    "subtopic": "RaVL como Marcador",
+    "difficulty": "medium",
+    "stem": "RaVL ≥ 11 mm é considerado um marcador de HVE com alta especificidade. Por que aVL é particularmente sensível para detectar HVE em pacientes hipertensos?",
+    "options": [
+      "A) aVL está posicionada a -30° no plano frontal, olhando diretamente para a parede lateral alta do VE (onde a hipertrofia é mais proeminente na HAS); ao filmá-la com a câmera apontando diretamente para a parede espessada, a onda R aumenta proporcionalmente à massa",
+      "B) aVL é sensível porque está perpendicular ao vetor QRS, capturando apenas as deflexões da HVE",
+      "C) aVL mede a espessura do septo interventricular, que é o primeiro a hipertrofiar na HAS",
+      "D) aVL tem maior ganho de sinal que as demais derivações por ser uma derivação aumentada"
+    ],
+    "answer_index": 0,
+    "explanation": "aVL fica a -30° no plano frontal e 'aponta' para a parede lateral alta do VE, que é um dos primeiros segmentos a desenvolver hipertrofia na hipertensão arterial sistêmica. Como o vetor dominante do QRS aponta para essa região (+30° a +60°), aVL captura uma projeção significativa desse vetor, amplificando a onda R proporcionalmente ao aumento de massa. O cutoff de 11 mm em aVL tem especificidade > 95% para HVE no contexto de HAS, embora com sensibilidade menor (~30%). É especialmente útil em pacientes obesos, onde Sokolow-Lyon é falsamente negativo pela atenuação do sinal.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_016",
+    "topic": "Sobrecarga e Hipertrofia — HVE",
+    "subtopic": "HVE e Fibrilação Atrial",
+    "difficulty": "hard",
+    "stem": "Paciente com HVE grave por estenose aórtica entra em fibrilação atrial. Os critérios de Sokolow-Lyon ainda podem ser aplicados? Qual a limitação clínica importante?",
+    "options": [
+      "A) Os critérios de amplitude (Sokolow-Lyon, Cornell) permanecem tecnicamente aplicáveis na FA para medir voltagens, mas a ausência de onda P impede o diagnóstico de sobrecarga atrial esquerda pelo índice de Morris; além disso, a variabilidade do RR modifica a amplitude do QRS ciclo a ciclo, tornando as medidas menos confiáveis",
+      "B) Na FA, os critérios de HVE tornam-se completamente inválidos e o diagnóstico deve ser feito apenas por ecocardiograma",
+      "C) Na FA, os critérios de HVE devem ser dobrados (Sokolow-Lyon ≥ 70 mm) para compensar a variabilidade do RR",
+      "D) A FA normaliza as amplitudes do QRS na HVE, tornando a detecção mais sensível"
+    ],
+    "answer_index": 0,
+    "explanation": "Na fibrilação atrial, a linha de base irregular e a variação cíclica do intervalo RR (ciclos longos geram QRS mais amplos pelo maior enchimento ventricular — fenômeno de Frank-Starling) introduzem variabilidade nas amplitudes do QRS. Para minimizar isso, recomenda-se medir a média de pelo menos 3–5 complexos consecutivos. A perda da onda P elimina o componente de diagnóstico de sobrecarga atrial esquerda. Na prática clínica, quando há FA + critérios de amplitude para HVE + clínica de HAS ou valvopatia, o diagnóstico de HVE é provável e deve ser confirmado por ecocardiograma.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_017",
+    "topic": "Sobrecarga e Hipertrofia — HVD",
+    "subtopic": "Cor Pulmonale Agudo (TEP)",
+    "difficulty": "hard",
+    "stem": "Paciente com dispneia súbita, taquicardia, hipoxemia. ECG mostra: taquicardia sinusal, padrão S1Q3T3, BRD incompleto e inversão de T em V1–V4. Qual diagnóstico deve ser imediatamente considerado e qual é o mecanismo dos achados?",
+    "options": [
+      "A) Tromboembolismo pulmonar (TEP) maciço: obstrução súbita da artéria pulmonar → sobrecarga aguda do VD → dilatação do VD que gira o coração à direita (S1Q3T3), bloqueia o ramo direito (BRD incompleto) e gera strain agudo em derivações direitas (T negativa V1–V4)",
+      "B) IAM inferior: supra em DII, DIII, aVF com imagem em espelho (Q3 como infra recíproco)",
+      "C) Pneumotórax hipertensivo: desvio mediastinal causa padrão S1Q3 por rotação do coração",
+      "D) DPOC em exacerbação: padrão crônico de cor pulmonale com S1Q3T3 pré-existente"
+    ],
+    "answer_index": 0,
+    "explanation": "No TEP maciço, a obstrução súbita da artéria pulmonar eleva abruptamente a resistência vascular pulmonar. O VD, que não tem tempo de hipertrofiar, dilata agudamente. Essa dilatação aguda desvia o eixo para a direita (S profunda em DI), gera correntes de lesão na parede inferior do VD (Q3 e T3 negativa), e a distensão do ramo direito intracardíaco causa BRD incompleto. A isquemia subendocárdica por sobrecarga aguda do VD gera strain agudo em V1–V4. O padrão S1Q3T3 completo está presente em apenas 20% dos TEPs, mas junto com a clínica e a taquicardia sinusal levanta imediatamente a suspeita diagnóstica.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_018",
+    "topic": "Sobrecarga e Hipertrofia — HVE",
+    "subtopic": "Escore de Cornell — Produto de Voltagem-Duração",
+    "difficulty": "hard",
+    "stem": "Além do critério de amplitude simples (SV3 + RaVL ≥ 28 mm), existe o produto de Cornell voltagem-duração. Como é calculado e qual o ponto de corte?",
+    "options": [
+      "A) (SV3 + RaVL) × duração do QRS em ms ≥ 2440 mm·ms; integra massa (voltagem) e tempo de ativação (duração do QRS), refletindo melhor a massa total do VE do que a amplitude isolada",
+      "B) (SV1 + RV5) × QTc ≥ 3000 mm·ms",
+      "C) RaVL × duração do QRS ≥ 1200 mm·ms",
+      "D) (SV3 + RaVL) ÷ duração do QRS ≥ 0,35 mm/ms"
+    ],
+    "answer_index": 0,
+    "explanation": "O produto de Cornell (Cornell voltage-duration product) multiplica a soma de voltagens (SV3 + RaVL em mm) pelo tempo de ativação ventricular (duração do QRS em ms). O ponto de corte de 2440 mm·ms foi validado em estudos como o LIFE Trial para predição de risco cardiovascular. A lógica é que a massa ventricular depende de duas dimensões — amplitude do sinal (voltagem) e volume de tecido ativo durante o QRS (duração). Esse produto é mais robusto em populações com QRS ligeiramente alargado (como em pacientes com bloqueio fascicular) onde a voltagem isolada pode subestimar a massa real.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_019",
+    "topic": "Sobrecarga Atrial — SOE",
+    "subtopic": "Causas de SOE",
+    "difficulty": "medium",
+    "stem": "Além da doença valvar mitral, quais outras condições frequentes causam sobrecarga atrial esquerda (P mitrale) no ECG?",
+    "options": [
+      "A) Hipertensão arterial sistêmica com HVE (pressão diastólica do VE elevada retrograde ao AE), insuficiência cardíaca com fração de ejeção preservada (ICFEp), e fibrilação atrial paroxística com remodelamento do AE",
+      "B) DPOC grave (cor pulmonale bilateral), estenose pulmonar e insuficiência tricúspide",
+      "C) Bloqueio de ramo esquerdo, síndrome de Wolff-Parkinson-White e ritmo juncional",
+      "D) Apenas doenças valvares mitrais geram P mitrale; outras condições alteram apenas a amplitude da onda P"
+    ],
+    "answer_index": 0,
+    "explanation": "A sobrecarga atrial esquerda ocorre sempre que o AE enfrenta pressão ou volume aumentados. Na HAS com HVE, a rigidez do VE hipertrofiado eleva a pressão de enchimento diastólico do VE, que se transmite retrogradamente para o AE. Na ICFEp, o mesmo mecanismo de disfunção diastólica pressuriza o AE cronicamente, levando à sua dilatação. Na FA paroxística, o remodelamento elétrico e estrutural do AE pode gerar dilatação progressiva mesmo antes da FA tornar-se persistente. Reconhecer P mitrale em contexto de HAS sem valvopatia mitral alerta para HVE e disfunção diastólica subjacente.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_020",
+    "topic": "Sobrecarga e Hipertrofia — HVD",
+    "subtopic": "Strain do VD",
+    "difficulty": "medium",
+    "stem": "Paciente com hipertensão pulmonar grave por hipertensão arterial pulmonar idiopática (HAPI). O ECG mostra T negativa em V1, V2 e V3. Qual o mecanismo fisiopatológico desse achado?",
+    "options": [
+      "A) Sobrecarga pressórica crônica do VD gera isquemia subendocárdica relativa (aumento da demanda miocárdica do VD sem hipertensão pulmonar proporcional) e repolarização anormal — as câmeras V1–V3, posicionadas sobre o VD, registram o padrão strain análogo ao que V5–V6 registram na HVE",
+      "B) A T negativa em V1–V3 na HAPI reflete IAM anterior subepicárdico por oclusão de coronária esquerda",
+      "C) As T negativas em V1–V3 representam BRD completo, não strain do VD",
+      "D) T negativa em V1–V3 é um achado normal em adultos jovens e não indica patologia"
+    ],
+    "answer_index": 0,
+    "explanation": "O princípio do strain é o mesmo em ambos os ventrículos: sobrecarga pressórica crônica → hipertrofia → isquemia subendocárdica relativa → repolarização anormal → ST infra + T negativa nas derivações que 'filmam' o ventrículo sobrecarregado. Na HVD por HAPI, as câmeras V1–V3 ficam posicionadas sobre o VD hipertrofiado e registram o padrão strain do VD. Esse achado, quando presente junto com R > S em V1 e desvio de eixo direita, forma a 'tríade clássica' de HVD com strain — de alta especificidade para hipertensão pulmonar grave. A pressão sistólica estimada na artéria pulmonar pelo eco correlaciona-se com a gravidade do strain.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_021",
+    "topic": "Sobrecarga e Hipertrofia — HVE",
+    "subtopic": "HVE em Atletas vs HAS",
+    "difficulty": "hard",
+    "stem": "Atleta de alto rendimento tem Sokolow-Lyon de 38 mm em ECG de rotina. Como diferenciar hipertrofia fisiológica do atleta (coração de atleta) de HVE patológica por HAS?",
+    "options": [
+      "A) No coração de atleta: sem strain, onda P normal, QRS ≤ 110 ms, espessura do septo ≤ 12 mm no eco, relaxamento diastólico normal. Na HVE por HAS: strain presente, P mitrale frequente, história de HAS, espessura septal > 13 mm, disfunção diastólica ao eco",
+      "B) O único critério diferencial é a amplitude: > 45 mm indica HVE patológica, independente do contexto clínico",
+      "C) Atleta sempre tem PA < 130/80 mmHg, o que exclui HVE patológica por definição",
+      "D) No coração de atleta, a zona de transição precordial é sempre patológica (transição tardia)"
+    ],
+    "answer_index": 0,
+    "explanation": "A hipertrofia fisiológica do atleta é adaptação ao volume aumentado (sobrecarga volumétrica) durante o exercício intenso prolongado — hipertrofia excêntrica com câmaras dilatadas proporcionalmente. O ECG mostra altas voltagens, mas sem padrão strain (não há isquemia subendocárdica), sem P mitrale, e o QRS tem duração normal. O ecocardiograma revela espessura parietal ≤ 12 mm e função diastólica normal (e2 lateral ≥ 12 cm/s). Na HVE por HAS, há hipertrofia concêntrica (paredes espessas, câmara normal/pequena), strain frequente, P mitrale, disfunção diastólica e espessura > 13 mm. Na 'zona cinzenta' (espessura 12–15 mm), a descontinuação do treinamento e reavaliação em 3 meses pode ajudar: hipertrofia fisiológica regride.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_022",
+    "topic": "Sobrecarga e Hipertrofia — Biventricular",
+    "subtopic": "Sobrecarga Biventricular",
+    "difficulty": "hard",
+    "stem": "Em qual condição clínica se espera ver critérios de HVE e HVD simultaneamente no mesmo ECG? Como o ECG pode sugerir sobrecarga biventricular?",
+    "options": [
+      "A) Cardiopatias congênitas com shunts grandes (comunicação interventricular, canal atrioventricular), e valvopatias avançadas. O ECG mostra critérios de HVE (SV1 + RV5 ≥ 35 mm) COMBINADOS com critérios de HVD (R > S em V1 ou desvio de eixo direita), denominado padrão de Katz-Wachtel (altas voltagens com padrão RS em múltiplas precordiais)",
+      "B) A sobrecarga biventricular é impossível porque um ventrículo dominante sempre cancela o sinal do outro",
+      "C) Apenas pacientes com transplante cardíaco duplo podem desenvolver sobrecarga biventricular",
+      "D) O ECG não pode sugerir sobrecarga biventricular; o ecocardiograma é obrigatório para o diagnóstico"
+    ],
+    "answer_index": 0,
+    "explanation": "Na sobrecarga biventricular, ambos os ventrículos geram vetores amplificados em direções opostas (VE → esquerda; VD → direita), que parcialmente se cancelam no plano frontal mas somam nas precordiais. O padrão de Katz-Wachtel é clássico: ondas RS altas e simétricas em V3–V4 (altas voltagens bifásicas nas precordiais médias), com R dominante em V5–V6 (HVE) e R > S em V1 (HVD). Clinicamente, a CIA e a CIV grandes na infância geram esse padrão, assim como a cardiopatia chagásica avançada e as valvopatias reumáticas combinadas. Em adultos, deve-se afastar hipertensão pulmonar secundária a HVE descompensada.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_023",
+    "topic": "Sobrecarga Atrial — SOD",
+    "subtopic": "P Pulmonale Transitória",
+    "difficulty": "medium",
+    "stem": "Paciente com asma em crise grave tem P apiculada ≥ 2,5 mm em DII durante a crise, que desaparece após tratamento. O que esse achado representa?",
+    "options": [
+      "A) P pulmonale transitória por sobrecarga aguda do AD durante o broncoespasmo grave (hipoxemia + hiperinsuflação pulmonar aguda → vasoconstricção pulmonar aguda → ↑ pressão VD → ↑ pressão AD); reverte com o tratamento da crise",
+      "B) P pulmonale permanente por DPOC associada ao asma, que persiste mesmo após a crise",
+      "C) Artefato de movimento muscular durante a crise de broncoespasmo que mimetiza onda P alta",
+      "D) Ritmo atrial ectópico por hipoxemia, gerando P alta que reverte com normoxemia"
+    ],
+    "answer_index": 0,
+    "explanation": "A asma grave gera dois mecanismos que sobrecarregam agudamente o VD: hipoxemia (vasoconstricção pulmonar hipóxica) e hiperinsuflação pulmonar (pressões intratorácicas positivas que comprimem os capilares alveolares, aumentando a resistência vascular pulmonar). O resultado é aumento transitório da pressão na artéria pulmonar → sobrecarga do VD → aumento da pressão no AD → P pulmonale transitória. Esse achado indica que a crise é grave o suficiente para comprometer hemodinâmica pulmonar. Ao contrário da DPOC, onde a P pulmonale é crônica e permanente, na asma bem controlada a onda P retorna ao normal após o broncoespasmo ceder.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_024",
+    "topic": "Sobrecarga e Hipertrofia — HVE",
+    "subtopic": "Diagnóstico Diferencial — Onda R Alta em V5",
+    "difficulty": "hard",
+    "stem": "Paciente jovem, atleta de 22 anos, sem comorbidades. ECG: R em V5 = 32 mm, ausência de strain, onda P normal. Quais diagnósticos devem ser considerados além de HVE, e qual o próximo passo?",
+    "options": [
+      "A) Coração de atleta (hipertrofia fisiológica), cardiomiopatia hipertrófica (CMH) e síndrome de repolarização precoce. Próximo passo: ecocardiograma para medir espessura parietal e excluir CMH (espessura ≥ 15 mm + padrão de hipertrofia assimétrica do septo)",
+      "B) R alta em V5 em jovem é sempre fisiológica; nenhuma investigação adicional é necessária",
+      "C) Apenas HVE por HAS deve ser considerada; solicitar PA e tratamento anti-hipertensivo empírico",
+      "D) R alta em V5 sem strain indica BRD e deve ser avaliada por holter de 24 horas"
+    ],
+    "answer_index": 0,
+    "explanation": "Em jovem assintomático com altas voltagens, o diagnóstico diferencial inclui: (1) coração de atleta — hipertrofia fisiológica proporcional, sem strain, função diastólica normal; (2) cardiomiopatia hipertrófica (CMH) — causa mais comum de morte súbita em jovens atletas, com espessura assimétrica do septo ≥ 15 mm, padrão de HVE exagerado no ECG, frequentemente com ondas Q profundas laterais; (3) cardiomiopatia de armazenamento (ex.: Fabry) em adultos jovens. O ecocardiograma é obrigatório para diferenciar, pois a CMH pode ter o mesmo padrão de ECG que o coração de atleta — e a distinção é crucial para liberar ou restringir atividade física competitiva.",
+    "tag": "sobrecarga"
+  },
+  {
+    "id": "sob_025",
+    "topic": "Sobrecarga e Hipertrofia — HVE",
+    "subtopic": "Sensibilidade e Especificidade dos Critérios",
+    "difficulty": "medium",
+    "stem": "Por que o ECG tem baixa sensibilidade (40–60%) mas alta especificidade (85–90%) para o diagnóstico de HVE quando comparado ao ecocardiograma?",
+    "options": [
+      "A) O ECG detecta apenas variações de voltagem superficial, que são atenuadas por obesidade, DPOC, derrame pericárdico e distância do coração ao eletrodo; mas quando os critérios de amplitude estão presentes, a HVE estrutural é quase sempre confirmada — poucos falsos-positivos",
+      "B) O ECG tem baixa sensibilidade porque os critérios foram desenvolvidos antes do ecocardiograma e estão desatualizados",
+      "C) A baixa sensibilidade se deve ao fato de que o ECG mede o volume ventricular, não a massa — e HVE pode ocorrer com volume normal",
+      "D) O ECG superestima a HVE em pacientes magros, gerando alta sensibilidade mas baixa especificidade nessa população"
+    ],
+    "answer_index": 0,
+    "explanation": "A amplitude das ondas no ECG de superfície depende de dois fatores: a força elétrica gerada pelo miocárdio (proporcional à massa) e a atenuação do sinal pelo tecido interposto entre o coração e o eletrodo. Em pacientes obesos, com DPOC (hiperinsuflação pulmonar), derrame pericárdico ou tórax grande, o sinal é atenuado — mesmo com HVE real, as amplitudes permanecem abaixo do ponto de corte (falsos-negativos, baixa sensibilidade). Por outro lado, quando o critério é atingido (sinal alto o suficiente para ultrapassar o threshold mesmo com atenuação), a probabilidade de HVE verdadeira é alta (alta especificidade, poucos falsos-positivos). Essa assimetria sensibilidade/especificidade torna o ECG um bom confirmador, mas mau descartador de HVE.",
+    "tag": "sobrecarga"
+  }
+]

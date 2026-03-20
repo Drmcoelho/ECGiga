@@ -1,0 +1,402 @@
+[
+  {
+    "id": "sca_ecg_001",
+    "topic": "SCA — ECG",
+    "subtopic": "Ondas T Hiperagudas",
+    "difficulty": "medium",
+    "stem": "Paciente de 55 anos com dor precordial há 20 minutos. O ECG mostra ondas T simétricas, muito amplas e apiculadas em V2-V5, sem supradesnivelamento de ST. Qual é o significado desse achado e qual a conduta?",
+    "options": [
+      "Ondas T hiperagudas — sinal mais precoce de oclusão coronariana transmural (STEMI em fase inicial); tratar como STEMI e ativar hemodinâmica urgente",
+      "Variante normal em homens jovens atleticamente condicionados; alta hospitalar com orientação",
+      "Hipercalemia leve; solicitar eletrólitos e tratar conservadoramente",
+      "Síndrome de repolarização precoce; ECG seriado e observação sem urgência"
+    ],
+    "answer_index": 0,
+    "explanation": "As ondas T hiperagudas são o sinal ECG mais precoce do STEMI, ocorrendo nos primeiros minutos a horas após a oclusão coronariana total. Caracterizam-se por amplitude aumentada, simetria perfeita (ambas as ramas são iguais) e base larga — diferentemente das T positivas normais ou do pico assimétrico da repolarização precoce. Mecanismo: a isquemia transmural aguda altera os gradientes iônicos transmurais, gerando correntes de lesão que se manifestam primeiro como exagero da onda T. Se o paciente está sintomático e as ondas T hiperagudas são novas, o caso deve ser tratado como STEMI equivalente com ativação imediata da hemodinâmica, mesmo sem supra de ST ainda estabelecido.",
+    "tag": "onda_T_hiperaguda"
+  },
+  {
+    "id": "sca_ecg_002",
+    "topic": "SCA — ECG",
+    "subtopic": "Padrão De Winter",
+    "difficulty": "hard",
+    "stem": "ECG de urgência de homem de 49 anos com dor precordial intensa mostra: infradesnivelamento de ST de 1-3 mm com morfologia ascendente (upsloping) de V1 a V4, com ondas T positivas e apiculadas no ponto J. Não há supradesnivelamento de ST em nenhuma derivação. Qual é o diagnóstico e a conduta?",
+    "options": [
+      "NSTEMI de baixo risco; anticoagulação e estratificação eletiva em 24-72h",
+      "Padrão de De Winter — equivalente de STEMI por oclusão proximal da DA; ativar hemodinâmica com a mesma urgência de um STEMI clássico",
+      "Síndrome de Wellens; ECG compatível com suboclusão da DA proximal; NUNCA realizar ergometria",
+      "Pericardite aguda; infra de ST difuso com T positiva; tratar com AINE"
+    ],
+    "answer_index": 1,
+    "explanation": "O padrão de De Winter (descrito por Robbert de Winter em 2008) é um equivalente de STEMI presente em aproximadamente 2% das oclusões da DA proximal. Caracteriza-se por: (1) infra de ST ≥ 1 mm no ponto J em V1-V4 com morfologia ascendente, e (2) ondas T positivas, simétricas e apiculadas na porção terminal. Diferentemente do STEMI clássico, o ST não está elevado, mas a isquemia é transmural e a artéria está ocluída. O mecanismo proposto envolve uma variante da progressão eletrofisiológica da isquemia que 'pula' a fase de supra. A conduta é ICP primária com a mesma urgência de um STEMI convencional.",
+    "tag": "padrao_de_winter"
+  },
+  {
+    "id": "sca_ecg_003",
+    "topic": "SCA — ECG",
+    "subtopic": "Supradesnivelamento de ST",
+    "difficulty": "medium",
+    "stem": "Paciente com dor precordial tem supra de ST em múltiplas derivações. Qual característica morfológica do supra ajuda a diferenciar STEMI de pericardite aguda?",
+    "options": [
+      "No STEMI: supra côncavo (em sorriso/saddle-back) e difuso; na pericardite: convexo (abóbada) e localizado",
+      "No STEMI: supra convexo (abóbada/tombstone), localizado em território vascular, com imagem recíproca; na pericardite: côncavo (em sela), difuso em múltiplas derivações sem recíprocos, com depressão do segmento PR",
+      "A morfologia não diferencia; apenas a clínica (dor pleurítica) é diagnóstica",
+      "No STEMI: supra apenas em derivações precordiais; na pericardite: apenas em derivações dos membros"
+    ],
+    "answer_index": 1,
+    "explanation": "A morfologia do supra de ST é uma pista diagnóstica fundamental. No STEMI, o supra tende a ser convexo (forma de abóbada ou 'tombstone' nos casos graves), localizado no território vascular da artéria ocluída, geralmente acompanhado de infradesnivelamento recíproco nas derivações opostas. Na pericardite aguda, o supra é côncavo (formato de sela ou sorriso), difuso (presente em DI, DII, aVF, V2-V6 simultaneamente), sem imagem recíproca verdadeira (exceto aVR e V1 que podem ter leve infra), e associado a depressão do segmento PR — sinal patognomônico de inflamação pericárdica. O aVR tipicamente mostra supra de PR na pericardite.",
+    "tag": "supra_st_stemi_vs_pericardite"
+  },
+  {
+    "id": "sca_ecg_004",
+    "topic": "SCA — ECG",
+    "subtopic": "Critérios de Sgarbossa",
+    "difficulty": "hard",
+    "stem": "Paciente com BRE (bloqueio de ramo esquerdo) pré-existente chega com dor precordial. O ECG mostra: concordância positiva (supra ST ≥ 1 mm em derivação com QRS positivo). Como interpretar e qual a conduta?",
+    "options": [
+      "BRE pré-existente invalida o ECG; apenas a troponina pode diagnosticar IAM",
+      "Concordância positiva é critério de Sgarbossa pontuação 5 (maior especificidade); indica STEMI superimpostos ao BRE; ativar hemodinâmica urgente",
+      "Concordância positiva é esperada no BRE e não tem valor diagnóstico adicional",
+      "Apenas a discordância excessiva (critério de Smith) é válida para diagnóstico; a concordância positiva é inespecífica"
+    ],
+    "answer_index": 1,
+    "explanation": "Os critérios de Sgarbossa (1996) permitem diagnosticar IAM no contexto de BRE. O critério de concordância positiva — supra de ST ≥ 1 mm em derivação onde o QRS é positivo (deflexão predominante para cima) — recebe 5 pontos e é o de maior especificidade (>90%). No BRE, o ST normalmente é discordante ao QRS (supra quando QRS negativo, infra quando QRS positivo). Concordância positiva viola esse padrão esperado e indica corrente de lesão superposta. Escore ≥ 3 pontos no Sgarbossa original é diagnóstico. O critério modificado de Smith (razão ST/S ≥ 0.25 em derivações com QRS negativo) aumenta a sensibilidade para a discordância excessiva.",
+    "tag": "sgarbossa_bre"
+  },
+  {
+    "id": "sca_ecg_005",
+    "topic": "SCA — ECG",
+    "subtopic": "Síndrome de Wellens",
+    "difficulty": "hard",
+    "stem": "Paciente internado por dor precordial, atualmente assintomático, tem ECG mostrando ondas T profundamente invertidas e simétricas em V2-V3 (Wellens tipo B). O plantonista propõe fazer um teste ergométrico para estratificação de risco. Qual é o erro nessa conduta e por quê?",
+    "options": [
+      "O erro é que o teste ergométrico está indicado apenas em V1-V4; para V2-V3 é necessário cintilografia",
+      "Não há erro; o teste ergométrico é o método de escolha para avaliar isquemia nesse padrão",
+      "O erro grave é realizar ergometria na síndrome de Wellens: indica suboclusão proximal da DA com isquemia crítica em fase de 'repouso relativo'; o esforço pode precipitar oclusão total e STEMI maciço ou morte súbita",
+      "O erro é solicitar ECG; deveria solicitar diretamente coronariografia eletiva em 30 dias"
+    ],
+    "answer_index": 2,
+    "explanation": "A síndrome de Wellens é um padrão ECG de altíssimo risco que indica suboclusão proximal crítica da DA, geralmente captado na fase interisquêmica (paciente assintomático, sem supra). Tipo A: ondas T bifásicas em V2-V3 (positivo-negativo). Tipo B (mais comum e grave): ondas T profundamente invertidas e simétricas em V2-V3, podendo estender-se a V1-V4. O mecanismo é reperfusão transitória de uma DA proximalmente subocluída — o miocárdio anterior está com isquemia crítica e 'pendurado por um fio'. Realizar ergometria pode precipitar oclusão total. A conduta correta é coronariografia urgente/prioritária com intenção de revascularização. O padrão de Wellens é patognomônico da DA proximal.",
+    "tag": "wellens_syndrome"
+  },
+  {
+    "id": "sca_ecg_006",
+    "topic": "SCA — ECG",
+    "subtopic": "Derivações Recíprocas",
+    "difficulty": "medium",
+    "stem": "ECG mostra supra de ST em DII, DIII e aVF (com DIII > DII) e infradesnivelamento em DI e aVL. Qual artéria está provavelmente ocluída e o que representa o infra em DI/aVL?",
+    "options": [
+      "DA proximal; o infra em DI/aVL representa extensão do infarto para a parede lateral",
+      "Coronária Direita (CD) — predomínio em DIII > DII indica CD; o infra em DI/aVL é imagem recíproca (espelho) do evento inferior, não isquemia lateral independente",
+      "Circunflexa (Cx) — domínio em DII > DIII indica Cx; o infra em DI/aVL confirma isquemia lateral concomitante",
+      "Tronco de coronária esquerda; supra inferior com infra lateral é padrão típico de doença de tronco"
+    ],
+    "answer_index": 1,
+    "explanation": "No IAM inferior (supra em DII/III/aVF), o domínio DIII > DII (supra maior em DIII do que DII) aponta para a Coronária Direita (CD) como artéria culpada — pela posição vetorial da CD em relação a essas derivações. Quando o domínio é DII > DIII, a Circunflexa é mais provável. O infradesnivelamento em DI e aVL é a imagem recíproca do supra inferior: derivações laterais altas 'enxergam' o vetor de corrente de lesão inferior de forma invertida. Esse infra recíproca NÃO indica nova área de isquemia. A presença de infra recíproco confirma autenticidade do supra e, em geral, indica maior extensão do infarto e pior prognóstico.",
+    "tag": "reciprocos_inferior_cd"
+  },
+  {
+    "id": "sca_ecg_007",
+    "topic": "SCA — ECG",
+    "subtopic": "IAM Posterior Isolado",
+    "difficulty": "hard",
+    "stem": "Paciente com dor precordial intensa tem ECG com infradesnivelamento de ST em V1-V4, ondas R altas em V1-V2 e ondas T positivas em V1-V2. Não há supra em nenhuma derivação. Qual diagnóstico deve ser considerado e qual conduta?",
+    "options": [
+      "NSTEMI clássico; anticoagulação e cateterismo eletivo em 24-72h",
+      "IAM posterior isolado (território da Circunflexa): o infra em V1-V4 representa o supra de ST posterior 'invertido'; confirmar com derivações V7-V9 e tratar como STEMI com ICP urgente",
+      "Hipertrofia ventricular direita; R alta em V1 é normal nesse contexto",
+      "Síndrome de Wolff-Parkinson-White com delta wave positiva em V1 simulando lesão"
+    ],
+    "answer_index": 1,
+    "explanation": "A parede posterior do VE (território da Circunflexa, ou ramo posterolateral da CD) não é diretamente visualizada pelas derivações precordiais padrão. Quando há infarto posterior, o supra de ST posterior 'aparece' nas derivações anteriores como imagem espelho invertida: infra de ST em V1-V4 com ondas T positivas e R proeminente (que é o Q posterior invertido). Para confirmar, colocam-se derivações posteriores V7 (linha axilar posterior), V8 (ponta da escápula) e V9 (paravertebral esquerda). Supra ≥ 0.5 mm em qualquer derivação posterior confirma IAM posterior = STEMI equivalente. A conduta é ICP primária urgente.",
+    "tag": "iam_posterior_v7v9"
+  },
+  {
+    "id": "sca_ecg_008",
+    "topic": "SCA — ECG",
+    "subtopic": "IAM de Ventrículo Direito",
+    "difficulty": "medium",
+    "stem": "Paciente com IAM inferior (supra em DII/III/aVF) evolui com hipotensão intensa e turgência jugular. Você solicita derivações direitas e encontra supra de ST em V4R. Qual medicação é ABSOLUTAMENTE CONTRAINDICADA nesse momento?",
+    "options": [
+      "AAS 300 mg mastigado",
+      "Ticagrelor 180 mg",
+      "Nitroglicerina intravenosa ou sublingual",
+      "Heparina não-fracionada intravenosa"
+    ],
+    "answer_index": 2,
+    "explanation": "O IAM de ventrículo direito (VD) é uma complicação do IAM inferior por oclusão proximal da CD antes dos ramos marginais direitos. O VD infartado não consegue bombear sangue para os pulmões, dependendo do retorno venoso (pré-carga) para manter o débito. A tríade clínica é: hipotensão + turgência jugular + ausência de congestão pulmonar. Os nitratos (nitroglicerina, isossorbida) são doadores de NO que causam venodilatação sistêmica intensa, reduzindo drasticamente a pré-carga do VD já comprometido. Uma dose de nitrato pode precipitar colapso hemodinâmico súbito e parada cardíaca. O tratamento é expansão volêmica vigorosa (SF 0,9%) + ICP primária urgente. Esta é uma das contraindicações mais importantes a memorizar.",
+    "tag": "iam_vd_nitratos_contraindicado"
+  },
+  {
+    "id": "sca_ecg_009",
+    "topic": "SCA — ECG",
+    "subtopic": "Onda Q Patológica",
+    "difficulty": "easy",
+    "stem": "Qual conjunto de critérios define uma onda Q como patológica no contexto do IAM?",
+    "options": [
+      "Duração ≥ 20 ms e amplitude ≥ 10% do QRS subsequente em qualquer derivação",
+      "Duração ≥ 40 ms (≥ 1 mm) OU amplitude ≥ 25% da onda R subsequente, nova em relação a ECG anterior, em derivações sem BRE ou HPE",
+      "Qualquer onda Q em DI e aVL é patológica independentemente do tamanho",
+      "Onda Q ≥ 30 ms apenas nas derivações precordiais V1-V4; derivações dos membros não são avaliadas"
+    ],
+    "answer_index": 1,
+    "explanation": "A onda Q patológica é o marcador ECG de necrose miocárdica estabelecida, refletindo ausência de potencial elétrico na zona infartada (janela elétrica). Os critérios clássicos são: duração ≥ 40 ms (1 mm na grade padrão a 25 mm/s) OU profundidade ≥ 25% da amplitude da onda R na mesma derivação, presente em derivações contíguas. O conceito de 'nova' é fundamental — uma Q patológica nova em relação a ECG prévio tem muito mais valor diagnóstico. Pequenas ondas Q septais normais existem em V5-V6, DI e aVL; Q em DIII isolada pode ser normal. Ondas Q patológicas no IAM tipicamente surgem após 6-24h do evento e podem persistir indefinidamente.",
+    "tag": "onda_q_patologica"
+  },
+  {
+    "id": "sca_ecg_010",
+    "topic": "SCA — ECG",
+    "subtopic": "Evolução Temporal do ECG no IAM",
+    "difficulty": "medium",
+    "stem": "Um paciente é encontrado inconsciente e os familiares relatam 'dor no peito há 2 dias'. O ECG mostra: ondas Q profundas em V1-V4, supra de ST residual côncavo em V1-V3 e inversão de onda T em V2-V5. Qual fase evolutiva do IAM esse ECG sugere?",
+    "options": [
+      "Fase hiperaguda (primeiros minutos): ondas T amplas sem Q ainda",
+      "Fase aguda inicial (0-6h): supra de ST sem Q ainda",
+      "Fase subaguda (dias 2-7): Q estabelecida + supra residual em resolução + inversão de T",
+      "Fase crônica (semanas/meses): apenas Q residual sem supra nem inversão de T"
+    ],
+    "answer_index": 2,
+    "explanation": "A evolução temporal do ECG no STEMI segue uma sequência clássica: (1) Hiperaguda (minutos): ondas T simétricas e amplas sem Q nem supra. (2) Aguda inicial (0-6h): supradesnivelamento de ST em evolução, sem Q ainda. (3) Aguda estabelecida (6-24h): supra máximo + início de ondas Q. (4) Subaguda (dias 2-7): Q estabelecidas + supra residual + inversão de T iniciando. (5) Crônica (semanas-meses): supra resolve, Q permanece, T pode normalizar ou permanecer invertida. O padrão descrito (Q + supra residual + inversão de T) é típico da fase subaguda, indicando infarto de 1-7 dias, compatível com o relato de 2 dias.",
+    "tag": "evolucao_temporal_ecg_iam"
+  },
+  {
+    "id": "sca_ecg_011",
+    "topic": "SCA — ECG",
+    "subtopic": "Equivalentes de STEMI",
+    "difficulty": "hard",
+    "stem": "Quais padrões ECG são reconhecidos como 'equivalentes de STEMI' pelas diretrizes atuais, exigindo ativação imediata da hemodinâmica mesmo sem supra de ST clássico?",
+    "options": [
+      "Apenas BRE novo; os demais padrões devem ser tratados como NSTEMI",
+      "BRE novo + critérios de Sgarbossa, Wellens tipo B, De Winter, BAV total com STEMI inferior, e supra de ST em V4R",
+      "Infra de ST isolado em qualquer distribuição e inversão de T profunda em qualquer derivação",
+      "Apenas padrão de De Winter e Wellens; BRE pré-existente não conta como equivalente"
+    ],
+    "answer_index": 1,
+    "explanation": "As diretrizes ESC 2023 para STEMI reconhecem vários equivalentes que devem receber reperfusão emergente com a mesma urgência do supra clássico: (1) BRE novo ou presumivelmente novo com critérios de Sgarbossa positivos; (2) Síndrome de Wellens (suboclusão proximal crítica da DA); (3) Padrão de De Winter (oclusão da DA proximal sem supra clássico); (4) IAM posterior com infra em V1-V4 confirmado por V7-V9; (5) Supra de ST em V4R (IAM de VD com IAM inferior). Reconhecer esses equivalentes é crucial pois o diagnóstico perdido = atraso na reperfusão = morte de miocárdio a cada minuto ('time is muscle').",
+    "tag": "equivalentes_stemi"
+  },
+  {
+    "id": "sca_ecg_012",
+    "topic": "SCA — ECG",
+    "subtopic": "aVR e Doença de Tronco",
+    "difficulty": "hard",
+    "stem": "Paciente de 67 anos com dor precordial, sudorese e ECG mostrando supra de ST em aVR e V1 com infradesnivelamento difuso em DI, DII, aVF, V4-V6. Qual é o diagnóstico mais provável e a conduta?",
+    "options": [
+      "Pericardite aguda difusa com supra em aVR por inflamação global; tratar com AINE",
+      "Oclusão proximal da DA ou doença de tronco de coronária esquerda (TCE); o supra em aVR + infra difuso indica isquemia subendocárdica global por hipoperfusão coronariana difusa; coronariografia urgente",
+      "Hipercalemia grave com supra pseudo-infarto em aVR; dosar K⁺ urgente",
+      "Miocardiopatia de Takotsubo (ballooning apical); stresse emocional recente com supra em aVR"
+    ],
+    "answer_index": 1,
+    "explanation": "O supradesnivelamento de ST em aVR (≥ 1 mm) acompanhado de infradesnivelamento difuso (especialmente ≥ 7 derivações) é um padrão de altíssimo risco que indica isquemia subendocárdica global por comprometimento do fluxo coronariano proximal. As duas causas principais são: (1) Obstrução do tronco de coronária esquerda (TCE), que irriga ~70% do miocárdio (DA + Cx); e (2) Oclusão muito proximal da DA (antes do 1º septal e do ramo diagonal). Esse padrão também pode ocorrer na doença triarterial grave com choque cardiogênico. O supra em aVR reflete isquemia da base do septo e da parede lateral alta, território final do TCE. A conduta é coronariografia urgente; a mortalidade é muito elevada.",
+    "tag": "avr_supra_tronco"
+  },
+  {
+    "id": "sca_ecg_013",
+    "topic": "SCA — ECG",
+    "subtopic": "Sgarbossa Modificado (Smith)",
+    "difficulty": "hard",
+    "stem": "Em um paciente com BRE e dor precordial, o ECG mostra infra de ST de 4 mm em V2 (QRS predominantemente positivo, R = 10 mm). Pela fórmula de Smith-Sgarbossa modificada, qual é a razão ST/R e o que ela indica?",
+    "options": [
+      "Razão ST/R = 0.4 (>0.25); critério positivo de Sgarbossa modificado (Smith), indicando IAM superposto ao BRE — ativar hemodinâmica",
+      "Razão ST/S = 0.4; este critério avalia a razão com a onda S, não R, e indica BRE isolado sem IAM",
+      "Infra de ST em derivação com QRS positivo é normal no BRE e não requer cálculo adicional",
+      "Razão ST/R = 0.4; apenas valores > 0.5 são diagnósticos; este caso é indeterminado"
+    ],
+    "answer_index": 0,
+    "explanation": "O critério de Smith-Sgarbossa modificado para derivações com QRS negativo (deflexão S predominante) utiliza a razão ST/S: se ≥ 0.25 (em valor absoluto), indica discordância excessiva e IAM. Para derivações com QRS positivo, aplica-se a razão ST/R. No exemplo: infra ST = 4 mm em derivação com R = 10 mm → razão ST/R = 4/10 = 0.4 (>0.25). Esse critério tem melhor sensibilidade do que o Sgarbossa original para identificar IAM no BRE. A lógica é que no BRE, a discordância ST 'normal' é proporcional ao tamanho do QRS; quando a razão excede 0.25, a discordância é excessiva e indica lesão isquêmica sobreposta.",
+    "tag": "sgarbossa_modificado_smith"
+  },
+  {
+    "id": "sca_ecg_014",
+    "topic": "SCA — ECG",
+    "subtopic": "IAM Inferior — CD vs Cx",
+    "difficulty": "medium",
+    "stem": "No IAM inferior, qual característica ECG favorece a Circunflexa (Cx) como artéria culpada em vez da Coronária Direita (CD)?",
+    "options": [
+      "Supra DIII > DII com infra em DI/aVL profundo",
+      "Supra DII > DIII com supra concomitante em V5-V6 (extensão lateral) e ausência de comprometimento do VD",
+      "BAV de 1º grau associado ao IAM inferior — indica comprometimento do nó AV pela CD",
+      "Inversão de T em V1 e supra em V4R indicando comprometimento do VD"
+    ],
+    "answer_index": 1,
+    "explanation": "A localização da Cx versus CD no IAM inferior pode ser estimada pelo padrão ECG: quando DII > DIII (supra maior em DII), há mais componente lateral, sugerindo Cx (que irriga a parede lateral e inferoposterior). Extensão do supra para V5-V6 (parede lateral) reforça ainda mais o envolvimento da Cx. Quando DIII > DII, o vetor de lesão aponta mais para a direita e inferior, típico da CD. A CD também irriga o nó AV (em 90% dos pacientes com dominância direita) e o VD, de modo que BAV associado, bradicardia sinusal ou comprometimento do VD (supra em V4R) apontam para CD proximal. A distinção tem importância prognóstica e técnica para o cateterismo.",
+    "tag": "iam_inferior_cx_vs_cd"
+  },
+  {
+    "id": "sca_ecg_015",
+    "topic": "SCA — ECG",
+    "subtopic": "Inversão de Onda T",
+    "difficulty": "medium",
+    "stem": "Paciente que teve IAM anterior há 5 dias retorna para reavaliação. O ECG mostra inversão de ondas T em V1-V5 sem supra de ST. A troponina está em queda. Qual é a interpretação correta?",
+    "options": [
+      "Novo evento isquêmico com NSTEMI; hospitalizar e realizar cateterismo urgente",
+      "Evolução normal pós-IAM: inversão de T na fase subaguda representa repolarização anormal do miocárdio lesado/em cicatrização — sem urgência adicional se troponina em queda",
+      "Síndrome de Dressler: pericardite pós-IAM; iniciar AINE",
+      "Trombose de stent precoce; retornar à hemodinâmica imediatamente"
+    ],
+    "answer_index": 1,
+    "explanation": "A inversão de ondas T no território do IAM é parte da evolução ECG normal pós-reperfusão, ocorrendo tipicamente entre o 2º e 7º dia. Representa alteração da repolarização ventricular no miocárdio em processo de cicatrização/atordoamento periinfarto. Esse padrão é chamado de 'inversão de T pós-reperfusão' ou 'síndrome de reperfusão ECG'. A troponina em queda (padrão de rise/fall) confirma que não há novo evento. A distinção com NSTEMI é feita pela combinação de: localização coerente com o IAM prévio, ausência de nova sintomatologia, troponina em declínio e contexto clínico. Inversão de T com troponina em elevação ou novo pico indicaria re-infarto.",
+    "tag": "inversao_t_pos_iam"
+  },
+  {
+    "id": "sca_ecg_016",
+    "topic": "SCA — ECG",
+    "subtopic": "Wellens Tipo A vs B",
+    "difficulty": "medium",
+    "stem": "Qual a diferença entre Wellens tipo A e Wellens tipo B, e qual dos dois é mais associado a suboclusão proximal crítica da DA?",
+    "options": [
+      "Tipo A: T invertida profunda V2-V3; Tipo B: T bifásica V2-V3. O tipo A é mais grave",
+      "Tipo A: T bifásica (positivo-negativo) em V2-V3; Tipo B: T invertida profunda e simétrica em V2-V3. Ambos indicam suboclusão proximal da DA, mas o tipo B é mais prevalente (~75% dos casos)",
+      "Tipo A ocorre no STEMI; Tipo B no NSTEMI. Apenas o tipo A requer intervenção urgente",
+      "Tipo A e B são idênticos; a nomenclatura foi abolida pelas diretrizes recentes"
+    ],
+    "answer_index": 1,
+    "explanation": "A síndrome de Wellens foi descrita com dois padrões: Tipo A (menos comum, ~25%): ondas T bifásicas em V2-V3 com deflexão inicial positiva seguida de deflexão negativa. Tipo B (mais comum, ~75%): ondas T profundamente invertidas, simétricas, em V2-V3 — o padrão mais reconhecível. Ambos ocorrem durante a fase assintomática (dor ausente), em paciente que já teve episódio de angina/isquemia. Ambos indicam suboclusão proximal da DA com isquemia anteroseptal crítica em 'modo standby'. O risco de evoluir para STEMI maciço sem intervenção é alto. A conduta é coronariografia prioritária e revascularização; NUNCA ergometria ou alta.",
+    "tag": "wellens_tipo_a_b"
+  },
+  {
+    "id": "sca_ecg_017",
+    "topic": "SCA — ECG",
+    "subtopic": "STEMI Lateral Alto",
+    "difficulty": "medium",
+    "stem": "Paciente com dor precordial tem supra de ST em DI e aVL com infra recíproco em DII, DIII e aVF. Qual território está comprometido e qual artéria é mais provável?",
+    "options": [
+      "Parede inferior — Coronária Direita",
+      "Parede lateral alta — ramo diagonal ou marginal da Circunflexa; o supra em DI/aVL com recíproco inferior indica IAM lateral alto",
+      "Parede anterior — DA proximal; DI e aVL são extensões do território anterior",
+      "Parede septal — ramo septal da DA"
+    ],
+    "answer_index": 1,
+    "explanation": "O supradesnivelamento de ST em DI e aVL com infradesnivelamento recíproco em DII/III/aVF (especialmente DIII e aVF) é o padrão do IAM da parede lateral alta do VE. As artérias responsáveis são habitualmente o primeiro ramo diagonal da DA ou os ramos marginais superiores da Circunflexa. Esse é um território frequentemente subestimado — o IAM 'lateral alto' pode ser a única manifestação em DI/aVL com infra recíproco inferior, sem envolvimento precordial. O tamanho do supra em DI e aVL, e a profundidade do recíproco em DIII, ajudam a estimar a extensão. Deve sempre ser tratado como STEMI com ativação de hemodinâmica.",
+    "tag": "stemi_lateral_alto"
+  },
+  {
+    "id": "sca_ecg_018",
+    "topic": "SCA — ECG",
+    "subtopic": "Supra de ST em BRE Novo",
+    "difficulty": "hard",
+    "stem": "Paciente com dor precordial intensa apresenta BRE com QRS ≥ 120 ms. O ECG de há 6 meses não mostrava BRE. A troponina ainda não retornou. Qual é a conduta adequada segundo as diretrizes?",
+    "options": [
+      "Aguardar resultado da troponina antes de qualquer decisão; BRE novo sozinho não justifica ativação da hemodinâmica",
+      "BRE novo (ou presumivelmente novo) em paciente sintomático é tratado como equivalente de STEMI pelas diretrizes ESC 2023; ativar hemodinâmica urgente sem aguardar troponina",
+      "Apenas se houver critérios de Sgarbossa positivos deve-se ativar a hemodinâmica; BRE novo sem Sgarbossa é NSTEMI",
+      "BRE novo contraindica cateterismo por risco de induzir bloqueio completo; fibrinólise é preferida"
+    ],
+    "answer_index": 1,
+    "explanation": "As diretrizes ESC 2023 para STEMI estabelecem que BRE novo ou presumivelmente novo em contexto clínico compatível (dor precordial típica) é uma indicação de reperfusão emergente com a mesma prioridade do STEMI clássico. A espera por troponina (que leva 30-60 min) representa perda de tempo miocárdico valioso. Os critérios de Sgarbossa aumentam a especificidade quando o BRE é antigo ou indeterminado, mas com BRE indubitavelmente novo, a conduta é ativação imediata. O cateterismo durante BRE é seguro e frequentemente confirma oclusão coronariana aguda tratável por ICP. 'Tempo é músculo' — cada 30 minutos de atraso aumenta significativamente a mortalidade.",
+    "tag": "bre_novo_stemi_equivalente"
+  },
+  {
+    "id": "sca_ecg_019",
+    "topic": "SCA — ECG",
+    "subtopic": "Derivações para IAM Posterior",
+    "difficulty": "medium",
+    "stem": "Para confirmar IAM posterior isolado, quais derivações adicionais devem ser colocadas e qual critério define positividade?",
+    "options": [
+      "V3R, V4R, V5R — supra ≥ 1 mm confirma IAM posterior",
+      "V7 (linha axilar posterior), V8 (ponta da escápula), V9 (paravertebral esquerda) — supra ≥ 0.5 mm em V7-V9 confirma IAM posterior",
+      "V1 e V2 invertidos (virar o papel de cabeça para baixo) — supra ≥ 1 mm após inversão confirma posterior",
+      "V4 e V5 no plano posterior do tórax — supra ≥ 1.5 mm confirma IAM posterior"
+    ],
+    "answer_index": 1,
+    "explanation": "As derivações posteriores V7, V8 e V9 são posicionadas no mesmo plano horizontal de V4-V6, porém na face posterior do tórax: V7 na linha axilar posterior esquerda, V8 na ponta da escápula esquerda e V9 na borda paravertebral esquerda. Elas 'olham' diretamente para a parede posterior do VE (território da Circunflexa e ramo posterolateral da CD). O critério de positividade é mais liberal que nas derivações padrão: supra ≥ 0.5 mm (não 1 mm) em pelo menos uma derivação posterior, devido à atenuação pelo tecido posterior. Esse limiar menor compensa a maior distância elétrica. O diagnóstico é STEMI posterior = ICP primária urgente.",
+    "tag": "derivacoes_posteriores_v7v9"
+  },
+  {
+    "id": "sca_ecg_020",
+    "topic": "SCA — ECG",
+    "subtopic": "Depressão do Segmento PR",
+    "difficulty": "easy",
+    "stem": "Paciente com dor pleurítica ao respirar e atrito pericárdico tem ECG com supra de ST côncavo difuso em múltiplas derivações e depressão do segmento PR em DII. Qual diagnóstico esse conjunto indica?",
+    "options": [
+      "STEMI anterior extenso com ruptura de parede livre e tamponamento",
+      "Pericardite aguda: supra côncavo difuso + depressão do segmento PR (inflamação atrial) ± inversão de T tardia",
+      "NSTEMI difuso por doença triarterial grave com isquemia global",
+      "Síndrome de Brugada com supra em sela nas derivações precordiais"
+    ],
+    "answer_index": 1,
+    "explanation": "A pericardite aguda tem assinatura ECG distinta: (1) Supra de ST côncavo (formato de sela ou sorriso), difuso em quase todas as derivações (I, II, aVF, V2-V6), porque a inflamação é global. (2) Depressão do segmento PR — sinal altamente específico de pericardite, resultante de corrente de lesão atrial (inflamação do pericárdio sobre o epicárdio atrial). (3) Inversão de T difusa tardia (após resolução do supra, na fase subaguda). (4) Ausência de imagem recíproca (exceto aVR e V1 que mostram leve supra do PR). A combinação de atrito pericárdico + dor pleurítica + esse padrão ECG é praticamente diagnóstica de pericardite.",
+    "tag": "pericardite_ecg"
+  },
+  {
+    "id": "sca_ecg_021",
+    "topic": "SCA — ECG",
+    "subtopic": "Infra de ST no NSTEMI",
+    "difficulty": "medium",
+    "stem": "Paciente com dor em queimação retroesternal tem infra de ST horizontal de 2 mm em V4-V6 e DI-DII. Qual morfologia de infra de ST tem maior valor diagnóstico para isquemia subendocárdica?",
+    "options": [
+      "Infra ascendente (upsloping): morfologia de maior especificidade para isquemia",
+      "Infra descendente ou horizontal (downsloping/horizontal): maior especificidade para isquemia; o infra ascendente tem menor valor e pode ser normal com esforço",
+      "Infra em J-point isolado sem envolvimento do segmento ST é o padrão mais específico",
+      "Toda forma de infra de ST tem igual valor diagnóstico independentemente da morfologia"
+    ],
+    "answer_index": 1,
+    "explanation": "A morfologia do infradesnivelamento de ST tem impacto prognóstico e diagnóstico. O infra horizontal (ST plano, paralelo à linha de base) e o infra descendente (downsloping, inclinado para baixo) têm alta especificidade para isquemia subendocárdica — quanto mais profundo e mais horizontal, pior o prognóstico. O infra ascendente (upsloping — ST sobe progressivamente do ponto J) tem menor especificidade; pode ocorrer como variante normal em repouso ou por frequência cardíaca elevada, sendo considerado diagnóstico de isquemia apenas se a magnitude for significativa (> 1.5 mm a 80 ms do ponto J). No NSTEMI, infra horizontal ≥ 0.5 mm em ≥ 2 derivações contíguas é o critério ECG.",
+    "tag": "morfologia_infra_st"
+  },
+  {
+    "id": "sca_ecg_022",
+    "topic": "SCA — ECG",
+    "subtopic": "STEMI Anterior Extenso",
+    "difficulty": "medium",
+    "stem": "Paciente com supra de ST em V1-V6, DI e aVL. Qual artéria está ocluída e o que significa a extensão do supra a DI e aVL além das derivações precordiais?",
+    "options": [
+      "Coronária Direita proximal com envolvimento do VD e septo",
+      "DA proximal (antes do 1º diagonal e 1º septal): STEMI anterior extenso, maior área de miocárdio em risco incluindo parede lateral alta (irrigada pelo ramo diagonal da DA)",
+      "Tronco de coronária esquerda com isquemia global; conduta apenas cirúrgica",
+      "Circunflexa proximal: território lateral e posterolateral"
+    ],
+    "answer_index": 1,
+    "explanation": "O supra de ST envolvendo V1-V6 (território anterior e lateral médio) mais DI e aVL (lateral alto) indica oclusão muito proximal da DA, antes do primeiro ramo diagonal e do primeiro ramo septal. Os ramos diagonais da DA irrigam a parede lateral alta, que é visualizada por DI e aVL. Quanto mais proximal a oclusão na DA, maior o território em risco. Essa constelação é chamada de 'STEMI anterior extenso' ou 'STEMI proximal DA' e tem mortalidade muito superior ao STEMI anterior médio ou distal. Esses pacientes têm maior risco de choque cardiogênico, arritmias ventriculares e insuficiência cardíaca pós-IAM.",
+    "tag": "stemi_anterior_extenso"
+  },
+  {
+    "id": "sca_ecg_023",
+    "topic": "SCA — ECG",
+    "subtopic": "Arritmias no STEMI",
+    "difficulty": "medium",
+    "stem": "Paciente em STEMI inferior tem FC de 38 bpm e PR progressivamente mais longo até bloqueio de condução com pausa. Qual o tipo de BAV e qual o mecanismo?",
+    "options": [
+      "BAV de 3º grau (total): mecanismo por isquemia do feixe de His",
+      "BAV de 2º grau Mobitz II: bloqueio infra-Hissiano por isquemia do ramo direito",
+      "BAV de 2º grau Mobitz I (Wenckebach): bloqueio no nó AV por isquemia da artéria do nó AV (ramo da CD), geralmente transitório e responsivo à atropina",
+      "BAV de 1º grau: PR prolongado isolado sem bloqueio clínico significativo"
+    ],
+    "answer_index": 2,
+    "explanation": "No IAM inferior por oclusão da CD, a artéria do nó AV (ramo da CD em ~90% dos casos) pode ser comprometida. O nó AV isquêmico desenvolve retardo progressivo da condução (PR aumentando a cada batimento) até bloqueio de um impulso — padrão de Wenckebach (Mobitz I). Características: PR progressivamente mais longo → pausa → QRS estreito (o bloqueio é no nó AV, não no feixe de His/ramos). É geralmente transitório (resolve com reperfusão), sensível à atropina e raramente requer marca-passo definitivo. Contraste com o Mobitz II do IAM anterior: PR fixo → bloqueio súbito, QRS largo, risco de progressão para BAV total e necessidade de marca-passo definitivo.",
+    "tag": "bav_iam_inferior_wenckebach"
+  },
+  {
+    "id": "sca_ecg_024",
+    "topic": "SCA — ECG",
+    "subtopic": "ECG na Angina Instável",
+    "difficulty": "easy",
+    "stem": "Paciente com dor precordial em repouso tem ECG durante a dor mostrando infra de ST de 1 mm em V3-V5. Após resolução da dor (20 minutos), o ECG normaliza completamente. Qual o diagnóstico mais provável?",
+    "options": [
+      "STEMI abortado com reperfusão espontânea",
+      "Angina instável ou NSTEMI: infra de ST dinâmico (presente durante a isquemia, resolve com alívio da dor) é o padrão ECG da isquemia subendocárdica aguda sem necrose estabelecida; troponina definirá AI vs NSTEMI",
+      "Pericardite aguda com supra fugaz que foi mal interpretado como infra",
+      "Síndrome de repolarização precoce com variação postural do ST"
+    ],
+    "answer_index": 1,
+    "explanation": "O infradesnivelamento de ST dinâmico — presente durante os sintomas e que reverte com alívio da dor ou nitratos — é o marcador ECG clássico da isquemia subendocárdica aguda. A dinâmica temporal é fundamental: o mesmo ECG que estava anormal normaliza com o fim da isquemia, confirmando a origem isquêmica (diferente de alterações fixas por hipertrofia ou BRE). Nesse cenário, troponina ultra-sensível em série (0h/1h ou 0h/2h) determinará se houve necrose (NSTEMI: troponina positiva com rise/fall) ou não (angina instável: troponina dentro do limite normal). Ambos requerem hospitalização, antiagregação e estratificação de risco para coronariografia.",
+    "tag": "infra_st_dinamico"
+  },
+  {
+    "id": "sca_ecg_025",
+    "topic": "SCA — ECG",
+    "subtopic": "Interpretação Sistemática no SCA",
+    "difficulty": "hard",
+    "stem": "Paciente de 72 anos, diabética, chega ao PS com mal-estar, dispneia e náusea sem dor torácica. Familiares relatam que a paciente estava 'estranha' há 3 horas. O ECG mostra supra de ST de 1.5 mm em DII, DIII e aVF. Qual ponto-chave esse caso ilustra?",
+    "options": [
+      "Diabéticos não podem ter IAM sem dor; reavaliar após glicemia corrigida",
+      "Apresentação atípica de IAM (equivalentes anginosos): diabéticos, idosos e mulheres frequentemente não têm dor típica; dispneia, mal-estar, náusea e 'sensação de morte iminente' podem ser os únicos sintomas de STEMI — o ECG é diagnóstico e a conduta é ICP urgente",
+      "O supra em DII/III/aVF em idosa diabética sugere pericardite; iniciar AINE",
+      "Sem dor precordial, o supra de ST é provavelmente espúrio; repetir ECG em 30 minutos"
+    ],
+    "answer_index": 1,
+    "explanation": "A neuropatia autonômica do diabetes reduz a percepção dolorosa isquêmica, levando a infartos 'silenciosos' ou com apresentação atípica. Mulheres, idosos e diabéticos têm maiores taxas de apresentação atípica de SCA, com equivalentes como: dispneia súbita, náusea/vômito, sudorese fria, fraqueza extrema, síncope, confusão mental e mal-estar inespecífico. Estudos mostram que apresentações atípicas estão associadas a maiores atrasos no diagnóstico e pior prognóstico. O ECG com supra em DII/III/aVF é diagnóstico de STEMI inferior independentemente dos sintomas — a conduta é a mesma: ICP primária urgente. 'Atípico na apresentação, não no tratamento'.",
+    "tag": "apresentacao_atipica_iam_diabetes"
+  }
+]

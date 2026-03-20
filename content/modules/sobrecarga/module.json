@@ -1,0 +1,115 @@
+{
+  "id": "mod-sobrecarga",
+  "title": "Sobrecarga e Hipertrofia Ventricular e Atrial",
+  "icon": "🏋️",
+  "description": "Como a câmara cardíaca 'grita' no ECG quando trabalha demais",
+  "estimated_minutes": 45,
+  "version": "1.0.0",
+  "language": "pt-BR",
+  "sections": [
+    {
+      "id": "sec-conceito",
+      "title": "Conceito: Sobrecarga vs Hipertrofia — a Confusão Necessária",
+      "content": "Os termos 'sobrecarga' e 'hipertrofia' são frequentemente usados de forma intercambiável no ECG, mas representam processos fisiopatológicos distintos que se sobrepõem cronicamente. Compreender essa diferença é fundamental para interpretar o ECG com precisão.\n\n**Hipertrofia** é o aumento real da massa miocárdica — mais sarcômeros, mais miofilamentos, maior espessura da parede. Ocorre de forma adaptativa frente a sobrecargas sustentadas. Existem dois tipos morfológicos: (1) Hipertrofia concêntrica — resposta à sobrecarga de pressão (pressão sistólica cronicamente elevada, como na HAS ou estenose aórtica); os sarcômeros se adicionam 'em paralelo', aumentando a espessura da parede sem necessariamente aumentar o volume da câmara — o ventrículo fica com paredes grossas mas cavidade pequena, tipo 'forte e compacto'. (2) Hipertrofia excêntrica — resposta à sobrecarga de volume (regurgitação valvar, shunts esquerda-direita); os sarcômeros se adicionam 'em série', alongando os miócitos e dilatando a câmara com aumento proporcional da espessura — cavidade grande com parede relativamente normal.\n\n**Sobrecarga eletrocardiográfica** é o que o ECG detecta — não é sinônimo de hipertrofia anatômica. O ECG detecta a *sobrecarga elétrica* da câmara: aumento da massa geradora de corrente elétrica (mais miócitos despolarizando simultaneamente → maior amplitude do vetor) e alterações de repolarização por isquemia subendocárdica relativa (o subendocárdio hipertrofiado recebe menos O2 por unidade de massa porque as coronárias não hipertrofiam proporcionalmente — daí o padrão de 'strain').\n\n**O ECG não é radiografia**: não mede milímetros de espessura diretamente. Ele detecta consequências elétricas indiretas — amplitude de onda, duração, morfologia e padrões de repolarização. Por isso, tem sensibilidade moderada (~50-60% para HVE anatômica) mas especificidade razoável (~85-95%). Um ECG 'normal' não exclui hipertrofia; mas critérios positivos têm alto valor preditivo positivo.",
+      "key_points": [
+        "Hipertrofia concêntrica (pressão) vs excêntrica (volume): morfologias e fisiopatologias distintas",
+        "O ECG detecta sobrecarga elétrica, não espessura em milímetros — sensibilidade ~50-60%, especificidade ~85-95%",
+        "Padrão de 'strain' (alteração de ST-T secundária) reflete isquemia subendocárdica relativa por desproporção massa/perfusão",
+        "ECG normal não exclui HVE; ecocardiograma é o padrão-ouro para diagnóstico de hipertrofia"
+      ],
+      "analogy": "Pense no ventrículo como um pugilista. O treinamento intenso (sobrecarga crônica) faz os músculos crescerem (hipertrofia). No ECG, é como se o pugilista gritasse mais alto (amplitude maior) porque tem mais massa muscular gerando o sinal. Mas quando ele treina demais sem recuperação adequada (isquemia subendocárdica), os músculos doem no final do treino — isso é o padrão de 'strain': o grito está mais alto (amplitude), mas a voz fica rouca no final (ST-T invertido)."
+    },
+    {
+      "id": "sec-hve-criterios",
+      "title": "Hipertrofia Ventricular Esquerda (HVE) — Critérios Diagnósticos",
+      "content": "A HVE gera voltagem aumentada nas derivações que 'filmam' o VE (precordiais esquerdas: V5-V6; frontais: DI, aVL) e reduções recíprocas nas derivações opostas (precordiais direitas: V1-V2). O vetor de despolarização ventricular fica mais amplo, mais tardio e mais voltado para a esquerda.\n\n**Critérios de amplitude (os mais usados):**\n\n**Critério de Sokolow-Lyon** (1949): S em V1 + R em V5 (ou V6, o maior) ≥ 35 mm. É o critério mais simples e amplamente ensinado. Sensibilidade: ~30-50%; especificidade: ~90%. MNEMÔNICO: 'S1 + R5 ≥ 35'. Atenção: em jovens, atletas e pessoas magras, voltagens naturalmente maiores podem dar falso-positivo. Em idosos e obesos, dá falso-negativo.\n\n**Critério de Cornell** (voltagem): R em aVL + S em V3. Em homens: ≥ 28 mm. Em mulheres: ≥ 20 mm (menores porque costumam ter corações menores). Melhor sensibilidade que Sokolow em mulheres e idosos.\n\n**Índice de Cornell** (produto voltagem × duração QRS): (R aVL + S V3) × duração QRS. Positivo: > 2440 mm·ms. Incorpora a duração do QRS, melhorando a sensibilidade.\n\n**Critérios de amplitude nas frontais**: R em DI + S em DIII ≥ 25 mm; R em aVL ≥ 11 mm; R em aVF ≥ 20 mm.\n\n**Critérios de duração**: QRS ≥ 90 ms (alargamento modesto pela maior massa a ser despolarizada).\n\n**Escore de Romhilt-Estes** (1968): sistema de pontos (6 = definitivo, 4 = provável): voltagem ≥ 5 pontos (amplitude em membros ≥ 20 mm ou precordiais ≥ 30 mm), padrão de strain ≥ 3 pontos, desvio de eixo para esquerda ≥ 2 pontos, alargamento QRS ≥ 1 ponto, deflexão intrinsecoide em V5-V6 > 50 ms ≥ 1 ponto, sobrecargas atriais ≥ 3 pontos.\n\n**Deflexão intrinsecoide** (ou VAT — Ventricular Activation Time): tempo do início do QRS até o pico da onda R em V5-V6. Valor normal ≤ 45 ms. Em HVE > 50 ms — a massa ventricular esquerda aumentada demora mais para ser despolarizada por completo.",
+      "key_points": [
+        "Sokolow-Lyon: S(V1) + R(V5ou V6) ≥ 35 mm — critério clássico, sensibilidade ~40%, especificidade ~90%",
+        "Cornell: R(aVL) + S(V3) ≥ 28 mm homens / ≥ 20 mm mulheres — melhor para mulheres e idosos",
+        "R em aVL ≥ 11 mm — critério simples e de alta especificidade isoladamente",
+        "Deflexão intrinsecoide em V5-V6 > 50 ms — massa maior = despolarização mais lenta",
+        "Falso-positivo: atletas, jovens, magros; falso-negativo: idosos, obesos, DPOC (baixa voltagem)"
+      ],
+      "mnemonic": "SOKOLOW = 'S1 + R5 ≥ 35' — S na derivação 1 (V1) mais R na derivação 5 (V5), soma maior ou igual a 35 quadradinhos."
+    },
+    {
+      "id": "sec-strain",
+      "title": "Padrão de Strain Ventricular Esquerdo — O Coração que Sangra Silenciosamente",
+      "content": "O padrão de 'strain' (ou sobrecarga sistólica) é uma das alterações mais importantes do ECG e representa isquemia subendocárdica relativa crônica no contexto de HVE. Compreender seu mecanismo é fundamental para não confundi-lo com isquemia aguda.\n\n**Mecanismo fisiopatológico**: Em HVE por sobrecarga de pressão (HAS, estenose aórtica), o miocárdio hipertrófico aumenta sua demanda de O2 (maior massa, maior tensão parietal), mas as coronárias epicárdicas não crescem proporcionalmente. O subendocárdio é mais vulnerável porque: (1) está mais distante das coronárias epicárdicas; (2) é comprimido pela pressão ventricular durante a sístole, reduzindo o fluxo coronário subendocárdico (que ocorre predominantemente na diástole); (3) tem maior tensão parietal (Lei de Laplace). O resultado é isquemia crônica subendocárdica — não infarto, mas perfusão insuficiente crônica.\n\n**Achados ECG do padrão de strain esquerdo**:\n- Nas derivações que 'filmam' o VE (V5, V6, DI, aVL): ST descendente (supradesnivelamento convexo para cima → na verdade é infradesnivelamento com morfologia característica) seguido de onda T negativa assimétrica (o ramo descendente do ST-T é mais rápido que o ramo ascendente — diferente da isquemia aguda onde a inversão é mais simétrica)\n- Nas derivações opostas (V1-V2): imagem em 'espelho' — ST elevado com T positiva (padrão de strain direito espelhado)\n- O QRS está aumentado em amplitude (critérios de voltagem para HVE presentes)\n\n**Diagnóstico diferencial crítico**: Strain vs. isquemia vs. BRE.\n- Strain: crônico, assintomático, ST-T inversão nas derivações de alta voltagem (VE), morfologia 'em concha' (ST convexo), sem supradesnivelamento real do ST\n- Isquemia aguda subendocárdica (NSTEMI): infradesnivelamento ST horizontal ou descendente, sintomático, sem critérios de HVE\n- BRE: QRS ≥ 120 ms, morfologia rSR' ou QS em V1, discordância ST-T secundária\n\n**Pearl clínico**: HVE + strain = pressão arterial cronicamente mal controlada. É o ECG contando a história de anos de HAS não tratada.",
+      "key_points": [
+        "Strain = isquemia subendocárdica crônica por desproporção massa/perfusão — NÃO é isquemia aguda",
+        "V5-V6, DI, aVL: ST descendente + T negativa assimétrica (ramo descendente mais rápido)",
+        "V1-V2: imagem em espelho do strain (ST elevado + T positiva) — não confundir com STEMI",
+        "Sempre associado a critérios de voltagem para HVE — strain sem voltagem deve fazer questionar o diagnóstico",
+        "Morfologia 'em concha' (ST convexo para cima nos VE-derivações) vs ST horizontal reto da isquemia subendocárdica aguda"
+      ],
+      "analogy": "O strain é como o cansaço muscular crônico de um atleta que treina demais sem recuperação. O músculo ainda funciona (o VE ainda ejeta), mas está sempre num estado de privação de oxigênio silenciosa. O ECG mostra essa 'fadiga crônica' como o padrão de ST-T alterado — não é uma crise aguda, mas o acúmulo de anos de sobrecarga."
+    },
+    {
+      "id": "sec-hvd",
+      "title": "Hipertrofia Ventricular Direita (HVD) — O VD Vence o ECG",
+      "content": "O ventrículo direito normalmente é dominado eletricamente pelo VE (que tem ~3x mais massa). Para que o VD apareça no ECG, ele precisa hipertrofiar significativamente a ponto de 'vencer' a dominância elétrica do VE — por isso a HVD tem diagnóstico mais tardio e difícil que a HVE.\n\n**Causas**: Hipertensão pulmonar (primária ou secundária a doença pulmonar/cardíaca esquerda), estenose pulmonar, Tetralogia de Fallot, cor pulmonale crônico (DPOC avançado, TEP crônico), comunicação interatrial (sobrecarga de volume).\n\n**Achados ECG da HVD**:\n\n1. **Desvio de eixo para direita (DEDir)**: QRS ≥ +90° no plano frontal (aVF positivo e DI negativo). Na HVD significativa, eixo ≥ +110°. MNEMÔNICO: 'DI negativo + aVF positivo = eixo à direita'.\n\n2. **R/S em V1 ≥ 1** (R dominante em V1): normalmente V1 tem S > R (o VE domina o vetor para a esquerda). Na HVD, o VD hipertrofiado gera um vetor para a direita e anterioridade que 'inverte' a relação R/S em V1. Padrões: qR em V1 (grave), rSR' em V1 com R' alto, ou simples R > S.\n\n3. **Progressão lenta da onda R nas precordiais**: o vetor do VD puxando para direita retarda o crescimento da onda R de V1 a V6.\n\n4. **Strain direito**: ST descendente + T negativa em V1-V3 e nas frontais direitas (DIII, aVF) — mesma fisiopatologia do strain esquerdo, agora no VD.\n\n5. **Sobrecargas atriais direitas** frequentemente associadas: onda P apiculada ('P pulmonale') em DII > 2,5 mm.\n\n6. **Critério de McGinn-White** (S1Q3T3): S em DI + Q em DIII + T invertida em DIII — mais associado ao TEP agudo que à HVD crônica.\n\n**Diagnóstico diferencial**: BRD completo também gera R' em V1 e desvio de eixo à direita, mas por bloqueio de condução, não por massa. No BRD, QRS ≥ 120 ms e morfologia rSR' típica ('orelha de coelho').",
+      "key_points": [
+        "HVD precisa 'vencer' o VE eletricamente — por isso é diagnóstico tardio (sensibilidade ~40%)",
+        "Critérios: DEDir ≥ +90° + R/S em V1 ≥ 1 + strain direito (T negativa V1-V3)",
+        "P pulmonale (P > 2,5 mm em DII) sinaliza cor pulmonale/HVD crônica",
+        "S1Q3T3 = sinal clássico de TEP AGUDO, não de HVD crônica",
+        "Diferencial: BRD completo (QRS ≥ 120 ms, rSR' típico) vs HVD (QRS estreito ou levemente alargado)"
+      ]
+    },
+    {
+      "id": "sec-soe",
+      "title": "Sobrecarga Atrial Esquerda (SOE) — A P Mitral",
+      "content": "O átrio esquerdo (AE) é despolarizado na segunda metade da onda P (o átrio direito contribui para a primeira metade). Quando o AE está dilatado ou sob sobrecarga de pressão, sua despolarização fica mais lenta e mais tardia, alargando e bifurcando a onda P.\n\n**Causas de SOE**: Insuficiência mitral, estenose mitral (causa clássica), HAS com HVE, insuficiência aórtica, IC com disfunção diastólica do VE, cardiomiopatia dilatada.\n\n**Achados ECG — P Mitral**:\n1. **P larga em DII ≥ 120 ms** (≥ 3 mm no papel): a despolarização atrial esquerda atrasada e lenta alarga a onda P. Também chamada de 'P bífida' ou 'P mitral' porque é classicamente descrita na doença mitral.\n2. **P bífida em DII**: duas corcundas na onda P — a primeira é o AD, a segunda (mais tardia, às vezes mais baixa) é o AE. Distância entre os dois picos ('inter-pico') ≥ 40 ms (1 mm no papel a 25 mm/s).\n3. **P negativa (ou predominantemente negativa) em V1**: como V1 fica 'de costas' para o AE (câmera olhando da esquerda para direita), a despolarização atrial esquerda aparece negativa. Critério: componente terminal negativo da onda P em V1 com área ≥ 1 mm × 1 mm (1 mm de profundidade × 1 mm de duração) — também chamado de 'P terminal force' em V1 (Morris Index).\n\n**Significado clínico**: SOE crônica (especialmente por estenose mitral) é fator de risco independente para FA, pois o átrio dilatado e fibrosado cria substratos anatômicos para reentrada. Encontrar P mitral no ECG deve levar ao ecocardiograma para avaliar AE e valvulopatia.\n\n**Pearl**: 'A P mitral conta a história da pressão: se o AE grita no ECG, o sangue está travado em algum lugar à esquerda.'",
+      "key_points": [
+        "P mitral: P ≥ 120 ms (3 mm) + bífida em DII (inter-pico ≥ 40 ms)",
+        "Componente terminal negativo da P em V1 (Morris Index ≥ 1×1 mm): sinal precoce e sensível de SOE",
+        "Causas: estenose mitral (clássica), HAS, IM, IC — qualquer coisa que aumente pressão/volume no AE",
+        "SOE é fator de risco para FA — o átrio dilatado cria substrato para reentrada"
+      ]
+    },
+    {
+      "id": "sec-sod",
+      "title": "Sobrecarga Atrial Direita (SOD) — A P Pulmonale",
+      "content": "O átrio direito (AD) é despolarizado na primeira metade da onda P. Quando sobrecarregado (pressão aumentada por hipertensão pulmonar, estenose tricúspide, cor pulmonale), sua despolarização se torna mais rápida e de maior amplitude — mas não mais longa (diferente do AE), porque ocorre antes do AE e, portanto, não alarga a onda P total.\n\n**Causas de SOD**: Hipertensão pulmonar (primária ou secundária), DPOC/cor pulmonale, estenose pulmonar, estenose tricúspide (rara), cardiopatias congênitas com hipertensão pulmonar, TEP maciço.\n\n**Achados ECG — P Pulmonale**:\n1. **P apiculada em DII, DIII, aVF > 2,5 mm** (amplitude, não duração): a onda P alta e pontiaguda em DII reflete o vetor atrial direito ampliado dirigindo-se inferiormente. 'P pulmonale' porque classicamente associada a cor pulmonale por DPOC.\n2. **P em V1 bifásica com componente inicial positivo alto** (> 1,5 mm): o componente inicial positivo da P em V1 reflete o AD — quando amplificado, fica proeminente.\n3. **Onda P de eixo normal ou levemente para baixo-direita**: reflete o vetor AD dominante.\n\n**Diagnóstico diferencial**: P apiculada em DII > 2,5 mm pode ocorrer em taquicardia sinusal isolada (ad por aumento do automatismo, não de massa) — neste caso é transitória. P pulmonale verdadeira é persistente e reflete sobrecarga crônica.\n\n**Combinação P pulmonale + HVD + DEDir + P apiculada**: o ECG clássico do cor pulmonale. Em DPOC avançado com hipertensão pulmonar severa, estes achados juntos têm valor diagnóstico importante.\n\n**Síndrome Biatrial**: quando há critérios de SOE e SOD simultaneamente — P larga E apiculada. Associada a valvopatia mitral com hipertensão pulmonar secundária, ou cardiomiopatias avançadas.",
+      "key_points": [
+        "P pulmonale: P > 2,5 mm em DII/DIII/aVF — apiculada, não alargada (AD é despolarizado antes do AE)",
+        "Componente inicial positivo da P em V1 proeminente (> 1,5 mm) é sinal precoce de SOD",
+        "Associação clínica: DPOC grave, hipertensão pulmonar, cor pulmonale, TEP maciço",
+        "Síndrome biatrial: P larga E apiculada — sobrecarga em ambos os átrios"
+      ]
+    },
+    {
+      "id": "sec-diagnostico-diferencial",
+      "title": "Diagnóstico Diferencial — Armadilhas do ECG",
+      "content": "O diagnóstico de sobrecarga/hipertrofia no ECG envolve inúmeras armadilhas que levam a falso-positivos e falso-negativos. Conhecer estas armadilhas é o que diferencia um leitor competente de um expert.\n\n**FALSO-POSITIVOS para HVE**:\n\n1. **Coração de atleta**: treinamento aeróbico de alta intensidade causa hipertrofia fisiológica com voltagem aumentada. Diferencial: atletas têm bradicardia sinusal em repouso (FC 40-60), voltagem aumentada mas sem strain, ecocardiograma mostra massa aumentada porém FEVE preservada e função diastólica normal. Regride com destreinamento.\n\n2. **Jovens e pessoas magras**: parede torácica delgada reduz a atenuação do sinal elétrico — voltagens maiores são normais em adultos jovens magros.\n\n3. **Hipertrofia septal assimétrica** (CMH): voltagens altas + ondas Q profundas em V5-V6 e derivações laterais (despolarização septal anormal) + sem P mitral.\n\n**FALSO-NEGATIVOS para HVE**:\n1. **Obesidade**: camada adiposa atenua o sinal — ECG pode ser 'normal' em obesos com HVE real.\n2. **DPOC**: hiperinsuflação pulmonar isola eletricamente o coração — baixa voltagem e pseudo-padrão de BRD.\n3. **Bloqueio de Ramo Esquerdo (BRE)**: o bloqueio já causa alterações de ST-T e voltagem que obscurecem os critérios de HVE — não aplicar critérios de Sokolow-Lyon em BRE completo.\n\n**HVD vs BRD completo**:\n- BRD: QRS ≥ 120 ms, rSR' típico ('orelha de coelho') em V1, descordância ST-T, eixo geralmente normal\n- HVD: QRS pode ser normal ou levemente alargado, R/S ≥ 1 em V1 sem rSR' típico, DEDir franco\n\n**Strain esquerdo vs isquemia aguda (NSTEMI)**:\n- Strain: crônico, sem sintomas agudos, ST-T em derivações de alta voltagem, morfologia convexa\n- NSTEMI: agudo, sintomático, infra ST horizontal/descendente que pode ser em qualquer território, ausência de critérios de HVE em distribuição esperada",
+      "key_points": [
+        "Atleta com voltagem alta: verificar bradicardia, ausência de strain, regressão com destreinamento — HVE fisiológica",
+        "DPOC: pode mascarar HVE e HVD por baixa voltagem e hiperinsuflação",
+        "BRE completo: invalida a maioria dos critérios de HVE — não aplicar Sokolow-Lyon",
+        "Strain crônico vs isquemia aguda: contexto clínico + morfologia + distribuição das alterações"
+      ]
+    },
+    {
+      "id": "sec-casos-clinicos",
+      "title": "Casos Clínicos Integrados",
+      "content": "**CASO 1 — O Hipertenso não controlado**:\nHomem de 62 anos, HAS há 20 anos, em uso irregular de anti-hipertensivos. Assintomático. ECG: ritmo sinusal FC 78, P normal, PR 160 ms, QRS 88 ms, eixo -10°. Sokolow-Lyon: S V1 = 20 mm, R V5 = 22 mm → soma = 42 mm (positivo). R aVL = 14 mm (positivo). Em V5-V6: ST descendente com T negativa assimétrica (padrão de strain). Conclusão: HVE com padrão de strain. O ECG está contando 20 anos de pressão mal controlada. Conduta: ecocardiograma para quantificar massa e FEVE + otimizar anti-hipertensivo (preferência por IECA/BRA + anlodipino + diurético tiazídico).\n\n**CASO 2 — A jovem com dispneia aos esforços**:\nMulher de 28 anos, sem comorbidades, dispneia progressiva. Exame: sopro sistólico em bordo esternal esquerdo irradiando para pescoço. ECG: P apiculada em DII (3 mm), PR 140 ms, QRS 80 ms, eixo +110° (DEDir), R/S em V1 = 1,8, T negativa em V1-V3. Conclusão: SOD + HVD — pensar em estenose pulmonar congênita ou hipertensão pulmonar. Ecocardiograma revelou estenose pulmonar grave com gradiente VD-AP de 80 mmHg.\n\n**CASO 3 — Difícil de ver**:\nMulher de 75 anos, obesa (IMC 38), HAS, DM2. ECG com baixa voltagem geral (todos os complexos < 5 mm nas frontais). Suspeita clínica de HVE. Cornell: R aVL = 6 mm, S V3 = 10 mm → soma = 16 mm (< 20 mm para mulheres — negativo). Mas ecocardiograma mostra HVE grave (septo 16 mm, parede posterior 15 mm, IMVE 185 g/m²). Lição: falso-negativo clássico — obesidade atenua o sinal. O Cornell se aproximou do limiar, mas não alcançou. Nestas pacientes, o ECG tem baixíssima sensibilidade e o eco é mandatório.",
+      "key_points": [
+        "HVE com strain = HAS crônica mal controlada — manejo inclui otimização anti-hipertensiva e eco",
+        "SOD + HVD em jovem com dispneia = investigar cardiopatia congênita ou HP",
+        "Obesa com suspeita de HVE: ECG pode ser normal apesar de HVE grave — eco é obrigatório",
+        "Sempre correlacionar ECG com clínica: os números sozinhos não fazem diagnóstico"
+      ]
+    }
+  ],
+  "quiz_tags": ["sobrecarga", "hipertrofia", "hve", "hvd", "soe", "sod", "strain", "p_mitral", "p_pulmonale"],
+  "linked_pathologies": ["lvh_strain", "rvh", "left_atrial_enlargement"],
+  "linked_simulator": "lvh_strain",
+  "prerequisites": ["mod-fundamentos-ecg", "mod-derivacoes"],
+  "references": [
+    "Sokolow M, Lyon TP. The ventricular complex in left ventricular hypertrophy. Am Heart J. 1949;37(2):161-186.",
+    "Casale PN, et al. Improved sex-specific criteria of left ventricular hypertrophy for clinical and computer interpretation of electrocardiograms. Circulation. 1987;75(3):565-572.",
+    "Lang RM, et al. Recommendations for Cardiac Chamber Quantification. JASE. 2015.",
+    "Diretriz Brasileira de Hipertensão Arterial, SBC/SBH/SBN 2020."
+  ]
+}

@@ -1,0 +1,402 @@
+[
+  {
+    "id": "sca_tx_001",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "AAS — Mecanismo",
+    "difficulty": "easy",
+    "stem": "Qual é o mecanismo pelo qual o AAS exerce seu efeito antiagregante e por que esse efeito é irreversível durante toda a vida da plaqueta?",
+    "options": [
+      "AAS bloqueia reversivelmente o receptor P2Y12, impedindo a ligação do ADP às plaquetas",
+      "AAS acetila irreversivelmente a COX-1 plaquetária, bloqueando a síntese de TXA2; como plaquetas não têm núcleo, não conseguem regenerar a enzima — o efeito dura toda a vida da plaqueta (7-10 dias)",
+      "AAS inibe reversivelmente a COX-2 endotelial, reduzindo a produção de prostaciclina vasodilatadora",
+      "AAS bloqueia os receptores GP IIb/IIIa, impedindo a ligação do fibrinogênio às plaquetas ativadas"
+    ],
+    "answer_index": 1,
+    "explanation": "O AAS acetila covalentemente (modificação irreversível) o resíduo de serina-530 da COX-1 plaquetária, inativando permanentemente a enzima. A COX-1 é responsável pela síntese de tromboxano A2 (TXA2) a partir do ácido araquidônico — o TXA2 é um potente vasoconstritor e ativador/agregante plaquetário. Como plaquetas são anucleadas e não sintetizam novas proteínas, a inibição dura toda a sua vida útil (~7-10 dias). Nas plaquetas formadas após a dose de AAS, a COX-1 é nova e funcional — daí a necessidade de dose diária contínua. Na fase aguda do SCA, a dose de ataque de 300 mg (mastigada, para absorção mais rápida) garante inibição imediata de > 95% das plaquetas circulantes.",
+    "tag": "aas_mecanismo_cox1"
+  },
+  {
+    "id": "sca_tx_002",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "P2Y12 — Clopidogrel vs Ticagrelor vs Prasugrel",
+    "difficulty": "hard",
+    "stem": "Paciente de 54 anos com STEMI vai para ICP primária. Qual inibidor do P2Y12 tem início de ação mais rápido e independe do metabolismo hepático (pró-fármaco), sendo preferível nesse cenário?",
+    "options": [
+      "Clopidogrel 600 mg: pró-fármaco bivalente com ação mais rápida que o ticagrelor",
+      "Ticagrelor 180 mg: inibidor direto (não é pró-fármaco), início de ação em 30 min, reversível; preferido no STEMI por ICP salvo contraindicações",
+      "Prasugrel 60 mg: pró-fármaco, mas metabolismo mais eficiente; preferido no STEMI quando o paciente não tem histórico de AVC/AIT",
+      "Clopidogrel 300 mg: única opção no STEMI por maior segurança em sangramento"
+    ],
+    "answer_index": 1,
+    "explanation": "Os inibidores do P2Y12 diferem fundamentalmente em mecanismo e farmacocinética: o Clopidogrel é um pró-fármaco tienopiridínico que requer dupla oxidação hepática pelo CYP2C19 para se tornar ativo; polimorfismos no CYP2C19 (*2, *3) levam a 'poor metabolizers' com resposta reduzida (~30% dos caucasianos, ~50% dos asiáticos). O Ticagrelor é um inibidor direto e reversível (classe ciclopentil-triazolopirimidina), não necessita de ativação hepática, com início em ~30 min e maior potência. O Prasugrel também é pró-fármaco, mas com metabolismo mais eficiente e menos dependente do CYP2C19; contraindicado em AVC/AIT prévio, ≥ 75 anos ou peso < 60 kg (maior risco de sangramento intracraniano). As diretrizes ESC 2023 preferem ticagrelor ou prasugrel ao clopidogrel no SCA quando não há contraindicações.",
+    "tag": "p2y12_comparacao"
+  },
+  {
+    "id": "sca_tx_003",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "DAPT — Duração",
+    "difficulty": "medium",
+    "stem": "Paciente com STEMI recebe stent farmacológico (DES) com everolimus. Qual a duração recomendada da dupla antiagregação plaquetária (DAPT) e por que ela é necessária?",
+    "options": [
+      "1 mês: suficiente para endotelização completa do stent farmacológico",
+      "12 meses como padrão pós-SCA com DES; a DAPT previne trombose de stent (risco maior nos primeiros meses) e reduz eventos isquêmicos recorrentes; pode ser encurtada em alto risco de sangramento ou prolongada em alto risco isquêmico",
+      "6 meses apenas para NSTEMI; STEMI requer AAS indefinido sem P2Y12",
+      "3 meses após DES de nova geração pois a endotelização é completa em 90 dias"
+    ],
+    "answer_index": 1,
+    "explanation": "A DAPT (AAS + inibidor P2Y12) por 12 meses é o padrão após SCA com DES, independentemente se STEMI ou NSTEMI. O risco de trombose de stent é máximo no 1º mês, mas permanece elevado no primeiro ano, especialmente com DES de primeira geração. Os DES de nova geração (everolimus, sirolimus, zotarolimus) têm endotelização mais rápida e menor risco de trombose tardia, o que permitiu estudos com DAPT mais curta (3-6 meses) em pacientes com alto risco hemorrágico. A duração pode ser prolongada além de 12 meses em pacientes com alto risco isquêmico (ex.: diabetes, múltiplos stents, artéria principal esquerda) e baixo risco de sangramento. A decisão de encurtar ou prolongar deve sempre ponderar o balanço isquemia × sangramento.",
+    "tag": "dapt_duracao"
+  },
+  {
+    "id": "sca_tx_004",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "Heparina Não-Fracionada vs HBPM",
+    "difficulty": "medium",
+    "stem": "Qual a diferença fundamental no mecanismo de ação entre a heparina não-fracionada (HNF) e a enoxaparina (HBPM) na anticoagulação do SCA?",
+    "options": [
+      "HNF inibe exclusivamente o fator Xa; enoxaparina inibe exclusivamente a trombina (FIIa)",
+      "HNF forma complexo com antitrombina III e inibe FIIa e FXa em proporção aproximada 1:1; enoxaparina tem proporção anti-Xa:anti-IIa de ~3:1 (maior seletividade para FXa, menor efeito sobre trombina)",
+      "HNF é um inibidor direto da trombina sem necessidade da antitrombina III; enoxaparina requer cofator",
+      "Ambas têm mecanismo idêntico; a diferença é apenas farmacocinética (meia-vida)"
+    ],
+    "answer_index": 1,
+    "explanation": "Tanto a HNF quanto as HBPM (enoxaparina, dalteparina) exercem seus efeitos via ligação à antitrombina III (AT III), potencializando a sua atividade inibitória 1000x. A diferença reside no comprimento da cadeia polissacarídica: a HNF tem cadeias longas que formam complexo ternário (heparina-AT III-trombina), inibindo FIIa e FXa em proporção ~1:1. As HBPM têm cadeias mais curtas (PM 4.000-6.000 Da) que se ligam à AT III e inibem principalmente o FXa (razão anti-Xa:anti-IIa ~3:1). A enoxaparina tem farmacocinética previsível, não requer monitoramento de TTPa e pode ser administrada SC em dose fixa. A reversão da HNF com protamina é completa; a enoxaparina é revertida apenas parcialmente (protamina neutraliza o efeito anti-IIa mas apenas ~60-80% do efeito anti-Xa).",
+    "tag": "hnf_vs_hbpm_mecanismo"
+  },
+  {
+    "id": "sca_tx_005",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "Fondaparinux no NSTEMI",
+    "difficulty": "medium",
+    "stem": "Paciente com NSTEMI e ClCr de 45 mL/min (insuficiência renal moderada). Qual anticoagulante é preferível e quais as limitações práticas para o cateterismo?",
+    "options": [
+      "Enoxaparina 1 mg/kg SC 12/12h sem ajuste de dose em insuficiência renal moderada",
+      "Fondaparinux 2.5 mg SC 1x/dia: melhor perfil de segurança renal no NSTEMI (anti-Xa puro), menor risco de sangramento e trombocitopenia; porém, se for para cateterismo, adicionar HNF no momento do procedimento para evitar trombose de cateter",
+      "Bivalirudina 0.75 mg/kg IV: preferida em qualquer grau de disfunção renal por ser eliminada por hidrólise plasmática",
+      "Apenas HNF IV com ajuste pelo TTPa; HBPM e fondaparinux contraindicados em IRC"
+    ],
+    "answer_index": 1,
+    "explanation": "No NSTEMI, o fondaparinux (2.5 mg/dia SC) é o anticoagulante com melhor perfil de segurança, especialmente no que tange a sangramento — o trial OASIS-5 demonstrou eficácia semelhante à enoxaparina com ~50% menos sangramentos maiores. Em IR moderada (ClCr 30-50 mL/min), a enoxaparina acumula (excreção renal) com risco de superdosagem e sangramento; o fondaparinux tem melhor tolerância (contraindicado apenas em ClCr < 20 mL/min). A limitação importante: como o fondaparinux não inibe a trombina, há risco de trombose de cateter no cateterismo — as diretrizes recomendam adicionar HNF (60-85 UI/kg IV) no início do procedimento. Fondaparinux não deve ser usado sozinho durante ICP.",
+    "tag": "fondaparinux_nstemi_renal"
+  },
+  {
+    "id": "sca_tx_006",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "Betabloqueadores no IAM",
+    "difficulty": "medium",
+    "stem": "Quais são os mecanismos pelos quais os betabloqueadores reduzem a mortalidade no pós-IAM, e quais contraindicações absolutas impedem seu uso na fase aguda?",
+    "options": [
+      "Mecanismo: vasodilatação coronariana por bloqueio α; contraindicação: hipertensão arterial sistêmica",
+      "Mecanismo: redução da FC (↑ tempo de diástole = ↑ perfusão coronariana), ↓ contratilidade (↓ consumo O2), efeito anti-arrítmico (↓ automaticidade e condução AV); contraindicações agudas: BAV de 2º/3º grau, FC < 60, broncoespasmo grave, IC descompensada com sinais de baixo débito, espasmo coronariano (Prinzmetal)",
+      "Mecanismo: inibição da COX-2 com redução do remodelamento inflamatório; contraindicações: uso prévio de AAS e alergia a AINE",
+      "Mecanismo: bloqueio dos canais de cálcio do tipo L com vasodilatação arterial; contraindicações: hipertrofia ventricular esquerda e disfunção diastólica"
+    ],
+    "answer_index": 1,
+    "explanation": "Os betabloqueadores exercem múltiplos efeitos benéficos no IAM: redução da frequência cardíaca (aumentando o tempo de enchimento diastólico e a perfusão coronariana), diminuição da contratilidade e da pressão arterial (redução do consumo de O2 miocárdico), e propriedades anti-arrítmicas (elevando o limiar para fibrilação ventricular). Em longo prazo, reduzem a remodelação ventricular e a mortalidade pós-IAM com disfunção de VE. As contraindicações na fase aguda incluem: BAV de 2º grau Mobitz II ou 3º grau (sem marca-passo), FC < 50-60 bpm, broncoespasmo ativo/asma grave, IC aguda descompensada (Killip III-IV), choque cardiogênico e angina vasoespástica de Prinzmetal (o bloqueio β2 deixa os receptores α sem oposição, piorando o espasmo).",
+    "tag": "betabloqueadores_iam_mecanismo"
+  },
+  {
+    "id": "sca_tx_007",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "Nitratos — Mecanismo e Contraindicações",
+    "difficulty": "medium",
+    "stem": "Paciente com IAM inferior (supra DII/III/aVF) está hipotenso (PA 80/50) e o plantonista cogita nitrato sublingual para alívio da dor. Por que essa conduta é potencialmente fatal?",
+    "options": [
+      "O nitrato sublingual pode causar broncoespasmo intenso em pacientes com IAM inferior",
+      "Nitratos são doadores de NO que causam vasodilatação venosa (redução da pré-carga); no IAM de VD (frequente no IAM inferior por CD proximal), o VD infartado depende de pré-carga elevada; o nitrato reduz o retorno venoso e precipita colapso hemodinâmico",
+      "Nitratos causam taquicardia reflexa intensa que aumenta o consumo de O2 no IAM inferior",
+      "O nitrato sublingual é metabolizado mais rapidamente no IAM inferior por aumento do metabolismo hepático de 1ª passagem"
+    ],
+    "answer_index": 1,
+    "explanation": "Os nitratos doam óxido nítrico (NO) ao endotélio vascular, promovendo venodilatação sistêmica predominante (redução da pré-carga) e, em doses maiores, vasodilatação arterial. No IAM inferior com comprometimento do VD (oclusão da CD proximal), o VD infartado perde sua função de bomba e depende criticamente do retorno venoso (pré-carga) para manter o débito cardíaco. A redução abrupta da pré-carga pelo nitrato 'esvazia' um VD já disfuncional, precipitando choque obstrutivo refratário. Essa contraindicação absoluta deve ser memorizada: STEMI inferior (+ suspeita de VD) = CONTRAINDICADO nitrato. A hipotensão atual já sugere comprometimento do VD. O tratamento correto é expansão volêmica com cristaloide.",
+    "tag": "nitratos_contraindicado_iam_vd"
+  },
+  {
+    "id": "sca_tx_008",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "Morfina no SCA",
+    "difficulty": "hard",
+    "stem": "Um residente propõe morfina IV para analgesia em um paciente com NSTEMI e dor intensa, argumentando que é o padrão clássico. Qual evidência atual questiona essa prática?",
+    "options": [
+      "A morfina causa hiperpotassemia grave que piora a isquemia miocárdica",
+      "O registro CRUSADE e estudos farmacodinâmicos demonstraram que a morfina retarda a absorção e o efeito dos inibidores P2Y12 orais (ticagrelor, clopidogrel) por retardar o esvaziamento gástrico, reduzindo os picos plasmáticos e o efeito antiagregante nas primeiras 2-4h — período crítico no SCA",
+      "A morfina causa broncoespasmo grave em pacientes cardíacos por liberação de histamina",
+      "A morfina causa vasodilatação arterial intensa que rouba fluxo das coronárias (steal coronariano)"
+    ],
+    "answer_index": 1,
+    "explanation": "O registro CRUSADE (2005) e subsequentes estudos farmacodinâmicos (IMPRESSION, 2016) revelaram que a morfina, ao reduzir a motilidade gástrica e retardar o esvaziamento, diminui a absorção dos inibidores P2Y12 orais como ticagrelor e clopidogrel em até 30-40% nas primeiras horas. No SCA, as primeiras horas são exatamente o período de maior risco trombótico — quando mais se precisa do efeito antiagregante máximo. O registro CRUSADE associou uso de morfina com maior mortalidade hospitalar em NSTEMI. As diretrizes ESC 2023 aconselham cautela com morfina no SCA, preferindo nitratos IV para alívio da dor quando possível, reservando a morfina para dor refratária e monitorando que o paciente não receberá P2Y12 oral imediatamente após.",
+    "tag": "morfina_sca_controversia"
+  },
+  {
+    "id": "sca_tx_009",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "Estatinas High-Intensity",
+    "difficulty": "medium",
+    "stem": "Por que as estatinas de alta intensidade devem ser iniciadas precocemente no SCA, mesmo quando o LDL já está dentro dos valores normais?",
+    "options": [
+      "Apenas pela redução do LDL, que deve atingir < 70 mg/dL em 48h para estabilizar a placa",
+      "Pelas ações pleiotrópicas precoces das estatinas: efeitos anti-inflamatórios (↓ PCR-us, ↓ IL-6), estabilização da placa (↓ atividade das MMPs, melhora da capa fibrosa), melhora da disfunção endotelial, antitrombóticos e antiagregantes — benefícios que precedem e são independentes da redução do LDL",
+      "Para prevenir rabdomiólise induzida pela angioplastia com contraste iodado",
+      "Para reduzir a nefrotoxicidade da heparina administrada durante o cateterismo"
+    ],
+    "answer_index": 1,
+    "explanation": "As estatinas têm dois tipos de benefícios: (1) Efeitos LDL-dependentes (semanas a meses): redução do tamanho do core lipídico, estabilização da placa a longo prazo. (2) Efeitos pleiotrópicos precoces (horas a dias): ação anti-inflamatória (redução de PCR-us, IL-6, TNF-α), melhora da função endotelial (aumento do eNOS e biodisponibilidade do NO), inibição das MMPs (reduzindo degradação da capa fibrosa), efeitos antiagregantes plaquetários e antitrombóticos. Esses efeitos pleiotrópicos justificam o início imediato de estatina de alta intensidade no SCA independentemente do LDL basal. As opções de alta intensidade são atorvastatina 40-80 mg ou rosuvastatina 20-40 mg. O alvo de LDL pós-SCA é < 55 mg/dL (ESC 2023).",
+    "tag": "estatinas_pleiotroficos_sca"
+  },
+  {
+    "id": "sca_tx_010",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "IECA/BRA pós-IAM",
+    "difficulty": "medium",
+    "stem": "Quais são as indicações para início de IECA (ou BRA se intolerante) após IAM, e qual o mecanismo de benefício na remodelação ventricular?",
+    "options": [
+      "Todo paciente pós-IAM deve receber IECA independentemente da FEVE, PA ou comorbidades",
+      "Indicações prioritárias: FEVE ≤ 40%, diabetes mellitus, HAS persistente, DRC; mecanismo: bloqueio da angiotensina II reduz hipertrofia patológica, fibrose intersticial, apoptose de cardiomiócitos e dilatação ventricular — comprovado em SAVE, AIRE e TRACE",
+      "IECA apenas se o paciente desenvolver IC sintomática (Killip III-IV); FEVE preservada não tem indicação",
+      "IECA é contraindicado nas primeiras 24h do IAM por risco de hipotensão e extensão do infarto"
+    ],
+    "answer_index": 1,
+    "explanation": "Os ensaios clínicos SAVE (captopril), AIRE (ramipril) e TRACE (trandolapril) demonstraram redução da mortalidade e hospitalização por IC com IECA em pacientes pós-IAM com FEVE ≤ 40%. Os mecanismos são: bloqueio da angiotensina II (potente vasoconstritor e mitógeno fibrótico), redução da aldosterona (↓ retenção de sódio/água e ↓ fibrose cardíaca), melhora da disfunção endotelial. Em longo prazo, reduzem a dilatação e hipertrofia excêntrica compensatória (remodelação adversa). As indicações prioritárias são FEVE ≤ 40%, DM tipo 2, HAS e DRC. Devem ser iniciados precocemente (dentro das primeiras 24h) se PA permitir, com titulação progressiva. BRAs têm eficácia equivalente em intolerantes ao IECA (tosse).",
+    "tag": "ieca_bra_pos_iam"
+  },
+  {
+    "id": "sca_tx_011",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "Janela Temporal da ICP Primária",
+    "difficulty": "medium",
+    "stem": "Paciente com STEMI chega a uma UPA sem laboratório de hemodinâmica. O tempo estimado para transferência ao hospital terciário com sala de cateterismo é de 110 minutos. Qual é a conduta mais adequada segundo as diretrizes?",
+    "options": [
+      "Fibrinólise imediata na UPA, pois qualquer tempo > 90 min invalida a ICP primária",
+      "Transferência imediata para ICP primária: o tempo total de primeiro contato médico ao balão (FMC-to-balloon) de 120 min ainda é aceitável para transferência; a ICP primária é superior à fibrinólise se realizável em < 120 min do primeiro contato médico",
+      "Observação na UPA por 6 horas e ICP eletiva se estável",
+      "Fibrinólise + ICP imediata na mesma unidade ('facilitated PCI') é o padrão de 2024"
+    ],
+    "answer_index": 1,
+    "explanation": "As diretrizes ESC 2023 definem os seguintes alvos temporais no STEMI: (1) Porta-balão (door-to-balloon) ≤ 60 min quando o paciente chega diretamente ao centro com ICP. (2) Primeiro contato médico ao balão (FMC-to-balloon) ≤ 90 min se o paciente já está em hospital com ICP. (3) FMC-to-balloon ≤ 120 min quando há necessidade de transferência — ainda preferível à fibrinólise. Com 110 minutos estimados de transferência, a ICP primária ainda é a estratégia preferida, desde que o protocolo de transferência seja ativado imediatamente (evitando perda de tempo na UPA). Se o tempo de transferência fosse > 120 min (sem ICP disponível em tempo hábil), a fibrinólise seria indicada, seguida de transferência para ICP de resgate ou coronariografia em 3-24h.",
+    "tag": "janela_temporal_icp_primaria"
+  },
+  {
+    "id": "sca_tx_012",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "Fibrinólise — Indicações e Critérios de Sucesso",
+    "difficulty": "hard",
+    "stem": "Paciente com STEMI anterior recebe tenecteplase (TNK) por ICP não disponível em 120 minutos. Após 90 minutos, qual critério ECG sugere reperfusão bem-sucedida (fibrinólise eficaz)?",
+    "options": [
+      "Resolução completa (100%) do supra de ST com normalização do ECG",
+      "Redução ≥ 50% do supra de ST na derivação com maior supra 90 minutos após a fibrinólise, associada a alívio da dor — critério de reperfusão bem-sucedida",
+      "Aparecimento de novo BRE após o fibrinolítico — indica expansão do infarto e reperfusão tecidual",
+      "Aumento da troponina 90 minutos após — lavagem do marcador indica reperfusão eficaz"
+    ],
+    "answer_index": 1,
+    "explanation": "A definição de fibrinólise bem-sucedida (reperfusão eficaz) baseia-se em critérios clínicos e ECG: (1) ECG: redução ≥ 50% do supradesnivelamento de ST na derivação mais afetada, 60-90 minutos após o início do fibrinolítico. (2) Clínico: alívio significativo da dor precordial. (3) Arrítmico: ritmo idioventricular acelerado (RIVA) — arritmia de reperfusão benigna indicando abertura da artéria. A resolução completa (>70%) é sinal de melhor prognóstico. Se os critérios de sucesso NÃO forem atingidos (fibrinólise falhada: < 50% de resolução do supra e dor persistente), o paciente deve ser submetido a ICP de resgate urgente — não repetir o fibrinolítico. Se bem-sucedida, coronariografia deve ser realizada em 3-24h (estratégia farmacoinvasiva).",
+    "tag": "fibrinolise_criterios_sucesso"
+  },
+  {
+    "id": "sca_tx_013",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "Fibrinólise — Contraindicações",
+    "difficulty": "medium",
+    "stem": "Qual das seguintes situações representa uma CONTRAINDICAÇÃO ABSOLUTA à fibrinólise no STEMI?",
+    "options": [
+      "Cirurgia abdominal há 2 semanas",
+      "Pressão arterial 160/100 mmHg na chegada",
+      "Acidente vascular cerebral hemorrágico prévio em qualquer tempo, ou AVC isquêmico nos últimos 6 meses",
+      "Idade > 75 anos com STEMI anterior extenso"
+    ],
+    "answer_index": 2,
+    "explanation": "As contraindicações absolutas à fibrinólise incluem: (1) AVC hemorrágico prévio em qualquer momento; (2) AVC isquêmico ou AIT nos últimos 6 meses; (3) Neoplasia intracraniana ou malformação arteriovenosa cerebral; (4) Trauma craniano/facial grave recente (< 3 semanas); (5) Sangramento gastrointestinal no último mês; (6) Distúrbio hemorrágico conhecido; (7) Dissecção aórtica. Cirurgia recente (< 3 semanas) e PA > 180 mmHg são contraindicações relativas — podem ser manejadas (controle da PA, avaliação risco-benefício). Idade > 75 anos não é contraindicação, mas aumenta o risco hemorrágico (especialmente intracraniano). Na presença de contraindicação absoluta, a ICP primária é a única opção de reperfusão mecânica.",
+    "tag": "fibrinolise_contraindicacoes"
+  },
+  {
+    "id": "sca_tx_014",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "Stent Farmacológico vs Metálico",
+    "difficulty": "medium",
+    "stem": "Por que o stent farmacológico (DES) reduziu o problema da reestenose em relação ao stent metálico simples (BMS), e qual é a consequência dessa vantagem no manejo da DAPT?",
+    "options": [
+      "O DES é coberto com ouro que repele as plaquetas, eliminando completamente a necessidade de antiagregação",
+      "O DES libera fármaco antiproliferativo (everolimus, sirolimus, zotarolimus) que inibe a hiperplasia neoíntimal, reduzindo a reestenose de ~20-30% (BMS) para < 5-8%; porém, retarda a endotelização, exigindo DAPT prolongada para prevenir trombose de stent tardio",
+      "O DES causa maior inflamação local que estimula cicatrização mais rápida e completa, dispensando DAPT além de 1 mês",
+      "BMS é superiores em STEMI; DES são usados apenas em lesões crônicas estáveis"
+    ],
+    "answer_index": 1,
+    "explanation": "O stent metálico simples (BMS) causava reestenose por hiperplasia neoíntimal (proliferação de células musculares lisas dentro do stent) em 20-30% dos casos em 1 ano — fenômeno conhecido como 'problema do BMS'. Os DES de 1ª geração (sirolimus — Cypher, paclitaxel — Taxus) liberavam fármacos antiproliferativos que reduziram a reestenose para < 10%, mas retardavam tanto a endotelização que aumentavam o risco de trombose de stent tardia e muito tardia, exigindo DAPT por até 12-24 meses. Os DES de 2ª geração (everolimus, zotarolimus) têm polímeros biocompatíveis e endotelização mais rápida, com excelente perfil de segurança, reduzindo a reestenose para < 5% e permitindo estudos de DAPT mais curta em casos selecionados. No SCA, a preferência é sempre DES de nova geração.",
+    "tag": "des_vs_bms_reestenose"
+  },
+  {
+    "id": "sca_tx_015",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "CABG no SCA",
+    "difficulty": "hard",
+    "stem": "Paciente de 61 anos com NSTEMI de alto risco tem coronariografia mostrando oclusão total da DA com colaterais, estenose de 90% da CD e 80% na Circunflexa. A equipe de Heart Team discute a estratégia. Qual é a indicação para CABG em vez de ICP multivaso nesse contexto?",
+    "options": [
+      "CABG nunca está indicada na fase aguda do SCA; toda revascularização aguda deve ser percutânea",
+      "CABG é preferida quando: doença de 3 vasos com função ventricular preservada (SYNTAX score alto), doença de tronco de coronária esquerda, paciente com DM e doença multivaso (FREEDOM trial), anatomia desfavorável para ICP (lesões complexas, bifurcações); geralmente após estabilização clínica",
+      "CABG está indicada apenas quando há oclusão total crônica sem colaterais visíveis",
+      "CABG é indicada sempre que o paciente tiver mais de 2 vasos comprometidos, independentemente do SYNTAX score"
+    ],
+    "answer_index": 1,
+    "explanation": "A decisão entre ICP e CABG na doença multivaso é baseada no Heart Team (cardiology + cardiac surgery), anatomia coronariana (SYNTAX score), função ventricular e comorbidades. O CABG é geralmente preferido em: (1) doença de tronco de coronária esquerda não protegido (LMCA) com SYNTAX > 22-32 (conforme guideline); (2) doença triarterial complexa com SYNTAX score alto (> 32); (3) diabetes mellitus com doença multivaso significativa (ensaio FREEDOM: CABG superior à ICP em DM); (4) anatomia desfavorável para ICP (bifurcações complexas, lesões calcificadas difusas). No SCA, a artéria culpada geralmente é tratada percutaneamente de imediato; CABG para a doença residual é planejada eletivamente após estabilização.",
+    "tag": "cabg_indicacoes_sca"
+  },
+  {
+    "id": "sca_tx_016",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "Prasugrel — Contraindicações Específicas",
+    "difficulty": "medium",
+    "stem": "Paciente de 77 anos, peso 55 kg, com STEMI vai para ICP primária. O plantonista considera prasugrel. Quais características desse paciente contraindicam o prasugrel?",
+    "options": [
+      "Apenas o peso < 60 kg contraindica; a idade não é contraindicação",
+      "Idade ≥ 75 anos E peso < 60 kg são ambos fatores de alto risco hemorrágico com prasugrel; a ficha técnica contraindica formalmente em ≥ 75 anos (exceto se alto risco isquêmico como diabético ou reinfartador) e recomenda dose reduzida em < 60 kg (5 mg/dia em vez de 10 mg)",
+      "O prasugrel está contraindicado apenas em pacientes com AVC hemorrágico prévio; idade e peso não interferem",
+      "Não há contraindicação relacionada a peso; apenas creatinina > 2 mg/dL contraindica prasugrel"
+    ],
+    "answer_index": 1,
+    "explanation": "O prasugrel, por ser um pró-fármaco de conversão hepática mais eficiente e potente que o clopidogrel, tem maior risco de sangramento, especialmente intracraniano. Três características de alto risco hemorrágico levaram a contraindicações formais na bula e nas diretrizes: (1) AVC/AIT prévio — contraindicação absoluta (ensaio TRITON-TIMI 38: aumento de AVC hemorrágico); (2) Idade ≥ 75 anos — contraindicação relativa (risco/benefício desfavorável; se usado, dose 5 mg/dia); (3) Peso < 60 kg — maior exposição ao fármaco ativo por menor volume de distribuição (se usado, dose 5 mg/dia). Este paciente tem DOIS fatores (77 anos E 55 kg), sendo o prasugrel formalmente contraindicado ou de uso com extrema cautela. A alternativa é ticagrelor (sem contraindicações baseadas em peso ou idade).",
+    "tag": "prasugrel_contraindicacoes"
+  },
+  {
+    "id": "sca_tx_017",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "Sildenafil e Nitratos",
+    "difficulty": "easy",
+    "stem": "Por que o uso de sildenafil nas últimas 24 horas é uma contraindicação absoluta ao uso de nitratos no SCA?",
+    "options": [
+      "O sildenafil aumenta o metabolismo hepático dos nitratos, tornando-os ineficazes",
+      "Ambos aumentam o GMPc por mecanismos complementares (sildenafil inibe a PDE-5; nitratos aumentam a síntese de GMPc via NO); a associação provoca hipotensão grave e potencialmente fatal por vasodilatação excessiva",
+      "O sildenafil bloqueia os receptores da angiotensina, e os nitratos competem pelo mesmo receptor vascular",
+      "A associação causa taquicardia reflexa com isquemia piorada e risco de fibrilação ventricular"
+    ],
+    "answer_index": 1,
+    "explanation": "Os nitratos doam NO que ativa a guanililciclase solúvel, aumentando o GMPc intracelular, que ativa a proteína cinase G (PKG), promovendo relaxamento da musculatura lisa vascular (vasodilatação). O sildenafil (e demais inibidores da PDE-5: tadalafil, vardenafil) inibe a fosfodiesterase tipo 5, a enzima que degrada o GMPc — mantendo níveis elevados de GMPc por mais tempo. A associação cria amplificação sinérgica do GMPc com vasodilatação desproporcional, causando hipotensão grave, síncope e potencialmente colapso cardiovascular. Tempo de washout: sildenafil/vardenafil ≥ 24h, tadalafil ≥ 48h antes de usar nitrato. Em emergências, se o paciente usou sildenafil e está em colapso hemodinâmico, o tratamento é expansão volêmica e vasopressores.",
+    "tag": "sildenafil_nitratos_interacao"
+  },
+  {
+    "id": "sca_tx_018",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "Bivalirudina",
+    "difficulty": "hard",
+    "stem": "Em que cenário clínico a bivalirudina seria preferida à HNF + inibidor de GP IIb/IIIa no SCA com ICP?",
+    "options": [
+      "Em pacientes com disfunção renal grave pois a bivalirudina é excretada pelo fígado",
+      "Em pacientes com trombocitopenia induzida por heparina (HIT) ou suspeita de HIT; e em pacientes com alto risco de sangramento onde se quer manter eficácia anticoagulante com menor taxa de sangramento; a bivalirudina é um inibidor direto da trombina sem necessidade de antitrombina III",
+      "Bivalirudina é indicada rotineiramente em todos os STEMI com ICP primária, pois é superior à HNF em mortalidade",
+      "Em pacientes com BRE que contraindica o uso de heparina por interferência no TTPa"
+    ],
+    "answer_index": 1,
+    "explanation": "A bivalirudina é um inibidor direto da trombina (DTI) — liga-se diretamente à trombina livre e ligada ao coágulo, sem necessidade de cofator antitrombina III. Sua principal indicação é na trombocitopenia induzida por heparina (HIT tipo II), onde qualquer heparina (incluindo HBPM) é contraindicada e a bivalirudina oferece anticoagulação segura. No contexto do SCA/ICP, os estudos HORIZONS-AMI e EUROMAX sugeriram menor sangramento com bivalirudina versus HNF + inibidor GP IIb/IIIa, porém com aumento da trombose de stent aguda. As diretrizes ESC 2023 consideram a bivalirudina uma alternativa razoável à HNF em STEMI com ICP, especialmente quando o risco de sangramento supera o risco isquêmico. A meia-vida curta (25 min) permite reversão rápida ao suspender a infusão.",
+    "tag": "bivalirudina_indicacoes"
+  },
+  {
+    "id": "sca_tx_019",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "Estratificação de Risco no NSTEMI",
+    "difficulty": "medium",
+    "stem": "Paciente com NSTEMI tem score GRACE de 165 pontos (alto risco). Qual estratégia invasiva está indicada e em qual janela temporal?",
+    "options": [
+      "Estratégia conservadora: tratamento clínico inicial com coronariografia apenas se novo evento",
+      "Estratégia invasiva precoce: coronariografia em < 24h (dentro de 24h do diagnóstico) em NSTEMI de alto risco (GRACE > 140 ou instabilidade hemodinâmica/elétrica) — 'early invasive strategy'",
+      "Estratégia invasiva eletiva: coronariografia eletiva em 72h para qualquer NSTEMI independentemente do risco",
+      "Coronariografia imediata (< 2h) igual ao STEMI, pois GRACE > 140 é equivalente a STEMI"
+    ],
+    "answer_index": 1,
+    "explanation": "O score GRACE (Global Registry of Acute Coronary Events) estratifica a mortalidade hospitalar no NSTEMI em baixo, intermediário e alto risco. O GRACE > 140 corresponde a alto risco (mortalidade hospitalar > 3%). As diretrizes ESC 2023 para NSTEMI definem: (1) Estratégia imediata (< 2h): instabilidade hemodinâmica, choque, arritmias ameaçadoras, dor refratária — igual ao STEMI. (2) Estratégia precoce (< 24h): GRACE > 140, troponina com rise/fall significativo, alterações dinâmicas de ST, FEVE < 40%, ICC de novo. (3) Estratégia eletiva (< 72h): GRACE ≤ 140, sem critérios de alto risco. (4) Conservadora: GRACE muito baixo com troponina negativa. Com GRACE 165, a janela de 24h é a indicada.",
+    "tag": "nstemi_estratificacao_grace"
+  },
+  {
+    "id": "sca_tx_020",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "Antagonistas da Aldosterona",
+    "difficulty": "medium",
+    "stem": "Após IAM com FEVE de 35% e sinais de IC, o paciente está em uso de IECA, betabloqueador e estatina. Qual classe medicamentosa adicional tem benefício comprovado em mortalidade nesse cenário específico?",
+    "options": [
+      "Antagonista do canal de cálcio do-hidropiridínico (anlodipino) para controle pressórico",
+      "Antagonista da aldosterona (espironolactona ou eplerenona): o estudo EPHESUS demonstrou redução de mortalidade cardiovascular com eplerenona iniciada 3-14 dias após IAM complicado com FEVE ≤ 40% e IC ou DM",
+      "Digoxina para controle da frequência cardíaca e melhora da contratilidade pós-IAM",
+      "Ivabradina para redução isolada da FC quando a FEVE está < 35%"
+    ],
+    "answer_index": 1,
+    "explanation": "O estudo EPHESUS (2003) randomizou pacientes com IAM (3-14 dias) com FEVE ≤ 40% e IC ou DM para eplerenona (antagonista seletivo da aldosterona) versus placebo, além do tratamento padrão (IECA + betabloqueador). Resultado: redução de 15% na mortalidade por todas as causas e 17% na morte cardiovascular/hospitalização. O mecanismo: bloqueio da aldosterona reduz a fibrose miocárdica (ação pró-fibrótica da aldosterona independente do SRAA sistêmico — 'aldosterone escape'), melhora a remodelação e reduz arritmias ventriculares. Cuidados: monitorar K⁺ (risco de hiperpotassemia, especialmente com IECA/BRA em uso) e função renal. Contraindicado em K⁺ > 5 mEq/L ou CrCl < 30 mL/min.",
+    "tag": "antagonista_aldosterona_pos_iam"
+  },
+  {
+    "id": "sca_tx_021",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "Ticagrelor — Características Específicas",
+    "difficulty": "medium",
+    "stem": "Paciente em uso de ticagrelor após NSTEMI relata dispneia leve ao esforço nas primeiras semanas, sem alteração na função pulmonar ou no ecocardiograma. Qual a causa mais provável e como manejar?",
+    "options": [
+      "Início de IC por remodelação pós-IAM; ajustar betabloqueador e IECA",
+      "Efeito adverso característico do ticagrelor: dispneia transitória (ocorre em ~14% dos pacientes) por mecanismo possivelmente relacionado ao adenosina — o ticagrelor inibe a recaptação de adenosina pelo eritrócito, elevando adenosina circulante que ativa receptores A2a pulmonares causando broncoconstrição reflexa leve; em geral benigna e não requer suspensão",
+      "Reação alérgica ao ticagrelor; substituir por prasugrel imediatamente",
+      "Isquemia residual não tratada; solicitar cintilografia de perfusão urgente"
+    ],
+    "answer_index": 1,
+    "explanation": "A dispneia é o efeito adverso mais característico do ticagrelor, ocorrendo em 10-14% dos pacientes no ensaio PLATO, geralmente nas primeiras semanas de tratamento. O mecanismo proposto envolve inibição do cotransportador de adenosina do eritrócito pelo ticagrelor (além do bloqueio do P2Y12), elevando os níveis de adenosina extracelular. A adenosina estimula receptores A2a nos pericitos capilares pulmonares e receptores C nas terminações nervosas das vias aéreas, causando uma forma leve de broncoconstrição ou sensação de falta de ar. Tipicamente, a dispneia é benigna, transitória (melhora em semanas), não requer descontinuação do fármaco e não está associada a broncoespasmo grave. Deve ser diferenciada de IC progressiva, embolia pulmonar ou isquemia residual.",
+    "tag": "ticagrelor_dispneia_adenosina"
+  },
+  {
+    "id": "sca_tx_022",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "ICP Primária vs Farmacoinvasiva",
+    "difficulty": "hard",
+    "stem": "Paciente com STEMI em cidade rural recebe fibrinólise com tenecteplase bem-sucedida (redução > 50% do supra, alívio da dor, RIVA). Qual é a conduta adequada nas próximas horas?",
+    "options": [
+      "Alta hospitalar com medicação oral após 24h de observação se estável",
+      "Transferência para coronariografia em 3-24h (estratégia farmacoinvasiva): mesmo com fibrinólise bem-sucedida, é mandatório angiografar para tratar a estenose residual e prevenir reoclusão — evidências de TRANSFER-AMI, CAPITAL-AMI, STREAM",
+      "ICP de resgate urgente imediatamente após a fibrinólise, independentemente do sucesso",
+      "Repetir a fibrinólise em 3h se houver qualquer supra residual de ST"
+    ],
+    "answer_index": 1,
+    "explanation": "A estratégia farmacoinvasiva consiste em fibrinólise seguida de coronariografia obrigatória em 3-24 horas após a trombolíticos, mesmo quando a fibrinólise é bem-sucedida clinicamente. Os ensaios TRANSFER-AMI, CAPITAL-AMI e STREAM (2012) demonstraram que a estratégia farmacoinvasiva é superior à fibrinólise com coronariografia apenas nas complicações ('ischemia-guided'): menor taxa de reoclusão, menor área de infarto e melhor função ventricular. O raciocínio: a fibrinólise abre a artéria mas deixa a placa instável rota, com estenose residual de alto grau e alto risco de reoclusão. A ICP de resgate é reservada para FALHA da fibrinólise (< 50% resolução do supra, dor persistente). NÃO se deve repetir fibrinolítico.",
+    "tag": "farmacoinvasiva_pos_fibrinolise"
+  },
+  {
+    "id": "sca_tx_023",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "Inibidores GP IIb/IIIa",
+    "difficulty": "hard",
+    "stem": "Em quais situações os inibidores do GP IIb/IIIa (abciximab, tirofibano, eptifibatida) ainda têm papel no manejo contemporâneo do SCA?",
+    "options": [
+      "Rotineiramente em todos os STEMI como pré-tratamento antes da ICP primária",
+      "Uso 'bail-out' seletivo durante a ICP: trombo coronariano maciço com fluxo TIMI 0-1 persistente após dilatação, fenômeno de no-reflow, complicação trombótica do stent, ou infartos com alta carga trombótica onde o ticagrelor/prasugrel não atingiu efeito máximo ainda",
+      "Apenas no NSTEMI de alto risco como anticoagulação adicional à heparina, nunca no STEMI",
+      "Substituindo os inibidores P2Y12 em pacientes que não podem deglutir comprimidos"
+    ],
+    "answer_index": 1,
+    "explanation": "Com a disponibilização de antiagregantes potentes por via oral (ticagrelor, prasugrel) e melhora das técnicas de ICP, o papel rotineiro dos inibidores GP IIb/IIIa diminuiu drasticamente. Os receptores GP IIb/IIIa são a via final comum da agregação plaquetária (ligação com fibrinogênio); seu bloqueio é potente mas aumenta significativamente o risco de sangramento. Atualmente, as diretrizes ESC 2023 recomendam seu uso apenas de forma seletiva ('bail-out') durante a ICP quando há evidência de trombo maciço, no-reflow ou complicação trombótica aguda. O abciximab (anticorpo monoclonal) era o mais estudado no STEMI; tirofibano e eptifibatida (pequenas moléculas) têm meia-vida mais curta e são mais utilizados no bail-out contemporâneo.",
+    "tag": "gpiibiiia_uso_seletivo"
+  },
+  {
+    "id": "sca_tx_024",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "Reabilitação Cardíaca Pós-IAM",
+    "difficulty": "easy",
+    "stem": "Qual é a indicação e o principal benefício comprovado da reabilitação cardíaca (programa de exercícios supervisionados) no pós-IAM?",
+    "options": [
+      "Reabilitação cardíaca é contraindicada no primeiro ano após IAM pelo risco de ruptura do tecido cicatricial",
+      "Programa de reabilitação cardíaca pós-IAM (iniciado 2-4 semanas após o evento em estáveis): redução de ~25% na mortalidade cardiovascular e ~28% nas hospitalizações recorrentes; melhora da capacidade funcional, qualidade de vida, controle dos fatores de risco e adesão medicamentosa",
+      "Reabilitação cardíaca é indicada apenas para pacientes com FEVE > 50%; IC grave não se beneficia",
+      "Os benefícios da reabilitação se limitam ao condicionamento muscular periférico; não há efeito em desfechos cardíacos duros"
+    ],
+    "answer_index": 1,
+    "explanation": "A reabilitação cardíaca baseada em exercício é uma das intervenções com maior nível de evidência e menor taxa de implementação na prática. Meta-análises (Cochrane 2016: 63 ensaios, > 14.000 pacientes) demonstraram redução de ~25% na mortalidade cardiovascular e ~28% nas hospitalizações em pacientes pós-IAM e insuficiência cardíaca. Os mecanismos incluem: melhora da função endotelial, redução da inflamação sistêmica, melhora autonômica (↑ tônus vagal, ↓ simpático), efeitos favoráveis no perfil lipídico, controle pressórico e glicêmico. É indicada para todos os pacientes após SCA (incluindo IC), geralmente iniciada 2-4 semanas após o evento agudo quando o paciente está hemodinamicamente estável. A adesão ao programa é o principal determinante do benefício.",
+    "tag": "reabilitacao_cardiaca_pos_iam"
+  },
+  {
+    "id": "sca_tx_025",
+    "topic": "SCA — Terapêutica",
+    "subtopic": "Manejo Integrado do SCA",
+    "difficulty": "hard",
+    "stem": "Paciente de 63 anos com STEMI anterior é submetido a ICP primária bem-sucedida com DES. FEVE pós-IAM = 38%, sem IC clínica, sem DM. Qual é o conjunto completo de medicamentos de alta hospitalar recomendado pelas diretrizes ESC 2023?",
+    "options": [
+      "AAS + clopidogrel + atorvastatina",
+      "AAS + ticagrelor (ou prasugrel) + atorvastatina 40-80 mg (ou rosuvastatina 20-40 mg) + betabloqueador + IECA (ou BRA) — a FEVE ≤ 40% justifica IECA; considerar eplerenona se FEVE ≤ 40% + IC ou DM",
+      "AAS + clopidogrel + estatina + nitrato de longa ação + furosemida profilática",
+      "AAS + ticagrelor + estatina; betabloqueador e IECA apenas se sintomático"
+    ],
+    "answer_index": 1,
+    "explanation": "O protocolo de alta pós-STEMI com disfunção ventricular (FEVE 38%) envolve múltiplas classes com evidência de redução de mortalidade: (1) DAPT: AAS 100 mg/dia + ticagrelor 90 mg 2x/dia (ou prasugrel 10 mg/dia) por 12 meses. (2) Estatina de alta intensidade: atorvastatina 40-80 mg ou rosuvastatina 20-40 mg (alvo LDL < 55 mg/dL). (3) Betabloqueador: carvedilol, metoprolol ou bisoprolol — reduz remodelação e mortalidade com FEVE reduzida. (4) IECA: indicado pela FEVE ≤ 40% (benefício em SAVE, AIRE, TRACE). (5) Antagonista da aldosterona (eplerenona): considerar se FEVE ≤ 40% + IC ou DM (EPHESUS). Esse paciente sem DM e sem IC clínica tem indicação de eplerenona 'bordeline' — decisão individualizada. O 'quarteto' AAS + P2Y12 + estatina + IECA/betabloqueador é o mínimo esperado.",
+    "tag": "alta_hospitalar_stemi_quinteto"
+  }
+]

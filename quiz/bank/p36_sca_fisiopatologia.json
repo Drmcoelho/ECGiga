@@ -1,0 +1,322 @@
+[
+  {
+    "id": "sca_fis_001",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "Placa Aterosclerótica",
+    "difficulty": "easy",
+    "stem": "Qual componente da placa aterosclerótica é o principal determinante de sua vulnerabilidade à ruptura?",
+    "options": [
+      "Capa fibrosa espessa com alto teor de colágeno",
+      "Core lipídico grande com capa fibrosa fina e infiltrado inflamatório",
+      "Calcificação extensa com espessura intimal aumentada",
+      "Hipertrofia da camada média por hipertensão arterial crônica"
+    ],
+    "answer_index": 1,
+    "explanation": "A placa vulnerável (instável) caracteriza-se por um núcleo lipídico volumoso, rico em ésteres de colesterol, coberto por uma capa fibrosa fina (< 65 µm). O infiltrado de macrófagos e linfócitos T produz metaloproteinases de matriz (MMPs) que degradam o colágeno da capa fibrosa, reduzindo sua resistência mecânica. A ruptura dessa capa expõe o material trombogênico do core ao fluxo sanguíneo, desencadeando trombose aguda. Paradoxalmente, placas altamente calcificadas e estenóticas são, em geral, mais estáveis e menos propensas à ruptura.",
+    "tag": "placa_vulneravel"
+  },
+  {
+    "id": "sca_fis_002",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "Ruptura vs Erosão",
+    "difficulty": "medium",
+    "stem": "Paciente de 42 anos, fumante, mulher, apresenta IAMSSST. Na OCT (tomografia de coerência óptica) coronariana, identifica-se superfície endotelial desnuda sem ruptura visível da capa fibrosa. Qual mecanismo fisiopatológico está predominantemente envolvido?",
+    "options": [
+      "Ruptura de placa com exposição do core lipídico",
+      "Erosão endotelial com trombo sobrejacente sem ruptura da capa fibrosa",
+      "Espasmo coronariano com oclusão funcional transitória",
+      "Dissecção espontânea de coronária com hematoma intramural"
+    ],
+    "answer_index": 1,
+    "explanation": "A erosão de placa ocorre em aproximadamente 25-30% dos casos de SCA, sendo mais prevalente em mulheres jovens e fumantes. Diferentemente da ruptura, a capa fibrosa permanece íntegra, mas há perda da cobertura endotelial, expondo a matriz subendotelial (proteoglicanos, colágeno tipo I) ao sangue. Isso ativa plaquetas via receptor GPVI e gera trombo predominantemente plaquetário (branco). Como não há exposição do core lipídico altamente trombogênico, o trombo tende a ser menos oclusivo, justificando a maior proporção de NSTEMI nesse mecanismo.",
+    "tag": "erosao_placa"
+  },
+  {
+    "id": "sca_fis_003",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "Ativação Plaquetária",
+    "difficulty": "medium",
+    "stem": "Após ruptura de placa coronariana, as plaquetas se ativam por múltiplos mecanismos. Qual sequência descreve corretamente a amplificação da resposta plaquetária?",
+    "options": [
+      "ADP → receptor P2Y12 → inibição da adenililciclase → ↓ AMPc → ativação plaquetária",
+      "TXA2 → receptor IP → ↑ AMPc → ativação plaquetária",
+      "ADP → receptor P2Y1 → inibição do tromboxano → vasodilatação coronariana",
+      "Trombina → receptor PAR-1 → ↑ prostaciclina → inibição plaquetária"
+    ],
+    "answer_index": 0,
+    "explanation": "O ADP liberado pelas plaquetas ativadas age de forma autócrina/parácrina via receptor P2Y12 (acoplado à proteína Gi), inibindo a adenililciclase e reduzindo o AMPc intracelular. Níveis baixos de AMPc favorecem a ativação de integrinas αIIbβ3 e a amplificação da resposta plaquetária — este é o mecanismo explorado pelos inibidores do P2Y12 (clopidogrel, ticagrelor, prasugrel). O TXA2, sintetizado pela COX-1 plaquetária, também contribui para a amplificação via receptor TP, causando vasoconstrição e recrutamento adicional de plaquetas; é inibido pelo AAS.",
+    "tag": "ativacao_plaquetaria_p2y12"
+  },
+  {
+    "id": "sca_fis_004",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "Cascata de Coagulação",
+    "difficulty": "hard",
+    "stem": "Em um trombo coronariano em formação, o fator tecidual exposto pela placa rota ativa a via extrínseca da coagulação. Qual é a sequência correta que culmina na formação de fibrina?",
+    "options": [
+      "Fator tecidual + FVIIa → FXa → trombina (FIIa) → fibrinogênio → fibrina",
+      "Fator tecidual + FXIIa → FIXa → FXa → trombina → fibrina",
+      "Fator tecidual + FVa → protrombinase → fibrinogênio → fibrina",
+      "Fator tecidual + FXa → FVIIIa → FIIa → fibrina"
+    ],
+    "answer_index": 0,
+    "explanation": "O fator tecidual (FT) exposto no subendotélio e nos macrófagos da placa se complexa com o FVIIa circulante, formando o complexo FT-FVIIa que ativa o FX em FXa. O FXa, em conjunto com o FVa (protrombinase), converte protrombina (FII) em trombina (FIIa). A trombina então cliva o fibrinogênio em monômeros de fibrina, que polimerizam para estabilizar o trombo — este é o alvo das heparinas (inibição indireta da trombina e FXa) e dos anticoagulantes diretos.",
+    "tag": "cascata_coagulacao"
+  },
+  {
+    "id": "sca_fis_005",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "Trombo Branco vs Vermelho",
+    "difficulty": "easy",
+    "stem": "Qual a diferença fundamental entre trombo branco e trombo vermelho na fisiopatologia do SCA?",
+    "options": [
+      "Trombo branco é rico em eritrócitos; trombo vermelho é rico em plaquetas",
+      "Trombo branco é rico em plaquetas (formado em alta tensão de cisalhamento); trombo vermelho é rico em fibrina e eritrócitos",
+      "Trombo branco ocorre exclusivamente em veias; trombo vermelho ocorre exclusivamente em artérias",
+      "Trombo branco causa STEMI; trombo vermelho causa angina instável"
+    ],
+    "answer_index": 1,
+    "explanation": "O trombo branco (arterial) forma-se predominantemente em áreas de alta tensão de cisalhamento (shear stress), como nas estenoses coronarianas, sendo composto majoritariamente por agregados plaquetários com pouca fibrina — daí a importância dos antiagregantes no SCA. O trombo vermelho (venoso) forma-se em baixo fluxo, sendo rico em fibrina e eritrócitos entranhados, respondendo melhor à anticoagulação. Na prática, o trombo coronariano no SCA é um híbrido: a porção oclusiva frequentemente tem componente de fibrina/eritrócitos superposto ao tampão plaquetário inicial, justificando a combinação de antiagregante + anticoagulante.",
+    "tag": "trombo_branco_vermelho"
+  },
+  {
+    "id": "sca_fis_006",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "Oclusão Total vs Subtotal",
+    "difficulty": "easy",
+    "stem": "Por que a oclusão coronariana total aguda causa STEMI enquanto a oclusão subtotal tipicamente causa NSTEMI ou angina instável?",
+    "options": [
+      "A oclusão total leva a isquemia transmural sustentada, com elevação de ST e necrose de toda a espessura da parede; a subtotal permite fluxo residual que limita a isquemia às camadas subendocárdicas",
+      "A oclusão total afeta o VD; a oclusão subtotal afeta o VE",
+      "A oclusão total gera trombo branco; a subtotal gera trombo vermelho",
+      "Na oclusão total, o ECG mostra inversão de onda T; na subtotal, supra de ST"
+    ],
+    "answer_index": 0,
+    "explanation": "Na oclusão total, não há fluxo anterógrado nem colateral suficiente, levando à isquemia transmural (afetando toda a espessura da parede). O miocárdio transmural lesado cria correntes de lesão que se manifestam como supradesnivelamento de ST no ECG — padrão de STEMI. Na oclusão subtotal, fluxo residual (ou colaterais) preserva parcialmente as camadas epicárdicas, mais resistentes à isquemia; a isquemia concentra-se no subendocárdio (mais vulnerável por menor pressão de perfusão), gerando infradesnivelamento de ST ou alterações de T — padrão de NSTEMI/angina instável.",
+    "tag": "stemi_vs_nstemi_fisiopatologia"
+  },
+  {
+    "id": "sca_fis_007",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "Zonas de Isquemia",
+    "difficulty": "medium",
+    "stem": "No modelo clássico das zonas de isquemia miocárdica, qual zona é considerada reversível se a reperfusão ocorrer precocemente?",
+    "options": [
+      "Zona de necrose — células irreversivelmente lesadas com perda de integridade de membrana",
+      "Zona de lesão — células com disfunção grave mas potencialmente viáveis em curto prazo",
+      "Zona de isquemia — células com metabolismo anaeróbico mas potencialmente recuperáveis com reperfusão precoce",
+      "Zona de hibernação — células cronicamente hipoperfundidas em repouso que reduziram função para sobreviver"
+    ],
+    "answer_index": 2,
+    "explanation": "No modelo concêntrico de Reimer e Jennings, a zona de isquemia periférica é a mais externa, com redução do fluxo mas manutenção parcial de ATP e integridade de membrana. Essas células são as mais suscetíveis a arritmias (instabilidade elétrica por despolarização parcial), mas plenamente recuperáveis com reperfusão precoce. A zona de lesão intermediária tem células com disfunção grave e alterações ultraestruturais; a zona de necrose central apresenta morte celular irreversível (coagulação proteica, ruptura de mitocôndrias) — a famosa 'onda de morte' que avança da zona subendocárdica em direção ao epicárdio com o tempo.",
+    "tag": "zonas_isquemia"
+  },
+  {
+    "id": "sca_fis_008",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "Pré-condicionamento Isquêmico",
+    "difficulty": "hard",
+    "stem": "Um paciente com angina instável de repetição evolui para IAM com menor área de necrose do que seria esperado pelo tamanho do território em risco. Qual fenômeno fisiopatológico explicaria esse achado?",
+    "options": [
+      "Espasmo coronariano crônico com vasodilatação compensatória permanente",
+      "Pré-condicionamento isquêmico: episódios subletais de isquemia tornam o miocárdio mais resistente a um insulto isquêmico subsequente",
+      "Hibernação miocárdica com redução adaptativa do consumo de O2 de forma permanente",
+      "Recanalização espontânea do trombo por tPA endógeno antes do evento principal"
+    ],
+    "answer_index": 1,
+    "explanation": "O pré-condicionamento isquêmico (PI) é um dos paradoxos mais fascinantes da cardiologia: episódios repetidos e breves de isquemia subletais 'ensinam' o cardiomiócito a tolerar isquemias maiores. Os mecanismos incluem ativação de receptores de adenosina, abertura dos canais de KATP mitocondriais, ativação de proteínas cinases (PKC, MAPK) e inibição da abertura do poro de transição de permeabilidade mitocondrial (mPTP). Clinicamente, o PI pode explicar por que pacientes com angina pré-infarto às vezes têm menor infarto — o chamado 'fenômeno de precondicionamento clínico'. Existe também o PI remoto (estímulo em um órgão protege outro).",
+    "tag": "preacondicionamento_isquemico"
+  },
+  {
+    "id": "sca_fis_009",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "Dano de Reperfusão",
+    "difficulty": "hard",
+    "stem": "Após ICP primária bem-sucedida em STEMI anterior, o paciente evolui com piora da função ventricular e bloqueio de ramo esquerdo transitório. Qual mecanismo é o principal responsável pelo dano de reperfusão miocárdica?",
+    "options": [
+      "Reativação súbita da via simpática com taquicardia e aumento do consumo de O2",
+      "Abertura do poro de transição de permeabilidade mitocondrial (mPTP) por sobrecarga de cálcio e espécies reativas de oxigênio na reoxigenação",
+      "Reoclusão precoce do stent por trombose in-stent mediada por TXA2",
+      "Vasoespasmo coronariano distal induzido pelo contraste iodado"
+    ],
+    "answer_index": 1,
+    "explanation": "O dano de reperfusão paradoxalmente mata células que poderiam ter sobrevivido à isquemia. Na isquemia, acumula-se Ca²⁺ intracelular (por falha da Na⁺/K⁺-ATPase e ativação do trocador Na⁺/Ca²⁺) e íons H⁺ (acidose láctica). No momento da reperfusão, a normalização abrupta do pH e a chegada de O₂ desencadeiam produção em massa de espécies reativas de oxigênio (radicais livres) e sobrecarga adicional de Ca²⁺ mitocondrial. Juntos, ativam a abertura do mPTP — uma alça de morte mitocondrial — levando à liberação de citocromo c e necroptose. Estratégias experimentais para reduzir o dano de reperfusão incluem pós-condicionamento isquêmico, resfriamento e ciclosporina A (inibidor do mPTP).",
+    "tag": "dano_reperfusao"
+  },
+  {
+    "id": "sca_fis_010",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "Hibernação vs Stunning",
+    "difficulty": "medium",
+    "stem": "Paciente pós-STEMI anterior tem FEVE de 30% e é candidato a revascularização. O cardiologista solicita cintilografia de perfusão e ecocardiograma com dobutamina para avaliar viabilidade. Qual a diferença entre miocárdio 'hibernante' e 'atordoado' (stunned)?",
+    "options": [
+      "Hibernação ocorre após reperfusão e é transitória; stunning ocorre com isquemia crônica e é permanente",
+      "Hibernação é disfunção crônica por hipoperfusão em repouso (adaptação a ↓ fluxo); stunning é disfunção aguda pós-isquemia em miocárdio já reperfundido mas com contratilidade temporariamente deprimida",
+      "Hibernação responde a inotrópicos; stunning não responde porque o músculo está morto",
+      "Ambos são irreversíveis e indicam necessidade de transplante cardíaco"
+    ],
+    "answer_index": 1,
+    "explanation": "O miocárdio hibernante é viável porém cronicamente hipoperfundido em repouso; o cardiomiócito 'desliga' sua função contrátil para reduzir o consumo de O₂ e sobreviver — uma adaptação protetora. Com a revascularização (ICP ou CABG), a função se recupera em semanas a meses. O miocárdio atordoado (stunned) ocorre após um episódio de isquemia seguido de reperfusão: a célula está viva e bem perfundida, mas a contratilidade está transitoriamente comprometida por disfunção das proteínas contráteis (miofibrilas danificadas por radicais livres e Ca²⁺). A recuperação espontânea ocorre em horas a dias. Ambos são viáveis e podem recuperar função — diferente do tecido necrótico.",
+    "tag": "hibernacao_stunning"
+  },
+  {
+    "id": "sca_fis_011",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "Troponina Ultra-sensível",
+    "difficulty": "medium",
+    "stem": "Paciente chega ao PS com dor precordial há 3 horas. A troponina I ultra-sensível (hs-cTnI) na admissão está em 52 ng/L (URL 99th percentil = 26 ng/L). O ECG é não-diagnóstico. Qual o próximo passo mais adequado segundo os algoritmos atuais (ESC 0h/1h ou 0h/2h)?",
+    "options": [
+      "Alta imediata pois troponina acima do limite superior é diagnóstica de STEMI",
+      "Repetir troponina em 1-2 horas; um delta (variação) ≥ 6 ng/L em 1h (ou ≥ critério específico em 2h) confirma NSTEMI; delta baixo + troponina absoluta baixa favorece regra de exclusão",
+      "Realizar ecocardiograma imediatamente para definir diagnóstico antes de qualquer outra medida",
+      "Administrar fibrinolítico baseado na troponina elevada mesmo sem supra de ST"
+    ],
+    "answer_index": 1,
+    "explanation": "Os algoritmos de troponina ultra-sensível (hs-cTn) ESC 0h/1h e 0h/2h baseiam-se em dois parâmetros: o valor absoluto na admissão e o delta (variação) entre as medições. Uma troponina elevada isolada pode refletir injúria miocárdica não isquêmica (miocardite, TEP, IC, sepse, IRC). O padrão cinético de rise-and-fall é o que distingue o NSTEMI: elevação rápida (> 20% de delta em 1h) com posterior queda. Se o valor na admissão é muito baixo (< limite de detecção específico) e o delta é mínimo, o NSTEMI pode ser descartado com alta segurança (VPN > 99%). Portanto, a cinética temporal é fundamental — não um único valor.",
+    "tag": "troponina_ultrassensivel_cinetica"
+  },
+  {
+    "id": "sca_fis_012",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "AI vs NSTEMI",
+    "difficulty": "easy",
+    "stem": "Qual é a diferença fundamental entre angina instável (AI) e IAMSSST (NSTEMI)?",
+    "options": [
+      "A AI cursa com supra de ST e o NSTEMI com infra de ST",
+      "A AI tem troponina negativa (sem necrose detectável) e o NSTEMI tem troponina positiva (necrose miocárdica documentada)",
+      "A AI é causada por espasmo coronariano e o NSTEMI por trombose",
+      "A AI requer ICP e o NSTEMI pode ser tratado apenas com medicamentos"
+    ],
+    "answer_index": 1,
+    "explanation": "Tanto a AI quanto o NSTEMI resultam de isquemia miocárdica aguda sem oclusão coronariana total (não há supra de ST). A distinção crítica é a detecção de necrose miocárdica: no NSTEMI, a isquemia é suficientemente grave para causar morte de cardiomiócitos, liberando troponina na circulação (biomarcador de necrose). Na AI, a isquemia é subclínica em termos de necrose — troponinas permanecem dentro do limite normal. Com a introdução das troponinas ultra-sensíveis, muitos casos anteriormente classificados como AI foram reclassificados como NSTEMI, tornando a AI relativamente rara no cenário contemporâneo.",
+    "tag": "ai_vs_nstemi"
+  },
+  {
+    "id": "sca_fis_013",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "tPA Endógeno e Fibrinólise",
+    "difficulty": "hard",
+    "stem": "Por que alguns pacientes com trombo coronariano agudo evoluem com resolução espontânea dos sintomas e normalização do ECG antes de chegar ao hospital? Qual mecanismo está envolvido?",
+    "options": [
+      "Resolução do espasmo coronariano que estava superimpostas à estenose basal",
+      "Fibrinólise endógena mediada pelo tPA (ativador tecidual do plasminogênio) liberado pelo endotélio, convertendo plasminogênio em plasmina que degrada a fibrina do trombo",
+      "Ativação dos receptores β2 pelo estresse que causa vasodilatação coronariana reflexa",
+      "Redução espontânea do consumo de O2 miocárdico por bradicardia vagal"
+    ],
+    "answer_index": 1,
+    "explanation": "O endotélio vascular libera constitutivamente tPA (ativador tecidual do plasminogênio), que converte o plasminogênio adsorvido à fibrina em plasmina — a principal enzima fibrinolítica endógena. A plasmina cliva a fibrina em produtos de degradação (D-dímero), podendo dissolver parcial ou totalmente o trombo coronariano. Esse fenômeno explica casos de IAM com artéria patente ('open artery') ao cateterismo, regressão de supra de ST antes da ICP, e o embasamento fisiopatológico para o uso exógeno de fibrinolíticos (alteplase, tenecteplase). O inibidor fisiológico do tPA é o PAI-1 (inibidor do ativador do plasminogênio tipo 1), elevado na síndrome metabólica.",
+    "tag": "fibrinolise_endogena_tpa"
+  },
+  {
+    "id": "sca_fis_014",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "Espasmo Coronariano",
+    "difficulty": "medium",
+    "stem": "Homem de 38 anos, sem fatores de risco convencionais, apresenta dor precordial intensa às 3h da manhã, com supra de ST transitório que reverte espontaneamente em 10 minutos. O cateterismo de urgência mostra coronárias sem obstrução significativa. Qual diagnóstico e mecanismo são mais prováveis?",
+    "options": [
+      "STEMI falso-positivo por hipercalemia aguda com alterações de repolarização",
+      "Angina de Prinzmetal (variante) por espasmo coronariano: hiperreatividade vascular por disfunção endotelial, ↓ produção de NO, ↑ resposta adrenérgica α e ↑ sensibilidade ao ergonômetro",
+      "Miocardite viral com elevação transitória de troponina e alterações de ST",
+      "Síndrome de Brugada com supra de ST espontâneo em derivações precordiais"
+    ],
+    "answer_index": 1,
+    "explanation": "A angina vasospástica (Prinzmetal) resulta de hipercontração focal da camada média da artéria coronária, sem placa obstrutiva significativa. O mecanismo central envolve disfunção endotelial com redução da síntese de NO e prostaciclina (vasodilatadores), associada a hiper-reatividade da musculatura lisa a estímulos vasoconstritores (ergonômetro, acetilcolina, frio, cocaína). O predomínio noturno e nas primeiras horas da manhã relaciona-se ao tônus simpático aumentado e pico de catecolaminas. O ECG mostra supra de ST transitório por isquemia transmural focal. O tratamento é com antagonistas do cálcio (não betabloqueador, que pode piorar o espasmo por deixar o receptor α sem oposição).",
+    "tag": "espasmo_coronariano_prinzmetal"
+  },
+  {
+    "id": "sca_fis_015",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "Cascata de Coagulação",
+    "difficulty": "hard",
+    "stem": "Um paciente em uso de fondaparinux desenvolve STEMI e é levado ao cateterismo. O hemodinamicista solicita anticoagulação adicional antes da ICP. Por que o fondaparinux não é suficiente isoladamente para o cateterismo?",
+    "options": [
+      "O fondaparinux é inativado pelo heparan sulfato liberado durante a manipulação do cateter",
+      "O fondaparinux é um inibidor seletivo do fator Xa sem efeito sobre a trombina já formada; no cateterismo, há alta geração de trombina local induzida pelo cateter, exigindo anticoagulação adicional com HNF para prevenir trombose de cateter",
+      "O fondaparinux se liga ao receptor P2Y12 e inibe a antiagregação necessária durante o procedimento",
+      "O fondaparinux requer monitoramento com TTPa que não pode ser medido em sala de hemodinâmica"
+    ],
+    "answer_index": 1,
+    "explanation": "O fondaparinux é um pentassacarídeo sintético que se liga seletivamente à antitrombina III, potencializando exclusivamente a inibição do fator Xa. Ele NÃO inibe a trombina já formada (FIIa). Durante o cateterismo, a superfície do cateter e o próprio contraste ativam a cascata de coagulação localmente, gerando trombina em alta quantidade. Como o fondaparinux não neutraliza a trombina livre, há risco significativo de trombose de cateter e no sítio do balão. As diretrizes (ESC 2023) recomendam adição de HNF (60-85 UI/kg em bolus IV) no momento do cateterismo em pacientes que estavam em fondaparinux.",
+    "tag": "fondaparinux_cateterismo"
+  },
+  {
+    "id": "sca_fis_016",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "Necrose Miocárdica",
+    "difficulty": "medium",
+    "stem": "Qual é o marcador bioquímico mais específico e sensível disponível atualmente para o diagnóstico de necrose miocárdica, e por que ele supera a CK-MB nessa função?",
+    "options": [
+      "Mioglobina: sobe em 1-2h, altamente específica para tecido cardíaco",
+      "Troponina I ou T cardíaca (hs-cTn): altamente específica para miocárdio (isoformas cardíacas exclusivas), detectável em concentrações muito baixas com rise/fall característico",
+      "CK-MB: sobe em 3-4h e tem maior especificidade cardíaca que a troponina",
+      "LDH: permanece elevada por 10-14 dias, sendo o melhor marcador para diagnóstico tardio de IAM"
+    ],
+    "answer_index": 1,
+    "explanation": "As troponinas cardíacas I e T (cTnI, cTnT) são proteínas do complexo regulatório das miofibrilas com isoformas exclusivamente cardíacas, tornando-as altamente específicas para lesão miocárdica. A versão ultra-sensível (hs-cTn) detecta concentrações na escala de ng/L, permitindo diagnóstico mais precoce (elevação em 1-3h após o início da necrose). A CK-MB existe em musculatura esquelética e pode elevar-se em rabdomiólise, trauma muscular ou exercício intenso, reduzindo sua especificidade. Além disso, a cTn tem vida mais longa (permanece elevada por 7-14 dias), útil para o diagnóstico retrospectivo, mas isso também exige cuidado na interpretação em re-infartos.",
+    "tag": "troponina_especificidade"
+  },
+  {
+    "id": "sca_fis_017",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "Remodelação Ventricular",
+    "difficulty": "medium",
+    "stem": "Após um IAM anterior extenso, o paciente evolui com dilatação progressiva do VE e piora da FEVE nos meses seguintes, mesmo sem novo evento coronariano. Qual processo fisiopatológico está ocorrendo?",
+    "options": [
+      "Reestenose do stent com nova oclusão coronariana subclínica",
+      "Remodelação ventricular patológica: expansão da zona infartada, hipertrofia excêntrica compensatória do miocárdio remoto, ativação neuro-humoral (SRAA, SNS) com fibrose intersticial progressiva",
+      "Hibernação miocárdica progressiva em resposta à redução crônica do fluxo coronariano",
+      "Síndrome de Dressler (pericardite autoimune) com derrame pericárdico comprimindo o VE"
+    ],
+    "answer_index": 1,
+    "explanation": "A remodelação ventricular patológica pós-IAM é um processo dinâmico iniciado nas primeiras horas e que evolui por meses. A zona infartada, sem cardiomiócitos viáveis, torna-se acinética e pode se expandir (expansão do infarto). O miocárdio remoto não infartado sofre hipertrofia excêntrica compensatória para manter o débito cardíaco. A ativação crônica do SRAA (angiotensina II) e do sistema adrenérgico promove fibrose intersticial, apoptose de cardiomiócitos saudáveis e progressão para insuficiência cardíaca. É por isso que IECAs/BRAs e betabloqueadores têm benefício comprovado na redução da remodelação e melhora do prognóstico pós-IAM.",
+    "tag": "remodelacao_ventricular"
+  },
+  {
+    "id": "sca_fis_018",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "Placa Aterosclerótica — Composição",
+    "difficulty": "easy",
+    "stem": "Qual componente da placa aterosclerótica tem o maior potencial trombogênico quando exposto ao sangue após ruptura?",
+    "options": [
+      "Capa fibrosa de colágeno tipo I e III",
+      "Fator tecidual presente nos macrófagos espumosos do core lipídico",
+      "Células musculares lisas migradas da camada média",
+      "Células endoteliais disfuncionais da superfície da placa"
+    ],
+    "answer_index": 1,
+    "explanation": "O core lipídico das placas vulneráveis é extremamente rico em fator tecidual (FT), expresso pelos macrófagos espumosos que fagocitaram LDL oxidado. O FT é considerado o principal iniciador da trombose após ruptura de placa — ao entrar em contato com o sangue, ativa imediatamente a via extrínseca da coagulação (FT + FVIIa → ativação do FX). Isso explica por que placas com grande core lipídico, mesmo não causando estenose grave, podem provocar trombose oclusiva súbita. O colágeno subendotelial é também trombogênico (ativa plaquetas via GPVI e GPIb), mas menos potente que o FT.",
+    "tag": "fator_tecidual_trombogenicidade"
+  },
+  {
+    "id": "sca_fis_019",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "Fisiopatologia do STEMI",
+    "difficulty": "medium",
+    "stem": "Paciente de 58 anos chega ao PS com dor precordial intensa há 90 minutos. ECG mostra supra de ST em V1-V4 com infra recíproco em DII/III/aVF. Qual coronária está provavelmente acometida e qual o mecanismo da imagem recíproca?",
+    "options": [
+      "Coronária Direita; o infra em DII/III/aVF representa extensão do infarto para a parede inferior",
+      "Artéria Descendente Anterior (DA); o infra em DII/III/aVF é imagem especular (recíproca) do supra anterior, não representando isquemia independente",
+      "Artéria Circunflexa; o infra inferior indica comprometimento do território inferoposterior",
+      "Tronco de coronária esquerda; o supra em V1-V4 mais infra difuso indicam doença de tronco"
+    ],
+    "answer_index": 1,
+    "explanation": "O supra de ST em V1-V4 localiza o infarto na parede anterior do VE, território da artéria Descendente Anterior (DA), ramo da coronária esquerda. O infradesnivelamento de ST em DII, DIII e aVF é uma imagem recíproca (espelho) do evento elétrico na parede oposta — as derivações inferiores 'veem' de longe o vetor de corrente de lesão anterior e registram a sua imagem invertida. Esse infra recíproco NÃO significa isquemia independente da parede inferior; é um fenômeno eletrofisiológico de oposição vetorial. A presença de infra recíproco confirma a autenticidade do supra (distingue de outras causas como pericardite, que raramente tem recíproco).",
+    "tag": "stemi_anterior_da"
+  },
+  {
+    "id": "sca_fis_020",
+    "topic": "SCA — Fisiopatologia",
+    "subtopic": "Espasmo Coronariano vs Trombose",
+    "difficulty": "hard",
+    "stem": "Paciente de 35 anos, usuária de cocaína, apresenta dor precordial com supra de ST transitório. A troponina é negativa após 6 horas. Qual mecanismo difere fundamentalmente esse cenário de um STEMI por ruptura de placa?",
+    "options": [
+      "A cocaína apenas aumenta a FC, sem efeito direto sobre as coronárias",
+      "A cocaína causa vasoespasmo coronariano por bloqueio da recaptação de catecolaminas (↑ norepinefrina → receptor α1 vascular) e ativação adrenérgica intensa, levando a isquemia transitória sem necrose se o espasmo resolver antes de 20-30 min de isquemia sustentada",
+      "A cocaína causa trombose arteriolar nos ramos intramurais, poupando as coronárias epicárdicas",
+      "O supra de ST na cocaína é sempre artefato por taquicardia sinusal extrema"
+    ],
+    "answer_index": 1,
+    "explanation": "A cocaína bloqueia o transportador de recaptação de norepinefrina e dopamina, elevando dramaticamente as catecolaminas na fenda sináptica. Nas coronárias, a estimulação dos receptores α1-adrenérgicos (sem oposição pelos β2) provoca vasoconstrição intensa e espasmo. Além disso, a cocaína é diretamente trombogênica (ativa plaquetas, aumenta PAI-1, reduz tPA). Se o espasmo for sustentado por mais de 20-30 minutos, inicia-se necrose miocárdica com elevação de troponina — STEMI por espasmo. A troponina negativa neste caso indica que a isquemia foi transitória e reversível. O tratamento é com antagonistas do cálcio e nitratos; betabloqueadores são CONTRAINDICADOS (deixam receptores α sem oposição, piorando o vasoespasmo).",
+    "tag": "cocaina_espasmo_coronariano"
+  }
+]

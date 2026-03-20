@@ -1,8 +1,8 @@
 
 import dash
-from dash import html, dcc, Input, Output, State, ctx
+from dash import html, dcc, Input, Output, State, ctx, MATCH, ALL, no_update, callback_context
 import plotly.graph_objs as go
-import numpy as np, base64, json
+import numpy as np, base64, json, random
 from PIL import Image
 from io import BytesIO
 
@@ -75,13 +75,14 @@ app.layout = html.Div([
 
     # ── Tabs ──
     dcc.Tabs(id="tabs-main", value="tab-simulador", className="tab-container", children=[
-        dcc.Tab(label="Simulador", value="tab-simulador", className="tab"),
-        dcc.Tab(label="Educação", value="tab-educacao", className="tab"),
-        dcc.Tab(label="Quiz", value="tab-quiz", className="tab"),
-        dcc.Tab(label="Eletrólitos", value="tab-electrolytes", className="tab"),
-        dcc.Tab(label="Eletrofisiologia", value="tab-ephys", className="tab"),
-        dcc.Tab(label="Análise CV", value="tab-analise", className="tab"),
-        dcc.Tab(label="Interpretação IA", value="tab-ia", className="tab"),
+        dcc.Tab(label="🗺️ Jornada", value="tab-jornada", className="tab"),
+        dcc.Tab(label="🫀 Simulador", value="tab-simulador", className="tab"),
+        dcc.Tab(label="📚 Educação", value="tab-educacao", className="tab"),
+        dcc.Tab(label="🧠 Quiz", value="tab-quiz", className="tab"),
+        dcc.Tab(label="⚗️ Eletrólitos", value="tab-electrolytes", className="tab"),
+        dcc.Tab(label="⚡ Eletrofisiologia", value="tab-ephys", className="tab"),
+        dcc.Tab(label="📊 Análise CV", value="tab-analise", className="tab"),
+        dcc.Tab(label="🤖 Interpretação IA", value="tab-ia", className="tab"),
     ]),
     html.Div(id="tab-content", style={"padding": "16px", "maxWidth": "1200px", "margin": "0 auto"}),
 
@@ -444,17 +445,138 @@ def _layout_educacao():
     ])
 
 
-def _layout_quiz():
-    """Layout da aba de quiz — questões de múltipla escolha adaptativas."""
+def _layout_jornada():
+    """Layout da aba Jornada de Aprendizagem — roadmap + progresso + quick-stats."""
+    modules = [
+        {"id": "mod-basico", "title": "Fundamentos do ECG", "icon": "📐", "desc": "Anatomia do traçado, papel milimetrado, derivações, eixo elétrico", "tab": "tab-educacao",
+         "subtopics": ["Papel de ECG (25mm/s, 10mm/mV)", "Onda P, complexo QRS, onda T, onda U", "Sistema de 12 derivações (câmera = derivação)", "Eixo elétrico cardíaco (hexaxial)", "Progressão da onda R nas precordiais"]},
+        {"id": "mod-ritmo", "title": "Ritmo Sinusal & Bradicardias", "icon": "🏃", "desc": "Nó SA, taquicardia sinusal, bradicardia, doença do nó sinusal", "tab": "tab-simulador",
+         "subtopics": ["Automatismo do nó SA (fase 4 espontânea)", "Taquicardia sinusal: causas (febre, TEP, catecolaminas, cafeína...)", "Bradicardia sinusal: atletas, beta-bloq, doença do nó sinusal", "Bloqueio sinoatrial vs pausa sinusal", "Estado colinérgico: vasovagal, Valsalva, vômito"]},
+        {"id": "mod-bav", "title": "Bloqueios AV", "icon": "🚦", "desc": "BAV 1°, Wenckebach, Mobitz II, BAV total — mecanismos e clínica", "tab": "tab-simulador",
+         "subtopics": ["BAV 1° grau (PR > 200ms): fármacos, Lyme, IAM inferior", "Wenckebach (Mobitz I): PR cresce → pausa; nó AV, benigno", "Mobitz II: PR fixo, bloqueio súbito; infranodal, alto risco", "BAV total: dissociação AV, escape juncional vs ventricular", "Terapêutica: atropina, isoproterenol, marcapasso"]},
+        {"id": "mod-sca", "title": "SCA — Fisiopatologia & ECG", "icon": "💔", "desc": "Da placa rota ao ECG: territórios, equivalentes STEMI, Wellens, De Winter", "tab": "tab-simulador",
+         "subtopics": ["Placa → ruptura → trombo → oclusão total (STEMI) vs parcial (NSTEMI)", "Hiperagudo T → supra ST → inversão T → onda Q", "STEMI anterior (DAE), inferior (CD), lateral (CX), posterior", "Equivalentes: Wellens, De Winter, supra aVR, BRE novo (Sgarbossa)", "Recíprocos: espelho é sempre a melhor pista!"]},
+        {"id": "mod-sca-tx", "title": "SCA — Terapêutica", "icon": "💊", "desc": "AAS, P2Y12, anticoagulação, nitratos, betabloq, ICP primária — por quê cada um", "tab": "tab-simulador",
+         "subtopics": ["AAS (COX-1/TXA2) + P2Y12 (clopidogrel/ticagrelor/prasugrel)", "Heparina/enoxaparina/fondaparinux: anti-Xa e anti-IIa", "Betabloqueadores: ↓FC, ↓consumo O2, antiarrítmico", "Nitratos: SIM angina, NÃO em IAM de VD (colapso!)", "ICP primária: janela <12h, balão <90 min. Fibrinólise se ICP indisponível"]},
+        {"id": "mod-sobrecarga", "title": "Sobrecarga & Hipertrofia", "icon": "🏋️", "desc": "HVE, HVD, sobrecarga atrial — critérios e strain pattern", "tab": "tab-simulador",
+         "subtopics": ["HVE: Sokolow-Lyon ≥35mm, Cornell ≥28/20mm, Romhilt-Estes", "Strain HVE: ST↓ + T invertida nas derivações com R alto (I, aVL, V5-V6)", "HVD: R>S em V1, eixo direita, strain V1-V2; associado a cor pulmonale/TEP", "SOD (P pulmonale): P apiculada ≥2.5mm; SOE (P mitrale): bífida ≥120ms", "Diferencial HVE vs BRE: QRS ≥120ms no BRE, <120ms no HVE puro"]},
+        {"id": "mod-eletrolitos", "title": "Eletrólitos & ECG", "icon": "⚗️", "desc": "K+, Ca²+, Mg²+ e suas assinaturas — do mecanismo ao ECG ao tratamento", "tab": "tab-electrolytes",
+         "subtopics": ["K+: mexe nas ONDAS (T, QRS, P) — hipercal: T apiculada → sine wave", "K- baixo: T achata, onda U proeminente, ST↓, risco de Torsades", "Ca2+ alto: QT curto (ST desaparece); Ca2+ baixo: QT longo (ST longo)", "Mg2+ baixo: potencializa hipocalemia e prolongamento QT → Torsades", "Emergência: gluconato Ca (hipercalemia grave), Mg IV (Torsades)"]},
+        {"id": "mod-ephys", "title": "Eletrofisiologia Cardíaca", "icon": "🔬", "desc": "Potencial de ação, canais iônicos, fases 0-4, automatismo", "tab": "tab-ephys",
+         "subtopics": ["Fases 0-4: INa (QRS), Ito (fase 1), ICa-L (platô/ST), IKr+IKs (onda T)", "Nó SA vs célula contrátil: fase 4 espontânea vs estável", "Período refratário absoluto vs relativo: quando arritmias nascem", "Mecanismos de arritmia: reentrada, automatismo aumentado, pós-poten.", "Fármacos antiarrítmicos: classes Vaughan Williams (I-IV)"]},
+        {"id": "mod-bloqueios", "title": "Bloqueios de Ramo", "icon": "🚧", "desc": "BRE, BRD, hemibloqueios, critérios de Sgarbossa", "tab": "tab-simulador",
+         "subtopics": ["BRD: RSR' em V1 (orelha de coelho), S em I/V6; QRS ≥120ms", "BRE: QS em V1, R monofásico largo em V6, I, aVL; sem onda Q septal", "Critérios de Sgarbossa: STEMI no contexto de BRE (Smith modificado)", "Hemibloqueio anterior esquerdo: desvio eixo ≤-45°, S em II,III,aVF", "BRE novo + dor torácica = STEMI até prova em contrário"]},
+        {"id": "mod-sindromes", "title": "Síndromes Especiais", "icon": "🎯", "desc": "Brugada, QT longo, TEP, pericardite, repolarização precoce", "tab": "tab-simulador",
+         "subtopics": ["Brugada tipo 1: coved ST ≥2mm V1-V2, T negativa; SCN5A; febre desvela", "QT longo: congênito (LQT1-3) vs adquirido (fármacos, ↓K+, ↓Mg2+)", "TEP: S1Q3T3 + taquicardia; RBBB novo; T invertida V1-V4", "Pericardite: supra ST côncavo difuso + dep PR + infra aVR; sem reciprocidade", "Repolarização precoce: J notch + ST côncavo em V4-V6; benigno vs maligno"]},
+    ]
+
+    module_cards = []
+    for i, mod in enumerate(modules):
+        subtopics_html = html.Ul([html.Li(s, className="jornada-subtopic") for s in mod["subtopics"]])
+        card = html.Div([
+            html.Div([
+                html.Div(mod["icon"], className="module-icon"),
+                html.Div([
+                    html.H4(f"{i+1}. {mod['title']}", className="module-title"),
+                    html.P(mod["desc"], className="module-desc"),
+                ]),
+            ], className="module-card-header"),
+            subtopics_html,
+            html.Div([
+                html.Div(className="progress-bar-fill", style={"width": "0%"}),
+            ], className="progress-bar"),
+            html.Div(f"Módulo {i+1} de {len(modules)}", className="module-progress-label"),
+        ], className="module-card")
+        module_cards.append(card)
+
     return html.Div([
-        html.H3("Quiz Adaptativo de ECG"),
         html.Div([
-            html.Label("Número de questões: "),
-            dcc.Input(id="quiz-n", type="number", value=6, min=1, max=20, step=1),
-            html.Button("Gerar Quiz", id="btn-quiz-generate", n_clicks=0, style={"marginLeft": "10px"}),
-            html.Button("Ver Progresso", id="btn-quiz-progress", n_clicks=0, style={"marginLeft": "10px"}),
-        ]),
-        html.Div(id="quiz-content", style={"marginTop": "20px"}),
+            html.Div("🗺️", className="section-icon"),
+            html.Div([
+                html.H3("Jornada de Aprendizagem", style={"marginBottom": "0"}),
+                html.P("Seu roadmap personalizado para dominar ECG — do básico ao avançado",
+                       style={"color": "#888", "fontSize": "0.85rem", "margin": "0"}),
+            ]),
+        ], className="section-header"),
+
+        # Quick stats
+        html.Div([
+            html.Div([html.Div("0", className="stat-value", id="jornada-total-q"), html.Div("Questões respondidas", className="stat-label")], className="stat-card"),
+            html.Div([html.Div("0%", className="stat-value", id="jornada-accuracy"), html.Div("Acurácia geral", className="stat-label")], className="stat-card"),
+            html.Div([html.Div("0", className="stat-value", id="jornada-streak"), html.Div("Dias consecutivos", className="stat-label")], className="stat-card"),
+            html.Div([html.Div("0/10", className="stat-value", id="jornada-modules"), html.Div("Módulos iniciados", className="stat-label")], className="stat-card"),
+        ], className="stats-dashboard"),
+
+        html.Div([
+            html.P([
+                "📌 ", html.B("Dica: "),
+                "Siga os módulos em ordem para uma base sólida, ou pule direto para o tópico que precisa revisar. "
+                "Cada módulo integra teoria → simulação → quiz para fixação ativa."
+            ]),
+        ], className="callout callout-info"),
+
+        # Module roadmap
+        html.Div(module_cards, className="modules-grid"),
+
+        # Quick links
+        html.Div([
+            html.H4("Atalhos Rápidos"),
+            html.Div([
+                html.Button("🧠 Quiz Rápido (10 questões)", id="btn-jornada-quiz", n_clicks=0, className="btn-primary"),
+                html.Button("🫀 Simular ECG Normal", id="btn-jornada-sim", n_clicks=0, className="btn-secondary"),
+                html.Button("📊 Ver Meu Progresso", id="btn-jornada-progress", n_clicks=0, className="btn-secondary"),
+            ], style={"display": "flex", "gap": "12px", "flexWrap": "wrap"}),
+        ], style={"marginTop": "24px"}),
+    ])
+
+
+def _layout_quiz():
+    """Layout da aba de quiz — questões interativas com clique para responder."""
+    return html.Div([
+        html.Div([
+            html.Div("🧠", className="section-icon"),
+            html.Div([
+                html.H3("Quiz Adaptativo de ECG", style={"marginBottom": "0"}),
+                html.P("Teste seus conhecimentos — clique na alternativa e receba feedback imediato",
+                       style={"color": "#888", "fontSize": "0.85rem", "margin": "0"}),
+            ]),
+        ], className="section-header"),
+        html.Div([
+            html.P([
+                "📌 ", html.B("Como funciona: "),
+                "Selecione uma alternativa e clique 'Confirmar'. O sistema adapta a dificuldade "
+                "ao seu nível e usa repetição espaçada (SM-2) para otimizar a retenção."
+            ]),
+        ], className="callout callout-info"),
+        html.Div([
+            html.Div([
+                html.Label("Questões: ", style={"fontWeight": "bold"}),
+                dcc.Input(id="quiz-n", type="number", value=10, min=1, max=30, step=1,
+                          style={"width": "60px", "marginRight": "12px"}),
+                html.Label("Dificuldade: ", style={"fontWeight": "bold"}),
+                dcc.Dropdown(
+                    id="quiz-difficulty-filter",
+                    options=[
+                        {"label": "Todas", "value": "all"},
+                        {"label": "Fácil", "value": "easy"},
+                        {"label": "Médio", "value": "medium"},
+                        {"label": "Difícil", "value": "hard"},
+                    ],
+                    value="all", clearable=False,
+                    style={"width": "140px", "display": "inline-block"},
+                ),
+            ], style={"display": "flex", "gap": "8px", "alignItems": "center", "flexWrap": "wrap"}),
+            html.Div([
+                html.Button("🧠 Gerar Quiz", id="btn-quiz-generate", n_clicks=0, className="btn-primary"),
+                html.Button("📊 Ver Progresso", id="btn-quiz-progress", n_clicks=0, className="btn-secondary"),
+            ], style={"display": "flex", "gap": "8px", "marginTop": "12px"}),
+        ], className="card", style={"padding": "16px", "marginBottom": "16px"}),
+        # Score banner (updated dynamically)
+        html.Div(id="quiz-score-banner", style={"marginBottom": "16px"}),
+        # Store for correct answers
+        dcc.Store(id="quiz-answers-store", data={}),
+        # Questions container
+        html.Div(id="quiz-content", style={"marginTop": "8px"}),
         html.Div(id="quiz-progress-content", style={"marginTop": "20px"}),
     ])
 
@@ -486,36 +608,66 @@ def _layout_simulador():
             dcc.Dropdown(
                 id="sim-pathology",
                 options=[
-                    {"label": "── Normal ──", "value": "normal", "disabled": False},
-                    {"label": "Normal (sinusal com HRV)", "value": "normal"},
-                    {"label": "── Isquemia / Infarto ──", "value": "_isch", "disabled": True},
-                    {"label": "STEMI anterior (V1-V4)", "value": "stemi_anterior"},
-                    {"label": "STEMI inferior (II,III,aVF)", "value": "stemi_inferior"},
-                    {"label": "STEMI lateral (I,aVL,V5-V6)", "value": "stemi_lateral"},
-                    {"label": "── Bloqueios ──", "value": "_blk", "disabled": True},
-                    {"label": "BRE (QRS alargado, QS em V1)", "value": "lbbb"},
-                    {"label": "BRD (RSR' em V1)", "value": "rbbb"},
+                    # ── Normal / Ritmo sinusal ───────────────
+                    {"label": "── Normal / Ritmo Sinusal ──", "value": "_ns", "disabled": True},
+                    {"label": "Normal sinusal (com HRV, 72 bpm)", "value": "normal"},
+                    {"label": "Bradicardia sinusal (~45 bpm)", "value": "sinus_bradycardia"},
+                    {"label": "Taquicardia sinusal (~120 bpm)", "value": "sinus_tachycardia"},
+                    # ── Bloqueios AV ─────────────────────────
+                    {"label": "── Bloqueios AV ──", "value": "_bav", "disabled": True},
                     {"label": "BAV 1° grau (PR > 200ms)", "value": "first_degree_avb"},
+                    {"label": "BAV 2° Mobitz I / Wenckebach (PR cresce, batida cai)", "value": "bav_mobitz1"},
+                    {"label": "BAV 2° Mobitz II (PR fixo, bloqueio súbito)", "value": "bav_mobitz2"},
+                    {"label": "BAV total 3° grau (dissociação AV, escape ~40bpm)", "value": "bav_complete"},
+                    # ── Bloqueios de Ramo ─────────────────────
+                    {"label": "── Bloqueios de Ramo ──", "value": "_blk", "disabled": True},
+                    {"label": "BRE (QRS ≥120ms, QS em V1)", "value": "lbbb"},
+                    {"label": "BRD (RSR' em V1, S em I/V6)", "value": "rbbb"},
+                    # ── Arritmias ────────────────────────────
                     {"label": "── Arritmias ──", "value": "_arr", "disabled": True},
-                    {"label": "Fibrilação atrial (RR irregular)", "value": "af"},
+                    {"label": "Fibrilação atrial (RR irregularmente irregular)", "value": "af"},
                     {"label": "WPW (PR curto, onda delta)", "value": "wpw"},
+                    # ── SCA / Isquemia ───────────────────────
+                    {"label": "── SCA / Isquemia ──", "value": "_isch", "disabled": True},
+                    {"label": "STEMI anterior (V1-V4) — oclusão DAE", "value": "stemi_anterior"},
+                    {"label": "STEMI inferior (II,III,aVF) — oclusão CD", "value": "stemi_inferior"},
+                    {"label": "STEMI lateral (I,aVL,V5-V6) — oclusão CX", "value": "stemi_lateral"},
+                    {"label": "STEMI posterior (infra V1-V4, R dominante)", "value": "stemi_posterior"},
+                    {"label": "Supra aVR (doença de tronco/3 vasos)", "value": "stemi_avr"},
+                    {"label": "Wellens tipo A (T bifásica V2-V3 — suboclusão DAE)", "value": "wellens_a"},
+                    {"label": "Wellens tipo B (T invertida profunda V2-V3)", "value": "wellens_b"},
+                    {"label": "De Winter (infra ST + T alta V1-V4)", "value": "de_winter"},
+                    # ── Sobrecarga / Hipertrofia ─────────────
+                    {"label": "── Sobrecarga / Hipertrofia ──", "value": "_ovl", "disabled": True},
+                    {"label": "HVE com strain (R alto, T invertida lateral)", "value": "lvh_strain"},
+                    {"label": "HVD (R>S em V1, eixo direita, strain V1-V2)", "value": "rvh"},
+                    {"label": "SOD — P pulmonale (P apiculada ≥2.5mm)", "value": "rae"},
+                    {"label": "SOE — P mitrale (P bífida, V1 negativo terminal)", "value": "lae"},
+                    # ── Eletrólitos ──────────────────────────
                     {"label": "── Eletrólitos ──", "value": "_elec", "disabled": True},
                     {"label": "Hipercalemia leve (T apiculadas)", "value": "hyperkalemia"},
                     {"label": "Hipercalemia grave (sine wave)", "value": "hyperkalemia_severe"},
                     {"label": "Hipocalemia (T achata, onda U)", "value": "hypokalemia"},
                     {"label": "Hipercalcemia (QT curto)", "value": "hypercalcemia"},
                     {"label": "Hipocalcemia (QT longo)", "value": "hypocalcemia"},
+                    # ── Equivalentes STEMI ───────────────────
+                    {"label": "── Equivalentes de STEMI ──", "value": "_seq", "disabled": True},
+                    {"label": "STEMI posterior (infra V1-V4, R dominante)", "value": "stemi_posterior"},
+                    {"label": "Supra aVR (tronco/3 vasos)", "value": "stemi_avr"},
+                    {"label": "Wellens tipo A (T bifásica V2-V3)", "value": "wellens_a"},
+                    {"label": "Wellens tipo B (T invertida profunda V2-V3)", "value": "wellens_b"},
+                    {"label": "De Winter (infra ST + T alta V1-V4)", "value": "de_winter"},
+                    # ── Síndromes / Outros ───────────────────
                     {"label": "── Síndromes / Outros ──", "value": "_syn", "disabled": True},
-                    {"label": "QT longo", "value": "long_qt"},
-                    {"label": "Brugada tipo 1 (coved V1-V2)", "value": "brugada_type1"},
-                    {"label": "Pericardite aguda (supra difuso)", "value": "pericarditis"},
+                    {"label": "QT longo (risco Torsades)", "value": "long_qt"},
+                    {"label": "Brugada tipo 1 (coved ST V1-V2)", "value": "brugada_type1"},
+                    {"label": "Pericardite aguda (supra côncavo difuso)", "value": "pericarditis"},
                     {"label": "TEP (S1Q3T3, taquicardia)", "value": "pe_pattern"},
-                    {"label": "HVE com strain (R alto, T invertida)", "value": "lvh_strain"},
                     {"label": "Repolarização precoce (benigno)", "value": "early_repolarization"},
                 ],
                 value="normal",
                 clearable=False,
-                style={"width": "400px"},
+                style={"width": "440px"},
             ),
             html.Button("Simular", id="btn-simulate", n_clicks=0),
         ], style={"display": "flex", "gap": "10px", "alignItems": "center", "flexWrap": "wrap"}),
@@ -1107,7 +1259,9 @@ def _layout_ia():
 
 @app.callback(Output("tab-content", "children"), Input("tabs-main", "value"))
 def render_tab(tab):
-    if tab == "tab-analise":
+    if tab == "tab-jornada":
+        return _layout_jornada()
+    elif tab == "tab-analise":
         return _layout_analise()
     elif tab == "tab-educacao":
         return _layout_educacao()
@@ -1171,47 +1325,162 @@ def update_axis_wheel(lead):
 # Callbacks da aba de quiz
 # ---------------------------------------------------------------------------
 
-@app.callback(Output("quiz-content", "children"), Input("btn-quiz-generate", "n_clicks"), State("quiz-n", "value"), prevent_initial_call=True)
-def generate_quiz(n_clicks, n_questions):
+@app.callback(
+    Output("quiz-content", "children"),
+    Output("quiz-answers-store", "data"),
+    Output("quiz-score-banner", "children"),
+    Input("btn-quiz-generate", "n_clicks"),
+    State("quiz-n", "value"),
+    State("quiz-difficulty-filter", "value"),
+    prevent_initial_call=True,
+)
+def generate_quiz(n_clicks, n_questions, difficulty_filter):
+    n_questions = n_questions or 10
     try:
-        from quiz.adaptive import AdaptiveEngine
-        engine = AdaptiveEngine(quiz_bank_path="quiz/bank")
         questions = []
-        history = []
-        for _ in range(n_questions or 6):
-            q = engine.select_next_question(history)
-            if not q:
-                break
-            questions.append(q)
-            history.append({"question_id": q.get("id", ""), "correct": True, "tag": q.get("tag", q.get("topic", ""))})
+        try:
+            from quiz.adaptive import AdaptiveEngine
+            engine = AdaptiveEngine(quiz_bank_path="quiz/bank")
+            history = []
+            for _ in range(n_questions * 2):  # request extra to filter
+                q = engine.select_next_question(history)
+                if not q:
+                    break
+                if difficulty_filter and difficulty_filter != "all":
+                    if q.get("difficulty", "").lower() != difficulty_filter:
+                        continue
+                questions.append(q)
+                history.append({"question_id": q.get("id", ""), "correct": True, "tag": q.get("tag", q.get("topic", ""))})
+                if len(questions) >= n_questions:
+                    break
+        except Exception:
+            pass
 
         if not questions:
-            # Fallback to simple engine
-            from quiz.engine import build_adaptive_quiz
-            result = build_adaptive_quiz({}, n_questions=n_questions or 6, seed=n_clicks)
-            questions = result.get("questions", [])
+            try:
+                from quiz.engine import build_adaptive_quiz
+                result = build_adaptive_quiz({}, n_questions=n_questions, seed=n_clicks)
+                questions = result.get("questions", [])
+            except Exception:
+                pass
 
+        if not questions:
+            return html.P("Nenhuma questão disponível. Verifique o banco de questões."), {}, ""
+
+        # Build interactive cards
+        answers_map = {}
         items = []
         for i, q in enumerate(questions):
             correct_idx = q.get("answer_index", 0)
-            options_html = []
-            for j, opt in enumerate(q.get("options", [])):
-                marker = "\u2713" if j == correct_idx else "\u2717"
-                color = "green" if j == correct_idx else "gray"
-                options_html.append(html.Li(f"{marker} {opt}", style={"color": color}))
-            items.append(html.Div([
-                html.H4(f"{i+1}. [{q.get('difficulty','?')}] {q.get('topic','?')}"),
-                html.P(q.get("stem", "")),
-                html.Ul(options_html),
-                html.Details([
-                    html.Summary("Explicação"),
-                    html.P(q.get("explanation", "Sem explicação."))
-                ]),
-                html.Hr(),
-            ]))
-        return html.Div(items) if items else html.P("Nenhuma questão disponível.")
+            answers_map[str(i)] = {
+                "correct": correct_idx,
+                "explanation": q.get("explanation", "Sem explicação disponível."),
+                "topic": q.get("topic", "geral"),
+            }
+            options = q.get("options", [])
+            difficulty = q.get("difficulty", "?")
+            diff_class = {"easy": "quiz-diff-easy", "medium": "quiz-diff-medium", "hard": "quiz-diff-hard"}.get(
+                difficulty.lower(), "quiz-diff-medium"
+            )
+            card = html.Div([
+                html.Div([
+                    html.Span(f"Questão {i+1}/{len(questions)}", className="quiz-q-number"),
+                    html.Span(difficulty.capitalize(), className=f"quiz-difficulty {diff_class}"),
+                    html.Span(q.get("topic", ""), className="quiz-topic-badge"),
+                ], className="quiz-card-header"),
+                html.P(q.get("stem", ""), className="quiz-stem"),
+                dcc.RadioItems(
+                    id={"type": "quiz-option", "index": i},
+                    options=[{"label": f"  {chr(65+j)}) {opt}", "value": j} for j, opt in enumerate(options)],
+                    value=None,
+                    className="quiz-radio-group",
+                    labelClassName="quiz-radio-label",
+                ),
+                html.Button(
+                    "Confirmar Resposta",
+                    id={"type": "quiz-confirm", "index": i},
+                    n_clicks=0,
+                    className="btn-confirm",
+                ),
+                html.Div(id={"type": "quiz-feedback", "index": i}, className="quiz-feedback-area"),
+            ], className="quiz-question-card", id={"type": "quiz-card", "index": i})
+            items.append(card)
+
+        # Score banner (initial)
+        banner = html.Div([
+            html.Div([
+                html.Span("0", id="quiz-correct-count", className="score-correct"),
+                html.Span(f" / {len(questions)}", className="score-total"),
+                html.Span(" acertos", style={"color": "#666", "marginLeft": "4px"}),
+            ], className="score-display"),
+            html.Div(className="quiz-score-bar", children=[
+                html.Div(className="quiz-score-bar-fill", id="quiz-score-bar-fill", style={"width": "0%"}),
+            ]),
+        ], className="quiz-score-banner")
+
+        return html.Div(items), answers_map, banner
     except Exception as e:
-        return html.P(f"Erro ao gerar quiz: {e}")
+        return html.P(f"Erro ao gerar quiz: {e}"), {}, ""
+
+
+# Pattern matching callback: check individual answer
+@app.callback(
+    Output({"type": "quiz-feedback", "index": MATCH}, "children"),
+    Output({"type": "quiz-feedback", "index": MATCH}, "className"),
+    Output({"type": "quiz-confirm", "index": MATCH}, "disabled"),
+    Output({"type": "quiz-option", "index": MATCH}, "className"),
+    Input({"type": "quiz-confirm", "index": MATCH}, "n_clicks"),
+    State({"type": "quiz-option", "index": MATCH}, "value"),
+    State("quiz-answers-store", "data"),
+    prevent_initial_call=True,
+)
+def check_quiz_answer(n_clicks, selected, answers_map):
+    if not n_clicks or n_clicks == 0:
+        raise dash.exceptions.PreventUpdate
+    # Get question index from callback context
+    triggered = callback_context.triggered_id
+    if not triggered:
+        raise dash.exceptions.PreventUpdate
+    idx = str(triggered["index"])
+    answer_data = answers_map.get(idx, {})
+    correct_idx = answer_data.get("correct", 0)
+    explanation = answer_data.get("explanation", "")
+
+    if selected is None:
+        return (
+            html.P("⚠️ Selecione uma alternativa antes de confirmar.", style={"color": "#e67e22"}),
+            "quiz-feedback-area",
+            False,
+            "quiz-radio-group",
+        )
+
+    is_correct = selected == correct_idx
+    if is_correct:
+        feedback = html.Div([
+            html.Div([
+                html.Span("✅ Correto!", className="feedback-badge feedback-correct"),
+            ]),
+            html.Div([
+                html.B("Explicação: "),
+                html.Span(explanation),
+            ], className="quiz-explanation"),
+        ])
+        fb_class = "quiz-feedback-area feedback-correct-area"
+    else:
+        correct_letter = chr(65 + correct_idx)
+        feedback = html.Div([
+            html.Div([
+                html.Span("❌ Incorreto", className="feedback-badge feedback-incorrect"),
+                html.Span(f" — Resposta correta: {correct_letter}", style={"color": "#666"}),
+            ]),
+            html.Div([
+                html.B("Explicação: "),
+                html.Span(explanation),
+            ], className="quiz-explanation"),
+        ])
+        fb_class = "quiz-feedback-area feedback-incorrect-area"
+
+    return feedback, fb_class, True, "quiz-radio-group quiz-answered"
 
 
 @app.callback(Output("quiz-progress-content", "children"), Input("btn-quiz-progress", "n_clicks"), prevent_initial_call=True)
@@ -1368,8 +1637,19 @@ def generate_ephys_quiz(n_clicks, quiz_type, n_questions):
         selected = pool[:n_questions]
         elements = []
         for i, q in enumerate(selected):
-            q_elements = [html.H5(f"Questão {i+1} [{q['difficulty']}] — {q['topic']}")]
-            # Generate figure if question has one
+            prefix = f"ephys-q{n_clicks}-{i}"
+            q_elements = []
+            # Header
+            difficulty = q.get("difficulty", "?")
+            diff_class = {"easy": "quiz-diff-easy", "medium": "quiz-diff-medium", "hard": "quiz-diff-hard"}.get(
+                difficulty.lower(), "quiz-diff-medium"
+            )
+            q_elements.append(html.Div([
+                html.Span(f"Questão {i+1}/{len(selected)}", className="quiz-q-number"),
+                html.Span(difficulty.capitalize(), className=f"quiz-difficulty {diff_class}"),
+                html.Span(q.get("topic", ""), className="quiz-topic-badge"),
+            ], className="quiz-card-header"))
+            # Figure if applicable
             if q.get("image_figure"):
                 try:
                     from education.electrophysiology import (
@@ -1380,24 +1660,62 @@ def generate_ephys_quiz(n_clicks, quiz_type, n_questions):
                         fig = create_phase_comparison_figure()
                     else:
                         fig = create_action_potential_figure(fig_type)
-                    fig.update_layout(height=400, width=700)
+                    fig.update_layout(height=350, width=700)
                     q_elements.append(dcc.Graph(figure=fig, style={"marginBottom": "8px"}))
                 except Exception:
                     q_elements.append(html.P("[Figura não pôde ser gerada]", style={"color": "gray"}))
-            q_elements.append(html.P(q["stem"], style={"fontWeight": "bold"}))
-            choices = []
-            for j, opt in enumerate(q["options"]):
-                marker = "✓" if j == q["answer_index"] else "✗"
-                choices.append(html.Li(f"[{marker}] {opt}"))
-            q_elements.append(html.Ul(choices))
-            q_elements.append(html.Details([
-                html.Summary("Ver explicação"),
-                html.P(q["explanation"], style={"marginTop": "6px", "color": "#2c3e50"}),
-            ]))
-            elements.append(html.Div(q_elements, className="card", style={"marginBottom": "12px"}))
+            q_elements.append(html.P(q["stem"], className="quiz-stem"))
+            # Interactive options
+            options = q.get("options", [])
+            correct_idx = q.get("answer_index", 0)
+            q_elements.append(dcc.RadioItems(
+                id={"type": "ephys-quiz-option", "index": prefix},
+                options=[{"label": f"  {chr(65+j)}) {opt}", "value": j} for j, opt in enumerate(options)],
+                value=None,
+                className="quiz-radio-group",
+                labelClassName="quiz-radio-label",
+            ))
+            q_elements.append(html.Button(
+                "Confirmar", id={"type": "ephys-quiz-confirm", "index": prefix},
+                n_clicks=0, className="btn-confirm",
+            ))
+            # Hidden divs to store correct answer and explanation
+            q_elements.append(html.Div(str(correct_idx), id={"type": "ephys-quiz-correct", "index": prefix}, style={"display": "none"}))
+            q_elements.append(html.Div(q.get("explanation", ""), id={"type": "ephys-quiz-expl", "index": prefix}, style={"display": "none"}))
+            q_elements.append(html.Div(id={"type": "ephys-quiz-feedback", "index": prefix}, className="quiz-feedback-area"))
+            elements.append(html.Div(q_elements, className="quiz-question-card"))
         return elements
     except Exception as e:
         return html.P(f"Erro ao gerar quiz: {e}")
+
+
+# Pattern matching callback for ephys quiz
+@app.callback(
+    Output({"type": "ephys-quiz-feedback", "index": MATCH}, "children"),
+    Output({"type": "ephys-quiz-feedback", "index": MATCH}, "className"),
+    Output({"type": "ephys-quiz-confirm", "index": MATCH}, "disabled"),
+    Input({"type": "ephys-quiz-confirm", "index": MATCH}, "n_clicks"),
+    State({"type": "ephys-quiz-option", "index": MATCH}, "value"),
+    State({"type": "ephys-quiz-correct", "index": MATCH}, "children"),
+    State({"type": "ephys-quiz-expl", "index": MATCH}, "children"),
+    prevent_initial_call=True,
+)
+def check_ephys_answer(n_clicks, selected, correct_str, explanation):
+    if not n_clicks:
+        raise dash.exceptions.PreventUpdate
+    if selected is None:
+        return html.P("⚠️ Selecione uma alternativa.", style={"color": "#e67e22"}), "quiz-feedback-area", False
+    correct_idx = int(correct_str)
+    is_correct = selected == correct_idx
+    if is_correct:
+        fb = html.Div([html.Span("✅ Correto!", className="feedback-badge feedback-correct"),
+                        html.Div([html.B("Explicação: "), explanation], className="quiz-explanation")])
+        return fb, "quiz-feedback-area feedback-correct-area", True
+    else:
+        fb = html.Div([html.Span("❌ Incorreto", className="feedback-badge feedback-incorrect"),
+                        html.Span(f" — Resposta: {chr(65+correct_idx)}", style={"color": "#666"}),
+                        html.Div([html.B("Explicação: "), explanation], className="quiz-explanation")])
+        return fb, "quiz-feedback-area feedback-incorrect-area", True
 
 
 # ---------------------------------------------------------------------------
@@ -1496,9 +1814,19 @@ def generate_electrolyte_quiz(n_clicks, quiz_type, n_questions):
         selected = pool[:n_questions]
         elements = []
         for i, q in enumerate(selected):
-            # Build question card
-            q_elements = [html.H5(f"Questão {i+1} [{q['difficulty']}] — {q['topic']}")]
-            # If question has image, generate ECG figure
+            prefix = f"elec-q{n_clicks}-{i}"
+            q_elements = []
+            # Header
+            difficulty = q.get("difficulty", "?")
+            diff_class = {"easy": "quiz-diff-easy", "medium": "quiz-diff-medium", "hard": "quiz-diff-hard"}.get(
+                difficulty.lower(), "quiz-diff-medium"
+            )
+            q_elements.append(html.Div([
+                html.Span(f"Questão {i+1}/{len(selected)}", className="quiz-q-number"),
+                html.Span(difficulty.capitalize(), className=f"quiz-difficulty {diff_class}"),
+                html.Span(q.get("topic", ""), className="quiz-topic-badge"),
+            ], className="quiz-card-header"))
+            # ECG figure if applicable
             if q.get("image_pathology"):
                 try:
                     from simulation.ecg_generator import generate_ecg, generate_pathological_ecg
@@ -1524,21 +1852,58 @@ def generate_electrolyte_quiz(n_clicks, quiz_type, n_questions):
                     q_elements.append(dcc.Graph(figure=fig, style={"marginBottom": "8px"}))
                 except Exception:
                     q_elements.append(html.P("[ECG não pôde ser gerado]", style={"color": "gray"}))
-            q_elements.append(html.P(q["stem"], style={"fontWeight": "bold"}))
-            # Options with reveal
-            choices = []
-            for j, opt in enumerate(q["options"]):
-                marker = "✓" if j == q["answer_index"] else "✗"
-                choices.append(html.Li(f"[{marker}] {opt}"))
-            q_elements.append(html.Ul(choices))
-            q_elements.append(html.Details([
-                html.Summary("Ver explicação"),
-                html.P(q["explanation"], style={"marginTop": "6px", "color": "#2c3e50"}),
-            ]))
-            elements.append(html.Div(q_elements, className="card", style={"marginBottom": "12px"}))
+            q_elements.append(html.P(q["stem"], className="quiz-stem"))
+            # Interactive options
+            options = q.get("options", [])
+            correct_idx = q.get("answer_index", 0)
+            q_elements.append(dcc.RadioItems(
+                id={"type": "elec-quiz-option", "index": prefix},
+                options=[{"label": f"  {chr(65+j)}) {opt}", "value": j} for j, opt in enumerate(options)],
+                value=None,
+                className="quiz-radio-group",
+                labelClassName="quiz-radio-label",
+            ))
+            q_elements.append(html.Button(
+                "Confirmar", id={"type": "elec-quiz-confirm", "index": prefix},
+                n_clicks=0, className="btn-confirm",
+            ))
+            # Hidden divs to store correct answer and explanation
+            q_elements.append(html.Div(str(correct_idx), id={"type": "elec-quiz-correct", "index": prefix}, style={"display": "none"}))
+            q_elements.append(html.Div(q.get("explanation", ""), id={"type": "elec-quiz-expl", "index": prefix}, style={"display": "none"}))
+            q_elements.append(html.Div(id={"type": "elec-quiz-feedback", "index": prefix}, className="quiz-feedback-area"))
+            elements.append(html.Div(q_elements, className="quiz-question-card"))
         return elements
     except Exception as e:
         return html.P(f"Erro ao gerar quiz: {e}")
+
+
+# Pattern matching callback for electrolyte quiz
+@app.callback(
+    Output({"type": "elec-quiz-feedback", "index": MATCH}, "children"),
+    Output({"type": "elec-quiz-feedback", "index": MATCH}, "className"),
+    Output({"type": "elec-quiz-confirm", "index": MATCH}, "disabled"),
+    Input({"type": "elec-quiz-confirm", "index": MATCH}, "n_clicks"),
+    State({"type": "elec-quiz-option", "index": MATCH}, "value"),
+    State({"type": "elec-quiz-correct", "index": MATCH}, "children"),
+    State({"type": "elec-quiz-expl", "index": MATCH}, "children"),
+    prevent_initial_call=True,
+)
+def check_elec_answer(n_clicks, selected, correct_str, explanation):
+    if not n_clicks:
+        raise dash.exceptions.PreventUpdate
+    if selected is None:
+        return html.P("⚠️ Selecione uma alternativa.", style={"color": "#e67e22"}), "quiz-feedback-area", False
+    correct_idx = int(correct_str)
+    is_correct = selected == correct_idx
+    if is_correct:
+        fb = html.Div([html.Span("✅ Correto!", className="feedback-badge feedback-correct"),
+                        html.Div([html.B("Explicação: "), explanation], className="quiz-explanation")])
+        return fb, "quiz-feedback-area feedback-correct-area", True
+    else:
+        fb = html.Div([html.Span("❌ Incorreto", className="feedback-badge feedback-incorrect"),
+                        html.Span(f" — Resposta: {chr(65+correct_idx)}", style={"color": "#666"}),
+                        html.Div([html.B("Explicação: "), explanation], className="quiz-explanation")])
+        return fb, "quiz-feedback-area feedback-incorrect-area", True
 
 
 # ---------------------------------------------------------------------------
@@ -1788,6 +2153,43 @@ def process(n, nrrob, nintv, naxis, nrhythm, content, filename, meta_text, ops, 
 def calc_qtc(qt, rr):
     if not qt or not rr or rr<=0: return "Informe QT e RR em ms."
     return f"QTc Bazett: {qtc_b(qt, rr):.1f} ms | QTc Fridericia: {qtc_f(qt, rr):.1f} ms"
+
+# ---------------------------------------------------------------------------
+# Jornada quick-link callbacks
+# ---------------------------------------------------------------------------
+
+@app.callback(
+    Output("tabs-main", "value", allow_duplicate=True),
+    Input("btn-jornada-quiz", "n_clicks"),
+    prevent_initial_call=True,
+)
+def jornada_goto_quiz(n):
+    if n:
+        return "tab-quiz"
+    raise dash.exceptions.PreventUpdate
+
+
+@app.callback(
+    Output("tabs-main", "value", allow_duplicate=True),
+    Input("btn-jornada-sim", "n_clicks"),
+    prevent_initial_call=True,
+)
+def jornada_goto_sim(n):
+    if n:
+        return "tab-simulador"
+    raise dash.exceptions.PreventUpdate
+
+
+@app.callback(
+    Output("tabs-main", "value", allow_duplicate=True),
+    Input("btn-jornada-progress", "n_clicks"),
+    prevent_initial_call=True,
+)
+def jornada_goto_progress(n):
+    if n:
+        return "tab-quiz"
+    raise dash.exceptions.PreventUpdate
+
 
 if __name__ == "__main__":
     app.run(debug=True)
